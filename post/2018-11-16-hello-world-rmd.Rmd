@@ -1,0 +1,12 @@
+---
+title: TESTING 
+author: "Jagger V"
+date: '2018-11-16'
+slug: hello-world-rmd
+categories: ["R"]
+tags: ["Test"]
+---
+
+# More test, test test test
+Does it work?
+
