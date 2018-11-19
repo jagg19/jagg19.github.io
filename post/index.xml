@@ -2,34 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Jagger with Swagger</title>
-    <link>/post/</link>
+    <link>https://jagg19.github.io/post/</link>
     <description>Recent content in Posts on Jagger with Swagger</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 16 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jagg19.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>First Post</title>
-      <link>/2018/11/hello-world-rmd/</link>
+      <link>https://jagg19.github.io/2018/11/hello-world-rmd/</link>
       <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/11/hello-world-rmd/</guid>
-      <description>Does it work? Seems like it does. This is my first blog post! I wanted to create my own blog using R programming, R Studio, Git, and Github where I would host my personal site and opinions. These opinions will not be fabricated and will be based off analysis.
-Why start a blog? I have a huge passion for analyzing financial data, especially those 10-K’s and 10-Q’s!! To most, it is just a 75+ page document full of financial jargon and data.</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/2015/07/hello-r-markdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/2015/07/hello-r-markdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+      <guid>https://jagg19.github.io/2018/11/hello-world-rmd/</guid>
+      <description>Does it work? Seems like it does. This is my first blog post! I wanted to create my own blog using R programming, R Studio, Git, and Github where I would host my personal site and opinions. These opinions will not be fabricated and will be based off my personal own analysis.
+Why start a blog? I have a huge passion for analyzing financial data, especially those 10-K’s and 10-Q’s!</description>
     </item>
     
   </channel>
