@@ -3,45 +3,93 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jagg19.github.io/2018/11/hello-world-rmd/</loc>
+    <loc>/2018/11/ml-airbnb-prices/</loc>
+    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/11/why-a-blog/</loc>
     <lastmod>2018-11-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/archives/</loc>
+    <loc>/tags/airbnb/</loc>
+    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/</loc>
+    <loc>/archives/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/</loc>
-    <lastmod>2018-11-16T00:00:00+00:00</lastmod>
+    <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/post/</loc>
-    <lastmod>2018-11-16T00:00:00+00:00</lastmod>
+    <loc>/</loc>
+    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/r/</loc>
-    <lastmod>2018-11-16T00:00:00+00:00</lastmod>
+    <loc>/tags/machine-learning/</loc>
+    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/</loc>
+    <loc>/tags/nyc/</loc>
+    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/test/</loc>
+    <loc>/post/</loc>
+    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/predictions/</loc>
+    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/programming/</loc>
+    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/project/</loc>
+    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/r-markdown/</loc>
+    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/test/</loc>
     <lastmod>2018-11-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

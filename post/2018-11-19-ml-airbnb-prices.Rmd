@@ -1,0 +1,266 @@
+---
+title: Teaching a Machine to Learn NYC Airbnb Prices
+author: Jagger Villalobos
+date: '2018-11-19'
+slug: ml-airbnb-prices
+coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1542650457/Untitled-design-18.png
+coverSize: partial
+thumbnailImagePosition: left
+categories: ["R", "R Markdown","Predictions", "Programming"]
+tags: ["Project","Machine Learning", "Airbnb","NYC"]
+---
+
+# Using Airbnb
+By now, most Gen Z and millenials have heard of or used Airbnb for a range of many reasons such as looking for a place to crash or taking a vacation. I believe what won the consumer's attention over hotel's was the fact that you are getting the "homey" setting and privacy while away on vacation instead of a hotel enviroment. I realized not everyone want's to part ways with room service, benefits of a having a full-service bar in the lobby, pool & spa's, sometimes a gym, and the 100+ channels that comes with almost all hotel's but when comparing the prices and the extra sq footage, it is hard not to take a look at and possibly book Airbnb listings. 
+
+# Listing on Airbnb
+While most of us have used or considered booking an Airbnb, there is alot less of us who have considered actually posting their property on Airbnb. Being that I am infatuated with Profit and New York City rent is extremely high, I considered listing my Brooklyn apartment to see what kind of profits I could turn. At the time, I was learning about multilinear regressions in my quantitative Analysis & Forecasting class and I was given a project to create a linear model to predict some form of dependent variable. I figured why not use this opportunity to dig a little deeper on estimating a listing price for my Apartment. This led me to stumble upon pretty interesting information about Commercial Operators listing on Airbnb in New York City. To keep this post inline with the subject, I will just quickly summarize what I found in the following paragraph.
+
+# Commercial Operators
+What exactly is a Commercial operator? This is a Airbnb Host that have multiple entire-home listings or control many private-room listings. If I was to post on Airbnb to try and squeeze a profit, I would list my property for certain days or weeks of the month, and at most a rental property if I happend to own one. This compares to commercial operators who may have 4-6 entire home listings and 8-12 private room listings. It was estimated that Commercial Operators make up 12% of NYC Airbnb hosts, but earned almost 1/3 of all incoming revenue. 
+
+# Why is this an issue? 
+I believe it is an issue because it is depleting the actual prices hosts could get for their properties if they were to list on Airbnb. If it was not for Commercial Operators saturing the market with these lower priced listings, maybe I could squeeze an extra $20-30/ night from my listing. Think of these NYC Commercial Operators as the Walmart or Amazon of property listings. They often charge less per night than other hosts do across all listings and adjust their rates to attract a high number of rentals overall. To Summarize, they are flooding the New York City markets with lower priced listings. 
+
+
+# Now the fun stuff - Building the Model
+I found my data off of InsideAirBnb.com which is an independent, non-commercial set of tools and data that allows you to explore how Airbnb is really being used in cities around the world. I retrived all listings in NYC as of 03/2018. This was a very large dataset that contained 29142 listings in NYC with 96 different factors to choose from as my independent variables. I would like to keep in mind the affect commercial operators have on prices. I believe that Airbnb listing prices are not fully predictable by the usual variables one would use to predict the price of a traditional property in NYC. These usual variables are factors such as bedroom count, bathroom, location, property type, and etc. If the listing prices were fully explainable by these usual variables, then I would assume with our data we will be able to train and build our model strong enough to have a low Root Mean Squared Error (RMSE). See below for how I got to our final Model.
+
+```{r Loading in the Data, echo=FALSE}
+data <- read.csv("/Users/jagvill/Desktop/Github/analysisData.csv")
+```
+
+# The Process
+After loading in the data, I began to analyze the structure to search for any outliers or Missing Values. Our initial dataset has a dimension of `r dim(data)[1]` rows and `r dim(data)[2]` columns so let's begin cutting down the amount of factors playing into price. I will choose the variables that make most sense when predicting a price for a property. 
+
+#### Cleaning the Data
+```{r Cleaning the Data}
+trimData <-subset(data,select = c("price"
+                                  ,"cancellation_policy" 
+                                  ,"is_business_travel_ready"
+                                  ,"accommodates" 
+                                  ,"bedrooms"
+                                  ,"beds"
+                                  ,"bathrooms"
+                                  ,"number_of_reviews"
+                                  ,"instant_bookable" 
+                                  ,"review_scores_rating"
+                                  ,"review_scores_location"
+                                  ,"review_scores_cleanliness"
+                                  ,"review_scores_checkin"
+                                  ,"review_scores_value"
+                                  ,"neighbourhood_group_cleansed"
+                                  ,"neighbourhood_cleansed"
+                                  ,"room_type"
+                                  ,"availability_30"
+                                  ,"availability_365"
+                                  ,"calculated_host_listings_count"
+                                  ,"reviews_per_month" 
+                                  ,"host_is_superhost"
+                                  ,"host_identity_verified"
+                                  ,"host_listings_count"
+                                  ,"cleaning_fee"
+                                  ,"guests_included"
+                                  ,"zipcode"
+                                  ,"property_type"))
+```
+
+#### Take out all observations with Price equal to $0 and 0 days availbility within the next year. Also, check and remove any observations with NA's as values
+```{r}
+non0data <- subset(trimData, price != 0 & availability_365 != 0)
+sapply(non0data, function(x) sum(is.na(x)))
+non0data <- non0data[complete.cases(non0data),]
+```
+
+#### Lets take a look at the big picture of our variables once more to double check that nothing is off
+```{r}
+str(non0data)
+```
+
+#### We can notice that under zipcodes, there is a zipcode titled "" with no value. Lets take a closer look
+```{r}
+length(non0data$zipcode[non0data$zipcode == ""])
+```
+- We have 202 listings with no zipcode. Since zipcode can play a large role in the listing price, we will also take these listings out. 
+
+```{r}
+non0data$zipcode[non0data$zipcode == ""] <- NA
+non0data <- non0data[complete.cases(non0data),]
+```
+
+
+#### Now that we have cleaned all of our data, we are ready to begin creating the model
+```{r First Model, echo=FALSE}
+
+model1 = lm(log(price) ~ cancellation_policy 
+           +is_business_travel_ready
+           +log(accommodates)
+           +bedrooms 
+           +beds
+           +bathrooms 
+           +log(number_of_reviews)
+           +instant_bookable 
+           +review_scores_rating 
+           +review_scores_location
+           +review_scores_cleanliness 
+           +review_scores_checkin 
+           +review_scores_value
+           +neighbourhood_group_cleansed + room_type
+           +availability_30 
+           +availability_365
+           +calculated_host_listings_count 
+           +log(reviews_per_month) 
+           +host_is_superhost
+           +host_identity_verified
+           +host_listings_count
+           +cleaning_fee
+           +guests_included
+           +zipcode
+           +property_type
+           ,non0data)
+```
+
+- As expected, this model has a very high R^2 of .7709 most likely due to the fact that we have 26 independent variables. We notice that not all are statistically significant so we begin to remove those from the model. 
+
+```{r Second Model, eval=FALSE}
+model2 = lm(log(price)~log(accommodates)
+           +bedrooms 
+           +beds
+           +bathrooms 
+           +log(number_of_reviews)
+           +review_scores_rating 
+           +review_scores_location
+           +review_scores_cleanliness 
+           +log(review_scores_value)
+           +neighbourhood_group_cleansed + room_type
+           +availability_30 
+           +availability_365
+           +calculated_host_listings_count 
+           +log(reviews_per_month) 
+           +host_is_superhost
+           +host_identity_verified
+           +cleaning_fee
+           +guests_included
+           +zipcode
+           +property_type
+           ,non0data)
+```
+
+- Although model2 still has a very high R^2 of .7705, it still also has alot of insignificant variables due to the fact that zipcode consists of 190 levels and property_type has a bunch of insignificant property_types. I will subsitute zipcode for neighborhood_group_cleansed since it has 4 levels compared to 190 and I will remove all insignificant property_type. 
+
+```{r Insignificant Property Types}
+
+uncommon_listings <- c("Tiny house", "Earth house", "Tent", "Timeshare", "Boat", "Chalet", "Hostel", "Train", "Cabin", "Treehouse", "Bungalow", "Castle", "Bed and breakfast", "Cave", "Casa particular (Cuba)", "Villa", "Boutique hotel", "Other", "In-law", "Camper/RV", "Yurt")
+
+for (i in uncommon_listings){
+  non0data <- subset(non0data, property_type != i)
+}
+```
+
+#### Run Model 3 and veiw summary / coefficients 
+```{r}
+model3 = lm(log(price)~log(accommodates)
+           +bedrooms 
+           +beds
+           +bathrooms 
+           +log(number_of_reviews)
+           +review_scores_rating 
+           +neighbourhood_group_cleansed + room_type
+           +availability_30 
+           +availability_365
+           +calculated_host_listings_count 
+           +host_is_superhost
+           +host_identity_verified
+           +cleaning_fee
+           +guests_included
+           +property_type
+           ,non0data)
+summary(model3)
+```
+- After making the above adjustments, we now have a Model with what I believe is the most significant variables to price, with a strong R^2 of .7016. 
+
+#### Now, Lets check if our model suffers from multicollinearity
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(car, quietly = TRUE)
+vif(model3)
+```
+
+- Our full model does not suffer from multicollinearity as the highest VIF value of `r vif(model3)[1]` is well below 5. 
+
+
+#### Next, we want to check if our final full model suffers from Auto Correlation or not using the Durbin Watson Test.
+
+```{r, echo= FALSE}
+durbinWatsonTest(model3)
+```
+
+- Using the D-W Significance table, we can reject the Null and there is no correlation among residuals. Having a total of 16 independent variables, or k, and WELL over 200 observations, or n in our sample, the DL @ 5% significance is 1.599 and Du is 1.943 which our D-W Statistic of `r durbinWatsonTest(model3)[2]` is above the upper limit indicating no Auto Correlation exists. It is also significant at the 1% with DL at 1.507 and Du at 1.847.
+
+#### Let's look at some visualizations 
+- Specifically the residuals from our model. In the first plot, values on the Y axis above 0 mean the predicton was too low, and negative values mean the prediction was too high. 0 means the prediction was 100% correct. We want to see something that is symmetrically distributed, tending to cluster towards the middle of the plot. On the X axis, we want to see it clustered around the lower single digit area and not something like -10 to +10.   
+
+```{r, echo=FALSE}
+plot(model3$residuals ~ model3$fitted.values)
+
+hist(model3$residuals, cex = .5)
+axis(1,at = seq(-2.5,2.5, by = .5))
+```
+
+- Our residuals fit the requiremnts we would like to see which shows that our model is strong and we cannot really make this model significantly more accurate.  
+
+#### Now lets input some sample data to test and see the expected value in price our model gives us.
+- I created a data frame with my Apartment's information, and replaced all my NA values with .0000001, or almost 0. For example, I do not have a review score as I do not list on Airbnb, so I replaced that with almost 0. Same for my listings count. As for reviews, I inserted 1 since we take the log of this variable to normalize, and the log of 1 is equal to 0. I estimated that my Listing will be available for 50% of the year and 50% of the month.
+```{r}
+Jaggerslisting <- data.frame(accommodates=6, number_of_reviews=1
+                             ,review_scores_rating=.0000001,availability_30=15
+                             ,availability_365=182, bedrooms=1, beds=2
+                             ,calculated_host_listings_count=.0000001, 
+                             bathrooms=1, neighbourhood_group_cleansed="Brooklyn", 
+                             room_type= "Entire home/apt" , host_identity_verified="t", cleaning_fee=50, guests_included= 6, property_type="Apartment",host_is_superhost="f")
+
+
+JaggerslistingPrice <- predict(model3, newdata = Jaggerslisting)
+
+#Since we log(price), we will need to take Exp(Of Our Result) to find our expected listing price per day per our model.
+
+exp(JaggerslistingPrice)
+```
+
+- **$`r exp(JaggerslistingPrice)` as a listing price, not bad! Except I live in New York so if I hit the goal of 50% booking in the month, I will barely break even.**
+
+#### Lets predict with a 95% confidence interval with 5% level of sig. We can be 95% certain that the range of values will contain the true mean of the population. 
+```{r, echo = FALSE}
+confInterval <- predict(model3, newdata = Jaggerslisting, interval = "confidence", level = 0.95)
+exp(confInterval)
+```
+
+- Since we are more focused on individual listings in our population, we can use the prediction interval. This will give us the range that we can be 95% certain the next value will fall between the intervals, and 5% will either fall under or over the intervals. We need to include uncertainty in the variation about our mean so this interval will be wider than our confidence interval.
+```{r}
+predInterval <- predict(model3, newdata = Jaggerslisting, interval = "prediction", level = 0.95)
+exp(predInterval)
+```
+
+> Please note that this is quite a bit wider than the confidence interval, indicating that the variation about the mean is fairly large. This means the datapoints of price is very spread out from the mean, indicating there is possibly more to the listing price than the variables used. I believe this ties into what I found in my research which was that Commercial Operators are saturating the AirBnb market, espeically in NYC.
+
+#### Finally, Teaching the Machine to Learn Airbnb Prices
+- Even with all the factors I have in my model, I expect a high RMSE due to the fact that Airbnb prices have been diluted to Commercial operators. If not, then with about 13,600 (n * 0.80) observations in our training data, our model should be able to predict the price a little more accuratley in our test data which will result to a LOW RMSE.
+```{r,echo=FALSE}
+library(caTools)
+library(Metrics)
+```
+
+```{r}
+set.seed(99)
+split <- sample.split(non0data$price, SplitRatio = 0.80)
+train <- subset(non0data, split == 1)  
+test <- subset(non0data, split == 0)
+
+predictTest <- predict(model3, type = "response", newdata=test)
+dollar_predictTest <- exp(predictTest)
+head(dollar_predictTest)
+
+
+rmse(test$price, dollar_predictTest)
+```
+##### The RMSE here is still high in my opinion after training the Model with 13,600 observations. I would not seek a RMSE of `r rmse(test$price, dollar_predictTest)` to efficiently price my property, and this is mostly because our model is getting trained to price property's a bit low due to those commercial operators saturing the market with low price listings. I noticed that when the # of reviews increase, the price for the listing slightly decreases. This can either mean the model is not correct for this type of data, or that since commercial operators generally price very low they tend to have alot of transactions which results in more reviews than the average lister. 
+

@@ -1,8 +1,11 @@
 ---
-title: First Post 
+title: Why a Blog? 
 author: "Jagger V"
 date: '2018-11-16'
-slug: hello-world-rmd
+slug: why-a-blog
+thumbnailImagePosition: left
+coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1542411839/samples/landscapes/architecture-signs.jpg
+coverSize: partial
 categories: ["R"]
 tags: ["Test"]
 ---
