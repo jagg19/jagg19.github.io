@@ -208,6 +208,7 @@ axis(1,at = seq(-2.5,2.5, by = .5))
 
 - Our residuals fit the requiremnts we would like to see which shows that our model is strong and we cannot really make this model significantly more accurate.  
 
+
 #### Now lets input some sample data to test and see the expected value in price our model gives us.
 - I created a data frame with my Apartment's information, and replaced all my NA values with .0000001, or almost 0. For example, I do not have a review score as I do not list on Airbnb, so I replaced that with almost 0. Same for my listings count. As for reviews, I inserted 1 since we take the log of this variable to normalize, and the log of 1 is equal to 0. I estimated that my Listing will be available for 50% of the year and 50% of the month.
 ```{r}
