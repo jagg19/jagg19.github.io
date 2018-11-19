@@ -7,7 +7,7 @@ coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1542650457/Untitl
 coverSize: partial
 thumbnailImagePosition: left
 categories: ["R", "R Markdown","Predictions", "Programming"]
-tags: ["Project","Machine Learning", "Airbnb","NYC"]
+tags: ["Project","Machine Learning", "Airbnb","Price Predictions", "Programming"]
 ---
 
 # Using Airbnb
@@ -27,7 +27,7 @@ I believe it is an issue because it is depleting the actual prices hosts could g
 I found my data off of InsideAirBnb.com which is an independent, non-commercial set of tools and data that allows you to explore how Airbnb is really being used in cities around the world. I retrived all listings in NYC as of 03/2018. This was a very large dataset that contained 29142 listings in NYC with 96 different factors to choose from as my independent variables. I would like to keep in mind the affect commercial operators have on prices. I believe that Airbnb listing prices are not fully predictable by the usual variables one would use to predict the price of a traditional property in NYC. These usual variables are factors such as bedroom count, bathroom, location, property type, and etc. If the listing prices were fully explainable by these usual variables, then I would assume with our data we will be able to train and build our model strong enough to have a low Root Mean Squared Error (RMSE). See below for how I got to our final Model.
 
 ```{r Loading in the Data, echo=FALSE}
-data <- read.csv("/Users/jagvill/Desktop/Github/analysisData.csv")
+data <- read.csv("/Users/jagvill/Desktop/Github/Data/analysisData.csv")
 ```
 
 # The Process

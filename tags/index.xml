@@ -30,11 +30,20 @@
     </item>
     
     <item>
-      <title>Nyc</title>
-      <link>/tags/nyc/</link>
+      <title>Price Predictions</title>
+      <link>/tags/price-predictions/</link>
       <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/nyc/</guid>
+      <guid>/tags/price-predictions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Programming</title>
+      <link>/tags/programming/</link>
+      <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/programming/</guid>
       <description></description>
     </item>
     

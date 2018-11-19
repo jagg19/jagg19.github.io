@@ -48,7 +48,9 @@
     
       <meta property="article:tag" content="Airbnb">
     
-      <meta property="article:tag" content="NYC">
+      <meta property="article:tag" content="Price Predictions">
+    
+      <meta property="article:tag" content="Programming">
     
   
 
@@ -574,7 +576,7 @@ summary(model3)</code></pre>
 <div id="next-we-want-to-check-if-our-final-full-model-suffers-from-auto-correlation-or-not-using-the-durbin-watson-test." class="section level4">
 <h4>Next, we want to check if our final full model suffers from Auto Correlation or not using the Durbin Watson Test.</h4>
 <pre><code>##  lag Autocorrelation D-W Statistic p-value
-##    1      0.01476564      1.970464   0.056
+##    1      0.01476564      1.970464   0.062
 ##  Alternative hypothesis: rho != 0</code></pre>
 <ul>
 <li>Using the D-W Significance table, we can reject the Null and there is no correlation among residuals. Having a total of 16 independent variables, or k, and WELL over 200 observations, or n in our sample, the DL @ 5% significance is 1.599 and Du is 1.943 which our D-W Statistic of 1.9704635 is above the upper limit indicating no Auto Correlation exists. It is also significant at the 1% with DL at 1.507 and Du at 1.847.</li>
@@ -669,7 +671,9 @@ head(dollar_predictTest)</code></pre>
 
   <a class="tag tag--primary tag--small" href="/tags/airbnb/">Airbnb</a>
 
-  <a class="tag tag--primary tag--small" href="/tags/nyc/">NYC</a>
+  <a class="tag tag--primary tag--small" href="/tags/price-predictions/">Price Predictions</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/programming/">Programming</a>
 
                   </div>
                 
