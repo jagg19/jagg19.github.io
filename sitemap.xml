@@ -3,99 +3,104 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jagg19.github.io/2018/11/ml-airbnb-prices/</loc>
+    <loc>/2018/11/salesforce-are-expanding-margins-enough-to-convict-a-buy/</loc>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/11/ml-airbnb-prices/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/2018/11/why-a-blog/</loc>
+    <loc>/2018/11/why-a-blog/</loc>
     <lastmod>2018-11-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/airbnb/</loc>
+    <loc>/tags/airbnb/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/archives/</loc>
+    <loc>/archives/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/</loc>
+    <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/</loc>
+    <loc>/</loc>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/machine-learning/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/machine-learning/</loc>
+    <loc>/post/</loc>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/predictions/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/post/</loc>
+    <loc>/tags/price-predictions/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/predictions/</loc>
+    <loc>/categories/programming/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/price-predictions/</loc>
+    <loc>/tags/programming/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/programming/</loc>
+    <loc>/tags/project/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/programming/</loc>
+    <loc>/categories/r/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/project/</loc>
+    <loc>/categories/r-markdown/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/r/</loc>
+    <loc>/tags/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/r-markdown/</loc>
-    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://jagg19.github.io/tags/</loc>
-    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://jagg19.github.io/tags/test/</loc>
+    <loc>/tags/test/</loc>
     <lastmod>2018-11-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
