@@ -44,7 +44,9 @@ tags: ["CRM", "Cloud", "DCF", "WACC", "Comparable Analysis", "recommendations"]
   I assume that Salesforce will not remain as risky as it is today as the business matures, so I started fiscal 2019 with a WACC of 10% (right under the optimal average) and remaining their until fiscal 2022. My reasoning is that I want to see if management can deliver on their 2022 vision before deciding to reduce the discount rate. From there, it decreases 50 basis point per year until fiscal 2025, which then decreases by 25 basis points finishing fiscal 2028 at a WACC of 7.75%. I used a final WACC terminal value discount rate of 7.5%.
   
 <br>
+
 ###Comparable Analysis highlights
+
 ![](/img/Salesforce_Comps.png)
 
 
@@ -67,7 +69,7 @@ When giving recommendations, I always use a longer-term view instead of the trad
 ![](/img/Sens_table.png)
 <br>
 
-#####Football Field Valuation
+##### Football Field Valuation
 
 ![](/img/Football_table.png)
 
