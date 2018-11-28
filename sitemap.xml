@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/2018/11/salesforce-are-expanding-margins-enough-to-convict-a-buy/</loc>
+    <loc>/2018/11/salesforce-enough-to-buy/</loc>
     <lastmod>2018-11-27T00:00:00+00:00</lastmod>
   </url>
   
@@ -30,6 +30,48 @@
   
   <url>
     <loc>/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/cloud/</loc>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/comparable-analysis/</loc>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/convenience/</loc>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/crm/</loc>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/dcf/</loc>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/forecasting/</loc>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/investment/</loc>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -64,13 +106,13 @@
   </url>
   
   <url>
-    <loc>/categories/programming/</loc>
+    <loc>/tags/programming/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/programming/</loc>
+    <loc>/categories/programming/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -83,13 +125,19 @@
   
   <url>
     <loc>/categories/r/</loc>
-    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/r-markdown/</loc>
-    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/recommendations/</loc>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -102,6 +150,18 @@
   <url>
     <loc>/tags/test/</loc>
     <lastmod>2018-11-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/valuations/</loc>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/wacc/</loc>
+    <lastmod>2018-11-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

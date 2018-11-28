@@ -21,6 +21,42 @@
     </item>
     
     <item>
+      <title>Cloud</title>
+      <link>/tags/cloud/</link>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/cloud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Comparable Analysis</title>
+      <link>/tags/comparable-analysis/</link>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/comparable-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Crm</title>
+      <link>/tags/crm/</link>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/crm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dcf</title>
+      <link>/tags/dcf/</link>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/dcf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Machine Learning</title>
       <link>/tags/machine-learning/</link>
       <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
@@ -57,11 +93,29 @@
     </item>
     
     <item>
+      <title>Recommendations</title>
+      <link>/tags/recommendations/</link>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/recommendations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Test</title>
       <link>/tags/test/</link>
       <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wacc</title>
+      <link>/tags/wacc/</link>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/wacc/</guid>
       <description></description>
     </item>
     

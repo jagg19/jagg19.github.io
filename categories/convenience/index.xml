@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Convenience on Jagger with Swagger</title>
+    <link>/categories/convenience/</link>
+    <description>Recent content in Convenience on Jagger with Swagger</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 27 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/convenience/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Salesforce, Inc. - Are Expanding Margins Enough to Buy?</title>
+      <link>/2018/11/salesforce-enough-to-buy/</link>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/11/salesforce-enough-to-buy/</guid>
+      <description>Salesforce, Inc.  Leader in the growing CRM market Modestly expanding margins Monetizing existing customer base  Customer Relationship Management Pioneer Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig in to Salesforce specifically, let’s explore what exactly CRM is and the growth prospects.</description>
+    </item>
+    
+  </channel>
+</rss>
