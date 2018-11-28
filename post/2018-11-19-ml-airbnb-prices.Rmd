@@ -11,27 +11,27 @@ tags: ["Project","Machine Learning", "Airbnb","Price Predictions", "Programming"
 ---
 
 # Using Airbnb
-By now, most Gen Z and millenials have heard of or used Airbnb for a range of many reasons such as looking for a place to crash or taking a vacation. I believe what won the consumer's attention over hotel's was the fact that you are getting the "homey" setting and privacy while away on vacation instead of a hotel enviroment. I realized not everyone want's to part ways with room service, benefits of a having a full-service bar in the lobby, pool & spa's, sometimes a gym, and the 100+ channels that comes with almost all hotel's but when comparing the prices and the extra sq footage, it is hard not to take a look at and possibly book Airbnb listings. 
+By now, most Gen Z and millenials have heard of or used Airbnb for a range of many reasons, such as looking for a place to crash or taking a vacation. I believe what won the consumer's attention over hotels was the fact that you are getting the "homey" setting and privacy while away on vacation instead of a hotel environment. I realize not everyone wants to part ways with room service, benefits of a having full-service bar in the lobby, pool & spas, sometimes a gym, and the 100+ channels,  but when comparing the prices and the extra sq. footage, it is hard not to take a look at and possibly book Airbnb listings. 
 
 # Listing on Airbnb
-While most of us have used or considered booking an Airbnb, there is alot less of us who have considered actually posting their property on Airbnb. Being that I am infatuated with Profit and New York City rent is extremely high, I considered listing my Brooklyn apartment to see what kind of profits I could turn. At the time, I was learning about multilinear regressions in my quantitative Analysis & Forecasting class and I was given a project to create a linear model to predict some form of dependent variable. I figured why not use this opportunity to dig a little deeper on estimating a listing price for my Apartment. This led me to stumble upon pretty interesting information about Commercial Operators listing on Airbnb in New York City. To keep this post inline with the subject, I will just quickly summarize what I found in the following paragraph.
+While most of us have used or considered booking an Airbnb, there are a lot less of us who have considered posting our own property on Airbnb. Being that I am infatuated with profit and New York City rent is extremely high, I considered listing my Brooklyn apartment to see what kind of profits I could turn. At the time, I was learning about multiple linear regression in my Quantitative Analysis & Forecasting class and I was given a project to create a linear model to predict some form of dependent variable. I figured why not use this opportunity to dig a little deeper on estimating a listing price for my apartment. This led me to stumble upon pretty interesting information about commercial operators listings on Airbnb in New York City. To keep this post in line with the subject, I will just quickly summarize what I found in the following paragraph.
 
 # Commercial Operators
-What exactly is a Commercial operator? This is a Airbnb Host that have multiple entire-home listings or control many private-room listings. If I was to post on Airbnb to try and squeeze a profit, I would list my property for certain days or weeks of the month, and at most a rental property if I happend to own one. This compares to commercial operators who may have 4-6 entire home listings and 8-12 private room listings. It was estimated that Commercial Operators make up 12% of NYC Airbnb hosts, but earned almost 1/3 of all incoming revenue. 
+What exactly is a commercial operator? This is an Airbnb host that has multiple entire-home listings or controls many private-room listings. If I was to post on Airbnb to try and squeeze a profit, I would list my property for certain days or weeks of the month, and at most a rental property if I happened to own one. This compares to commercial operators who may have 4-6 entire home listings and 8-12 private room listings. It was estimated that commercial operators make up 12% of NYC Airbnb hosts, but earned almost 1/3 of all incoming revenue. 
 
 # Why is this an issue? 
-I believe it is an issue because it is depleting the actual prices hosts could get for their properties if they were to list on Airbnb. If it was not for Commercial Operators saturing the market with these lower priced listings, maybe I could squeeze an extra $20-30/ night from my listing. Think of these NYC Commercial Operators as the Walmart or Amazon of property listings. They often charge less per night than other hosts do across all listings and adjust their rates to attract a high number of rentals overall. To Summarize, they are flooding the New York City markets with lower priced listings. 
+I believe it is an issue because it is depleting the actual prices hosts could get for their properties if they were to list on Airbnb. If it weren't for commercial operators saturating the market with these lower-priced listings, maybe I could squeeze an extra $20-30/ night from my listing. Think of these NYC commercial operators as the Walmart or Amazon of property listings. They often charge less per night than other hosts do across all listings and adjust their rates to attract a high number of rentals overall. To summarize, they are flooding the New York City markets with lower-priced listings. 
 
 
 # Now the fun stuff - Building the Model
-I found my data off of InsideAirBnb.com which is an independent, non-commercial set of tools and data that allows you to explore how Airbnb is really being used in cities around the world. I retrived all listings in NYC as of 03/2018. This was a very large dataset that contained 29142 listings in NYC with 96 different factors to choose from as my independent variables. I would like to keep in mind the affect commercial operators have on prices. I believe that Airbnb listing prices are not fully predictable by the usual variables one would use to predict the price of a traditional property in NYC. These usual variables are factors such as bedroom count, bathroom, location, property type, and etc. If the listing prices were fully explainable by these usual variables, then I would assume with our data we will be able to train and build our model strong enough to have a low Root Mean Squared Error (RMSE). See below for how I got to our final Model.
+I found my data off of InsideAirBnb.com which is an independent, non-commercial set of tools and data that allows you to explore how Airbnb is really being used in cities around the world. I retrieved all listings in NYC as of 03/2018. This was a very large data set that contained 29,142 listings in NYC with 96 different factors to choose from as my independent variables. I would like to keep in mind the effect commercial operators have on prices. I believe that Airbnb listing prices are not fully predictable by the usual variables one would use to predict the price of a traditional property in NYC. These usual variables are factors such as bedroom count, bathroom, location, property type, and etc. If the listing prices were fully explainable by these usual variables, then I would assume with our data we will be able to train and build our model strong enough to have a low root mean squared error (RMSE). See below for how I got to our final Model.
 
 ```{r Loading in the Data, echo=FALSE}
 data <- read.csv("/Users/jagvill/Desktop/Github/Data/analysisData.csv")
 ```
 
 # The Process
-After loading in the data, I began to analyze the structure to search for any outliers or Missing Values. Our initial dataset has a dimension of `r dim(data)[1]` rows and `r dim(data)[2]` columns so let's begin cutting down the amount of factors playing into price. I will choose the variables that make most sense when predicting a price for a property. 
+After loading in the data, I began to analyze the structure to search for any outliers or missing values. Our initial data set has a dimension of `r dim(data)[1]` rows and `r dim(data)[2]` columns so let's begin cutting down the amount of factors playing into the pricing. I will choose the variables that make the most sense when predicting a price for a property. 
 
 #### Cleaning the Data
 ```{r Cleaning the Data}
@@ -72,16 +72,16 @@ sapply(non0data, function(x) sum(is.na(x)))
 non0data <- non0data[complete.cases(non0data),]
 ```
 
-#### Lets take a look at the big picture of our variables once more to double check that nothing is off
+#### Let's take a look at the big picture of our variables once more to double check that nothing is off
 ```{r}
 str(non0data)
 ```
 
-#### We can notice that under zipcodes, there is a zipcode titled "" with no value. Lets take a closer look
+#### We can notice that under zip codes, there is a zip code titled "" with no value. Let's take a closer look
 ```{r}
 length(non0data$zipcode[non0data$zipcode == ""])
 ```
-- We have 202 listings with no zipcode. Since zipcode can play a large role in the listing price, we will also take these listings out. 
+- We have 202 listings with no zip code. Since zip code can play a large role in the listing price, we will also take these listings out. 
 
 ```{r}
 non0data$zipcode[non0data$zipcode == ""] <- NA
@@ -146,7 +146,7 @@ model2 = lm(log(price)~log(accommodates)
            ,non0data)
 ```
 
-- Although model2 still has a very high R^2 of .7705, it still also has alot of insignificant variables due to the fact that zipcode consists of 190 levels and property_type has a bunch of insignificant property_types. I will subsitute zipcode for neighborhood_group_cleansed since it has 4 levels compared to 190 and I will remove all insignificant property_type. 
+- Although model2 still has a very high R^2 of .7705, it still also has a lot of insignificant variables due to the fact that zip code consists of 190 levels and property_type has a bunch of insignificant property_types. I will substitute zip code for neighborhood_group_cleansed since it has 4 levels compared to 190 and I will remove all insignificant property_types. 
 
 ```{r Insignificant Property Types}
 
@@ -177,7 +177,7 @@ model3 = lm(log(price)~log(accommodates)
            ,non0data)
 summary(model3)
 ```
-- After making the above adjustments, we now have a Model with what I believe is the most significant variables to price, with a strong R^2 of .7016. 
+- After making the above adjustments, we now have a model with what I believe is the most significant variables to price, with a strong R^2 of .7016. 
 
 #### Now, Lets check if our model suffers from multicollinearity
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -188,16 +188,16 @@ vif(model3)
 - Our full model does not suffer from multicollinearity as the highest VIF value of `r vif(model3)[1]` is well below 5. 
 
 
-#### Next, we want to check if our final full model suffers from Auto Correlation or not using the Durbin Watson Test.
+#### Next, we want to check if our final full model suffers from autocorrelation or not using the Durbin Watson Test.
 
 ```{r, echo= FALSE}
 durbinWatsonTest(model3)
 ```
 
-- Using the D-W Significance table, we can reject the Null and there is no correlation among residuals. Having a total of 16 independent variables, or k, and WELL over 200 observations, or n in our sample, the DL @ 5% significance is 1.599 and Du is 1.943 which our D-W Statistic of `r durbinWatsonTest(model3)[2]` is above the upper limit indicating no Auto Correlation exists. It is also significant at the 1% with DL at 1.507 and Du at 1.847.
+- Using the D-W Significance table, we can reject the null and there is no correlation among the residuals. Having a total of 16 independent variables, or k, and WELL over 200 observations, or n in our sample, the DL @ 5% significance is 1.599 and Du is 1.943 which our D-W Statistic of `r durbinWatsonTest(model3)[2]` is above the upper limit indicating no autocorrelation exists. It is also significant at the 1% with DL at 1.507 and Du at 1.847.
 
 #### Let's look at some visualizations 
-- Specifically the residuals from our model. In the first plot, values on the Y axis above 0 mean the predicton was too low, and negative values mean the prediction was too high. 0 means the prediction was 100% correct. We want to see something that is symmetrically distributed, tending to cluster towards the middle of the plot. On the X axis, we want to see it clustered around the lower single digit area and not something like -10 to +10.   
+- Specifically the residuals from our model. In the first plot, values on the Y axis above 0 mean the prediction was too low, and negative values mean the prediction was too high. 0 means the prediction was 100% correct. We want to see something that is symmetrically distributed, tending to cluster towards the middle of the plot. On the X axis, we want to see it clustered around the lower single digit area and not something like -10 to +10.   
 
 ```{r, echo=FALSE}
 plot(model3$residuals ~ model3$fitted.values)
@@ -206,11 +206,11 @@ hist(model3$residuals, cex = .5)
 axis(1,at = seq(-2.5,2.5, by = .5))
 ```
 
-- Our residuals fit the requiremnts we would like to see which shows that our model is strong and we cannot really make this model significantly more accurate.  
+- Our residuals fit the requirements we would like to see which shows that our model is strong and we cannot really make this model significantly more accurate.  
 
 
-#### Now lets input some sample data to test and see the expected value in price our model gives us.
-- I created a data frame with my Apartment's information, and replaced all my NA values with .0000001, or almost 0. For example, I do not have a review score as I do not list on Airbnb, so I replaced that with almost 0. Same for my listings count. As for reviews, I inserted 1 since we take the log of this variable to normalize, and the log of 1 is equal to 0. I estimated that my Listing will be available for 50% of the year and 50% of the month.
+#### Now let's input some sample data to test and see the expected value in price our model gives us.
+- I created a data frame with my apartment's information, and replaced all my NA values with .0000001, or almost 0. For example, I do not have a review score as I do not list on Airbnb, so I replaced that with almost 0. Same for my listings count. As for reviews, I inserted 1 since we take the log of this variable to normalize, and the log of 1 is equal to 0. I estimated that my listing will be available for 50% of the year and 50% of the month.
 ```{r}
 Jaggerslisting <- data.frame(accommodates=6, number_of_reviews=1
                              ,review_scores_rating=.0000001,availability_30=15
@@ -241,10 +241,10 @@ predInterval <- predict(model3, newdata = Jaggerslisting, interval = "prediction
 exp(predInterval)
 ```
 
-> Please note that this is quite a bit wider than the confidence interval, indicating that the variation about the mean is fairly large. This means the datapoints of price is very spread out from the mean, indicating there is possibly more to the listing price than the variables used. I believe this ties into what I found in my research which was that Commercial Operators are saturating the AirBnb market, espeically in NYC.
+> Please note that this is quite a bit wider than the confidence interval, indicating that the variation about the mean is fairly large. This means the datapoints of price are very spread out from the mean, indicating there is possibly more to the listing price than the variables used. I believe this ties into what I found in my research which was that commercial operators are saturating the Airbnb market, espeically in NYC.
 
 #### Finally, Teaching the Machine to Learn Airbnb Prices
-- Even with all the factors I have in my model, I expect a high RMSE due to the fact that Airbnb prices have been diluted to Commercial operators. If not, then with about 13,600 (n * 0.80) observations in our training data, our model should be able to predict the price a little more accuratley in our test data which will result to a LOW RMSE.
+- Even with all the factors I have in my model, I expect a high RMSE due to the fact that Airbnb prices have been diluted to commercial operators. If not, then with about 13,600 (n * 0.80) observations in our training data, our model should be able to predict the price a little more accurately in our test data which will result in a LOW RMSE.
 ```{r,echo=FALSE}
 library(caTools)
 library(Metrics)
@@ -263,7 +263,7 @@ head(dollar_predictTest)
 
 rmse(test$price, dollar_predictTest)
 ```
-##### The RMSE here is still high in my opinion after training the Model with 13,600 observations. I would not seek a RMSE of `r rmse(test$price, dollar_predictTest)` to efficiently price my property, and this is mostly because our model is getting trained to price property's a bit low due to those commercial operators saturing the market with low price listings. I noticed that when the # of reviews increase, the price for the listing slightly decreases. This can either mean the model is not correct for this type of data, or that since commercial operators generally price very low they tend to have alot of transactions which results in more reviews than the average lister. 
+##### The RMSE here is still high in my opinion after training the model with 13,600 observations. I would not seek a RMSE of `r rmse(test$price, dollar_predictTest)` to efficiently price my property, and this is mostly because our model is getting trained to price property's a bit low due to those commercial operators saturing the market with low price listings. I noticed that when the # of reviews increase, the price for the listing slightly decreases. This can either mean the model is not correct for this type of data, or that since commercial operators generally price very low they tend to have a lot of transactions which results in more reviews than the average lister. 
 
 #Conclusion
-These Commercial operators are bringing down the prices of Airbnb listings and true home sharers cannot compete. In fact, 10% of these Hosts (about 5,000) earned 48% of NYC total Airbnb revenue totaling $318 Million while the bottom 80% (over 40400) earned $209 Million in 2017. I believe once the playing field is leveled between Consumer Hosts and Commercial Hosts, the variance between individual fitted values and the population mean will start to decrease and the listing prices can be predicted with less noise. 
+These commercial operators are bringing down the prices of Airbnb listings and true home sharers cannot compete. In fact, 10% of these hosts (about 5,000) earned 48% of NYC's total Airbnb revenue totaling $318 Million while the bottom 80% (over 40400) earned $209 Million in 2017. I believe once the playing field is leveled between consumer hosts and commercial hosts, the variance between individual fitted values and the population mean will start to decrease and the listing prices can be predicted with less noise. 
