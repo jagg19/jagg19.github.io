@@ -117,7 +117,7 @@ num_inversion_plot <- function(data, nrow = 7, ncol = 1){
   
   for(i in loop){
     if(i < 6){        #The first 5 graphs will come from this first if-statement
-      b <- i + 1
+      b <- i + 1      # [i] will be used for 1st element, and [b] is used for 2nd
   
   #We take our data and select the first pair in the indx(1 and 2), only get days when 
   #the short-term yield > long-term, count the # of days and group by year-mon then plot 
@@ -127,7 +127,7 @@ num_inversion_plot <- function(data, nrow = 7, ncol = 1){
       
       ls[[i]] <- data %>% select(ref_date, BC_2YEAR,BC_10YEAR) %>% filter(BC_2YEAR > BC_10YEAR) %>% {count(.,date = format(.$ref_date, "%Y-%m"))} %>% ggplot(aes(date, n)) + geom_col(fill = "lightblue") + labs(title = "# of inversions for BC_2YEAR & BC_10YEAR", y = "Occurrences", x = "Date")+ theme(axis.text.x = element_text(angle = 65, hjust = 1))
       
-    } else{      #Our 7th graph will be our second custom pair
+    } else {      #Our 7th graph will be our second custom pair
       
       ls[[i]] <- data %>% select(ref_date,BC_2YEAR, BC_10YEAR,BC_30YEAR) %>% filter(BC_2YEAR > BC_10YEAR & BC_10YEAR > BC_30YEAR) %>% {count(.,date = format(.$ref_date, "%Y-%m"))} %>% ggplot(aes(date, n)) + geom_col(fill = "lightblue") + labs(title = "# of complete yield inversions - 2yr > 10yr > 30yr", y = "Occurrences", x = "Date") + theme(axis.text.x = element_text(angle = 65, hjust = 1))
       
@@ -140,7 +140,7 @@ num_inversion_plot <- function(data, nrow = 7, ncol = 1){
 num_inversion_plot(my_yc)
 ```
 
->*We can see that the most common inversions since 1990 are the 7-year/10-year (**877 times**), 2-year/3-year (**667 times**), 3-year/5-year (**649 times**), and 2-year/10-year(**508 times**). What I like to classify as a "Across-the-board" inversion (2-yr > 10-yr > 30-yr) has occured only **189 times** since 1990. The rarest pair of inversion is surprisignly the 5-year/7-year yield, occuring only **69 times** since 1990.* 
+>We can see that the most common inversions since 1990 are the 7-year/10-year (**877 times**), 2-year/3-year (**667 times**), 3-year/5-year (**649 times**), and 2-year/10-year(**508 times**). What I like to classify as a "Across-the-board" inversion (2-yr > 10-yr > 30-yr) has occured only **189 times** since 1990. The rarest pair of inversion is surprisignly the 5-year/7-year yield, occuring only **69 times** since 1990. 
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 my_yc_gather <-  gather(data = my_yc,
@@ -159,7 +159,7 @@ my_yc_gather <- na.omit(my_yc_gather)
 ```
 
 #Yield curve - YTD changes
-Now, let us view the way the yield curve has changed since the start of 2018. Maybe this can paint a better picture by showing us the momentum in which the yield curve has been inverting. We will take 5 different time frames to plot our yield curve by using the seq and floor functions and setting the number of periods to 5. First, we need to convert our data frame from "wide" format to "long" format, meaning we make all our columns their unique own rows with corresponding value's. This will take our dimensions of the data frame from `r dim(my_yc)` to `r dim(my_yc_gather)` with dates being the index. This will allow us to index by our unique dates for each yield on the yield curve. Once we index by our dates, we can then plot away with our unique sequence yield curve to view YTD changes!
+Now, let us view the way the yield curve has changed since the start of 2018. Maybe this can paint a better picture by showing us the momentum in which the yield curve has been inverting. We will take 5 different time frames to plot our yield curve by using the seq and floor functions and setting the number of periods to 5. First, we need to convert our data frame from "wide" format to "long" format. This means we convert all of our columns into their own rows with corresponding value's. This will take our dimensions of the data frame from `r dim(my_yc)` to `r dim(my_yc_gather)` with dates, maturities, and rates as the columns. This will allow us to index by our generated sequence dates for each yield on the yield curve. Once we index by our sequence dates, we can then plot away to view YTD changes in our yield curve.
 
 ```{r}
 #Change to long format, and convert maturity to factor
@@ -236,11 +236,11 @@ ten_thr_spread_p <- paste(tod_thr*100, "Basis Points,","a", round((tod_thr-yest_
 ```
 
 #What can we takeaway from this?
-Most of the inversions happened in the years of 1990, 2000, and 2006-2007. The post savings and loan crisis in 1990, the dot com bubble in 2000, and the financial crisis of 2007. All three time frames were during recessions but did all result in a bear market (defined as a decline of 20%)? In theory, the answer is no. The only +20% market declines during these three year periods were in 2000 and 2007. Although, if we analyze a little closer we can see the answer *should* be YES! **If** we were to classify a "Bear" market as a decline of +19.9%, *only* 10 basis under the current 20% classification, then yes; all three year periods resulted in a Bear market (July-October/1990 incurred 19.92% loss). 
+Most of the inversions happened in the years of 1990, 2000, and 2006-2007. The post savings and loan crisis in 1990, the dot com bubble in 2000, and the financial crisis of 2007 (right now we are dealing with US/China trade issues, high wage growth that the FED views as inflationary, etc). All three time frames were during recessions but did they all result in a bear market (defined as a decline of 20%)? In theory, the answer is no. The only 20%+ market declines during these three year periods were in 2000 and 2007. Although, if we analyze a little closer we can see the answer *should* be YES! **If** we were to classify a Bear market as a decline of +19.9%, *only* 10 basis under the current 20% classification, then yes; all three year periods resulted in a Bear market (July-October/1990 incurred 19.92% loss). 
  
-If we were to use the "Across-the-board" inversion as an indicator, then the "Bear" market began 7 months after the inversions in 1990, 1 month after the first inversion in 2000, and 19 months after the 2006 inversions. As of 12-11-2018, the 2/10-year spread closed at `r ten_two_spread_p` and the 10-year/30-year closed at `r ten_thr_spread_p`. What this tells me is that although we see some slight inversions on the short-end of the curve, which as we saw earlier occurs more often than the long-end, but the "Across-the-board" inversion has yet to happen. Even if this true inversion does occur, then there is a possibility that we won't see a bear market occur until a few months following the first inversion. 
+If we were to use the "Across-the-board" inversion as an indicator, then the Bear market began 7 months after the inversions in 1990, 1 month after the first inversion in 2000, and 19 months after the 2006 inversions. As of 12-11-2018, the 2/10-year spread closed at `r ten_two_spread_p` and the 10-year/30-year closed at `r ten_thr_spread_p`. What this tells me is that although we see some slight inversions on the short-end of the curve, which as we saw earlier occurs more often than the long-end, but the "Across-the-board" inversion has yet to happen. Even if this true inversion were to occur, then there is a possibility that we won't see a bear market occur until a few months following the first inversion. 
 
-I do not believe we will enter a bear market due to the recent inversions in the yield curve. If you happen to be in the camp that does believe a bear market is coming, then you most likely believe the U.S and China trade spat will only worsen from here. This could mean that no deal is reached for a long period of time, additional tariffs, or a unfavorable deal is reached. I believe it is extremely hard to predict what two countries will settle on, when a deal is reached, or how it will affect the markets today. This is why I prefer buying into value and playing the long game rather than trying to predict how yield curve inversions and investor sentiment can affect markets short-term. 
+I do not believe we will enter a bear market due to the recent inversions in the yield curve. If you happen to be in the camp that does believe a bear market is coming, then most likely you believe that the U.S and China trade spat will only worsen from here. This could mean that either no deal is reached for a long period of time, additional tariffs, or a unfavorable deal is reached. I believe it is extremely hard to predict what two countries will settle on, when a deal is reached, or how it will affect the markets today. This is why I prefer buying into value and playing the long game rather than trying to predict how yield curve inversions and investor sentiment can affect markets short-term. All in all, I believe the FED will continue to watch closely before continuing to pump up the short end of the curve and we most likely will not see a lasting bear market if a true inversion were play out. 
 
 
 ```{r Print the Plots, eval=FALSE, include=FALSE}
