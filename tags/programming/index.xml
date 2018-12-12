@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Programming on Jagger with Swagger</title>
-    <link>/tags/programming/</link>
+    <link>https://jagg19.github.io/tags/programming/</link>
     <description>Recent content in Programming on Jagger with Swagger</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 19 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jagg19.github.io/tags/programming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Teaching a Machine to Learn NYC Airbnb Prices</title>
-      <link>/2018/11/ml-airbnb-prices/</link>
+      <link>https://jagg19.github.io/2018/11/ml-airbnb-prices/</link>
       <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/11/ml-airbnb-prices/</guid>
+      <guid>https://jagg19.github.io/2018/11/ml-airbnb-prices/</guid>
       <description>Using Airbnb By now, most Gen Z and millenials have heard of or used Airbnb for a range of many reasons, such as looking for a place to crash or taking a vacation. I believe what won the consumer’s attention over hotels was the fact that you are getting the “homey” setting and privacy while away on vacation instead of a hotel environment. I realize not everyone wants to part ways with room service, benefits of a having full-service bar in the lobby, pool &amp;amp; spas, sometimes a gym, and the 100+ channels, but when comparing the prices and the extra sq.</description>
     </item>
     
