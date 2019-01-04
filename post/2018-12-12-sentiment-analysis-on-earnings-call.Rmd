@@ -1,0 +1,545 @@
+---
+title: Sentiment Analysis on Earnings Call
+author: Jagger Villalobos
+date: '2018-12-14'
+slug: sentiment-analysis-conf-call
+coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/c_scale,w_325/v1546624528/Slider-Sentiment-468x340.png
+coverSize: partial
+thumbnailImagePosition: left
+categories: ["R", "R Markdown", "Investment", "Text Mining", "Earnings"]
+tags: ["CRM", "Cloud", "Sentiment Analysis", "Conference Call"]
+output: 
+  html_document:
+    df_print: paged
+---
+
+```{r Libraries, include=FALSE}
+library(rvest)
+library(stringi)
+library(rebus)
+library(qdap)
+library(tm)
+library(tidytext)
+library(tidyverse)
+library(ggthemes)
+library(radarchart)
+library(gridExtra)
+library(tidyquant)
+library(igraph)
+library(ggraph)
+library(dendextend)
+library(widyr)
+```
+
+
+#Conference Call Sentiment
+- Executives are very careful with the language they use during a conference call
+- Using sentiment scores to validate companies long-term goals
+- Adjusting for negation words that can affect score
+- Key takeaways from this analysis
+
+
+#Text Mining and Sentiment Analysis
+Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or when Elon Musk tweets about how all the shorts are wrong and tesla's stock initially pops right away? Within seconds of going public, millions of shares are being traded based off what was said or done. Are investors staring at twitter 24/7 ready to hit buy or sell? The answer of course is no, but algorithms programmed with text mining and sentiment scripts are. This should not be too surprising with the rise of quants and electronic trading, but it still amazes me how quickly these programs pick up and analyze the text. Sentiment analysis from tweets, social media postings, press releases, surveys, reviews, transcripts and many more occur millions of times everyday. Even when you send your resume in to apply for a job, most likely your resume is being read through a ATS system which analyzes the text to find matching keywords. 
+
+
+I find it very interesting how during a conference call, the stock price flucates and can change at any second due to one, two or three said words. The company can beat top and bottom line estimates, but if the CEO guides in-line due to "future headwinds" then the stock price can plummet. I decided to build a model that can analyze the conference call transcript using multiple methods to get a overall view of the management and analysts sentiments throughout the call. I first used the very simple method of word frequency analysis, then I used 3 different sentiment analysis databases to arrive at overall sentiment scores, adjusted our dictionaries so it fits our style of text, analyzed possible negation words, and use network graphs to visualize relationships between our text. We will be analyzing Salesforce Q2 earnings transcript sentiment to then compare with Q3 to validate the scores and previous guidance. 
+
+
+#Getting the Data
+We will webscrape the transcript from seeking alpha and clean the empty spaces from the data. Then, we can begin the tedious part which is extracting key text and putting it together into a dataframe. For example, we want to extract all executive and analyst names so we can label who is speaking to get seperate sentiments for management and analysts. Then, we want to break up the transcript text into two parts. The first part is the first half of the call, when the management annouces results and gets into more detail; then the second part is the question and answer session of the call which is labeled by who is asking and answering the question. We will call the first data frame "conf_call" and the second "qna_full" which will eventually be merged into a tibble data frame. Take a look at the data frames below. 
+```{r Getting the Data, include=FALSE}
+company_name <- "salesforce"
+
+html1 <- read_html("https://seekingalpha.com/article/4202977-salesforce-com-inc-crm-ceo-marc-benioff-q2-2019-results-earnings-call-transcript?part=single")
+
+transcript <- html_text(html_nodes(html1, "#a-body"))
+
+
+#Convert it to CVS and read it back in so it is a string per line
+#write.csv(transcript, "transcript_text.csv")
+setwd("~/Desktop/R/Earnings_transcripts")
+
+transcript_text <- stri_read_lines("transcript_text.csv")
+#transcript_text_qthr <- stri_read_lines("transcript_textq3.csv")
+#setwd("/Users/jagvill/Desktop/Github/blogdown_source/content/post")
+
+#Remove empty lines
+empty <- stri_isempty(transcript_text)
+transcript_text <- transcript_text[!empty]
+
+```
+
+
+
+#Splitting the text into sections that we want to analyze. 
+```{r Splitting the data into sections, include=FALSE}
+
+#Create pattern to grab relevant names such as Analyst and Executives and save
+pattern1 <- capture(upper() %R% one_or_more(WRD)) %R% SPC %R%
+  capture(upper() %R% one_or_more(WRD)) %R% " - " %R% capture(one_or_more(WRD) %R%
+  optional(char_class("- ,")) %R% zero_or_more(WRD %R% SPC %R% WRD %R% "-" %R% WRD))
+
+idx_e <- which(str_detect(transcript_text, "Executives")) + 1
+idx_a <- which(str_detect(transcript_text, "Analysts")) - 1
+exec <- transcript_text[idx_e:idx_a]
+exec <- str_match(exec, pattern1)
+exec <- exec[1:nrow(exec),2:3]
+exec <- paste(exec[,1],exec[,2])
+
+
+idx_a <- which(str_detect(transcript_text, "Analysts")) + 1
+idx_o <- min(which(str_detect(transcript_text, "Operator"))) - 1
+analyst <- transcript_text[idx_a:idx_o]
+analyst <- str_match(analyst, pattern1)
+analyst <- analyst[1:nrow(analyst),2:3]
+analyst <- paste(analyst[,1],analyst[,2])
+
+
+
+
+#Splitting up the call between management on the actual conf_call and Q&A from both analysts and management responses. We will also be charting some visualizations
+idx_c <- min(which(str_detect(transcript_text, "Good afternoon")))
+idx_q <- which(str_detect(transcript_text, "Question-and-Answer")) - 1
+
+conf_call <- transcript_text[idx_c:idx_q]
+
+idx_q <- which(str_detect(transcript_text, "Question-and-Answer")) + 1
+
+qna <- transcript_text[idx_q:length(transcript_text)]
+
+
+conf_call_df <- data.frame(doc_id = "management", text = conf_call, stringsAsFactors = FALSE)
+
+
+#locations or indexing of the names and question/answer from the transcript. Use "qna" for executives since their names show up before the QNA starts. 
+analyst_names_loc <- str_detect(transcript_text, paste(analyst,collapse = "|"))
+analyst_question_loc <- str_which(transcript_text, paste(analyst,collapse = "|")) + 1
+names_loc <- str_detect(qna, paste(exec,collapse = "|"))
+question_loc <- str_which(qna, paste(exec,collapse = "|")) + 1
+
+
+#Create Dataframe for each section and clean any unwanted data. 
+qna_full_analyst <- data.frame(doc_id = transcript_text[analyst_names_loc], text = transcript_text[analyst_question_loc], stringsAsFactors = FALSE) %>% filter(str_length(doc_id) < 22)
+
+qna_full_exec <- data.frame(doc_id = qna[names_loc], text = qna[question_loc], stringsAsFactors = FALSE) %>%  filter(str_length(doc_id) < 22)
+
+
+#Create a blank DF so we can integrate everything together in order. We could of done this in a easier way if we indexed correctly, but since I split up parts of the transcript I will have to do it like this. 
+n <- nrow(qna_full_analyst) + nrow(qna_full_exec)
+
+qna_full <- data.frame(doc_id = rep("who", n), text = rep("text",n), stringsAsFactors = FALSE)
+
+
+#Set starting index values so we can create this empty dataframe as if it goes in this order : Question followed by an answer. In other words, combine the two dataframes by every other row.
+n_analyst <- nrow(qna_full_analyst)
+a <- 0  
+b <- 0
+
+for(row in 1:nrow(qna_full)){
+  
+  if(row %% 2 != 0 & a < n_analyst){
+    a <- a + 1
+    qna_full[row,] <- qna_full_analyst[a,]} 
+  
+  else{ 
+    b <- b + 1 
+    qna_full[row,] <- qna_full_exec[b,]}
+}
+
+
+```
+
+
+
+```{r Viewing data we have}
+#Labeled with only management since we know it is executives only
+print(conf_call_df)
+
+#Labeled with names so we know who is asking the question / answering
+print(qna_full)
+
+```
+
+
+
+#Clean the Text
+Now that we have our appropiate sections and names in our data frames, we need to clean it even more for further analysis. Since computers read case sensitive, we are going to make all text lower case, replace abbreviations (Sr. -> senior), replace contractions (can't -> can not), replace numbers (1 -> one), replace ordinal's (1st -> first), and replace symbols (% -> percent). This can be done by creating a custom function using cleaning functions from the QDAP package.
+```{r Cleaning Data}
+
+#Create function to clean the text
+qdap_clean <- function(x){
+  x <- replace_abbreviation(x)
+  x <- replace_contraction(x)
+  x <- replace_number(x)
+  x <- replace_ordinal(x)
+  x <- replace_symbol(x)
+  x <- tolower(x)
+  return(x)
+}
+
+
+#Clean each of these
+conf_call_clean <- qdap_clean(conf_call_df$text)
+qna_clean <- qdap_clean(qna_full$text)
+```
+
+
+
+
+Now that we have our cleaned version of the two text's, we can create a corpus object that seperates the text by "documents". Then, we will then convert to a Term-Document Matrix which takes each term from each document. This is extrmemely powerful since it can analyze the terms by position, and the relationships between the terms. Once we make this TDM, we can analyze our text in many different ways, starting with a simpe word frequency analysis. **TALK ABOUT STOP WORDS HERE**
+```{r}
+#Create a all corpus
+all_corpus <- c(conf = conf_call_clean, qna = qna_clean) %>% VectorSource() %>% VCorpus()
+
+
+#lowercase names to match and remove from our text
+analyst_lowsplt <- as.character(str_split(tolower(analyst), pattern = " ", simplify = TRUE))
+exec_lowsplt <- as.character(str_split(tolower(exec), pattern = " ", simplify = TRUE))
+
+
+#Clean corpus function - Since it is a earnings call we will hear alot of names that we may want to remove for analysis purposes. (executive names, analyst names, operator)
+clean_corpus <-function(corpus){
+  corpus <- tm_map(corpus, removePunctuation)
+  corpus <- tm_map(corpus, stripWhitespace)
+  corpus <- tm_map(corpus, removeWords, c(stopwords("en"), company_name , analyst_lowsplt, exec_lowsplt))
+  return(corpus)
+}
+
+
+all_corpus_clean <- clean_corpus(all_corpus)
+```
+
+
+
+
+```{r TDM / DTM }
+#Create TDM from our clean corpus
+all_tdm_tf <- TermDocumentMatrix(all_corpus_clean)
+
+#Sum the frequency of the tdm word count, sort and plot the top results
+word_freq <- rowSums(as.matrix(all_tdm_tf))
+word_freq <- sort(word_freq, decreasing = TRUE)
+barplot(word_freq[1:20], col = "tan", las = 2, main = "Top 20")
+word_freq[1:20]
+```
+It looks like we see some common narrative associated with the business operations such as "cloud" and "one". Take these words out of our analysis as they do not mean much and wont uncover anything interesting. On the brightside, it's a good thing to see that "growth" ranked #15 in the top 20 list. Let's analyze a little more with the TDM. We can find any associations with speicfic key words analysts might be interested in, such as growth or raising.
+  
+
+```{r}
+#Find associations in all the terms with "growth" with cor over 0.4
+growth_ass <- findAssocs(all_tdm_tf, "growth", 0.4)
+ass_df <- list_vect2df(growth_ass, col2 = "word", col3="score")
+
+#Plot them!
+ggplot(ass_df, aes(score, word)) + geom_point(size = 1) + labs(x = "Correlation", y = "Terms",title = 'Correlation to Term - "Growth"') + scale_x_continuous(limits = c(0.40,.52), breaks = seq(.40,.52,.01)) + theme_economist_white(base_size = 9)
+```
+
+
+
+#Running Sentiment Analysis
+From this point on, we will convert from our data frame and use a tibble, which is a different form of dataframe that it easier to work with. Once we make the tibble object, we can label each set of text according to if its text from the management call, a analyst question from the Q&A session or a executive response and answer. 
+```{r, message=FALSE}
+#Create tibble object
+tibble_tidy <- data.frame(rbind(conf = conf_call_df, qna = qna_full)) %>% DataframeSource() %>% VCorpus() %>% tidy()
+
+
+#Label according to who is speaking
+z <- 0
+for(i in tibble_tidy$id){
+  z <- z+1
+  if(i %in% analyst){
+    tibble_tidy$author[z] <- "analyst_question"
+  } else if(i %in% exec){
+    tibble_tidy$author[z] <- "management_answer"
+  } else {tibble_tidy$author[z] <- "management_call"
+  }
+}
+
+
+#Keep only the rows you are interested in
+tibble_tidy <- tibble_tidy[,c("author", "id", "text")]
+
+#Unnest tokens, which converts all text to lowercase, and seperates our text by word
+text_tidy <- tibble_tidy %>% mutate(line_number = 1:nrow(.)) %>% group_by(author) %>% unnest_tokens(word, text) %>% ungroup()
+```
+
+
+
+#Now let's view different levels of sentiment starting with the simple "Bing" database designed by Bing Liu a distinguished professor at University of Illinios at Chicago. This database classifies words either negative or positive from a dictionary of 6,788 key words. First, let us quickly glance at the words and type of sentiment. Then we can look at the top 10 most common filtered words that are scored in our text.
+```{r message=FALSE}
+# Random examples in Bing words
+bing <- get_sentiments("bing")
+s <- sample(1:nrow(bing), 10)
+bing[s,]
+
+#We want to keep "great" as this is very positive in financial sentiment
+stop_words <- stop_words %>% filter(word != "great")
+
+#Create tiddy object that is filtered and scored
+text_tidy_bing <- text_tidy %>% inner_join(bing) %>% anti_join(stop_words)
+
+#Top 10 most frequent bing scored words in our text.
+head(text_tidy_bing %>% count(word, sentiment, sort = TRUE),10)
+```
+#No suprise we see cloud mentioned 50 times being that salesforce business segments operate in the cloud. What is **MOST** surprising is that the Bing dictionary considers this a negative word. Imagine if we did not catch this, and we considered "cloud" a negative word! 
+
+#Adjusting the Database
+This can distort the sentiment outlook so we must be careful and look at words that are impacting the score the most. It is worth noting that this dictionary and others, will not always best fit our style of text. You should always analyzing your most frequent terms and whether or not it is in the dictionary, you must decide if it needs to be adjusted fit the industry and company. After quickly glancing through the top 50 most used terms in the transcript, I noticed "headwinds" was used 8 times. In finance, headwinds should be viewed as a negative term and I will need to adjust the bing dictionary in order to score this negative term.
+```{r}
+bing <- bing %>% filter(word != "cloud")  #Filter out cloud & add headwind as negative
+bing <- rbind(data.frame(word = "headwind", sentiment = "negative", stringsAsFactors = F),bing)
+
+#Now let us see the top terms in each sentiment from a better visualization that shows which are the biggest contributors to positive score in Bing
+top_w_bing <- text_tidy_bing %>% count(word, sentiment, sort = TRUE) %>% group_by(sentiment) %>% top_n(9, wt = n) %>% mutate(n = ifelse(sentiment == "negative", -n, n)) %>% arrange(desc(n)) 
+
+ggplot(top_w_bing, aes(x = reorder(word,n), y = n, fill = sentiment)) + geom_col() + labs(y = "Occurrences", x = "", title = "Most frequent Positive/Negative Terms") + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + scale_fill_wsj()
+
+```
+**MAYBE ADD NEGATION or AMPLIFIER CHECK HERE TO SEE IF ANY NEGATION WORDS OCCUR BEFORE BIGGEST POSITIVE CONTRIBUTION WORDS or AMPLIFIERS BEFORE**
+
+
+# Let's see whether or not the analysts were either mostly positive or negative compared to management. 
+```{r message=FALSE}
+#Seperate by author sentiments 
+author_sentiment_bing <- text_tidy_bing %>% count(author, sentiment) %>% group_by(author) %>%  mutate(percent = n / sum(n))
+
+
+ggplot(author_sentiment_bing, aes(author, percent, fill = sentiment)) + geom_col() + theme(axis.text.x = element_text(angle = 0)) + labs(x = "Section", y = "Total Percentage",title = "Makeup of Positive/Negative Sentiment") 
+```
+#It looks like the analysts were not as positive as the management throughout the Q&A, which is no surpise since analysts are not as optimistic since it is their job to dig underneath the surface. **Elaborate**
+
+
+#Now let us look at sentiment throughout the conference call. Here we will calculate sentiment, or polarity by taking the positive - negative terms, and plotting it to visualize the score from beginning to end. Earning calls usually start off great due to management boasting any achievements, but once analyst begin to ask about future guidance and hard details in the Q&A, you can see a big change in sentiment. I will set `geom_smooth(span=0.4)` so I can capture the overall sentiment but with a bit more weight on the index at that moment.
+```{r message=FALSE}
+#Calculate polarity over time of the call
+text_tidy_bingscores <- text_tidy_bing %>% count(line_number, sentiment, author) %>% spread(sentiment, n, fill = 0) %>% mutate(polarity = positive - negative)
+
+#Plot the overall sentiment over the entire lentgth call
+ggplot(text_tidy_bingscores, aes(line_number, polarity)) + geom_smooth(span = .4) + geom_hline(yintercept = 4.7, color = "red") + labs(x = "Line Number", y = "Polarity Score",title = "Conference Call Chronological Polarity") + theme_gdocs() 
+
+
+#Plot the overall polarity for EACH section. This will plot the polarity for the conference call, analysts questions and Management answers through the duration of each.
+ggplot(text_tidy_bingscores, aes(line_number, polarity)) + geom_smooth(span = .4) + geom_hline(yintercept = 4.7, color = "red") + labs(x = "Line Number", y = "Polarity Score",title = "Conference Call Polarity Per Section") + theme_gdocs() + facet_wrap(~author)
+
+```
+#**FIX PLOT CHECK WARNINGS ABOUT SPAN** As we see here, it looks like the overall sentiment hit a high around index 35 right before management got into some details about the forecasts and guidance. This is usually because management does not want to set the bar too high, and dampen any high expectations analyst may have for the next quarter. Sentiment began to fall further once the Q&A began, but the overall sentiment polarity made a new high going into the end of Q&A which is generally a great sign. Analysts seem to have started a bit skepitcal but became more positive with each Q&A. 
+
+
+
+
+#Another form of sentiment analysis we can do is classify the emotion of the speaker by using NRC database. This database scores a distinct emotional class covering Plutchiks Wheel of Emotions. The NRC database, develoepd by Saif Mohammad and Peter turney, also includes positive and negative words. Since we have already done a analysis on the positive and negative words, we will subset this scoring out and only look at emotions. Of course, we first need to look at the biggest contributors to the score and if it is appropiate for our text. **Talk how this type of sentiment scoring can get tedious if we want to get a true view on emotion by adjusting emotions only since some words can be classified across all emotions.**
+```{r}
+
+#Get the getiments for NRC and create tibble for top NRC scores.
+nrc <- get_sentiments("nrc")
+
+nrc_score_tidy <- text_tidy %>% inner_join(nrc, by = "word") %>% anti_join(stop_words) 
+
+#Of course we need to check for possible adjustments
+head(nrc_score_tidy %>% count(word,sentiment, sort = T),100)
+
+
+#Only take the emotional sentiments and not "Positive or Negative" since we already looked at that using the BING database. 
+nrc_scores_group <- nrc_score_tidy %>% filter(!grepl("positive|negative", sentiment)) %>% count(author, sentiment) %>% group_by(author) %>% mutate(positive = 100 * n / sum(n))
+
+
+#Plot it on a stacked barchart
+ggplot(nrc_scores_group, aes(x = author, y = positive, fill = sentiment)) + geom_col() + labs(x = "Section", y = "Total Percentage",title = "Emotional Makeup")
+
+
+
+#We can visualize it a bit better by using a multi-dimensional Radar graph. Since management had alot more time to speak, they got alot more words in so we will want to log the scores to get a better visualization of the overall sentiments. This is because when calculating sentiment this way, we use frequency to determine how "trust" worthy he/she seems to be. 
+nrc_scores_group_radar <- nrc_score_tidy %>% filter(!grepl("positive|negative", sentiment)) %>% count(author, sentiment) %>% spread(author,n)
+
+nrc_scores_group_radar[,c(2:4)] <- log(nrc_scores_group_radar[,c(2:4)])
+
+
+#Plot radar chart to view NRC scores
+chartJSRadar(nrc_scores_group_radar)
+```
+#It looks like *NONE* of the analysts sounded disgusted and they also had the lowest tone in "fear" and "anger" which is a great sign!! The management had the highest tone of "Joy" throughout the conference call. Looks like they maybe had much to cheer for. Overall, I would say that surprise and trust seemed to be the overall emotion for the length of the call between all 3 sections. Anticipation also was a clear theme, as most likely alot is still depending on management's outlooks and 2022 goals. 
+
+
+
+#Using Afinn data base dictionary to analyze the sentiment. A score of -5 to 5 based off sentiment for each term. Developed by a danish researcher, finn Arup Nielsen. When plotting, we will also use `geom_smooth(span = 0.4)` to capture the overall sentiment but with a bit more weight on the index at that moment.
+```{r}
+afinn <- get_sentiments("afinn")
+
+#Create tibble for AFINN
+text_tidy_nrc <- text_tidy  %>%  inner_join(afinn) %>% anti_join(stop_words)
+
+#Of course we need to check for possible adjustments
+head(text_tidy_nrc %>% count(word,score, sort = T),100)
+
+#Calculate polarity over time of the call
+afinn_scores <- text_tidy_nrc %>% count(line_number,word,score) %>% group_by(line_number) %>% summarise(score = sum(score * n))
+
+#Plot the overall polarity over the entire lentgth call
+ggplot(afinn_scores, aes(line_number, score)) + geom_smooth(span = 0.4) + labs(x = "Line Number", y = "Polarity Score",title = "Conference Call Chronological Polarity - AFINN") + geom_hline(yintercept = 8, col = "red") + theme_gdocs() 
+
+```
+
+#When we plot the score over the entire length of the conference call, the trend shows the same characteristics as our Bing visualization. The call starts off positive and continues to increase until management begin discussions about future guidance around index or line number 35. This is a bit common since the management do not want to set the bar too high for themselves. Just like in our Bing Sentiment chart, the overall sentiment score begins to increase going into the end of the Q&A making a new sentiment high. 
+
+
+
+**Maybe we should integrate bi-grams and tri-grams throughout our analysis so it all transitions and feels a bit smoother. Also to answer any "What ifs" or "buts" that may arise when reading through the post. We can start by integrating the negation words before the highest impacting positive words (i.e line 299) to see if we need to adjust. Then we can possibly look at amplifier words.**
+
+#Bi gram
+```{r}
+text_tidy_bi <- tibble_tidy %>% mutate(line_number = 1:nrow(.)) %>% group_by(author) %>% unnest_tokens(bigram, text, token = "ngrams", n = 2) %>% ungroup() %>% arrange(line_number)
+
+bi_words <- text_tidy_bi %>% separate(bigram, c("word1", "word2"), sep = " ") %>% filter(!word1 %in% stop_words$word & !word2 %in% stop_words$word) %>%  mutate(word2 = str_replace_all(string = word2 , pattern = "s"%R%END, "")) %>% unite(bigram, word1, word2, sep = " ")
+
+
+call_words <- bi_words %>% filter(author == "management_call") %>% count(bigram, sort = TRUE) %>% head(15)
+
+qna_words <- bi_words %>% filter(author == "analyst_question" | author == "management_answer") %>% count(bigram, sort = TRUE) %>% head(15)
+
+
+p1 <- call_words %>% ggplot(aes(y = n, x = reorder(bigram,n))) + geom_col() + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + ylim(0,9)
+
+
+p2 <- qna_words %>% ggplot(aes(y = n, x = reorder(bigram,n))) + geom_col() + theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+
+
+grid.arrange(p1, p2, nrow = 1)
+
+
+
+#Create seperated and filtered bigram
+text_tidy_bi_filtsep <- text_tidy_bi %>% separate(bigram, c("word1", "word2"), sep = " ") %>% filter(!word1 %in% stop_words$word & !word2 %in% stop_words$word) %>% mutate(word2 = str_replace_all(string = word2 , pattern = "s"%R%END, "")) %>% mutate(word1 = str_replace_all(string = word1 , pattern = "s"%R%END, "")) 
+
+
+text_tidy_bi_filtsep %>% filter(word2 == "growth") %>% count(word1, word2, sort = TRUE)
+
+
+text_tidy_bi_sep <- text_tidy_bi %>% separate(bigram, c("word1", "word2"), sep = " ") %>% mutate(word2 = str_replace_all(string = word2 , pattern = "s"%R%END, "")) %>% mutate(word1 = str_replace_all(string = word1 , pattern = "s"%R%END, ""))
+
+
+
+#How often are words preceded by a word like "not" or "no" and is the score conflicting?
+afinn <- get_sentiments("afinn")
+text_tidy_bi_sep %>% filter(word1 %in% negation.words) %>% inner_join(afinn, by = c(word2 = "word")) %>% count(word1,word2,score, sort = T)
+```
+
+
+#Tri-gram
+```{r}
+text_tidy_tri <- tibble_tidy %>% mutate(line_number = 1:nrow(.)) %>% group_by(author) %>% unnest_tokens(trigram, text, token = "ngrams", n = 3) %>% ungroup() %>% arrange(line_number)
+
+tri_words <- text_tidy_tri %>% separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% filter(!word1 %in% stop_words$word & !word2 %in% stop_words$word & word3 %in% stop_words$word) %>%  mutate(word2 = str_replace_all(string = word2 , pattern = "s"%R%END, "")) %>% mutate(word1 = str_replace_all(string = word1 , pattern = "s"%R%END, "")) %>% mutate(word3 = str_replace_all(string = word3 , pattern = "s"%R%END, ""))%>% unite(trigram, word1, word2, word3, sep = " ")
+
+
+call_triwords <- tri_words %>% filter(author == "management_call") %>% count(trigram, sort = TRUE) %>% head(15)
+
+qna_triwords <- tri_words %>% filter(author == "analyst_question" | author == "management_answer") %>% count(trigram, sort = TRUE) %>% head(15)
+
+
+p3 <- call_triwords %>% ggplot(aes(y = n, x = reorder(trigram,n))) + geom_col() + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + ylim(0,9)
+
+
+p4 <- qna_triwords %>% ggplot(aes(y = n, x = reorder(trigram,n))) + geom_col() + theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+
+
+grid.arrange(p3, p4, nrow = 1)
+
+
+tri_words %>% separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% filter(str_detect(word1, "growth")| str_detect(word2, "growth"))
+```
+
+
+#Network graphs
+```{r}
+not_freq_bigrams <- tibble_tidy %>%
+         mutate(text = str_replace_all(string = text ,
+                                       pattern = "\\sa\\s",
+                                       " ")) %>%
+        
+         mutate(text = str_replace_all(string = text ,
+                                       pattern = "[[:punct:]]",
+                                       " ")) %>% 
+        unnest_tokens(output = bigram,
+                      input = text ,
+                      token = "ngrams",
+                      n = 2) %>% 
+        separate(bigram, c("word1", "word2"),sep =  " ")
+
+
+
+
+
+#Network of unfiltered bigram
+bigram_net <- text_tidy_bi_sep %>% count(word1, word2, sort = TRUE)
+
+bigram_igraph <- bigram_net %>%
+        filter(n>5) %>% 
+        graph_from_data_frame()
+
+
+a <- grid::arrow(type = "closed", length = unit(.1, "inches"))
+
+ggraph(bigram_igraph, layout = "fr") + geom_edge_link(aes(edge_alpha = n), show.legend = FALSE, arrow = a, 
+        end_cap = circle(.08, 'inches')) + geom_node_point(color = "lightblue", size = 3) + geom_node_text(aes(label = name), vjust = 0.5, hjust = 0.5, size = 2) + theme_void() + ggtitle("bigram network, n>5")
+
+
+#If we want to save this as functions
+count_bigrams <- function(dataset) {
+  dataset %>%
+    unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+    separate(bigram, c("word1", "word2"), sep = " ") %>%
+    filter(!word1 %in% stop_words$word,
+           !word2 %in% stop_words$word) %>%
+    count(word1, word2, sort = TRUE)
+}
+
+visualize_bigrams <- function(bigrams) {
+  set.seed(2016)
+  a <- grid::arrow(type = "closed", length = unit(.15, "inches"))
+  
+  bigrams %>%
+    graph_from_data_frame() %>%
+    ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), show.legend = FALSE, arrow = a) +
+    geom_node_point(color = "lightblue", size = 5) +
+    geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+    theme_void()
+}
+
+
+#Filtered bigram network
+count_bigrams(tibble_tidy) %>% 
+  filter(n > 2,
+         !str_detect(word1, "\\d"),
+         !str_detect(word2, "\\d")) %>%
+  visualize_bigrams()
+
+#Dendogram
+tdm_sparse <- removeSparseTerms(all_tdm_tf, sparse = 0.93)
+
+#Create the word cluster to plot the Dendrogram
+tdm_m <- as.matrix(tdm_sparse)
+hc <- hclust(dist(tdm_m))
+
+hcd_colored <- branches_attr_by_labels(as.dendrogram(hc), c("growth"), col = "red")
+plot(hcd_colored)
+
+
+
+#Network using Widyr for correlation
+widy_words <- tibble_tidy %>% mutate(section = row_number() %/% 2) %>% filter(section > 0) %>% unnest_tokens(word,text) %>% filter(!word %in% stop_words$word)
+
+word_pairs <- widy_words %>% group_by(word) %>% filter(n() >= 15) %>% pairwise_cor(word, section, sort = T)
+
+
+set.seed(2016)
+word_pairs %>% filter(correlation > .2) %>%  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+  geom_edge_link(aes(edge_alpha = correlation), show.legend = FALSE) +
+  geom_node_point(color = "lightblue", size = 3.5) +
+  geom_node_text(aes(label = name), vjust = .5, hjust = .5, size = 3) +
+  theme_void()
+```
