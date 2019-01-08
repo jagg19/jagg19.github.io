@@ -8,7 +8,6 @@ coverSize: partial
 thumbnailImagePosition: left
 categories:
   - Equity Valuation
-  - R Markdown
   - Earnings
   - Forecasting
   - Valuations

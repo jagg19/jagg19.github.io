@@ -6,7 +6,7 @@ slug: ml-airbnb-prices
 coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1542650457/Untitled-design-18.png
 coverSize: partial
 thumbnailImagePosition: left
-categories: ["Data Analysis","R", "R Markdown","Predictions", "Programming"]
+categories: ["Data Analysis", "Predictions", "Programming"]
 tags: ["Project","Machine Learning", "Airbnb","Price Predictions", "Programming"]
 ---
 
