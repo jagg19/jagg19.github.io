@@ -2,156 +2,156 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Running on R</title>
-    <link>https://jagg19.github.io/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 19 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jagg19.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Airbnb</title>
-      <link>https://jagg19.github.io/tags/airbnb/</link>
+      <link>/tags/airbnb/</link>
       <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/airbnb/</guid>
+      <guid>/tags/airbnb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Banks</title>
-      <link>https://jagg19.github.io/tags/banks/</link>
+      <link>/tags/banks/</link>
       <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/banks/</guid>
+      <guid>/tags/banks/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Cloud</title>
-      <link>https://jagg19.github.io/tags/cloud/</link>
+      <link>/tags/cloud/</link>
       <pubDate>Thu, 03 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/cloud/</guid>
+      <guid>/tags/cloud/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Comparable Analysis</title>
-      <link>https://jagg19.github.io/tags/comparable-analysis/</link>
+      <link>/tags/comparable-analysis/</link>
       <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/comparable-analysis/</guid>
+      <guid>/tags/comparable-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Crm</title>
-      <link>https://jagg19.github.io/tags/crm/</link>
+      <link>/tags/crm/</link>
       <pubDate>Thu, 03 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/crm/</guid>
+      <guid>/tags/crm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dcf</title>
-      <link>https://jagg19.github.io/tags/dcf/</link>
+      <link>/tags/dcf/</link>
       <pubDate>Thu, 03 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/dcf/</guid>
+      <guid>/tags/dcf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Interest Rates</title>
-      <link>https://jagg19.github.io/tags/interest-rates/</link>
+      <link>/tags/interest-rates/</link>
       <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/interest-rates/</guid>
+      <guid>/tags/interest-rates/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Inverted Yield Curve</title>
-      <link>https://jagg19.github.io/tags/inverted-yield-curve/</link>
+      <link>/tags/inverted-yield-curve/</link>
       <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/inverted-yield-curve/</guid>
+      <guid>/tags/inverted-yield-curve/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Machine Learning</title>
-      <link>https://jagg19.github.io/tags/machine-learning/</link>
+      <link>/tags/machine-learning/</link>
       <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/machine-learning/</guid>
+      <guid>/tags/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Price Predictions</title>
-      <link>https://jagg19.github.io/tags/price-predictions/</link>
+      <link>/tags/price-predictions/</link>
       <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/price-predictions/</guid>
+      <guid>/tags/price-predictions/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Programming</title>
-      <link>https://jagg19.github.io/tags/programming/</link>
+      <link>/tags/programming/</link>
       <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/programming/</guid>
+      <guid>/tags/programming/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Project</title>
-      <link>https://jagg19.github.io/tags/project/</link>
+      <link>/tags/project/</link>
       <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/project/</guid>
+      <guid>/tags/project/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Quarterly Results</title>
-      <link>https://jagg19.github.io/tags/quarterly-results/</link>
+      <link>/tags/quarterly-results/</link>
       <pubDate>Thu, 03 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/quarterly-results/</guid>
+      <guid>/tags/quarterly-results/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Recommendations</title>
-      <link>https://jagg19.github.io/tags/recommendations/</link>
+      <link>/tags/recommendations/</link>
       <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/recommendations/</guid>
+      <guid>/tags/recommendations/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Test</title>
-      <link>https://jagg19.github.io/tags/test/</link>
+      <link>/tags/test/</link>
       <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/test/</guid>
+      <guid>/tags/test/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Wacc</title>
-      <link>https://jagg19.github.io/tags/wacc/</link>
+      <link>/tags/wacc/</link>
       <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/tags/wacc/</guid>
+      <guid>/tags/wacc/</guid>
       <description></description>
     </item>
     
