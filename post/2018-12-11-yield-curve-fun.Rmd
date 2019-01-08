@@ -6,7 +6,7 @@ slug: yield-curve-fun
 coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1544586991/A1MAIN-crazybull-042718-.jpg
 coverSize: partial
 thumbnailImagePosition: left
-categories: ["R", "R Markdown", "Investment", "Yield Curve"]
+categories: ["Data Analysis","R", "R Markdown", "Investment", "Yield Curve"]
 tags: ["Interest Rates", "Inverted Yield Curve", "Banks"]
 
 ---

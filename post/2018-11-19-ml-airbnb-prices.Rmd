@@ -6,7 +6,7 @@ slug: ml-airbnb-prices
 coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1542650457/Untitled-design-18.png
 coverSize: partial
 thumbnailImagePosition: left
-categories: ["R", "R Markdown","Predictions", "Programming"]
+categories: ["Data Analysis","R", "R Markdown","Predictions", "Programming"]
 tags: ["Project","Machine Learning", "Airbnb","Price Predictions", "Programming"]
 ---
 
@@ -20,7 +20,7 @@ While most of us have used or considered booking an Airbnb, there are a lot less
 What exactly is a commercial operator? This is an Airbnb host that has multiple entire-home listings or controls many private-room listings. If I was to post on Airbnb to try and squeeze a profit, I would list my property for certain days or weeks of the month, and at most a rental property if I happened to own one. This compares to commercial operators who may have 4-6 entire home listings and 8-12 private room listings. It was estimated that commercial operators make up 12% of NYC Airbnb hosts, but earned almost 1/3 of all incoming revenue. 
 
 # Why is this an issue? 
-I believe it is an issue because it is depleting the actual prices hosts could get for their properties if they were to list on Airbnb. If it weren't for commercial operators saturating the market with these lower-priced listings, maybe I could squeeze an extra $20-30/ night from my listing. Think of these NYC commercial operators as the Walmart or Amazon of property listings. They often charge less per night than other hosts do across all listings and adjust their rates to attract a high number of rentals overall. To summarize, they are flooding the New York City markets with lower-priced listings. 
+I believe it is an issue because it is depleting the actual prices hosts could get for their properties if they were to list on Airbnb. If it weren't for commercial operators saturating the market with these lower-priced listings, maybe I could squeeze an extra \$20-30/ night from my listing. Think of these NYC commercial operators as the Walmart or Amazon of property listings. They often charge less per night than other hosts do across all listings and adjust their rates to attract a high number of rentals overall. To summarize, they are flooding the New York City markets with lower-priced listings. 
 
 
 # Now the fun stuff - Building the Model
@@ -266,4 +266,4 @@ rmse(test$price, dollar_predictTest)
 ##### The RMSE here is still high in my opinion after training the model with 13,600 observations. I would not seek a RMSE of `r rmse(test$price, dollar_predictTest)` to efficiently price my property, and this is mostly because our model is getting trained to price property's a bit low due to those commercial operators saturing the market with low price listings. I noticed that when the # of reviews increase, the price for the listing slightly decreases. This can either mean the model is not correct for this type of data, or that since commercial operators generally price very low they tend to have a lot of transactions which results in more reviews than the average lister. 
 
 #Conclusion
-These commercial operators are bringing down the prices of Airbnb listings and true home sharers cannot compete. In fact, 10% of these hosts (about 5,000) earned 48% of NYC's total Airbnb revenue totaling $318 Million while the bottom 80% (over 40400) earned $209 Million in 2017. I believe once the playing field is leveled between consumer hosts and commercial hosts, the variance between individual fitted values and the population mean will start to decrease and the listing prices can be predicted with less noise. 
+These commercial operators are bringing down the prices of Airbnb listings and true home sharers cannot compete. In fact, 10% of these hosts (about 5,000) earned 48% of NYC's total Airbnb revenue totaling \$318 Million while the bottom 80% (over 40400) earned \$209 Million in 2017. I believe once the playing field is leveled between consumer hosts and commercial hosts, the variance between individual fitted values and the population mean will start to decrease and the listing prices can be predicted with less noise. 

@@ -7,7 +7,8 @@ coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1546623541/salesf
 coverSize: partial
 thumbnailImagePosition: left
 categories:
-  - Investment
+  - Equity Valuation
+  - R Markdown
   - Earnings
   - Forecasting
   - Valuations
@@ -16,6 +17,7 @@ tags:
   - Quarterly Results
   - CRM
   - DCF
+  - Recommendations
 output: 
   html_document:
    df_print: paged

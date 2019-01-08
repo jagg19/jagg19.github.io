@@ -6,8 +6,8 @@ slug: salesforce-enough-to-buy
 coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1543362880/1088Salesforce.Einstein.jpg
 coverSize: partial
 thumbnailImagePosition: left
-categories: ["R", "R Markdown","Forecasting", "Investment", "Valuations", "Convenience"]
-tags: ["CRM", "Cloud", "DCF", "WACC", "Comparable Analysis", "recommendations"]
+categories: ["Equity Valuation","R", "R Markdown","Forecasting", "Valuations"]
+tags: ["CRM", "Cloud", "DCF", "WACC", "Comparable Analysis", "Recommendations"]
 ---
 
 
