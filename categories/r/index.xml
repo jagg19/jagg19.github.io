@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>R on Jagger with Swagger</title>
-    <link>/categories/r/</link>
-    <description>Recent content in R on Jagger with Swagger</description>
+    <title>R on Running on R</title>
+    <link>https://jagg19.github.io/categories/r/</link>
+    <description>Recent content in R on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 11 Dec 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jagg19.github.io/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Yield Curve Inversion - Marks End to Bull Market?</title>
-      <link>/2018/12/yield-curve-fun/</link>
+      <link>https://jagg19.github.io/2018/12/yield-curve-fun/</link>
       <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/12/yield-curve-fun/</guid>
+      <guid>https://jagg19.github.io/2018/12/yield-curve-fun/</guid>
       <description>Going, Going, Inverted!  Yield Curve inversions are typically a leading indicator for a recession Historic analysis on inversions for specific yields since 1990 Yield Curve over 5 different time frames since the start of 2018 Takeaway from recent inversions   Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost 6 years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I began to track the daily fluctuations.</description>
     </item>
     
     <item>
       <title>Salesforce, Inc. - Are Expanding Margins Enough to Buy?</title>
-      <link>/2018/11/salesforce-enough-to-buy/</link>
+      <link>https://jagg19.github.io/2018/11/salesforce-enough-to-buy/</link>
       <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/11/salesforce-enough-to-buy/</guid>
+      <guid>https://jagg19.github.io/2018/11/salesforce-enough-to-buy/</guid>
       <description>Salesforce, Inc.  Leader in the growing CRM market Modestly expanding margins Monetizing existing customer base  
 Customer Relationship Management Pioneer Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig in to Salesforce specifically, let’s explore what exactly CRM is and the growth prospects.</description>
     </item>
     
     <item>
       <title>Teaching a Machine to Learn NYC Airbnb Prices</title>
-      <link>/2018/11/ml-airbnb-prices/</link>
+      <link>https://jagg19.github.io/2018/11/ml-airbnb-prices/</link>
       <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/11/ml-airbnb-prices/</guid>
+      <guid>https://jagg19.github.io/2018/11/ml-airbnb-prices/</guid>
       <description>Using Airbnb By now, most Gen Z and millenials have heard of or used Airbnb for a range of many reasons, such as looking for a place to crash or taking a vacation. I believe what won the consumer’s attention over hotels was the fact that you are getting the “homey” setting and privacy while away on vacation instead of a hotel environment. I realize not everyone wants to part ways with room service, benefits of a having full-service bar in the lobby, pool &amp;amp; spas, sometimes a gym, and the 100+ channels, but when comparing the prices and the extra sq.</description>
     </item>
     
     <item>
       <title>Why a Blog?</title>
-      <link>/2018/11/why-a-blog/</link>
+      <link>https://jagg19.github.io/2018/11/why-a-blog/</link>
       <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/11/why-a-blog/</guid>
+      <guid>https://jagg19.github.io/2018/11/why-a-blog/</guid>
       <description>Does it work? Seems like it does. This is my first blog post! I wanted to create my own blog using R programming, R Studio, Git, and Github where I would host my personal site and opinions. These opinions will not be fabricated and will be based off my personal analysis.
 Why start a blog? I have a huge passion for analyzing financial data, especially those 10-K’s and 10-Q’s!! I do not get excited from fleshing out models on excel all day, but I do get excited from the picture painted using all the tools these filings provide.</description>
     </item>

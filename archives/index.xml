@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Archives on Jagger with Swagger</title>
-    <link>/archives/</link>
-    <description>Recent content in Archives on Jagger with Swagger</description>
+    <title>Archives on Running on R</title>
+    <link>https://jagg19.github.io/archives/</link>
+    <description>Recent content in Archives on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="/archives/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jagg19.github.io/archives/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
