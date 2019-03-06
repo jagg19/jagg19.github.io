@@ -1,5 +1,5 @@
 ---
-title: "IPO Estimates + Review"
+title: "Lyft IPO + Dropbox Review"
 author: Jagger Villalobos
 date: '2019-03-04'
 slug: ipo-estimates-lyftdbx
@@ -20,7 +20,7 @@ output:
    df_print: paged
 ---
 
-#Salesforce Q3 Update
+#IPO Estimate & Review
 - Taking a look at LYFT financials for the first time
 - Review of Dropbox IPO and stock performance
 
