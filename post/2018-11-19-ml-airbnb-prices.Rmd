@@ -1,7 +1,7 @@
 ---
 title: Teaching a Machine to Learn NYC Airbnb Prices
 author: Jagger Villalobos
-date: '2018-11-19'
+date: '2018-11-21'
 slug: ml-airbnb-prices
 coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1542650457/Untitled-design-18.png
 coverSize: partial
