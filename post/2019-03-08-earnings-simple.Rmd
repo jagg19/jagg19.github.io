@@ -187,4 +187,4 @@ Something interesting I thought I could look at was the correlation between the 
 
 
 <br>
-Overall, I’d like to fine-tune this simple strategy by maybe testing different buy/sell triggers, adding a couple of momentum indicators, getting intraday data, or even adding in a sentiment score going into earnings. I also want to check out what those high correlations are all about and backtest a pair trade strategy. I may create a continuation post to this and test out earnings pair trading strategies. 
+Overall, I’d like to fine-tune this simple strategy by maybe testing different buy/sell triggers, adding a couple of momentum indicators, getting intraday data, or even adding in a sentiment score going into earnings. I also want to check out what those high correlations are all about and backtest a pair trade strategy. I may create a continuation post to this and test out earnings pair trading strategies.
