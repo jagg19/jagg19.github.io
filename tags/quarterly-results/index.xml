@@ -6,10 +6,20 @@
     <description>Recent content in Quarterly Results on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/quarterly-results/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Scaling a Simple Earnings Strategy to the NASDAQ Exchange</title>
+      <link>/2019/03/backtest-simple-earnings/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/03/backtest-simple-earnings/</guid>
+      <description>Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.</description>
+    </item>
     
     <item>
       <title>Salesforce Q3 Update</title>

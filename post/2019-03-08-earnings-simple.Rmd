@@ -1,0 +1,190 @@
+---
+title: "Scaling a Simple Earnings Strategy to the NASDAQ Exchange"
+author: Jagger Villalobos
+date: 2019-03-11
+slug: backtest-simple-earnings
+coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1552093638/1_SfUnSwcp9mVJB4EH2lPtOQ.png
+coverSize: partial
+thumbnailImagePosition: left
+categories:
+  - Earnings
+  - Backtest
+  - Programming
+  - Data Analysis
+  - Trading
+tags:
+  - Algo
+  - NASDAQ
+  - Beautiful Plots
+  - Quarterly Results
+output: 
+  html_document:
+   df_print: paged
+---
+
+
+#Pure Earnings Play
+
+- Getting the data and writing the function
+- Top sectors and stocks from results
+- Beautiful plots to visualize the results
+- Quick review
+- How to improve the simple strategy
+
+<br>
+
+
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions. I'm going to integrate the two to talk about the performance of a simple earnings trade strategy across the NASDAQ and how it compares against a basket of popular stocks. I wanted to compare it to a group of popular names from the NASDAQ to simulate the "go-to" names for the average mom-and-pop investor. These popular names will include Facebook, Apple, Amazon, Netflix, Google, and many more to see if these Wall Street darlings are also the best ones to trade during earnings. After all, if these companies are doing so well then their earning results should reflect that. 
+
+The trading strategy is kept simple to illustrate the common approach to trade earnings. The strategy will buy the stock at the market open one day prior to the earnings release date, and if the company reports BEFORE the market open, then we will sell at the market open. If the company reports AFTER market close, then we will sell it the following day at the market open. See below to see how the trades are triggered.
+
+
+![](/img/Strategy.png)
+
+<br>
+We are going to use this strategy and scale it out to each stock in the NASDAQ with a market cap over \$5Billion. This is when the computers take over because we want to run this across thousands of different stocks and then run additional scripts on the results. A great trader usually focuses on a core set of stocks, whereas a computer can keep track of tens of thousands at a fraction of the time. 
+
+
+First, I am going to drop all stocks that do not have a Billion \$ market cap, then filter out all comapnies that are under a \$5 Billion market cap since we want each stock above. Finally, I will drop any rows that may contain NA values. After filtering through the NASDAQ, there are 282 stocks remaining that meet our criteria. Now, I will need to get all of the quarterly earnings dates for each stock during our specified time period. I will web scrape the data from a reputable source online in order for me to get accurate historic earnings data for each stock. It's either that or pay excessive premium subscriptions to financial data services for the historical earnings data. Let’s look at the results through a variety of different visualizations, starting with a Lollipop chart to illustrate the Top Performing Sectors.
+
+<br>
+![](/img/TotalSectorRtrns_NDQ.png)
+
+<br>
+Now, let’s take a look at the Top 40 performing stocks by total return using the same Lollipop chart. Do you notice any of the big names, like Amazon or Apple? I'll also print the top 100.
+
+![](/img/TOP40STCKSRTRN_LOLIPOP_NDQ1.png)
+
+```{r,echo=FALSE, warning=FALSE, message=FALSE}
+x<-readr::read_csv("/Users/jagvill/Desktop/Github/blogdown_source/top_stocks_100.csv")
+x<- x[-1]
+print(x, n=100)
+```
+
+
+
+<br>
+
+###Average Gains / Losses for each Stock Traded
+
+We have over 280+ stocks with each earnings trade since 2016. It wouldn’t be a good-looking chart to throw all of those on one axis, or even over a layer of different grids. I think a diverging bar graph would suit this nicely. We can put 100 stocks on a graph and easily see the average gains and losses for each stock. We will start from the last ranked stocks by return and work our way down, so the first chart shows the top 183-282 stocks by return, and their respective gains and losses. 
+
+
+![](/img/Avgrtrn183282_NDQ.png)
+![](/img/STCKAVGRTRN_83-181_NDQ.png)
+
+![](/img/STCKAVGRTRN_1-82_NDQ.png)
+
+<br>
+
+#Cumulative Changes in each Stock Traded
+
+Now, we can create a few grids to illustrate the cumulative change for the total capital over the backtesting period if we were to allocate \$1000 DOLLARS into each stock. If the bullet is GREEN, then that means we are at a profit and above our initial capital of \$1000 DOLLARS, and if it's RED then it means we are at a loss. Let us look at the top 126 stocks by return over three different grids. 
+
+
+![](/img/Top42_Cumchart_NDQ.png)
+<br>
+![](/img/Top4384_Cumchart_NDQ.png)
+<br>
+![](/img/Top85126_Cumchart_NDQ.png)
+
+<br>
+
+###Surprise, Surprise
+
+Were you expecting any of the above results? Did it surpise you to see the Energy sector come out on top or the lack of popular household stocks in the Top 10? I was pretty surpised to see ETSY come out on top as #1 for total returns at 85%, while EBAY (similar business model) came in at #192/282 for a total return of -3.53%. What about the overall return for the rest of the portfolio?
+
+<br>
+
+###Overall Returns 
+
+Let's view the return distrubution for EACH trade made on the Full Portfolio and compare that to random samples. Also, we will compare these returns against a basket of the 20 most popular stocks in the NASDAQ as well as 20 random stocks from the top100 ranked by total return.
+
+
+
+![](/img/Fullport_Hist.png)
+
+The returns for each trade made seem to be normally distributed, with exception of a few outliers. I removed those to get a cleaner view of the distrubtions, which we can see the average return for a trade is 46 basis points (or 0.46 percentage points). This is great considering there are over 3500 total trades. What about the overall return or the comparison to popular household names?
+
+First, I would like to compare the distribution of the trade returns to the distributions of the randomly selected samples from the Full Portfolio. I'm doing this to gauge how this simple strategy would perform if we were to just randomly select a group of stocks or a group of popular stocks. After, we can compare the overall returns from each portfolio to see how effective this trade is compared to just trading the Top 20 Most Popular household names. 
+
+
+
+
+![](/img/Dist_portvssample_ndq.png)
+
+<br>
+
+Portfolio | Median Total Return | Mean Total Return | Avg Return Per Trade(plot)|
+------ |       ------------- |      ------------- |            ---------------- | 
+Full_Port | 4.22% | 5.66%  | 0.46%
+Sample_Full_Port1 | 11.3% | 10.9% | 0.87%
+
+
+<br>
+
+![](/img/Dist_sample1_2_ndq.png)
+
+<br>
+
+Portfolio | Median Total Return | Mean Total Return | Avg Return Per Trade(plot) |
+------ | ---- | ---- | ---- | 
+Sample_Full_Port1 | 11.3% | 10.9%  | 0.87%
+Sample_Full_Port2 | 6.21% | 6.73% | 0.54%
+
+<br>
+![](/img/Dist_sample2_3_ndq.png)
+
+<br>
+
+Portfolio | Median Total Return | Mean Total Return | Avg Return Per Trade(plot) |
+------ | ---- | ---- | ---- | 
+Sample_Full_Port2 | 6.21% | 6.73%  | 0.54%
+Sample_Full_Port3 | 0.045% | 4.92% | 0.40%
+
+<br>
+![](/img/Dist_sample3_4_ndq.png)
+
+<br>
+
+Portfolio | Median Total Return | Mean Total Return | Avg Return Per Trade(plot) |
+------ | ---- | ---- | ---- | 
+Sample_Full_Port3 | 0.045% | 4.92%  | 0.46%
+Sample_Full_Port4 | 0.72% | 0.257% | 0.021%
+
+<br>
+![](/img/Popular_rand_ndq.png)
+
+<br>
+
+Portfolio | Median Total Return | Mean Total Return | Avg Return Per Trade(plot) |
+------ | ---- | ---- | ---- | 
+Popular_20_Port | 16.1% | 12.6%  | 1.04%
+Random_20_Port | 21% | 28.8% | 2.29%
+
+<br>
+Table for the overall gain / loss for each portfolio/sample above
+```{r,echo=FALSE, warning=FALSE, message=FALSE}
+t<- readr::read_csv("/Users/jagvill/Desktop/Github/blogdown_source/rtrns_tbl_ports.csv")
+t<- t[-1]
+t[,2:3]<-round(t[,2:3],2)
+t
+```
+
+###Overall Returns Summary
+
+As we can see, the total return from the start 2016 to Friday 3/8/2019 for the entire portfolio was 5.66%. Not bad for an extremely simple strategy! Although, if you were to use this strategy on the popular household names then you would have done better than using a sophisticated "algo" trader across the entire NASDAQ index. By using this simple buy and sell earnings play across the 20 most popular names in the NASDAQ, you could have returned 12.62% for the same time period. On the other hand, if you can use the computer to your advantage by training it to decide which stocks to run this simple strategy on, then it can greatly increase your returns. By running this simple strategy on 20 random stocks from the top 100, our returns shot up to 28.79% for the same time period. 
+
+###Quick look
+
+Something interesting I thought I could look at was the correlation between the average earning returns for each stock. I’d like to see if any strong correlations above +/- 0.8 exist. If so then that can be something to help us decide which stocks to choose when initiating this simple earnings strategy. We will also do the same for the top 35 stocks. 
+
+
+![](/img/CorrelogramAll_NDQ1.png)
+![](/img/TOP35_CORRELOGRAM_NDQ1.png)
+
+
+
+
+<br>
+Overall, I’d like to fine-tune this simple strategy by maybe testing different buy/sell triggers, adding a couple of momentum indicators, getting intraday data, or even adding in a sentiment score going into earnings. I also want to check out what those high correlations are all about and backtest a pair trade strategy. I may create a continuation post to this and test out earnings pair trading strategies. 

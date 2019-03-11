@@ -21,11 +21,29 @@
     </item>
     
     <item>
+      <title>Algo</title>
+      <link>/tags/algo/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/algo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Banks</title>
       <link>/tags/banks/</link>
       <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/banks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Beautiful Plots</title>
+      <link>/tags/beautiful-plots/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/beautiful-plots/</guid>
       <description></description>
     </item>
     
@@ -111,6 +129,15 @@
     </item>
     
     <item>
+      <title>Nasdaq</title>
+      <link>/tags/nasdaq/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/nasdaq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Price Predictions</title>
       <link>/tags/price-predictions/</link>
       <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
@@ -140,7 +167,7 @@
     <item>
       <title>Quarterly Results</title>
       <link>/tags/quarterly-results/</link>
-      <pubDate>Thu, 03 Jan 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/quarterly-results/</guid>
       <description></description>

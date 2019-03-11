@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.51 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Jagger Villalobos">
+<meta name="keywords" content="">
+<meta name="description" content="Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.">
+
+
+<meta property="og:description" content="Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scaling a Simple Earnings Strategy to the NASDAQ Exchange">
+<meta name="twitter:title" content="Scaling a Simple Earnings Strategy to the NASDAQ Exchange">
+<meta property="og:url" content="/2019/03/backtest-simple-earnings/">
+<meta property="twitter:url" content="/2019/03/backtest-simple-earnings/">
+<meta property="og:site_name" content="Running on R">
+<meta property="og:description" content="Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.">
+<meta name="twitter:description" content="Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-03-11T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-03-11T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="Earnings">
+    
+      <meta property="article:section" content="Backtest">
+    
+      <meta property="article:section" content="Programming">
+    
+      <meta property="article:section" content="Data Analysis">
+    
+      <meta property="article:section" content="Trading">
+    
+  
+  
+    
+      <meta property="article:tag" content="Algo">
+    
+      <meta property="article:tag" content="NASDAQ">
+    
+      <meta property="article:tag" content="Beautiful Plots">
+    
+      <meta property="article:tag" content="Quarterly Results">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1552093638/1_SfUnSwcp9mVJB4EH2lPtOQ.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1552093638/1_SfUnSwcp9mVJB4EH2lPtOQ.png">
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+
+
+    <title>Scaling a Simple Earnings Strategy to the NASDAQ Exchange</title>
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="/2019/03/backtest-simple-earnings/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-134862415-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Running on R</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
+        
+          <h5 class="sidebar-profile-bio">Bottom-Up Analysis | Equity Research</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/jagg19">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              post-header-cover--partial"
+       style="background-image:url('https://res.cloudinary.com/dyackvnwm/image/upload/v1552093638/1_SfUnSwcp9mVJB4EH2lPtOQ.png')"
+       data-behavior="4">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Scaling a Simple Earnings Strategy to the NASDAQ Exchange
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-03-11T00:00:00Z">
+        
+  March 11, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/earnings">Earnings</a>, 
+    
+      <a class="category-link" href="/categories/backtest">Backtest</a>, 
+    
+      <a class="category-link" href="/categories/programming">Programming</a>, 
+    
+      <a class="category-link" href="/categories/data-analysis">Data Analysis</a>, 
+    
+      <a class="category-link" href="/categories/trading">Trading</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="4"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+
+<div id="pure-earnings-play" class="section level1">
+<h1>Pure Earnings Play</h1>
+<ul>
+<li>Getting the data and writing the function</li>
+<li>Top sectors and stocks from results</li>
+<li>Beautiful plots to visualize the results</li>
+<li>Quick review</li>
+<li>How to improve the simple strategy</li>
+</ul>
+<p><br></p>
+<p>You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions. I’m going to integrate the two to talk about the performance of a simple earnings trade strategy across the NASDAQ and how it compares against a basket of popular stocks. I wanted to compare it to a group of popular names from the NASDAQ to simulate the “go-to” names for the average mom-and-pop investor. These popular names will include Facebook, Apple, Amazon, Netflix, Google, and many more to see if these Wall Street darlings are also the best ones to trade during earnings. After all, if these companies are doing so well then their earning results should reflect that.</p>
+<p>The trading strategy is kept simple to illustrate the common approach to trade earnings. The strategy will buy the stock at the market open one day prior to the earnings release date, and if the company reports BEFORE the market open, then we will sell at the market open. If the company reports AFTER market close, then we will sell it the following day at the market open. See below to see how the trades are triggered.</p>
+<div class="figure">
+<img src="/img/Strategy.png" />
+
+</div>
+<p><br> We are going to use this strategy and scale it out to each stock in the NASDAQ with a market cap over $5Billion. This is when the computers take over because we want to run this across thousands of different stocks and then run additional scripts on the results. A great trader usually focuses on a core set of stocks, whereas a computer can keep track of tens of thousands at a fraction of the time.</p>
+<p>First, I am going to drop all stocks that do not have a Billion $ market cap, then filter out all comapnies that are under a $5 Billion market cap since we want each stock above. Finally, I will drop any rows that may contain NA values. After filtering through the NASDAQ, there are 282 stocks remaining that meet our criteria. Now, I will need to get all of the quarterly earnings dates for each stock during our specified time period. I will web scrape the data from a reputable source online in order for me to get accurate historic earnings data for each stock. It’s either that or pay excessive premium subscriptions to financial data services for the historical earnings data. Let’s look at the results through a variety of different visualizations, starting with a Lollipop chart to illustrate the Top Performing Sectors.</p>
+<p><br> <img src="/img/TotalSectorRtrns_NDQ.png" /></p>
+<p><br> Now, let’s take a look at the Top 40 performing stocks by total return using the same Lollipop chart. Do you notice any of the big names, like Amazon or Apple? I’ll also print the top 100.</p>
+<div class="figure">
+<img src="/img/TOP40STCKSRTRN_LOLIPOP_NDQ1.png" />
+
+</div>
+<pre><code>## # A tibble: 100 x 3
+##     Symbol TOT.RTRN SECTOR               
+##     &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;                
+##   1 ETSY       85.0 Miscellaneous        
+##   2 LOPE       77.4 Consumer Services    
+##   3 LOGI       72.0 Technology           
+##   4 UBNT       71.5 Technology           
+##   5 SPLK       67.1 Technology           
+##   6 PODD       60.5 Health Care          
+##   7 ANGI       58.0 Consumer Services    
+##   8 EXEL       48.7 Health Care          
+##   9 WB         48.4 Technology           
+##  10 TTWO       46.8 Technology           
+##  11 OKTA       45.7 Technology           
+##  12 FIVE       44.3 Consumer Services    
+##  13 RP         43.9 Technology           
+##  14 YNDX       43.3 Technology           
+##  15 BRKR       41.9 Capital Goods        
+##  16 GRMN       41.1 Capital Goods        
+##  17 COLM       39.1 Consumer Non-Durables
+##  18 ZBRA       39.0 Technology           
+##  19 ASML       37.5 Technology           
+##  20 CDNS       36.6 Technology           
+##  21 LRCX       34.7 Technology           
+##  22 TEAM       34.2 Technology           
+##  23 NVDA       34.0 Technology           
+##  24 ULTI       33.3 Technology           
+##  25 ADSK       33.3 Technology           
+##  26 AVGO       33.0 Technology           
+##  27 TSLA       32.1 Capital Goods        
+##  28 XLNX       31.8 Technology           
+##  29 SSNC       31.6 Technology           
+##  30 PEGA       31.6 Technology           
+##  31 CGNX       31.4 Capital Goods        
+##  32 MCHP       30.8 Technology           
+##  33 ADI        30.7 Technology           
+##  34 NFLX       30.5 Consumer Services    
+##  35 EWBC       30.4 Finance              
+##  36 ADBE       30.2 Technology           
+##  37 MASI       30.2 Health Care          
+##  38 MXIM       29.7 Technology           
+##  39 SNPS       29.5 Technology           
+##  40 EXAS       29.4 Health Care          
+##  41 IAC        28.6 Consumer Services    
+##  42 ALXN       28.2 Health Care          
+##  43 NDSN       26.6 Capital Goods        
+##  44 QGEN       26.5 Health Care          
+##  45 IDXX       25.4 Health Care          
+##  46 MRVL       24.5 Technology           
+##  47 FB         24.0 Technology           
+##  48 MSFT       23.7 Technology           
+##  49 ISRG       23.4 Health Care          
+##  50 PRAH       23.2 Health Care          
+##  51 FTNT       23.2 Technology           
+##  52 ROKU       22.8 Consumer Services    
+##  53 MOMO       22.3 Technology           
+##  54 AMRN       22.2 Health Care          
+##  55 ON         22.1 Technology           
+##  56 AMAT       21.8 Technology           
+##  57 ACGL       21.6 Finance              
+##  58 COUP       21.5 Technology           
+##  59 MELI       21.1 Miscellaneous        
+##  60 CSCO       20.9 Technology           
+##  61 MORN       20.3 Finance              
+##  62 NICE       19.5 Technology           
+##  63 RYAAY      19.5 Transportation       
+##  64 AZPN       19.4 Technology           
+##  65 CSX        19.2 Transportation       
+##  66 WIX        19   Technology           
+##  67 HAS        18.8 Consumer Non-Durables
+##  68 TER        18.7 Capital Goods        
+##  69 AMZN       18.6 Consumer Services    
+##  70 MU         18.1 Technology           
+##  71 CTXS       17.7 Technology           
+##  72 FANG       17.7 Energy               
+##  73 LAMR       17.4 Consumer Services    
+##  74 BIIB       17.3 Health Care          
+##  75 ARRS       17.3 Technology           
+##  76 KLAC       16.7 Capital Goods        
+##  77 ALGN       16.7 Health Care          
+##  78 AAPL       16.6 Technology           
+##  79 ROST       16   Consumer Services    
+##  80 JD         15.7 Consumer Services    
+##  81 VRSN       14.9 Technology           
+##  82 TRMB       14.8 Capital Goods        
+##  83 JBHT       14.7 Transportation       
+##  84 MDB        14.4 Technology           
+##  85 MYL        13.6 Health Care          
+##  86 HTHT       13.4 Consumer Services    
+##  87 STLD       13.2 Basic Industries     
+##  88 PFPT       13.0 Technology           
+##  89 ZION       12.7 Finance              
+##  90 PYPL       12.7 Miscellaneous        
+##  91 ORLY       12.4 Consumer Services    
+##  92 BIDU       12.3 Technology           
+##  93 DXCM       12.2 Health Care          
+##  94 DISCB      12.1 Consumer Services    
+##  95 AKAM       11.4 Miscellaneous        
+##  96 TMUS       11.4 Public Utilities     
+##  97 WWD        11.4 Energy               
+##  98 WDC        11.2 Technology           
+##  99 LBRDK      11.1 Consumer Services    
+## 100 LBRDA      11.1 Consumer Services</code></pre>
+<p><br></p>
+<div id="average-gains-losses-for-each-stock-traded" class="section level3">
+<h3>Average Gains / Losses for each Stock Traded</h3>
+<p>We have over 280+ stocks with each earnings trade since 2016. It wouldn’t be a good-looking chart to throw all of those on one axis, or even over a layer of different grids. I think a diverging bar graph would suit this nicely. We can put 100 stocks on a graph and easily see the average gains and losses for each stock. We will start from the last ranked stocks by return and work our way down, so the first chart shows the top 183-282 stocks by return, and their respective gains and losses.</p>
+<p><img src="/img/Avgrtrn183282_NDQ.png" /> <img src="/img/STCKAVGRTRN_83-181_NDQ.png" /></p>
+<div class="figure">
+<img src="/img/STCKAVGRTRN_1-82_NDQ.png" />
+
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="cumulative-changes-in-each-stock-traded" class="section level1">
+<h1>Cumulative Changes in each Stock Traded</h1>
+<p>Now, we can create a few grids to illustrate the cumulative change for the total capital over the backtesting period if we were to allocate $1000 DOLLARS into each stock. If the bullet is GREEN, then that means we are at a profit and above our initial capital of $1000 DOLLARS, and if it’s RED then it means we are at a loss. Let us look at the top 126 stocks by return over three different grids.</p>
+<p><img src="/img/Top42_Cumchart_NDQ.png" /> <br> <img src="/img/Top4384_Cumchart_NDQ.png" /> <br> <img src="/img/Top85126_Cumchart_NDQ.png" /></p>
+<p><br></p>
+<div id="surprise-surprise" class="section level3">
+<h3>Surprise, Surprise</h3>
+<p>Were you expecting any of the above results? Did it surpise you to see the Energy sector come out on top or the lack of popular household stocks in the Top 10? I was pretty surpised to see ETSY come out on top as #1 for total returns at 85%, while EBAY (similar business model) came in at #192/282 for a total return of -3.53%. What about the overall return for the rest of the portfolio?</p>
+<p><br></p>
+</div>
+<div id="overall-returns" class="section level3">
+<h3>Overall Returns</h3>
+<p>Let’s view the return distrubution for EACH trade made on the Full Portfolio and compare that to random samples. Also, we will compare these returns against a basket of the 20 most popular stocks in the NASDAQ as well as 20 random stocks from the top100 ranked by total return.</p>
+<div class="figure">
+<img src="/img/Fullport_Hist.png" />
+
+</div>
+<p>The returns for each trade made seem to be normally distributed, with exception of a few outliers. I removed those to get a cleaner view of the distrubtions, which we can see the average return for a trade is 46 basis points (or 0.46 percentage points). This is great considering there are over 3500 total trades. What about the overall return or the comparison to popular household names?</p>
+<p>First, I would like to compare the distribution of the trade returns to the distributions of the randomly selected samples from the Full Portfolio. I’m doing this to gauge how this simple strategy would perform if we were to just randomly select a group of stocks or a group of popular stocks. After, we can compare the overall returns from each portfolio to see how effective this trade is compared to just trading the Top 20 Most Popular household names.</p>
+<div class="figure">
+<img src="/img/Dist_portvssample_ndq.png" />
+
+</div>
+<p><br></p>
+<table>
+<thead>
+<tr class="header">
+<th>Portfolio</th>
+<th>Median Total Return</th>
+<th>Mean Total Return</th>
+<th>Avg Return Per Trade(plot)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Full_Port</td>
+<td>4.22%</td>
+<td>5.66%</td>
+<td>0.46%</td>
+</tr>
+<tr class="even">
+<td>Sample_Full_Port1</td>
+<td>11.3%</td>
+<td>10.9%</td>
+<td>0.87%</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="figure">
+<img src="/img/Dist_sample1_2_ndq.png" />
+
+</div>
+<p><br></p>
+<table>
+<thead>
+<tr class="header">
+<th>Portfolio</th>
+<th>Median Total Return</th>
+<th>Mean Total Return</th>
+<th>Avg Return Per Trade(plot)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sample_Full_Port1</td>
+<td>11.3%</td>
+<td>10.9%</td>
+<td>0.87%</td>
+</tr>
+<tr class="even">
+<td>Sample_Full_Port2</td>
+<td>6.21%</td>
+<td>6.73%</td>
+<td>0.54%</td>
+</tr>
+</tbody>
+</table>
+<p><br> <img src="/img/Dist_sample2_3_ndq.png" /></p>
+<p><br></p>
+<table>
+<thead>
+<tr class="header">
+<th>Portfolio</th>
+<th>Median Total Return</th>
+<th>Mean Total Return</th>
+<th>Avg Return Per Trade(plot)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sample_Full_Port2</td>
+<td>6.21%</td>
+<td>6.73%</td>
+<td>0.54%</td>
+</tr>
+<tr class="even">
+<td>Sample_Full_Port3</td>
+<td>0.045%</td>
+<td>4.92%</td>
+<td>0.40%</td>
+</tr>
+</tbody>
+</table>
+<p><br> <img src="/img/Dist_sample3_4_ndq.png" /></p>
+<p><br></p>
+<table>
+<thead>
+<tr class="header">
+<th>Portfolio</th>
+<th>Median Total Return</th>
+<th>Mean Total Return</th>
+<th>Avg Return Per Trade(plot)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sample_Full_Port3</td>
+<td>0.045%</td>
+<td>4.92%</td>
+<td>0.46%</td>
+</tr>
+<tr class="even">
+<td>Sample_Full_Port4</td>
+<td>0.72%</td>
+<td>0.257%</td>
+<td>0.021%</td>
+</tr>
+</tbody>
+</table>
+<p><br> <img src="/img/Popular_rand_ndq.png" /></p>
+<p><br></p>
+<table>
+<thead>
+<tr class="header">
+<th>Portfolio</th>
+<th>Median Total Return</th>
+<th>Mean Total Return</th>
+<th>Avg Return Per Trade(plot)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Popular_20_Port</td>
+<td>16.1%</td>
+<td>12.6%</td>
+<td>1.04%</td>
+</tr>
+<tr class="even">
+<td>Random_20_Port</td>
+<td>21%</td>
+<td>28.8%</td>
+<td>2.29%</td>
+</tr>
+</tbody>
+</table>
+<p><br> Table for the overall gain / loss for each portfolio/sample above</p>
+<pre><code>## # A tibble: 7 x 3
+##   Portfolio         MED.RTRN TOT.RTRN
+##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Full_Port             4.21     5.66
+## 2 Sample_Full_Port1    11.3     10.9 
+## 3 Sample_Full_Port2     6.21     6.73
+## 4 Sample_Full_Port3     0.05     4.92
+## 5 Sample_Full_Port4     0.72     0.26
+## 6 Most_Popular_20      16.1     12.6 
+## 7 Random_20_Top100     21.0     28.8</code></pre>
+</div>
+<div id="overall-returns-summary" class="section level3">
+<h3>Overall Returns Summary</h3>
+<p>As we can see, the total return from the start 2016 to Friday 3/8/2019 for the entire portfolio was 5.66%. Not bad for an extremely simple strategy! Although, if you were to use this strategy on the popular household names then you would have done better than using a sophisticated “algo” trader across the entire NASDAQ index. By using this simple buy and sell earnings play across the 20 most popular names in the NASDAQ, you could have returned 12.62% for the same time period. On the other hand, if you can use the computer to your advantage by training it to decide which stocks to run this simple strategy on, then it can greatly increase your returns. By running this simple strategy on 20 random stocks from the top 100, our returns shot up to 28.79% for the same time period.</p>
+</div>
+<div id="quick-look" class="section level3">
+<h3>Quick look</h3>
+<p>Something interesting I thought I could look at was the correlation between the average earning returns for each stock. I’d like to see if any strong correlations above +/- 0.8 exist. If so then that can be something to help us decide which stocks to choose when initiating this simple earnings strategy. We will also do the same for the top 35 stocks.</p>
+<p><img src="/img/CorrelogramAll_NDQ1.png" /> <img src="/img/TOP35_CORRELOGRAM_NDQ1.png" /></p>
+<p><br> Overall, I’d like to fine-tune this simple strategy by maybe testing different buy/sell triggers, adding a couple of momentum indicators, getting intraday data, or even adding in a sentiment score going into earnings. I also want to check out what those high correlations are all about and backtest a pair trade strategy. I may create a continuation post to this and test out earnings pair trading strategies.</p>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/algo/">Algo</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/nasdaq/">NASDAQ</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/beautiful-plots/">Beautiful Plots</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/quarterly-results/">Quarterly Results</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/03/ipo-estimates-lyftdbx/" data-tooltip="Lyft IPO &#43; Dropbox Review">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/03/backtest-simple-earnings/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/03/backtest-simple-earnings/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/03/backtest-simple-earnings/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Jagger Villalobos. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/03/ipo-estimates-lyftdbx/" data-tooltip="Lyft IPO &#43; Dropbox Review">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/03/backtest-simple-earnings/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/03/backtest-simple-earnings/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/03/backtest-simple-earnings/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F03%2Fbacktest-simple-earnings%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F03%2Fbacktest-simple-earnings%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F03%2Fbacktest-simple-earnings%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jagger Villalobos</h4>
+    
+      <div id="about-card-bio">Bottom-Up Analysis | Equity Research</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Seeking Research Analyst Position
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        New York, New York
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
+                <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
+                <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">IPO Estimate &amp; Review  Taking a look at LYFT financials for the first time Review of Dropbox IPO and stock performance  
+ Can the slow IPO market get a lift from LYFT? Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
+                <h3 class="media-heading">Salesforce Q3 Update</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Salesforce Q3 Update  Updated model from previous post, click here to read previous Salesforce post Management raised top and bottom line forecasts for FY19 guidance Management gave more details on FY20 &amp; FY22 goals and confirmed forecasts Near bulletproof business model during economic slowdown Key risks to management goals Recommendation and price targets  
+Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/12/yield-curve-fun/">
+                <h3 class="media-heading">Yield Curve Inversion - Marks End to Bull Market?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Going, Going, Inverted!  Yield Curve inversions are typically a leading indicator for a recession Historic analysis on inversions for specific yields since 1990 Yield Curve over 5 different time frames since the start of 2018 Takeaway from recent inversions   Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost 6 years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I began to track the daily fluctuations.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/11/salesforce-enough-to-buy/">
+                <h3 class="media-heading">Salesforce, Inc. - Are Expanding Margins Enough to Buy?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Salesforce, Inc.  Leader in the growing CRM market Modestly expanding margins Monetizing existing customer base  
+Customer Relationship Management Pioneer Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig in to Salesforce specifically, let’s explore what exactly CRM is and the growth prospects.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/11/ml-airbnb-prices/">
+                <h3 class="media-heading">Teaching a Machine to Learn NYC Airbnb Prices</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Using Airbnb By now, most Gen Z and millenials have heard of or used Airbnb for a range of many reasons, such as looking for a place to crash or taking a vacation. I believe what won the consumer’s attention over hotels was the fact that you are getting the “homey” setting and privacy while away on vacation instead of a hotel environment. I realize not everyone wants to part ways with room service, benefits of a having full-service bar in the lobby, pool &amp; spas, sometimes a gym, and the 100+ channels, but when comparing the prices and the extra sq.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/11/why-a-blog/">
+                <h3 class="media-heading">Why a Blog?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Does it work? Seems like it does. This is my first blog post! I wanted to create my own blog using R programming, R Studio, Git, and Github where I would host my personal site and opinions. These opinions will not be fabricated and will be based off my personal analysis.
+Why start a blog? I have a huge passion for analyzing financial data, especially those 10-K’s and 10-Q’s!! I do not get excited from fleshing out models on excel all day, but I do get excited from the picture painted using all the tools these filings provide.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         7 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2019\/03\/backtest-simple-earnings\/';
+          
+            this.page.identifier = '\/2019\/03\/backtest-simple-earnings\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

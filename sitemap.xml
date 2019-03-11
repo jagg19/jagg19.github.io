@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2019/03/backtest-simple-earnings/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2019/03/ipo-estimates-lyftdbx/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
   </url>
@@ -39,7 +44,19 @@
   </url>
   
   <url>
+    <loc>/tags/algo/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/archives/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/backtest/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -50,7 +67,14 @@
   </url>
   
   <url>
+    <loc>/tags/beautiful-plots/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -74,7 +98,7 @@
   
   <url>
     <loc>/categories/data-analysis/</loc>
-    <lastmod>2018-12-11T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -92,7 +116,7 @@
   
   <url>
     <loc>/categories/earnings/</loc>
-    <lastmod>2019-01-03T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -145,6 +169,12 @@
   </url>
   
   <url>
+    <loc>/tags/nasdaq/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/opinion/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -152,7 +182,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -176,7 +206,7 @@
   
   <url>
     <loc>/categories/programming/</loc>
-    <lastmod>2018-11-19T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -188,7 +218,7 @@
   
   <url>
     <loc>/tags/quarterly-results/</loc>
-    <lastmod>2019-01-03T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -212,7 +242,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -225,6 +255,12 @@
   <url>
     <loc>/tags/test/</loc>
     <lastmod>2018-11-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/trading/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
