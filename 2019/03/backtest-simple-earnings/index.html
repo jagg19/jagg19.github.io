@@ -311,120 +311,150 @@ if (!doNotTrack) {
 
 </div>
 <p><br> We are going to use this strategy and scale it out to each stock in the NASDAQ with a market cap over $5Billion. This is when the computers take over because we want to run this across thousands of different stocks and then run additional scripts on the results. A great trader usually focuses on a core set of stocks, whereas a computer can keep track of tens of thousands at a fraction of the time.</p>
-<p>First, I am going to drop all stocks that do not have a Billion $ market cap, then filter out all comapnies that are under a $5 Billion market cap since we want each stock above. Finally, I will drop any rows that may contain NA values. After filtering through the NASDAQ, there are 282 stocks remaining that meet our criteria. Now, I will need to get all of the quarterly earnings dates for each stock during our specified time period. I will web scrape the data from a reputable source online in order for me to get accurate historic earnings data for each stock. It’s either that or pay excessive premium subscriptions to financial data services for the historical earnings data. Let’s look at the results through a variety of different visualizations, starting with a Lollipop chart to illustrate the Top Performing Sectors.</p>
+<p>First, I am going to drop all stocks that do not have a Billion $ market cap, then filter out all companies that are under a $5 Billion market cap since we want each stock above. Finally, I will drop any rows that may contain NA values. After filtering through the NASDAQ, there are 282 stocks remaining that meet our criteria. Now, I will need to get all of the quarterly earnings dates for each stock during our specified time period. I will web scrape the data from a reputable source online in order for me to get accurate historic earnings data for each stock. It’s either that or pay excessive premium subscriptions to financial data services for the historical earnings data. Let’s look at the results through a variety of different visualizations, starting with a Lollipop chart to illustrate the top performing sectors by overall total returns.</p>
+<div id="top-sectors" class="section level3">
+<h3>Top Sectors</h3>
 <p><br> <img src="/img/TotalSectorRtrns_NDQ.png" /></p>
-<p><br> Now, let’s take a look at the Top 40 performing stocks by total return using the same Lollipop chart. Do you notice any of the big names, like Amazon or Apple? I’ll also print the top 100.</p>
+<p>Being that we are backtesting the NASDAQ, I was quite surprised to see only one sector at a loss and the Energy coming out on top. After looking a little deeper, I found that only two stocks were responsible for the Energy Sector coming out on top. If additional energy companies would have made it through our initial Market Cap screening, then most likely Technology would have taken the #1 spot. Since this was such a simple strategy, I was very surprised to see only one sector at a loss. To see if only a few companies were responsible for the overall loss or if the losses were evenly spread out through the sector, we view the distribution on a histogram. After taking a quick look, it is clear to see that the returns are pretty normally distributed. Below is a table that lists each Sector by total overall returns and the number of companies in each sector.</p>
+<pre><code>## # A tibble: 12 x 3
+##    SECTOR                OVERALL.RTRN Companies
+##    &lt;chr&gt;                        &lt;dbl&gt;     &lt;int&gt;
+##  1 Energy                       14.5          2
+##  2 Technology                   11.7         92
+##  3 Miscellaneous                 9.5         12
+##  4 Capital Goods                 7.9         15
+##  5 Consumer Durables             5.7          2
+##  6 Consumer Services             3.2         60
+##  7 Consumer Non-Durables         2.2         10
+##  8 Basic Industries              1.8          3
+##  9 Finance                       1.3         30
+## 10 Public Utilities              1            4
+## 11 Transportation                0.04         8
+## 12 Health Care                  -0.41        44</code></pre>
+</div>
+<div id="histogram-returns-for-each-company-in-the-health-sector." class="section level3">
+<h3>Histogram: Returns for each company in the Health sector.</h3>
+<div class="figure">
+<img src="/img/Healthcare_rtrns.png" />
+
+</div>
+</div>
+</div>
+<div id="top-stocks" class="section level1">
+<h1>Top Stocks</h1>
+<p><br> Now, let’s take a look at the Top 40 performing stocks by total return using the same Lollipop chart. Do you notice any of the big names, like Amazon or Apple? I’ll also print a table showing the top 100 stocks by overall total return, number of trades, and the sector it is in.</p>
 <div class="figure">
 <img src="/img/TOP40STCKSRTRN_LOLIPOP_NDQ1.png" />
 
 </div>
-<pre><code>## # A tibble: 100 x 3
-##     Symbol TOT.RTRN SECTOR               
-##     &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;                
-##   1 ETSY       85.0 Miscellaneous        
-##   2 LOPE       77.4 Consumer Services    
-##   3 LOGI       72.0 Technology           
-##   4 UBNT       71.5 Technology           
-##   5 SPLK       67.1 Technology           
-##   6 PODD       60.5 Health Care          
-##   7 ANGI       58.0 Consumer Services    
-##   8 EXEL       48.7 Health Care          
-##   9 WB         48.4 Technology           
-##  10 TTWO       46.8 Technology           
-##  11 OKTA       45.7 Technology           
-##  12 FIVE       44.3 Consumer Services    
-##  13 RP         43.9 Technology           
-##  14 YNDX       43.3 Technology           
-##  15 BRKR       41.9 Capital Goods        
-##  16 GRMN       41.1 Capital Goods        
-##  17 COLM       39.1 Consumer Non-Durables
-##  18 ZBRA       39.0 Technology           
-##  19 ASML       37.5 Technology           
-##  20 CDNS       36.6 Technology           
-##  21 LRCX       34.7 Technology           
-##  22 TEAM       34.2 Technology           
-##  23 NVDA       34.0 Technology           
-##  24 ULTI       33.3 Technology           
-##  25 ADSK       33.3 Technology           
-##  26 AVGO       33.0 Technology           
-##  27 TSLA       32.1 Capital Goods        
-##  28 XLNX       31.8 Technology           
-##  29 SSNC       31.6 Technology           
-##  30 PEGA       31.6 Technology           
-##  31 CGNX       31.4 Capital Goods        
-##  32 MCHP       30.8 Technology           
-##  33 ADI        30.7 Technology           
-##  34 NFLX       30.5 Consumer Services    
-##  35 EWBC       30.4 Finance              
-##  36 ADBE       30.2 Technology           
-##  37 MASI       30.2 Health Care          
-##  38 MXIM       29.7 Technology           
-##  39 SNPS       29.5 Technology           
-##  40 EXAS       29.4 Health Care          
-##  41 IAC        28.6 Consumer Services    
-##  42 ALXN       28.2 Health Care          
-##  43 NDSN       26.6 Capital Goods        
-##  44 QGEN       26.5 Health Care          
-##  45 IDXX       25.4 Health Care          
-##  46 MRVL       24.5 Technology           
-##  47 FB         24.0 Technology           
-##  48 MSFT       23.7 Technology           
-##  49 ISRG       23.4 Health Care          
-##  50 PRAH       23.2 Health Care          
-##  51 FTNT       23.2 Technology           
-##  52 ROKU       22.8 Consumer Services    
-##  53 MOMO       22.3 Technology           
-##  54 AMRN       22.2 Health Care          
-##  55 ON         22.1 Technology           
-##  56 AMAT       21.8 Technology           
-##  57 ACGL       21.6 Finance              
-##  58 COUP       21.5 Technology           
-##  59 MELI       21.1 Miscellaneous        
-##  60 CSCO       20.9 Technology           
-##  61 MORN       20.3 Finance              
-##  62 NICE       19.5 Technology           
-##  63 RYAAY      19.5 Transportation       
-##  64 AZPN       19.4 Technology           
-##  65 CSX        19.2 Transportation       
-##  66 WIX        19   Technology           
-##  67 HAS        18.8 Consumer Non-Durables
-##  68 TER        18.7 Capital Goods        
-##  69 AMZN       18.6 Consumer Services    
-##  70 MU         18.1 Technology           
-##  71 CTXS       17.7 Technology           
-##  72 FANG       17.7 Energy               
-##  73 LAMR       17.4 Consumer Services    
-##  74 BIIB       17.3 Health Care          
-##  75 ARRS       17.3 Technology           
-##  76 KLAC       16.7 Capital Goods        
-##  77 ALGN       16.7 Health Care          
-##  78 AAPL       16.6 Technology           
-##  79 ROST       16   Consumer Services    
-##  80 JD         15.7 Consumer Services    
-##  81 VRSN       14.9 Technology           
-##  82 TRMB       14.8 Capital Goods        
-##  83 JBHT       14.7 Transportation       
-##  84 MDB        14.4 Technology           
-##  85 MYL        13.6 Health Care          
-##  86 HTHT       13.4 Consumer Services    
-##  87 STLD       13.2 Basic Industries     
-##  88 PFPT       13.0 Technology           
-##  89 ZION       12.7 Finance              
-##  90 PYPL       12.7 Miscellaneous        
-##  91 ORLY       12.4 Consumer Services    
-##  92 BIDU       12.3 Technology           
-##  93 DXCM       12.2 Health Care          
-##  94 DISCB      12.1 Consumer Services    
-##  95 AKAM       11.4 Miscellaneous        
-##  96 TMUS       11.4 Public Utilities     
-##  97 WWD        11.4 Energy               
-##  98 WDC        11.2 Technology           
-##  99 LBRDK      11.1 Consumer Services    
-## 100 LBRDA      11.1 Consumer Services</code></pre>
+<pre><code>## # A tibble: 282 x 4
+##     Symbol OVERALL.RTRN `# of Trades` SECTOR               
+##     &lt;chr&gt;         &lt;dbl&gt;         &lt;int&gt; &lt;chr&gt;                
+##   1 ETSY           85.0            12 Miscellaneous        
+##   2 LOPE           77.4            13 Consumer Services    
+##   3 LOGI           72.0            13 Technology           
+##   4 UBNT           71.5            13 Technology           
+##   5 SPLK           67.1            12 Technology           
+##   6 PODD           60.5            12 Health Care          
+##   7 ANGI           58.0            13 Consumer Services    
+##   8 EXEL           48.7            13 Health Care          
+##   9 WB             48.4            12 Technology           
+##  10 TTWO           46.8            13 Technology           
+##  11 OKTA           45.7             7 Technology           
+##  12 FIVE           44.3            12 Consumer Services    
+##  13 RP             43.9            12 Technology           
+##  14 YNDX           43.3            13 Technology           
+##  15 BRKR           41.9            13 Capital Goods        
+##  16 GRMN           41.1            13 Capital Goods        
+##  17 COLM           39.1            13 Consumer Non-Durables
+##  18 ZBRA           39.0            13 Technology           
+##  19 ASML           37.5            13 Technology           
+##  20 CDNS           36.6            13 Technology           
+##  21 LRCX           34.7            13 Technology           
+##  22 TEAM           34.2            13 Technology           
+##  23 NVDA           34.0            13 Technology           
+##  24 ULTI           33.3            13 Technology           
+##  25 ADSK           33.3            12 Technology           
+##  26 AVGO           33.0            12 Technology           
+##  27 TSLA           32.1            13 Capital Goods        
+##  28 XLNX           31.8            13 Technology           
+##  29 SSNC           31.6            13 Technology           
+##  30 PEGA           31.6            13 Technology           
+##  31 CGNX           31.4            13 Capital Goods        
+##  32 MCHP           30.8            13 Technology           
+##  33 ADI            30.7            13 Technology           
+##  34 NFLX           30.5            13 Consumer Services    
+##  35 EWBC           30.4            13 Finance              
+##  36 ADBE           30.2            12 Technology           
+##  37 MASI           30.2            12 Health Care          
+##  38 MXIM           29.7            13 Technology           
+##  39 SNPS           29.5            13 Technology           
+##  40 EXAS           29.4            13 Health Care          
+##  41 IAC            28.6            13 Consumer Services    
+##  42 ALXN           28.2            13 Health Care          
+##  43 NDSN           26.6            13 Capital Goods        
+##  44 QGEN           26.5            12 Health Care          
+##  45 IDXX           25.4            13 Health Care          
+##  46 MRVL           24.5            12 Technology           
+##  47 FB             24.0            13 Technology           
+##  48 MSFT           23.7            13 Technology           
+##  49 ISRG           23.4            13 Health Care          
+##  50 PRAH           23.2            12 Health Care          
+##  51 FTNT           23.2            13 Technology           
+##  52 ROKU           22.8             6 Consumer Services    
+##  53 MOMO           22.3            12 Technology           
+##  54 AMRN           22.2            12 Health Care          
+##  55 ON             22.1            13 Technology           
+##  56 AMAT           21.8            13 Technology           
+##  57 ACGL           21.6            13 Finance              
+##  58 COUP           21.5             8 Technology           
+##  59 MELI           21.1            12 Miscellaneous        
+##  60 CSCO           20.9            13 Technology           
+##  61 MORN           20.3            13 Finance              
+##  62 NICE           19.5            13 Technology           
+##  63 RYAAY          19.5            13 Transportation       
+##  64 AZPN           19.4            13 Technology           
+##  65 CSX            19.2            13 Transportation       
+##  66 WIX            19              13 Technology           
+##  67 HAS            18.8            13 Consumer Non-Durables
+##  68 TER            18.7            13 Capital Goods        
+##  69 AMZN           18.6            13 Consumer Services    
+##  70 MU             18.1            12 Technology           
+##  71 CTXS           17.7            13 Technology           
+##  72 FANG           17.7            13 Energy               
+##  73 LAMR           17.4            13 Consumer Services    
+##  74 BIIB           17.3            13 Health Care          
+##  75 ARRS           17.3            13 Technology           
+##  76 KLAC           16.7            13 Capital Goods        
+##  77 ALGN           16.7            13 Health Care          
+##  78 AAPL           16.6            13 Technology           
+##  79 ROST           16              12 Consumer Services    
+##  80 JD             15.7            12 Consumer Services    
+##  81 VRSN           14.9            13 Technology           
+##  82 TRMB           14.8            13 Capital Goods        
+##  83 JBHT           14.7            13 Transportation       
+##  84 MDB            14.4             5 Technology           
+##  85 MYL            13.6            12 Health Care          
+##  86 HTHT           13.4            12 Consumer Services    
+##  87 STLD           13.2            13 Basic Industries     
+##  88 PFPT           13.0            13 Technology           
+##  89 ZION           12.7            13 Finance              
+##  90 PYPL           12.7            13 Miscellaneous        
+##  91 ORLY           12.4            13 Consumer Services    
+##  92 BIDU           12.3            13 Technology           
+##  93 DXCM           12.2            13 Health Care          
+##  94 DISCB          12.1            12 Consumer Services    
+##  95 AKAM           11.4            13 Miscellaneous        
+##  96 TMUS           11.4            13 Public Utilities     
+##  97 WWD            11.4            13 Energy               
+##  98 WDC            11.2            13 Technology           
+##  99 LBRDK          11.1             9 Consumer Services    
+## 100 LBRDA          11.1            10 Consumer Services    
+## # … with 182 more rows</code></pre>
 <p><br></p>
 <div id="average-gains-losses-for-each-stock-traded" class="section level3">
 <h3>Average Gains / Losses for each Stock Traded</h3>
-<p>We have over 280+ stocks with each earnings trade since 2016. It wouldn’t be a good-looking chart to throw all of those on one axis, or even over a layer of different grids. I think a diverging bar graph would suit this nicely. We can put 100 stocks on a graph and easily see the average gains and losses for each stock. We will start from the last ranked stocks by return and work our way down, so the first chart shows the top 183-282 stocks by return, and their respective gains and losses.</p>
+<p>We have over 280+ stocks with each earnings trade since 2016. It would not be a good-looking chart if we threw all of those on one axis, or even over a layer of different grids. I think a diverging bar graph would suit this nicely. We can put 100 stocks on a graph and easily see the average gains and losses for each stock. We will start from the last ranked stocks by return and work our way down, so the first chart shows the top 183-282 stocks by return, and their respective gains and losses.</p>
 <p><img src="/img/Avgrtrn183282_NDQ.png" /> <img src="/img/STCKAVGRTRN_83-181_NDQ.png" /></p>
 <div class="figure">
 <img src="/img/STCKAVGRTRN_1-82_NDQ.png" />
@@ -440,17 +470,20 @@ if (!doNotTrack) {
 <p><br></p>
 <div id="surprise-surprise" class="section level3">
 <h3>Surprise, Surprise</h3>
-<p>Were you expecting any of the above results? Did it surpise you to see the Energy sector come out on top or the lack of popular household stocks in the Top 10? I was pretty surpised to see ETSY come out on top as #1 for total returns at 85%, while EBAY (similar business model) came in at #192/282 for a total return of -3.53%. What about the overall return for the rest of the portfolio?</p>
+<p>Were you expecting any of the above results? Did it surprise you to see the Energy sector come out on top or the lack of popular household stocks in the Top 10? I was pretty surprised to see ETSY come out on top as #1 for total returns at 85%, while EBAY (similar business model) came in at #192/282 for a total return of -3.53%. What about the overall return for the rest of the portfolio?</p>
 <p><br></p>
 </div>
 <div id="overall-returns" class="section level3">
 <h3>Overall Returns</h3>
-<p>Let’s view the return distrubution for EACH trade made on the Full Portfolio and compare that to random samples. Also, we will compare these returns against a basket of the 20 most popular stocks in the NASDAQ as well as 20 random stocks from the top100 ranked by total return.</p>
+<p>Let’s view the return distribution for EACH trade made on the Full Portfolio and compare that to random samples. Also, we will compare these returns against a basket of the 20 most popular stocks in the NASDAQ as well as 20 random stocks from the top100 ranked by total return. I classified the “20 most popular” names by researching the most widely held stocks in the NASDAQ, most active by dollar trading volume in NASDAQ, and NASDAQ stocks in Robinhood’s top 100 most popular list.</p>
 <div class="figure">
 <img src="/img/Fullport_Hist.png" />
 
 </div>
-<p>The returns for each trade made seem to be normally distributed, with exception of a few outliers. I removed those to get a cleaner view of the distrubtions, which we can see the average return for a trade is 46 basis points (or 0.46 percentage points). This is great considering there are over 3500 total trades. What about the overall return or the comparison to popular household names?</p>
+<p>The returns for each trade made seem to be normally distributed, with exception of a few outliers. I removed those to get a cleaner view of the distributions, which we can see the average return for a trade is 46 basis points (or 0.46 percentage points). This is great considering there are over 3500 total trades. What about the overall return or the comparison to popular household names?</p>
+</div>
+<div id="our-portfolio-vs-sample-portfolios-vs-most-popular" class="section level3">
+<h3>Our Portfolio vs Sample Portfolios vs Most Popular</h3>
 <p>First, I would like to compare the distribution of the trade returns to the distributions of the randomly selected samples from the Full Portfolio. I’m doing this to gauge how this simple strategy would perform if we were to just randomly select a group of stocks or a group of popular stocks. After, we can compare the overall returns from each portfolio to see how effective this trade is compared to just trading the Top 20 Most Popular household names.</p>
 <div class="figure">
 <img src="/img/Dist_portvssample_ndq.png" />
@@ -604,12 +637,16 @@ if (!doNotTrack) {
 <div id="overall-returns-summary" class="section level3">
 <h3>Overall Returns Summary</h3>
 <p>As we can see, the total return from the start 2016 to Friday 3/8/2019 for the entire portfolio was 5.66%. Not bad for an extremely simple strategy! Although, if you were to use this strategy on the popular household names then you would have done better than using a sophisticated “algo” trader across the entire NASDAQ index. By using this simple buy and sell earnings play across the 20 most popular names in the NASDAQ, you could have returned 12.62% for the same time period. On the other hand, if you can use the computer to your advantage by training it to decide which stocks to run this simple strategy on, then it can greatly increase your returns. By running this simple strategy on 20 random stocks from the top 100, our returns shot up to 28.79% for the same time period.</p>
+<p><br></p>
 </div>
 <div id="quick-look" class="section level3">
 <h3>Quick look</h3>
 <p>Something interesting I thought I could look at was the correlation between the average earning returns for each stock. I’d like to see if any strong correlations above +/- 0.8 exist. If so then that can be something to help us decide which stocks to choose when initiating this simple earnings strategy. We will also do the same for the top 35 stocks.</p>
 <p><img src="/img/CorrelogramAll_NDQ1.png" /> <img src="/img/TOP35_CORRELOGRAM_NDQ1.png" /></p>
-<p><br> Overall, I’d like to fine-tune this simple strategy by maybe testing different buy/sell triggers, adding a couple of momentum indicators, getting intraday data, or even adding in a sentiment score going into earnings. I also want to check out what those high correlations are all about and backtest a pair trade strategy. I may create a continuation post to this and test out earnings pair trading strategies.</p>
+</div>
+<div id="whats-next" class="section level3">
+<h3>What’s Next</h3>
+<p>Overall, I’d like to fine-tune this simple strategy by maybe testing different buy/sell triggers, adding a couple of momentum indicators, getting intraday data, or even adding in a sentiment score going into earnings. I also want to check out what those high correlations are all about and backtest a pair trade strategy. I may create a continuation post to this and test out earnings pair trading strategies.</p>
 </div>
 </div>
 

@@ -45,20 +45,39 @@ The trading strategy is kept simple to illustrate the common approach to trade e
 We are going to use this strategy and scale it out to each stock in the NASDAQ with a market cap over \$5Billion. This is when the computers take over because we want to run this across thousands of different stocks and then run additional scripts on the results. A great trader usually focuses on a core set of stocks, whereas a computer can keep track of tens of thousands at a fraction of the time. 
 
 
-First, I am going to drop all stocks that do not have a Billion \$ market cap, then filter out all comapnies that are under a \$5 Billion market cap since we want each stock above. Finally, I will drop any rows that may contain NA values. After filtering through the NASDAQ, there are 282 stocks remaining that meet our criteria. Now, I will need to get all of the quarterly earnings dates for each stock during our specified time period. I will web scrape the data from a reputable source online in order for me to get accurate historic earnings data for each stock. It's either that or pay excessive premium subscriptions to financial data services for the historical earnings data. Let’s look at the results through a variety of different visualizations, starting with a Lollipop chart to illustrate the Top Performing Sectors.
+First, I am going to drop all stocks that do not have a Billion \$ market cap, then filter out all companies that are under a \$5 Billion market cap since we want each stock above. Finally, I will drop any rows that may contain NA values. After filtering through the NASDAQ, there are 282 stocks remaining that meet our criteria. Now, I will need to get all of the quarterly earnings dates for each stock during our specified time period. I will web scrape the data from a reputable source online in order for me to get accurate historic earnings data for each stock. It's either that or pay excessive premium subscriptions to financial data services for the historical earnings data. Let’s look at the results through a variety of different visualizations, starting with a Lollipop chart to illustrate the top performing sectors by overall total returns.
+
+
+###Top Sectors
 
 <br>
 ![](/img/TotalSectorRtrns_NDQ.png)
 
+
+Being that we are backtesting the NASDAQ, I was quite surprised to see only one sector at a loss and the Energy coming out on top.  After looking a little deeper, I found that only two stocks were responsible for the Energy Sector coming out on top. If additional energy companies would have made it through our initial Market Cap screening, then most likely Technology would have taken the #1 spot.  Since this was such a simple strategy, I was very surprised to see only one sector at a loss. To see if only a few companies were responsible for the overall loss or if the losses were evenly spread out through the sector, we view the distribution on a histogram. After taking a quick look, it is clear to see that the returns are pretty normally distributed. Below is a table that lists each Sector by total overall returns and the number of companies in each sector.
+
+```{r,echo=FALSE, warning=FALSE, message=FALSE}
+x<-readr::read_csv("/Users/jagvill/Desktop/Github/blogdown_source/tib_sec_return.csv")
+x<- x[-1]
+print(x, n=100)
+```
+
+###Histogram: Returns for each company in the Health sector. 
+
+![](/img/Healthcare_rtrns.png)
+
+
+#Top Stocks
 <br>
-Now, let’s take a look at the Top 40 performing stocks by total return using the same Lollipop chart. Do you notice any of the big names, like Amazon or Apple? I'll also print the top 100.
+Now, let’s take a look at the Top 40 performing stocks by total return using the same Lollipop chart. Do you notice any of the big names, like Amazon or Apple? I'll also print a table showing the top 100 stocks by overall total return, number of trades, and the sector it is in.
 
 ![](/img/TOP40STCKSRTRN_LOLIPOP_NDQ1.png)
 
 ```{r,echo=FALSE, warning=FALSE, message=FALSE}
-x<-readr::read_csv("/Users/jagvill/Desktop/Github/blogdown_source/top_stocks_100.csv")
-x<- x[-1]
-print(x, n=100)
+
+y<-readr::read_csv("/Users/jagvill/Desktop/Github/blogdown_source/tib_rtrn.csv")
+y<- y[-1]
+print(y, n=100)
 ```
 
 
@@ -67,7 +86,7 @@ print(x, n=100)
 
 ###Average Gains / Losses for each Stock Traded
 
-We have over 280+ stocks with each earnings trade since 2016. It wouldn’t be a good-looking chart to throw all of those on one axis, or even over a layer of different grids. I think a diverging bar graph would suit this nicely. We can put 100 stocks on a graph and easily see the average gains and losses for each stock. We will start from the last ranked stocks by return and work our way down, so the first chart shows the top 183-282 stocks by return, and their respective gains and losses. 
+We have over 280+ stocks with each earnings trade since 2016. It would not be a good-looking chart if we threw all of those on one axis, or even over a layer of different grids. I think a diverging bar graph would suit this nicely. We can put 100 stocks on a graph and easily see the average gains and losses for each stock. We will start from the last ranked stocks by return and work our way down, so the first chart shows the top 183-282 stocks by return, and their respective gains and losses. 
 
 
 ![](/img/Avgrtrn183282_NDQ.png)
@@ -92,20 +111,22 @@ Now, we can create a few grids to illustrate the cumulative change for the total
 
 ###Surprise, Surprise
 
-Were you expecting any of the above results? Did it surpise you to see the Energy sector come out on top or the lack of popular household stocks in the Top 10? I was pretty surpised to see ETSY come out on top as #1 for total returns at 85%, while EBAY (similar business model) came in at #192/282 for a total return of -3.53%. What about the overall return for the rest of the portfolio?
+Were you expecting any of the above results? Did it surprise you to see the Energy sector come out on top or the lack of popular household stocks in the Top 10? I was pretty surprised to see ETSY come out on top as #1 for total returns at 85%, while EBAY (similar business model) came in at #192/282 for a total return of -3.53%. What about the overall return for the rest of the portfolio?
 
 <br>
 
 ###Overall Returns 
 
-Let's view the return distrubution for EACH trade made on the Full Portfolio and compare that to random samples. Also, we will compare these returns against a basket of the 20 most popular stocks in the NASDAQ as well as 20 random stocks from the top100 ranked by total return.
+Let's view the return distribution for EACH trade made on the Full Portfolio and compare that to random samples. Also, we will compare these returns against a basket of the 20 most popular stocks in the NASDAQ as well as 20 random stocks from the top100 ranked by total return. I classified the "20 most popular" names by researching the most widely held stocks in the NASDAQ, most active by dollar trading volume in NASDAQ, and NASDAQ stocks in Robinhood's top 100 most popular list. 
 
 
 
 ![](/img/Fullport_Hist.png)
 
-The returns for each trade made seem to be normally distributed, with exception of a few outliers. I removed those to get a cleaner view of the distrubtions, which we can see the average return for a trade is 46 basis points (or 0.46 percentage points). This is great considering there are over 3500 total trades. What about the overall return or the comparison to popular household names?
+The returns for each trade made seem to be normally distributed, with exception of a few outliers. I removed those to get a cleaner view of the distributions, which we can see the average return for a trade is 46 basis points (or 0.46 percentage points). This is great considering there are over 3500 total trades. What about the overall return or the comparison to popular household names?
 
+
+###Our Portfolio vs Sample Portfolios vs Most Popular
 First, I would like to compare the distribution of the trade returns to the distributions of the randomly selected samples from the Full Portfolio. I'm doing this to gauge how this simple strategy would perform if we were to just randomly select a group of stocks or a group of popular stocks. After, we can compare the overall returns from each portfolio to see how effective this trade is compared to just trading the Top 20 Most Popular household names. 
 
 
@@ -175,6 +196,8 @@ t
 
 As we can see, the total return from the start 2016 to Friday 3/8/2019 for the entire portfolio was 5.66%. Not bad for an extremely simple strategy! Although, if you were to use this strategy on the popular household names then you would have done better than using a sophisticated "algo" trader across the entire NASDAQ index. By using this simple buy and sell earnings play across the 20 most popular names in the NASDAQ, you could have returned 12.62% for the same time period. On the other hand, if you can use the computer to your advantage by training it to decide which stocks to run this simple strategy on, then it can greatly increase your returns. By running this simple strategy on 20 random stocks from the top 100, our returns shot up to 28.79% for the same time period. 
 
+<br> 
+
 ###Quick look
 
 Something interesting I thought I could look at was the correlation between the average earning returns for each stock. I’d like to see if any strong correlations above +/- 0.8 exist. If so then that can be something to help us decide which stocks to choose when initiating this simple earnings strategy. We will also do the same for the top 35 stocks. 
@@ -185,6 +208,5 @@ Something interesting I thought I could look at was the correlation between the 
 
 
 
-
-<br>
+###What's Next
 Overall, I’d like to fine-tune this simple strategy by maybe testing different buy/sell triggers, adding a couple of momentum indicators, getting intraday data, or even adding in a sentiment score going into earnings. I also want to check out what those high correlations are all about and backtest a pair trade strategy. I may create a continuation post to this and test out earnings pair trading strategies.
