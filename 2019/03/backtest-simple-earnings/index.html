@@ -304,7 +304,7 @@ if (!doNotTrack) {
 <li>How to improve the simple strategy</li>
 </ul>
 <p><br></p>
-<p>You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions. I’m going to integrate the two to talk about the performance of a simple earnings trade strategy across the NASDAQ starting in 2016 and how it compares against a basket of popular stocks. I wanted to compare it to a group of popular names from the NASDAQ to simulate the “go-to” names for the average mom-and-pop investor. These popular names will include Facebook, Apple, Amazon, Netflix, Google, and many more to see if these Wall Street darlings are also the best ones to trade during earnings. After all, if these companies are doing so well then their earning results should reflect that.</p>
+<p>You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions. I’m going to integrate the two to talk about the performance of a simple earnings trade strategy across the NASDAQ and how it compares against a basket of popular stocks. I wanted to compare it to a group of popular names from the NASDAQ to simulate the “go-to” names for the average mom-and-pop investor. These popular names will include Facebook, Apple, Amazon, Netflix, Google, and many more to see if these Wall Street darlings are also the best ones to trade during earnings. After all, if these companies are doing so well then their earning results should reflect that.</p>
 <div id="the-process" class="section level3">
 <h3>The Process</h3>
 <p>The trading strategy is kept simple to illustrate the common approach to trade earnings. The strategy will buy the stock at the market open one day prior to the earnings release date, and if the company reports BEFORE the market open, then we will sell at the market open. If the company reports AFTER market close, then we will sell it the following day at the market open. See below to see how the trades are triggered.</p>
@@ -316,7 +316,7 @@ if (!doNotTrack) {
 </div>
 <div id="the-data" class="section level3">
 <h3>The Data</h3>
-<p>All of our stock data (with exception of earnings dates) comes from a R package called “tidyquant” that uses yahoo, quandl, alphavantage, bloomberg, etc. for pricing data. First, we gather the NASDAQ exchange data and drop all stocks that do not have a Billion $ market cap, then filter out all companies that are under a $5 Billion market cap. After, we will map a pricing function to all stocks that passed our market cap screening to obtain the historic pricing data since the start of 2016. Finally, I will drop any rows that may contain NA values. After filtering through the NASDAQ, there are 282 stocks remaining that meet our criteria. Now, I will need to get all of the quarterly earnings dates for each stock during our specified time period. I will web scrape the data from a reputable source online in order for me to get accurate historic earnings data for each stock. I am savings tons of $$$ by getting the data this way. Let’s look at the results through a variety of different visualizations, starting with a Lollipop chart to illustrate the top performing sectors by overall total returns.</p>
+<p>All of our stock data (with exception of earnings dates) comes from an R package called “tidyquant” that uses yahoo, quandl, alphavantage, bloomberg, etc. for pricing data. First, we gather the NASDAQ exchange data and drop all stocks that do not have a Billion $ market cap, then filter out all companies that are under a $5 Billion market cap. After, we will map a pricing function to all stocks that passed our market cap screening to obtain the historic pricing data since the start of 2016. Finally, I will drop any rows that may contain NA values. After filtering through the NASDAQ, there are 282 stocks remaining that meet our criteria. I’ll also need to get all of the quarterly earnings dates for each stock during our specified time period. I will web scrape the data from a reputable source online in order for me to get accurate historic earnings data for each stock. I am saving $$$ by getting the data this way. Let’s look at the results through a variety of different visualizations, starting with a Lollipop chart to illustrate the top performing sectors by overall total returns.</p>
 </div>
 <div id="top-sectors" class="section level3">
 <h3>Top Sectors</h3>
@@ -344,11 +344,11 @@ if (!doNotTrack) {
 <img src="/img/Healthcare_rtrns.png" />
 
 </div>
+<p><br></p>
 </div>
-</div>
-<div id="top-stocks" class="section level1">
-<h1>Top Stocks</h1>
-<p><br> Now, let’s take a look at the Top 40 performing stocks by total return using the same Lollipop chart. Do you notice any of the big names, like Amazon or Apple? I’ll also print a table showing the top 100 stocks by overall total return, number of trades, and the sector it is in.</p>
+<div id="top-stocks" class="section level3">
+<h3>Top Stocks</h3>
+<p>Now, let’s take a look at the Top 40 performing stocks by total return using the same Lollipop chart. Do you notice any of the big names, like Amazon or Apple? I’ll also print a table showing the top 100 stocks by overall total return, number of trades, and the sector it is in.</p>
 <div class="figure">
 <img src="/img/TOP40STCKSRTRN_LOLIPOP_NDQ1.png" />
 
@@ -458,8 +458,9 @@ if (!doNotTrack) {
 ## 100 LBRDA          11.1            10 Consumer Services    
 ## # … with 182 more rows</code></pre>
 <p><br></p>
+</div>
 <div id="average-gains-losses-for-each-stock-traded" class="section level3">
-<h3>Average Gains / Losses for each Stock Traded</h3>
+<h3>Average Gains / Losses for Each Stock Traded</h3>
 <p>We have over 280+ stocks with each earnings trade since 2016. It would not be a good-looking chart if we threw all of those on one axis, or even over a layer of different grids. I think a diverging bar graph would suit this nicely. We can put 100 stocks on a graph and easily see the average gains and losses for each stock. We will start from the last ranked stocks by return and work our way down, so the first chart shows the top 183-282 stocks by return, and their respective gains and losses.</p>
 <p><img src="/img/Avgrtrn183282_NDQ.png" /> <img src="/img/STCKAVGRTRN_83-181_NDQ.png" /></p>
 <div class="figure">
@@ -468,12 +469,12 @@ if (!doNotTrack) {
 </div>
 <p><br></p>
 </div>
-</div>
-<div id="cumulative-changes-in-each-stock-traded" class="section level1">
-<h1>Cumulative Changes in each Stock Traded</h1>
+<div id="cumulative-changes-in-each-stock-traded" class="section level3">
+<h3>Cumulative Changes in Each Stock Traded</h3>
 <p>Now, we can create a few grids to illustrate the cumulative change for the total capital over the backtesting period if we were to allocate $1000 DOLLARS into each stock. If the bullet is GREEN, then that means we are at a profit and above our initial capital of $1000 DOLLARS, and if it’s RED then it means we are at a loss. Let us look at the top 126 stocks by return over three different grids.</p>
 <p><img src="/img/Top42_Cumchart_NDQ.png" /> <br> <img src="/img/Top4384_Cumchart_NDQ.png" /> <br> <img src="/img/Top85126_Cumchart_NDQ.png" /></p>
 <p><br></p>
+</div>
 <div id="surprise-surprise" class="section level3">
 <h3>Surprise, Surprise</h3>
 <p>Were you expecting any of the above results? Did it surprise you to see the Energy sector come out on top or the lack of popular household stocks in the Top 10? I was pretty surprised to see ETSY come out on top as #1 for total returns at 85%, while EBAY (similar business model) came in at #192/282 for a total return of -3.53%. What about the overall return for the rest of the portfolio?</p>
@@ -645,8 +646,8 @@ if (!doNotTrack) {
 <p>As we can see, the total return from the start 2016 to Friday 3/8/2019 for the entire portfolio was 5.66%. Not bad for an extremely simple strategy! Although, if you were to use this strategy on the popular household names then you would have done better than using a sophisticated “algo” trader across the entire NASDAQ index. By using this simple buy and sell earnings play across the 20 most popular names in the NASDAQ, you could have returned 12.62% for the same time period. On the other hand, if you can use the computer to your advantage by training it to decide which stocks to run this simple strategy on, then it can greatly increase your returns. By running this simple strategy on 20 random stocks from the top 100, our returns shot up to 28.79% for the same time period.</p>
 <p><br></p>
 </div>
-<div id="quick-look" class="section level3">
-<h3>Quick look</h3>
+<div id="quick-look---correlation-among-returns" class="section level3">
+<h3>Quick Look - Correlation Among Returns</h3>
 <p>Something interesting I thought I could look at was the correlation between the average earning returns for each stock. I’d like to see if any strong correlations above +/- 0.8 exist. If so then that can be something to help us decide which stocks to choose when initiating this simple earnings strategy. We will also do the same for the top 35 stocks.</p>
 <p><img src="/img/CorrelogramAll_NDQ1.png" /> <img src="/img/TOP35_CORRELOGRAM_NDQ1.png" /></p>
 </div>

@@ -34,7 +34,7 @@ output:
 <br>
 
 
-You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions. I'm going to integrate the two to talk about the performance of a simple earnings trade strategy across the NASDAQ starting in 2016 and how it compares against a basket of popular stocks. I wanted to compare it to a group of popular names from the NASDAQ to simulate the "go-to" names for the average mom-and-pop investor. These popular names will include Facebook, Apple, Amazon, Netflix, Google, and many more to see if these Wall Street darlings are also the best ones to trade during earnings. After all, if these companies are doing so well then their earning results should reflect that. 
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions. I'm going to integrate the two to talk about the performance of a simple earnings trade strategy across the NASDAQ and how it compares against a basket of popular stocks. I wanted to compare it to a group of popular names from the NASDAQ to simulate the "go-to" names for the average mom-and-pop investor. These popular names will include Facebook, Apple, Amazon, Netflix, Google, and many more to see if these Wall Street darlings are also the best ones to trade during earnings. After all, if these companies are doing so well then their earning results should reflect that. 
 
 ###The Process
 The trading strategy is kept simple to illustrate the common approach to trade earnings. The strategy will buy the stock at the market open one day prior to the earnings release date, and if the company reports BEFORE the market open, then we will sell at the market open. If the company reports AFTER market close, then we will sell it the following day at the market open. See below to see how the trades are triggered.
@@ -46,7 +46,7 @@ The trading strategy is kept simple to illustrate the common approach to trade e
 We are going to use this strategy and scale it out to each stock in the NASDAQ with a market cap over \$5Billion. This is when the computers take over because we want to run this across thousands of different stocks and then run additional scripts on the results. A great trader usually focuses on a core set of stocks, whereas a computer can keep track of tens of thousands at a fraction of the time. 
 
 ###The Data
-All of our stock data (with exception of earnings dates) comes from a R package called "tidyquant" that uses yahoo, quandl, alphavantage, bloomberg, etc. for pricing data. First, we gather the NASDAQ exchange data and drop all stocks that do not have a Billion \$ market cap, then filter out all companies that are under a \$5 Billion market cap. After, we will map a pricing function to all stocks that passed our market cap screening to obtain the historic pricing data since the start of 2016. Finally, I will drop any rows that may contain NA values. After filtering through the NASDAQ, there are 282 stocks remaining that meet our criteria. Now, I will need to get all of the quarterly earnings dates for each stock during our specified time period. I will web scrape the data from a reputable source online in order for me to get accurate historic earnings data for each stock. I am savings tons of \$\$\$ by getting the data this way. Let’s look at the results through a variety of different visualizations, starting with a Lollipop chart to illustrate the top performing sectors by overall total returns.
+All of our stock data (with exception of earnings dates) comes from an R package called "tidyquant" that uses yahoo, quandl, alphavantage, bloomberg, etc. for pricing data. First, we gather the NASDAQ exchange data and drop all stocks that do not have a Billion \$ market cap, then filter out all companies that are under a \$5 Billion market cap. After, we will map a pricing function to all stocks that passed our market cap screening to obtain the historic pricing data since the start of 2016. Finally, I will drop any rows that may contain NA values. After filtering through the NASDAQ, there are 282 stocks remaining that meet our criteria. I'll also need to get all of the quarterly earnings dates for each stock during our specified time period. I will web scrape the data from a reputable source online in order for me to get accurate historic earnings data for each stock. I am saving \$\$\$ by getting the data this way. Let’s look at the results through a variety of different visualizations, starting with a Lollipop chart to illustrate the top performing sectors by overall total returns.
 
 
 ###Top Sectors
@@ -67,9 +67,10 @@ print(x, n=100)
 
 ![](/img/Healthcare_rtrns.png)
 
-
-#Top Stocks
 <br>
+
+###Top Stocks
+
 Now, let’s take a look at the Top 40 performing stocks by total return using the same Lollipop chart. Do you notice any of the big names, like Amazon or Apple? I'll also print a table showing the top 100 stocks by overall total return, number of trades, and the sector it is in.
 
 ![](/img/TOP40STCKSRTRN_LOLIPOP_NDQ1.png)
@@ -85,7 +86,7 @@ print(y, n=100)
 
 <br>
 
-###Average Gains / Losses for each Stock Traded
+###Average Gains / Losses for Each Stock Traded
 
 We have over 280+ stocks with each earnings trade since 2016. It would not be a good-looking chart if we threw all of those on one axis, or even over a layer of different grids. I think a diverging bar graph would suit this nicely. We can put 100 stocks on a graph and easily see the average gains and losses for each stock. We will start from the last ranked stocks by return and work our way down, so the first chart shows the top 183-282 stocks by return, and their respective gains and losses. 
 
@@ -97,7 +98,7 @@ We have over 280+ stocks with each earnings trade since 2016. It would not be a 
 
 <br>
 
-#Cumulative Changes in each Stock Traded
+###Cumulative Changes in Each Stock Traded
 
 Now, we can create a few grids to illustrate the cumulative change for the total capital over the backtesting period if we were to allocate \$1000 DOLLARS into each stock. If the bullet is GREEN, then that means we are at a profit and above our initial capital of \$1000 DOLLARS, and if it's RED then it means we are at a loss. Let us look at the top 126 stocks by return over three different grids. 
 
@@ -199,7 +200,7 @@ As we can see, the total return from the start 2016 to Friday 3/8/2019 for the e
 
 <br> 
 
-###Quick look
+###Quick Look - Correlation Among Returns
 
 Something interesting I thought I could look at was the correlation between the average earning returns for each stock. I’d like to see if any strong correlations above +/- 0.8 exist. If so then that can be something to help us decide which stocks to choose when initiating this simple earnings strategy. We will also do the same for the top 35 stocks. 
 
