@@ -8,7 +8,7 @@ coverSize: partial
 thumbnailImagePosition: left
 categories: ["Data Analysis", "Market", "Yield Curve"]
 tags: ["Interest Rates", "Inverted Yield Curve", "Banks"]
-
+summary: "I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations. These two interest rates are part of the larger yield curve that generally trends higher along the x-axis of a graph, while an “inverted” curve trends lower along the x-axis. Let's take a look at the yield curve over five different time frames since the start of 2018 and which of these yields recently inverted."
 ---
 
 ```{r Load libraries, message=FALSE, warning=FALSE, include=FALSE}
@@ -42,7 +42,7 @@ if("gridExtra" %in% rownames(installed.packages()) == FALSE){
 
 
 #Yield Curve Inversion
-I've always followed bank stocks ever since I first began investing almost 6 years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I began to track the daily fluctuations. These two interest rates are part of the larger yield curve that generally trends higher along the x-axis of a graph, while a "inverted" curve trends lower along the x-axis. The yield curve is widely spoken about so I will not get into too much detail but due to the inversion that first occurred earlier this month (December 3rd 2018), it is once again very popular in mainstream media. I've had this code that I wrote, posted and updated to github a few months back, and I use daily to view and analyze the daily movements. I've decided to make a quick post to visualize the yield curve over five different time frames since the start of 2018 and to look at how many times and when specific yields inverted.
+I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations. These two interest rates are part of the larger yield curve that generally trends higher along the x-axis of a graph, while an “inverted” curve trends lower along the x-axis. The yield curve is widely spoken about so I will not get into too much detail but due to the inversion that first occurred earlier this month (December 3rd 2018), it is once again very popular in mainstream media. I've had this code that I wrote, posted and updated to github a few months back, and I use daily to view and analyze the daily movements. I've decided to make a quick post to visualize the yield curve over five different time frames since the start of 2018 and to look at how many times and when specific yields inverted.
 
 #Why it matters - Quick Summary
 The yield curve matters because it can be a sentiment driver on the overall economy to many. Investors view any inversions in the yield curve as a sign that the economy may be heading into a recession. This is because an inversion happens when a shorter-term treasury note demands more yield than a longer-term note. You usually demand more for longer-term lending since you are incurring greater opportunity costs of the longer repayment schedules. Once lenders demand more interest for shorter-term notes, this can be a sign that they are not as confident in short-term notes due to a possible economic slowdown. Most investors want to be the first out the door in most companies if a economic slowdown was to actually come. 
@@ -55,14 +55,12 @@ I am using a package called "ustyc" that web scrapes US treasury yield curve dat
 #yr <- 1990:2017
 #my_yc <- map(yr, getYieldCurve) %>% map(2) %>% do.call("rbind", .)
 #write.csv(my_yc, "yc_19902017.csv")
-setwd("/Users/jagvill/Desktop/R/Personal")
-my_yc <- read.csv("yc_19902017.csv", stringsAsFactors = F)
+my_yc <- read.csv("/Users/jagvill/Desktop/R/Personal/Yield_Curve/yc_19902017.csv", stringsAsFactors = F)
 
 
 #yc18 <- getYieldCurve("2018")[[2]]
 #write.csv(yc18, "yc_2018.csv")
-yc18 <- read.csv("yc_2018.csv", stringsAsFactors = F) 
-setwd("/Users/jagvill/Desktop/Github/blogdown_source/content/post")
+yc18 <- read.csv("/Users/jagvill/Desktop/R/Personal/Yield_Curve/yc_2018.csv", stringsAsFactors = F) 
 my_yc <- rbind(my_yc,yc18)
 
 

@@ -1,7 +1,7 @@
 ---
 title: Salesforce Q3 Update
 author: Jagger Villalobos
-date: '2019-01-03'
+date: '2019-01-04'
 slug: salesforce-q3-update
 coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1546623541/salesforce-logo-sign.jpg
 coverSize: partial
@@ -20,6 +20,7 @@ tags:
 output: 
   html_document:
    df_print: paged
+summary: "Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results. This provides concrete evidence to investors that management’s long-term forecasts of FY22 revenue are likely to be met. Not only did the company confirm its FY22 goals, but they gave more detail on expectations for FY20 that indicates a 20-21% revenue growth rate which is above expectations of 19% YoY."
 ---
 
 
@@ -33,7 +34,7 @@ output:
 
 <br>
 
-Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results. This provides concrete evidence to investors that management's long-term forecasts of FY22 revenue will likely be met. Not only did the company confirm its FY22 goals, but they gave more detail on expectations for FY20 that indicates a 20-21% revenue growth rate which is above expectations of 19% YoY. In my previous valuation for Salesforce, I was a bit conservative regarding the forecasts that executives continued to tout in previous earnings calls and investor presentations. I was not doubting the guidance management was laying out, but I was a bit worried about competition from its peer's such as Workday (WDAY), Adobe (ADBE), Oracle (ORCL), ServiceNow (NOW), Microsoft (MSFT) and others. The guidance on the most recent quarter has taken care of any doubts I previously had, so I took off some constraints to my estimates.  
+Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results. This provides concrete evidence to investors that management’s long-term forecasts of FY22 revenue are likely to be met. Not only did the company confirm its FY22 goals, but they gave more detail on expectations for FY20 that indicates a 20-21% revenue growth rate which is above expectations of 19% YoY. In my previous valuation for Salesforce, I was a bit conservative regarding the forecasts that executives continued to tout in previous earnings calls and investor presentations. I was not doubting the guidance management was laying out, but I was a bit worried about competition from its peer's such as Workday (WDAY), Adobe (ADBE), Oracle (ORCL), ServiceNow (NOW), Microsoft (MSFT) and others. The guidance on the most recent quarter has taken care of any doubts I previously had, so I took off some constraints to my estimates.  
 
 
 #CRM Segment & CEO Marc Benioff 

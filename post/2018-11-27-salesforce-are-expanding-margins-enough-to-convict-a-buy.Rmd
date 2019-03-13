@@ -8,6 +8,7 @@ coverSize: partial
 thumbnailImagePosition: left
 categories: ["Equity Valuation","Forecasting", "Valuations"]
 tags: ["CRM", "Cloud", "DCF", "WACC", "Comparable Analysis", "Recommendations"]
+summary: "Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig into Salesforce specifically, let’s explore what exactly CRM is and the growth prospects. I want to cover some important factors that can affect Salesforce future cash flows instead of specific steps and calculations."
 ---
 
 
@@ -19,7 +20,7 @@ tags: ["CRM", "Cloud", "DCF", "WACC", "Comparable Analysis", "Recommendations"]
 <br>
 
 ###Customer Relationship Management Pioneer
-  Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig in to Salesforce specifically, let’s explore what exactly CRM is and the growth prospects. I love getting into detail, but I will try my best not to go too far into it. I just want to go over important factors that can affect Salesforce future cash flows instead of specific steps and calculations.
+  Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig in to Salesforce specifically, let’s explore what exactly CRM is and the growth prospects. I love getting into detail, but I will try my best not to go too far into it. I want to cover some important factors that can affect Salesforce future cash flows instead of specific steps and calculations.
 
 <br>
 

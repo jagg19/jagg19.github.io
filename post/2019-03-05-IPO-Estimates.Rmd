@@ -18,6 +18,7 @@ tags:
 output: 
   html_document:
    df_print: paged
+summary: "Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31. As of 3/4/2019, the markets have had 11 companies raise a total of $1.2 Billion which has a long way to go if it wants to beat the prior year amount. As one of the most anticipated IPO to hit the markets in 2019, LYFT filed its S-1 IPO filing on 3/1/2019 showing its massive loss of nearly $1 Billion."
 ---
 
 #IPO Estimate & Review

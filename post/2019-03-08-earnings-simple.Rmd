@@ -20,6 +20,7 @@ tags:
 output: 
   html_document:
    df_print: paged
+summary: "You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions. I'm going to integrate the two to talk about the performance of a simple earnings trade strategy across the NASDAQ and how it compares against a basket of popular stocks."
 ---
 
 
