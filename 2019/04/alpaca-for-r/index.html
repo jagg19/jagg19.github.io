@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.51 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Jagger Villalobos">
+<meta name="keywords" content="">
+<meta name="description" content="AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.">
+
+
+<meta property="og:description" content="AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AlpacaforR">
+<meta name="twitter:title" content="AlpacaforR">
+<meta property="og:url" content="/2019/04/alpaca-for-r/">
+<meta property="twitter:url" content="/2019/04/alpaca-for-r/">
+<meta property="og:site_name" content="Running on R">
+<meta property="og:description" content="AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.">
+<meta name="twitter:description" content="AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-04-15T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-04-15T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="R Package">
+    
+      <meta property="article:section" content="Earnings">
+    
+      <meta property="article:section" content="Backtest">
+    
+      <meta property="article:section" content="Programming">
+    
+      <meta property="article:section" content="Trading">
+    
+  
+  
+    
+      <meta property="article:tag" content="Algo">
+    
+      <meta property="article:tag" content="Alpaca">
+    
+      <meta property="article:tag" content="NASDAQ">
+    
+      <meta property="article:tag" content="NYSE">
+    
+      <meta property="article:tag" content="Quarterly Results">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1555345721/201811_paper-trading.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1555345721/201811_paper-trading.png">
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+
+
+    <title>AlpacaforR</title>
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="/2019/04/alpaca-for-r/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-134862415-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Running on R</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
+        
+          <h5 class="sidebar-profile-bio">Bottom-Up Analysis | Equity Research</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/jagg19">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              post-header-cover--partial"
+       style="background-image:url('https://res.cloudinary.com/dyackvnwm/image/upload/v1555345721/201811_paper-trading.png')"
+       data-behavior="4">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      AlpacaforR
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-04-15T00:00:00Z">
+        
+  April 15, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/r-package">R Package</a>, 
+    
+      <a class="category-link" href="/categories/earnings">Earnings</a>, 
+    
+      <a class="category-link" href="/categories/backtest">Backtest</a>, 
+    
+      <a class="category-link" href="/categories/programming">Programming</a>, 
+    
+      <a class="category-link" href="/categories/trading">Trading</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="4"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+
+<div id="alpacaforr" class="section level1">
+<h1>AlpacaforR</h1>
+<ul>
+<li>What is Alpaca and AlpacaforR</li>
+<li>Some Example Functions</li>
+<li>Implementing the Earnings Strategy</li>
+<li>Some Bonus Example Functions - Live Account Users</li>
+<li>Learn more about <a href="https://docs.alpaca.markets/about-us/">Alpaca</a> and <a href="https://github.com/jagg19/AlpacaforR">AlpacaforR Github</a></li>
+</ul>
+<p><br></p>
+<p>After writing my recent post <a href="https://jagg19.github.io/2019/03/backtest-simple-earnings/">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</a>, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R. I wanted to find an easy to use package or brokerage account that could allow me to implement live trades using only R. From my experience, R is a great tool to use for backtesting with packages like quantstrat offering a fast and powerful backtesting platform, but fails for live trade implementation. I think this might be due to a low number of exchanges that offer real-time and easy-to-use free API connection. I almost came to the conclusion that I would need to use other languages other than R to find a easy way to implement my earnings strategy until I found an online brokerage called Alpaca. Alpaca offers commission free trades through their free-to-use real-time API. Using a few R functions from the httr and jsonlite packages, I was able to create a package / SDK to fully interact with Alpacas API, called AlpacaforR.</p>
+<p>AlpacaforR allows you to interact with everything Alpaca offers to its users, including access to some of Polygons API if you have a live brokerage account. I want to focus on how to use AlpacaforR, by using it to implement the earnings strategy from my last post. If you want to learn more about Alpaca and information on their Web API, then you should visit <a href="https://docs.alpaca.markets/api-documentation/web-api/">here.</a> You can also go to visit their <a href="https://docs.alpaca.markets/api-documentation/api-v2/">how-to-code-examples</a> page for examples using JavaScript or Python. Since they currently do not offer any SDK’s for R, and since AlpacaforR is new and in its early development stage, you will not find any documentation on how to use it other than here and the <a href="https://github.com/jagg19/AlpacaforR">AlpacaforR Github</a>.</p>
+<p><br></p>
+<div id="downloading-and-setting-up-alpacaforr" class="section level3">
+<h3>Downloading and Setting Up AlpacaforR</h3>
+<p>I will start off by of course downloading the package. To do this, I will need to have the ‘devtools’ package installed. I have it installed but I want to cover all of the steps here.</p>
+<pre class="r"><code>install.packages(&quot;devtools&quot;)
+library(devtools)</code></pre>
+<p>Great, now we are able to download packages right off of github. We can do that easily by running the below.</p>
+<pre class="r"><code>install_github(&quot;jagg19/AlpacaforR&quot;)
+library(AlpacaforR)</code></pre>
+<p>The next thing to do is very important and <strong>MUST</strong> not be skipped. This is when I set my Alpaca API Key ID and Secret Key in the R environment. This is the heart to the API connection as you cannot use any endpoints if your not properly authorized. It must match the proper header name when being sent in the HTTP request so we have to make sure we name and store these properly before moving forward. We can make sure this is permanent each time we open a R session by storing it in a .Renviron file, or we can set it manually each time we start a new R session by using the ‘Sys.setenv’ function. The below are examples of setting it manually, but I recommend storing these in your .Renviron file so these do not need to be loaded in every time we open a new R session.</p>
+<p><br></p>
+<div id="setting-api-secret-keys-to-environment" class="section level4">
+<h4>Setting API &amp; Secret Keys to Environment</h4>
+<pre class="r"><code>Sys.setenv(&#39;APCA-API-KEY-ID&#39; = VALUE)
+Sys.setenv(&#39;APCA-API-SECRET-KEY&#39; = VALUE)</code></pre>
+<p>These have to be the names of your keys. Please do not forget to set these, or you will not be able to use connect with Alpaca’s API properly. You can make sure that these have been set properly by calling Sys.getenv(‘APCA-API-KEY-ID’) and Sys.getenv(‘APCA-API-KEY-ID’) which the output should match your keys.</p>
+<p><br></p>
+</div>
+<div id="what-about-my-url" class="section level4">
+<h4>What About my URL?</h4>
+<p>One last thing that is required when interacting with Alpacas API is your URL. These will differ according to account type, but AlpacaforR will find the URL for you as long as you specify when your using a live account by setting ‘live = TRUE’ for functions such as ‘submit_order’. This also acts as a “confirmation” before sending orders to your live account. Not all functions require this since some functions use the same URL regardless of the account type. The functions that don’t require the live argument are <code>get_assets</code>, <code>get_calendar</code> , <code>get_clock</code>, and <code>get_bars</code> since the same URL is used for each account type.</p>
+<p><br></p>
+</div>
+</div>
+<div id="using-alpacaforr" class="section level3">
+<h3>Using AlpacaforR</h3>
+<p>Now for the fun stuff. I am using a Paper account for the examples below, but by setting live = TRUE we can use a live brokerage account as well. The first thing I will want to do is to get my account to ensure that I have connected correctly. We can see account details such as account id, portfolio value, buying power, cash, cash withdrawable, and etc. Below I will call get_account() to see these details.</p>
+<p><br></p>
+<div id="getting-your-account" class="section level4">
+<h4>Getting Your Account</h4>
+<pre class="r"><code>#If paper account: 
+get_account()
+
+#If live account:
+get_account(live = TRUE)</code></pre>
+<div class="figure">
+<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555349014/Screen_Shot_2019-04-15_at_1.21.01_PM.png" />
+
+</div>
+<p>Awesome, it looks like I have connected my correct account (for this example I will connect to my paper account) and I can see the status of my account as ACTIVE. I could look at some of the account details like available funds for trading, but I am ready to begin! Although, I cant remember if had any open positions at the moment so I want to check if that is the case.</p>
+<p><br></p>
+</div>
+<div id="getting-current-positions" class="section level4">
+<h4>Getting Current Positions</h4>
+<pre class="r"><code>#If paper account:
+get_positions()
+
+#If live account:
+get_positions(live = TRUE)</code></pre>
+<p>Since I do not have any open positions, I’ll receive a message that states “No positions are open at this time” but lets change that. First, I want to bring up the price of SPY to see how the day finished for the overall market and I want to check out the prices for the last month on my favorite stock, GE (lol JK). We can easily so that by using the ‘get_bars’ function and setting the appropriate arguments like below.</p>
+<p><br></p>
+</div>
+<div id="getting-price-bars" class="section level4">
+<h4>Getting Price Bars</h4>
+<pre class="r"><code>#Todays date
+today = Sys.Date()
+get_bars(ticker = &quot;SPY&quot;, from = today)
+
+#Getting the last month of daily prices for Amazon
+get_bars(ticker = &quot;GE&quot;, timeframe = &quot;day&quot;, from = Sys.Date()-30, to = today)</code></pre>
+<p>It looks like the overall market ended slightly up on Friday while GE finished 1.3% lower. I decide I want to submit a limit order for GE at a price a little lower than we are currently at just by a little because I think this might be a good time to buy in. I also plan on trading alot this week, so I want to see what the market calendar looks like. We can do these two things by using ‘get_calendar’ and ‘submit_order’.</p>
+<p><br></p>
+</div>
+<div id="checking-market-calendar" class="section level4">
+<h4>Checking Market Calendar</h4>
+<pre class="r"><code>#Getting specific dates using date ranges
+get_calendar(from = &quot;2019-04-15&quot;, to = &quot;2019-04-20&quot;)</code></pre>
+<div class="figure">
+<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555348631/Screen_Shot_2019-04-15_at_1.17.02_PM.png" />
+
+</div>
+<p>Hmm, anything off? I entered the dates for Monday - Friday but only four days were returned. Thankfully we checked the market calendar because it shows that the market will not be open on Friday 4/19/2019.</p>
+<p><br></p>
+</div>
+<div id="submitting-orders-to-alpaca" class="section level4">
+<h4>Submitting Orders to Alpaca</h4>
+<pre class="r"><code>#A limit order - Paper
+#submit_order(ticker = &quot;GE&quot;, qty = &quot;5&quot;, side = &quot;buy&quot;, type = &quot;limit&quot;, limit_price = &quot;9&quot;)
+
+
+#A limit order - Live
+submit_order(ticker = &quot;GE&quot;, qty = &quot;5&quot;, side = &quot;buy&quot;, type = &quot;limit&quot;, limit_price = &quot;9&quot;, live = TRUE)</code></pre>
+</div>
+<div id="after-submitting-a-order-to-our-live-account.." class="section level4">
+<h4>After submitting a order to our live account..</h4>
+<div class="figure">
+<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/order_submission.png" />
+
+</div>
+<p><br></p>
+<p>Perfect, the order went through just as planned!! I just submitted an order to my Live Alpaca brokerage account from R! Also, the market is open all next week so I can look forward to a week full of excitement! Now I think its time to implement the earnings strategy from my previous post.</p>
+</div>
+</div>
+<div id="implementing-the-earnings-strategy" class="section level3">
+<h3>Implementing the Earnings Strategy</h3>
+<p>As a reminder, the earnings strategy from my previous post was pretty simple to illustrate how a “simple” go-to strategy for someone new to investing would perform against the same strategy but against the entire NASDAQ exchange. This time we will do it against the NASDAQ and the NYSE, but first filter out every company that does not have a market capitalization above $5 Billion. The strategy buys the company at the open one day prior to the report date, and sells it the same day of reporting if the company reports before market open. If the company reports after market close, then the strategy will sell it one day after the report date at the open. This is ran once a day before the market opens to get the pipeline filled with orders which will all trigger at the open.</p>
+<p>This is what it looks like on my end when it runs each day, using the AlpacaforR functions of ‘get_account’, ‘get_bars’, ‘get_positions’, ‘get_calendar’, and ‘submit_order’ to assist and execute with various functions in bringing my strategy script to Alpacas platform. I will run the R Script that contains the strategy in my terminal.</p>
+<div id="ran-on-friday-4122019-before-market-open" class="section level4">
+<h4>Ran on Friday 4/12/2019 Before Market Open</h4>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555350232/Screen_Shot_2019-04-15_at_1.43.23_PM.png" /> <img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555350237/Screen_Shot_2019-04-15_at_1.43.33_PM.png" /></p>
+<p><br></p>
+<p>As we can see, alot of stuff is happening as far as the order flow being sent to Alpaca in R (sorry for the emoji’s inside script lol). If all worked correctly, then you should see a bunch of orders in your pipeline, waiting to trigger at the next market open.</p>
+<p><br></p>
+<div class="figure">
+<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347616/orders_pending.png" />
+
+</div>
+<p><br></p>
+<p>As we see, this was a success! This script was ran last Friday 04/12/2019 before market open. This means that all of the stocks it purchased Friday, should have reported earnings this morning. When we run our script again, the strategy should submit orders to sell those positions and open any new positions for companies that report the following day. Let’s see the result of the output below.</p>
+<p><br></p>
+</div>
+<div id="ran-on-monday-4152019-before-market-open" class="section level4">
+<h4>Ran on Monday 4/15/2019 Before Market Open</h4>
+<div class="figure">
+<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/4.15.earningsrun.png" />
+
+</div>
+<div class="figure">
+<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/4.15.earningsrun2.png" />
+
+</div>
+<div class="figure">
+<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/4.15.earningsrun3.png" />
+
+</div>
+<p><br></p>
+<p>Nice!! Our algo is doing its job while AlpacaforR is working hard behind to scenes to make it possible to effortlessly submit these orders live in R.</p>
+<p><br></p>
+</div>
+</div>
+<div id="polygon-api-support---alpaca-live-brokerage-accounts-only" class="section level3">
+<h3>Polygon API support - Alpaca Live Brokerage Accounts Only</h3>
+<p>If you have a live account, you have access to a few additional functions by using Polygon’s API. One difference between using Polygon data is that it is using consolidated market data. Alpaca defines consolidated market data as;</p>
+<blockquote>
+<p>“Aggregated reporting of all securities exchanges’ and alternative trading venues’ quote and trade data. It is the most relied upon type of market data, providing investors and traders globally with a unified view of U.S. stock market prices and volumes. It also underpins the National Best Bid and Offer (NBBO), which provides investors with a continuous view of the best available displayed buy and sell prices, and through Rule 611 ensures that investors receive the best available displayed prices on their trades, with a few exceptions”.</p>
+</blockquote>
+<p>These functions will start with “get_poly” and “get_meta”. Get meta supplies endpoints such as “news”, “dividends”,“earnings”,“analysts” and “company” to supply other data aside from pricing. Below are examples of “get_poly_agg_quote” and “get_meta” using the news endpoint.</p>
+<p><br></p>
+<div id="get-poly-aggregate-price-data" class="section level4">
+<h4>Get Poly Aggregate Price Data</h4>
+<pre class="r"><code>#Getting default pricing data on AMZN (daily): 
+get_poly_agg_quote(ticker = &quot;AMZN&quot;,from = &quot;2019-04-01&quot;, to = &quot;2019-04-12&quot;)
+
+#Getting minute pricing data on AMZN: 
+get_poly_agg_quote(&quot;AMZN&quot;, from = &quot;2019-04-11&quot;, to = &quot;2019-04-12&quot;, timespan = &quot;minute&quot;)
+
+
+#Getting quarterly pricing data on AMZN: 
+get_poly_agg_quote(&quot;AMZN&quot;, from = &quot;2018-01-01&quot;, to = &quot;2019-04-12&quot;, timespan = &quot;quarter&quot;) 
+
+#Getting yearly pricing data on AMZN: 
+get_poly_agg_quote(&quot;AMZN&quot;, from = &quot;2015-01-01&quot;, to = &quot;2019-12-31&quot;, timespan = &quot;year&quot;)</code></pre>
+<p><br></p>
+</div>
+<div id="daily-timespan" class="section level4">
+<h4>Daily timespan</h4>
+<div class="figure">
+<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347616/daily_poly.png" />
+
+</div>
+</div>
+<div id="minute-timespan" class="section level4">
+<h4>Minute timespan</h4>
+<div class="figure">
+<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/minute_poly.png" />
+
+</div>
+</div>
+<div id="quarterly-timespan" class="section level4">
+<h4>Quarterly timespan</h4>
+<div class="figure">
+<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347616/quarterly_poly.png" />
+
+</div>
+</div>
+<div id="yearly-timespan" class="section level4">
+<h4>Yearly timespan</h4>
+<div class="figure">
+<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/Yearly_poly.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="get-meta-news-endpoint" class="section level4">
+<h4>Get Meta News Endpoint</h4>
+<pre class="r"><code>#Getting the last 100 news articles for AMZN:
+get_meta(ticker = &quot;AMZN&quot;, endpoint = &quot;news&quot;, perpage = &quot;100&quot;)</code></pre>
+<div class="figure">
+<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347458/meta_news_poly.png" />
+
+</div>
+<div id="can-we-say-possible-news-sentiment-algo-the-opportunities-are-endless-with-alpacaforr" class="section level6">
+<h6>Can we say possible news sentiment algo? The opportunities are endless with AlpacaforR :)</h6>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="so-much-more-with-alpacaforr" class="section level3">
+<h3>So much more with AlpacaforR!</h3>
+<p>We have only scratched the surface and its just getting started with AlpacaforR! I’ve connected to our account, checked my positions, checked the prices of individual assets, looked at recent news of that asset, and even submitted orders straight to our Alpaca account. Only a few of the available AlpacaforR functions were covered in this post, but there are many more cool things that you can do interacting with Alpaca’s API. The goal of this post was to hopefully encourage you to checkout Alpaca if your looking for a brokerage account to connect and implement your strategies with, and to also checkout AlpacaforR if you are an R user that is interested in either paper trading real-time quotes or live trading using R. As a reminder, this package / SDK is in its early development stages but can still execute all of its functions in paper or live trading accounts. Feedback as well as advice is very much appreciated from anyone who is interested. If you want to see the rest of AlpacaforR functions then visit <a href="https://github.com/jagg19/AlpacaforR">AlpacaforR Github</a> page and monitor for new updates!</p>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/algo/">Algo</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/alpaca/">Alpaca</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/nasdaq/">NASDAQ</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/nyse/">NYSE</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/quarterly-results/">Quarterly Results</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/03/backtest-simple-earnings/" data-tooltip="Scaling a Simple Earnings Strategy to the NASDAQ Exchange">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/04/alpaca-for-r/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/04/alpaca-for-r/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/04/alpaca-for-r/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Jagger Villalobos. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/03/backtest-simple-earnings/" data-tooltip="Scaling a Simple Earnings Strategy to the NASDAQ Exchange">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/04/alpaca-for-r/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/04/alpaca-for-r/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/04/alpaca-for-r/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F04%2Falpaca-for-r%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F04%2Falpaca-for-r%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F04%2Falpaca-for-r%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jagger Villalobos</h4>
+    
+      <div id="about-card-bio">Bottom-Up Analysis | Equity Research</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Seeking Analyst Position
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        New York, New York
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/alpaca-for-r/">
+                <h3 class="media-heading">AlpacaforR</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
+                <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
+                <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">IPO Estimate &amp; Review  Taking a look at LYFT financials for the first time Review of Dropbox IPO and stock performance  
+ Can the slow IPO market get a lift from LYFT? Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
+                <h3 class="media-heading">Salesforce Q3 Update</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Salesforce Q3 Update  Updated model from previous post, click here to read previous Salesforce post Management raised top and bottom line forecasts for FY19 guidance Management gave more details on FY20 &amp; FY22 goals and confirmed forecasts Near bulletproof business model during economic slowdown Key risks to management goals Recommendation and price targets  
+Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/12/yield-curve-fun/">
+                <h3 class="media-heading">Yield Curve Inversion - Marks End to Bull Market?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Going, Going, Inverted!  Yield Curve inversions are typically a leading indicator for a recession Historic analysis on inversions for specific yields since 1990 Yield Curve over 5 different time frames since the start of 2018 Takeaway from recent inversions   Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/11/salesforce-enough-to-buy/">
+                <h3 class="media-heading">Salesforce, Inc. - Are Expanding Margins Enough to Buy?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Salesforce, Inc.  Leader in the growing CRM market Modestly expanding margins Monetizing existing customer base  
+Customer Relationship Management Pioneer Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig in to Salesforce specifically, let’s explore what exactly CRM is and the growth prospects.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/11/ml-airbnb-prices/">
+                <h3 class="media-heading">Teaching a Machine to Learn NYC Airbnb Prices</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Using Airbnb By now, most Gen Z and millenials have heard of or used Airbnb for a range of many reasons, such as looking for a place to crash or taking a vacation. I believe what won the consumer’s attention over hotels was the fact that you are getting the “homey” setting and privacy while away on vacation instead of a hotel environment. I realize not everyone wants to part ways with room service, benefits of a having full-service bar in the lobby, pool &amp; spas, sometimes a gym, and the 100+ channels, but when comparing the prices and the extra sq.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         7 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2019\/04\/alpaca-for-r\/';
+          
+            this.page.identifier = '\/2019\/04\/alpaca-for-r\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
