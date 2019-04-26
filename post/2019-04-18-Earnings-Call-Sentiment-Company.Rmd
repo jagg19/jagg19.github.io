@@ -1,0 +1,1215 @@
+---
+title: Sentiment Analysis on Earnings Call
+author: Jagger Villalobos
+date: '2019-04-18'
+slug: sentiment-analysis-conf-call
+coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/c_scale,w_325/v1546624528/Slider-Sentiment-468x340.png
+coverSize: partial
+thumbnailImagePosition: left
+categories: ["R", "R Markdown", "Investment", "Text Mining", "Earnings"]
+tags: ["CRM", "Cloud", "Sentiment Analysis", "Conference Call"]
+output: 
+  html_document:
+    df_print: paged
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r Libraries, eval=FALSE, include=FALSE}
+library(rvest)
+library(stringi)
+library(rebus)
+library(qdap)
+library(tm)
+library(tidytext)
+library(ggthemes)
+library(radarchart)
+library(tidyquant)
+library(ggraph)
+library(dendextend)
+library(widyr)
+```
+
+```{r, include=FALSE}
+library(tidyverse)
+library(tidytext)
+```
+
+# Conference Call Text Mining and Sentiment Analysis
+- Executives are very careful with the language they use during a conference call
+- Using sentiment scores to validate future / long-term goals
+- Checking for negation words that can affect score
+- Key takeaways from this analysis
+
+
+
+
+Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done? Are investors staring at twitter 24/7 ready to hit buy or sell? The answer, of course, is no, but algorithms programmed with NLP (natural language processing) scripts are. Sentiment analysis from tweets, social media postings, press releases, surveys, reviews, transcripts and many more occur millions of times every day. Even when you send your resume in to apply for a job, most likely your resume is being read through an ATS system which analyzes the text to find matching keywords. I've had this earnings scentiment script locked away in my useful financial scripts vault, and after reading a Stanford research paper titled ["Forecasting Returns Using Earnings Call Transcripts"](http://stanford.edu/class/msande448/2017/Final/Reports/gr1.pdf) it inspired me to build upon my current script and create a post about earnings call sentiment. In part 1, I will review sentiment analysis in R and some of the basic terms for it, while in part 2 I will build a model to help us predict if the earnings call warrants a buy for the stock. 
+
+
+I find it very interesting how during a conference call, the stock price fluctuates and can change at any second due to one, two or three said words. The company can beat top and bottom line estimates, but if the CEO guides in-line due to “future headwinds” then the stock price can plummet. I decided to build a model that can analyze the conference call transcript using multiple methods to get an overall view of the management and analysts sentiments throughout the call. I first used the very simple method of word frequency analysis, then I used a variety of lexicons for sentiment analysis to arrive at overall sentiment scores, adjusted the lexicons to fit our criteria, analyzed possible negation words, and use network graphs to visualize relationships between the text.
+
+
+# Getting the Data
+I will web scrape the transcript from seeking alpha and clean the empty spaces from the data. Then, I can begin the tedious part which is extracting the key text using REGEX and putting it together into a data frame. For example, I'd like to extract all executive and analyst names so I can label who is speaking to get separate sentiments for management and analysts. I can do this by creating a regular expression pattern. Regular expression is a pattern matching tool that makes up a sequence of symbols to search and extract pattern in the text. If new to REGEX, it can look like nonsense but it is very powerful to sort through and filter textual data. As an example, look at the REGEX code below that I found off google that searches for simple email addresses;
+
+>[a-zA-Z0-9_.+-]+@[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_.-]+
+
+Mine wont be this extensive but REGEX is not as easy to read at first. Luckily, R has a package called "Rebus" that makes it a bit easier which I will show shortly. 
+
+```{r Getting the Data, eval=FALSE}
+
+#Create empty sentiment dataframe that we will build for each lexicon
+sentiment_df <- tibble(Ticker=NA,Earnings_date=NA,Positive=NA,Negative=NA,Total_words=NA,Score=NA,Sentiment=NA, Lexicon=NA)
+
+#Company Info
+company_name <- "salesforce"
+ticker <- "CRM"
+
+#Transcript URLs
+q1 <- "https://seekingalpha.com/article/4177957-salesforce-com-inc-crm-ceo-marc-benioff-q1-2019-results-earnings-call-transcript?part=single"
+
+
+q4 <- "https://seekingalpha.com/article/4246320-salesforce-com-inc-crm-ceo-marc-benioff-q4-2019-results-earnings-call-transcript?part=single"
+
+
+#Requesting html
+html1 <- read_html(q4)
+
+#Reading the body of the html, and converting it to a readable text format
+transcript_text <- html_text(html_nodes(html1, "#a-body"))
+
+#Seperating the text by new line characters in html code
+transcript_text <- strsplit(transcript_text, "\n") %>% unlist()
+
+
+#Remove empty lines
+transcript_text <- transcript_text[!stri_isempty(transcript_text)]
+
+#Getting the earnings date
+earnings_date <- html_text(html_nodes(html1, "time")) %>% paste0(collapse = "")
+```
+
+
+Below is the REGEX code to extract the names of executives and analysts in the transcript. We can do this by matching the text to a common format found in transcripts. The transcripts start out by listing the conference call participants, and the lines containing the names always use either "-" or "–" as separators for NAME - TITLE.  
+
+If REGEX is too daunting for you, then R provides a package called "Rebus" that makes using REGEX as easy as using words to represent patterns. For example, the first the block of code below, and notice how it uses words like "upper, one_or_more, SPC, WRD, capture" instead of the REGEX syntax "[[:upper:]][\\w]+ ". 
+
+# Splitting the text into sections for analysis 
+```{r Splitting the data into sections,eval=FALSE}
+
+#Create pattern to grab relevant names such as Analyst and Executives. Using this and REGEX to show difference
+pattern1 <- capture(upper() %R% one_or_more(WRD) %R% SPC %R%
+  upper() %R% one_or_more(WRD)) %R% " - " %R% capture(one_or_more(WRD) %R%
+  optional(char_class("- ,")) %R% zero_or_more(WRD %R% SPC %R% WRD %R% "-" %R% WRD))
+
+
+#Grab just the executive names 
+
+#Give the names all common seperators
+transcript_text <- gsub("–","-",transcript_text)
+
+#REGEX pattern to search for the starting index containing executive names. Finds something like "Mark Benioff - CEO"
+idx_e <- min(which(str_detect(transcript_text, "[[:upper:]][\\w]+ -")))
+
+#Dropping everything before the start of Executive names, and resetting the index back to 1
+transcript_text <- transcript_text[idx_e:length(transcript_text)]
+
+idx_e <- 1
+
+#Repeating to find the starting index containing the analyst names
+idx_a <- min(which(!str_detect(transcript_text, "[[:upper:]][\\w]+ -")))
+
+
+#Executive names will start from the starting index to 1 row before the analysts starting index. We will use the pattern we created to extract all names from our resulting vectors
+exec <- transcript_text[idx_e:(idx_a-1)]
+exec <- str_match(exec, pattern1)
+exec <- exec[1:nrow(exec),2]
+
+
+#Repeat for the Analyst names. The ending index for the analyst names is the row before the opening remarks
+idx_o <- min(which(!str_detect(transcript_text, "[[:upper:]][\\w]+ -"))[-1]) - 1
+analyst <- transcript_text[(idx_a+1):idx_o]
+analyst <- str_match(analyst, pattern1)
+analyst <- analyst[1:nrow(analyst),2]
+
+
+
+#Save just the transcript text. Skip straight to the operators opening remarks
+transcript_text <- transcript_text[(idx_o +1) : length(transcript_text)]
+
+
+
+#Splitting up the call between management on the conf_call and the Q&A session
+
+#Start with Conf_call section and find the start of the Q&A
+idx_c <- min(which(str_detect(transcript_text, paste(exec,collapse = "$|"))))
+idx_q <- which(str_detect(transcript_text, "Question-and-Answer")) - 1
+conf_call <- transcript_text[idx_c:idx_q]
+
+
+#Now for the QNA section
+idx_q <- which(str_detect(transcript_text, "Question-and-Answer")) + 1
+qna <- transcript_text[idx_q:length(transcript_text)]
+
+
+
+#Get locations of the names so we can label the text in order
+conf_location_exec <- str_which(conf_call, paste(exec,collapse = "$|^"))
+exec_names_conf <- conf_call[conf_location_exec]
+
+
+#Get locations of the names so we can label the text in order
+qna_location_analysts <- str_which(qna, paste(analyst, collapse = "$|^"))
+qna_location_exec <- str_which(qna, paste(exec, collapse = "$|^"))
+
+
+#Create tibble then combine and arrange by row id to keep the correct order
+analyst_names_qna <- tibble(name = qna[qna_location_analysts], id = qna_location_analysts)
+exec_names_qna <- tibble(name = qna[qna_location_exec], id = qna_location_exec)
+all_names_qna <- bind_rows(analyst_names_qna, exec_names_qna) %>% arrange(id)
+```
+
+
+After extracting the information I need, the earnings transcript is then broken up into two parts. The first part is the first half of the call when the management announces results; then the second part is the question and answer session of the call which is labeled by who is asking and answering the question. After creating the above name vectors, I created two data frames for each part of the call. The first data frame is "conf_call" and the second is "qna_full". This will help give additional visualization once we start getting sentiment scores. Take a look at the data frames below.
+
+
+```{r eval=FALSE, include=FALSE}
+#To bind strings together for one question
+for(i in 1:length(conf_location_exec)){
+z <- str_which(conf_call, paste(exec,collapse = "$|^"))
+if(length(z) > 1){
+  ifelse(i == 1, 
+        conf_call <- c(paste(conf_call[(z[1]+1):(z[2]-1)], collapse = ""),conf_call[z[2]:length(conf_call)]), 
+        conf_call <- c(conf_call[1:(z[1]-1)],paste(conf_call[(z[1]+1):(z[2]-1)], collapse = ""),conf_call[z[2]:length(conf_call)]))
+  
+  } else conf_call <- c(conf_call[1:(z[1]-1)],paste(conf_call[(z[1]+1):length(conf_call)], collapse = ""))
+}
+
+#Create tibble for Conf_Call with names and text
+conf_call_df <- tibble(names = exec_names_conf, text = conf_call)
+
+#=========================================================================================================================================================
+
+
+#Now for the QNA section
+idx_q <- which(str_detect(transcript_text, "Question-and-Answer")) + 1
+qna <- transcript_text[idx_q:length(transcript_text)]
+
+#Remove operator text from qna
+qna <- qna[-sort(c(str_which(qna, "^Operator$"), str_which(qna, "^Operator$") +1))]
+
+#Get locations of the names so we can label the text in order
+analyst_names_loc <- str_which(qna, paste(analyst, collapse = "$|^"))
+exec_names_loc <- str_which(qna, paste(exec, collapse = "$|^"))
+
+#Create tibble then combine and arrange by row id to keep the correct order
+analyst_names_qna <- tibble(name = qna[analyst_names_loc], id = analyst_names_loc)
+exec_names_qna <- tibble(name = qna[exec_names_loc], id = exec_names_loc)
+all_names <- bind_rows(analyst_names_qna, exec_names_qna) %>% arrange(id)
+
+
+#To bind strings together for one response and remove any names that we dont need
+names_loc_qna <- str_which(qna, paste(all_names$name,collapse = "$|^"))
+for(i in 1:length(names_loc_qna)){
+z <- str_which(qna, paste(all_names$name,collapse = "$|^"))
+
+if(length(z) > 1){
+  ifelse(i == 1, 
+        qna <- c(paste(qna[(z[1]+1):(z[2]-1)], collapse = ""),qna[z[2]:length(qna)]), 
+        qna <- c(qna[1:(z[1]-1)],paste(qna[(z[1]+1):(z[2]-1)], collapse = ""),qna[z[2]:length(qna)]))
+  
+  } else qna <- c(qna[1:(z[1]-1)],paste(qna[(z[1]+1):length(qna)], collapse = ""))
+
+}
+
+#Create tibble for QNA with names and text
+qna_full <- tibble(names = all_names$name, text = qna)
+```
+
+
+
+
+```{r include=FALSE}
+#write_csv(conf_call_df, "confcall_df.csv")
+
+conf_call_df <- readr::read_csv("/Users/jagvill/Desktop/Github/Data/earnings_sentiment_pt1/confcall_df.csv",col_types = "cc")
+
+qna_full <- readr::read_csv("/Users/jagvill/Desktop/Github/Data/earnings_sentiment_pt1/qnafull_df.csv",col_types = "cc")
+
+
+```
+
+
+
+
+```{r Viewing data we have}
+
+print(conf_call_df)
+print(qna_full)
+```
+
+
+##### The full view of a part from the **first** QNA question.
+```{r}
+kableExtra::kable(head(qna_full,3)) %>% kableExtra::kable_styling()
+```
+
+
+Using the powerful REGEX language and a little bit of elbow grease, I'm left with a two-column data frame. The first column contains the names of the speaker and the second contains the text. I can proceed to clean and properly analyze the text further. 
+
+
+
+
+# Clean the Text
+Now that I have appropriate sections and names in the data frames, I need to clean it even more for further analysis. Since computers read case sensitive, I need to make all text lower case, replace abbreviations (Sr. -> senior), replace contractions (can't -> cannot), replace numbers (1 -> one), replace ordinal's (1st -> first), and replace symbols (% -> percent). This can be done by creating a custom function using cleaning functions from the "QDAP" package.
+```{r Cleaning Data, eval=FALSE}
+
+#Create function to clean the text
+qdap_clean <- function(x){
+  x <- replace_abbreviation(x)
+  x <- replace_contraction(x)
+  #x <- replace_number(x)
+  x <- replace_ordinal(x)
+  #x <- replace_symbol(x)
+  x<- gsub("[’‘]","",x)
+  x <- tolower(x)
+  return(x)
+}
+
+
+#Clean each of these
+conf_call_df$text <- qdap_clean(conf_call_df$text)
+qna_full$text <- qdap_clean(qna_full$text)
+```
+
+
+
+
+The next step is to create a corpus object, which is an object that separates the text by "documents". Then, the corpus object is converted to a Term-Document Matrix which takes each term (as the row value) from each document (as the column value). Once a TDM is created, I can analyze the text in many different ways, starting with a simple word frequency analysis. First, I'll explain why it is necessary for a little more text cleaning. 
+
+First, all words at the end of the sentence will have the punctuation symbol included as part of the word and will be counted as a separate word (I.E "today vs today."). Also, there are many common words which are called stop words that include "my", "was", "to", "by", etc. so I will remove these using the stopwords lexicon from the "tidytext" package. Last, I can expect to see executive and analyst names many times so these should also be removed for analysis purposes. This can be done by creating a function to clean the text from each document inside the corpus as seen below.
+
+```{r eval=FALSE}
+#Create corpus object
+all_corpus <- c(conf = conf_call_df$text, qna = qna_full$text) %>% VectorSource() %>% VCorpus()
+
+
+#convert our name vectors to lowercase to match and remove from our text
+analyst_lowsplt <- as.character(str_split(tolower(analyst), pattern = " ", simplify = TRUE))
+exec_lowsplt <- as.character(str_split(tolower(exec), pattern = " ", simplify = TRUE))
+
+
+#Clean corpus function - Since it is a earnings call we will hear alot of names that we may want to remove for analysis purposes. (executive names, analyst names, operator)
+clean_corpus <-function(corpus){
+  corpus <- tm_map(corpus, removePunctuation)
+  corpus <- tm_map(corpus, stripWhitespace)
+  corpus <- tm_map(corpus, removeWords, c(stopwords("en"), company_name , analyst_lowsplt, exec_lowsplt))
+  return(corpus)
+}
+
+
+all_corpus_clean <- clean_corpus(all_corpus)
+```
+
+
+## Simple Frequency Count from TDM
+
+After cleaning the text a little more, I am ready to begin my analysis. I'll start with a simple barplot illustrating the Top 20 most frequent words in our text.
+```{r TDM / DTM ,eval=FALSE}
+#Create TDM from our clean corpus
+all_tdm_tf <- TermDocumentMatrix(all_corpus_clean)
+
+
+#Sum the frequency of the tdm word count, sort and plot the top results
+word_freq <- rowSums(as.matrix(all_tdm_tf))
+word_freq <- sort(word_freq, decreasing = TRUE)
+
+#The plots below show both quarters
+barplot(word_freq[1:20], col = "tan", las = 2, main = "Top 20 Frequent Words Q1-19")
+```
+
+
+![](/img/sentiment/Top20_frqnt_q119.png)
+![](/img/sentiment/Top20_frqnt_q419.png)
+
+It looks like there is a common narrative associated with business operations such as "customers" cloud" and "one". I will drop these words out of the text as they don't uncover much. On the bright side, it's a good thing to see that "growth" ranked #14 in the top 20 list for Q4-19. I want to possibly find any associations with specific keywords. Being that "growth" was ranked #14 in our list, I will choose this word to find associations/correlations with. The "tm" package also offers a function called 'findAssocs' that returns a vector that holds matching terms from x and their rounded correlations satisfying the inclusive lower correlation limit of corlimit. See below for the word associations using this function for the word "growth" in both Q1-19 and Q4-19 earnings transcripts.
+
+<br>
+
+```{r eval=FALSE, include=FALSE}
+#Find the terms that occur in each "document" atleast 3 times
+findFreqTerms(all_tdm_tf,lowfreq = 10)
+
+growth_ass <- findAssocs(removeSparseTerms(all_tdm_tf, sparse = 0.96), "growth", 0.60)
+growth_ass[[1]] <- growth_ass[[1]][-grep("[0-9]",names(growth_ass$growth))]
+growth_df <- list_vect2df(growth_ass, col2 = "word", col3="score")
+
+
+
+
+#Plot them!
+growth_ass_plot <- ggplot(growth_df, aes(score, word)) + geom_point(size = 1.5) + labs(x = "Correlation", y = "Terms",title = 'Correlation to Term - "Growth" Q1-19') + scale_x_continuous(limits = c(0.60,.80), breaks = seq(.60,.80,.01)) + ggthemes::theme_economist_white(base_size = 9) + theme(axis.text.x = element_text(angle = 90,vjust = 0.5,size = 7))
+
+
+#revenue_ass_plot <- ggplot(revenue_df, aes(score, word)) + geom_point(size = 1) + labs(x = "Correlation", y = "Terms",title = 'Correlation to Term - "Growth"') + scale_x_continuous(limits = c(0.60,.80), breaks = seq(.60,.80,.01)) + ggthemes::theme_economist_white(base_size = 9) + theme(axis.text.x = element_text(angle = 90,vjust = 0.5,size = 7))
+
+```
+
+![](/img/sentiment/wrd_growth_cor_q119.png)
+
+![](/img/sentiment/wrd_growth_cor_q419.png)
+
+<br>
+
+#Running Sentiment Analysis
+From this point on, I will convert the data frame into a tibble, which is a different form of data frame that is easier to work with. After the tibble object is created, each set of text can be labeled according to if its text from an executive or an analyst.
+```{r eval=FALSE}
+#Create tibble object
+tibble_tidy <- data.frame(doc_id = c(conf_call_df$names,qna_full$names), text = c(conf_call_df$text, qna_full$text)) %>% DataframeSource() %>% VCorpus() %>% tidy() 
+
+
+#Label according to who is speaking
+z <- 0
+for(i in tibble_tidy$id){
+  z <- z+1
+  if(i %in% analyst){
+    tibble_tidy$author[z] <- "analyst"
+  } else tibble_tidy$author[z] <- "management"
+}
+
+
+#Keep only the rows you are interested in
+tibble_tidy <- tibble_tidy[,c("author", "id", "text")]
+
+#Unnest tokens, which converts all text to lowercase, and seperates our text by word
+text_tidy <- tibble_tidy %>% mutate(line_number = 1:nrow(.)) %>% group_by(author) %>% unnest_tokens(word, text) %>% ungroup()
+
+```
+
+
+
+
+
+```{r, include=FALSE}
+#write_csv(tibble_tidy,"tibble_tidy_q1.csv")
+
+
+text_tidy <- readr::read_csv("/Users/jagvill/Desktop/Github/Data/earnings_sentiment_pt1/text_tidy_q1.csv")
+tibble_tidy <- readr::read_csv("/Users/jagvill/Desktop/Github/Data/earnings_sentiment_pt1/tibble_tidy_q1.csv")
+```
+
+
+
+<br>
+
+
+# Bing Lexicon: Scoring Sentiment from -1 to 1 
+Let's view the different levels of sentiment starting with the simple "Bing" lexicon designed by Bing Liu, a distinguished professor at the University of Illinois at Chicago. This lexicon classifies words either negative or positive from a dictionary of 6,788 keywords. Let's take a look at the 10 most frequent bing scored words in the Q1 transcript. First, I want to quickly glance at the words and type of sentiment. Then, I can look at the top 10 most common filtered words that are scored in the text.
+```{r }
+#Bing lexicon
+bing <- tidytext::get_sentiments("bing")
+
+#We want to keep "great" as this is very positive in financial sentiment
+stop_words <- tidytext::stop_words %>% filter(word != "great")
+
+#Create tiddy object that is filtered and scored
+text_tidy_bing <- text_tidy %>% inner_join(bing, by = "word") %>% anti_join(tidytext::stop_words, by = "word")
+
+#Top 10 most frequent bing scored words in our text.
+head(text_tidy_bing %>% count(word, sentiment, sort = TRUE),10)
+```
+
+
+No surprise to see cloud mentioned 50 times being that salesforce business segments operate in the cloud. What's **MOST** surprising is that the Bing dictionary considers this a negative word. Imagine if this slipped by, and "cloud" was labeled a negative contribution to the sentiment! 
+
+
+
+
+# Adjusting the Database
+This can distort the sentiment outlook so I must be careful and look at words that are impacting the score the most. It is worth noting that this dictionary and others, will not always best fit our style of text as we can see. You should always analyze if whether or not it is in the dictionary your most frequent terms are in the dictionary and decide if it needs to be adjusted fit the industry and company that is under analysis. After quickly glancing through the top 50 frequent terms in the transcript, I noticed the term "headwinds" used in various quarters. In finance, headwinds are viewed as a negative term and will need to be adjusted the bing dictionary to score this negative term. We get can a cleaner view of positive vs negative terms once this is done. See below for a plot of the most frequent pos / neg terms used in Q1 & Q4.
+```{r eval=FALSE, include=FALSE}
+bing <- bing %>% filter(word != "cloud")  #Filter out cloud & add headwind as negative
+bing <- rbind(data.frame(word = "headwind", sentiment = "negative", stringsAsFactors = F),bing)
+
+#Now let us see the top terms in each sentiment from a better visualization that shows which are the biggest contributors to positive score in Bing
+top_w_bing <- text_tidy_bing %>% inner_join(bing) %>% count(word, sentiment, sort = TRUE)  %>% top_n(9, wt = n) 
+
+bot_w_bing <- text_tidy_bing %>% inner_join(bing) %>% count(word, sentiment, sort = TRUE) %>% filter(sentiment == "negative") %>%  mutate(n = -n) %>% top_n(-9, wt = n)
+
+
+plot2<-ggplot(full_join(top_w_bing,bot_w_bing), aes(x = reorder(word,n), y = n, fill = sentiment)) + geom_col() + labs(y = "Occurrences", x = "", title = "Most frequent Positive/Negative Terms Q1-19",subtitle="Bing") + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + scale_fill_wsj()
+
+```
+
+
+![](/img/sentiment/frqnt_pos_neg_bing_q119.png)
+![](/img/sentiment/frqnt_pos_neg_bing_q419.png)
+
+
+
+# Analysts vs Management: Bing
+
+Were the analysts more positive than the management? Generally, management is mostly positive and attempts to shed light on any issues they may have. On the other hand, analysts are not as optimistic since it is their job to dig underneath the surface. I want to take a look at the overall positive/negative sentiment from Analysts and Management. Below is the code for Q1-19 plot but the picture is of Q1-19 & Q4-19.
+```{r eval=FALSE}
+#Seperate sentiment by author
+author_sentiment_bing <- text_tidy_bing %>% count(author, sentiment) %>% group_by(author) %>%  mutate(percent = n / sum(n))
+
+
+bingplot_q1 <- ggplot(author_sentiment_bing, aes(author, percent, fill = sentiment)) + geom_col() + theme(axis.text.x = element_text(angle = 0)) + labs(x = "Author", y = "Total Percentage",title = "Makeup of Positive/Negative Sentiment", subtitle="Bing: Q1-19") 
+
+gridExtra::grid.arrange(bingplot_q1,bingplot_q4,nrow=1)
+```
+
+![](/img/sentiment/mkeup_posneg_bing_q1q419.png)
+
+
+# Sentiment Throughout Earnings Call
+Now, I would love to see the sentiment throughout the conference call to see if there are any noticeable dips at any point. This could signal bad news or something that should be looked into further.
+
+Sentiment or polarity is calculated by taking the positive-negative terms and dividing by the total # of positive/negative terms. Earning calls usually start off great due to management boasting any recent achievements, but once analysts begin to ask about future guidance or for more detail, you can see an initial slowdown in sentiment. We can see this below through the different plots of polarity over the course of the call.
+
+```{r eval=FALSE, include=FALSE}
+#Calculate polarity over time of the call
+text_tidy_bingscores <- text_tidy_bing %>% count(line_number, sentiment, author) %>% spread(sentiment, n, fill = 0) %>% mutate(polarity = (positive - negative) / (positive + negative)) %>% mutate(polarity=cumsum(polarity))
+
+#Plot the overall sentiment over the entire lentgth call
+ggplot(text_tidy_bingscores, aes(line_number, polarity)) + geom_smooth(span = .2) + labs(x = "Line Number", y = "Polarity Score",title = "Conference Call Chronological Polarity Q4-19", subtitle="Bing") + theme_gdocs() 
+
+
+
+#Plot the overall polarity for EACH section. This will plot the polarity for the conference call, analysts questions and Management answers through the duration of each.
+ggplot(text_tidy_bingscores, aes(line_number, polarity)) + geom_smooth(span = .3) + labs(x = "Line Number", y = "Polarity Score",title = "Conference Call Polarity Per Section Q4-19",subtitle="Bing") + theme_gdocs() + facet_wrap(~author)
+
+```
+
+
+
+
+![](/img/sentiment/confcall_polarity_full_q119.png)
+![](/img/sentiment/confcall_polarity_full_q419.png)
+![](/img/sentiment/confcall_polarity_full_split_q119.png)
+![](/img/sentiment/confcall_polarity_full_split_q419.png)
+
+
+The above graphs are evidence for a conference call that had a positive sentiment. Later, I will check to see if this is true or not. In some cases, you will see a large dip in the score which could signal a very negative announcement that resulted in bad sentiment. 
+
+
+```{r eval=FALSE, include=FALSE}
+
+#getting the values needed for bing dataframe
+score <- text_tidy_bingscores$polarity[nrow(text_tidy_bingscores)]
+sentiment <- ifelse(score > 15,"positive","negative")
+total_words <- sum(word_count(tibble_tidy$text))
+pos_neg_words <- text_tidy_bing %>% group_by(sentiment) %>% count()
+lexicon <- "bing"
+
+
+#creating sentiment dataframe for bing lexicon
+bing_sentiment_df <- tibble(Ticker=ticker,Earnings_date=earnings_date,Positive=pos_neg_words[pos_neg_words$sentiment == "positive","n"]$n,Negative=pos_neg_words[pos_neg_words$sentiment == "negative","n"]$n,Total_words=total_words,Score=score,Sentiment=sentiment, Lexicon=lexicon)
+
+
+
+#adding to our overall sentiment dataframe
+sentiment_df <- rbind(sentiment_df,bing_sentiment_df)
+
+```
+
+
+
+<br>
+
+
+# Afinn Lexicon: Scoring Sentiment from -5 to 5  
+
+Another lexicon used for sentiment analysis is the Afinn database. Its score has a scale of -5 to 5 based off sentiment for each of the 2,476 keywords. Some keywords hold larger weights with a score of five, while some hold a lighter weight of one. This lexicon was developed by a Danish researcher, Finn Arup Nielsen. 
+```{r}
+#Afinn lexicon
+afinn <- tidytext::get_sentiments("afinn")
+
+#Create tibble for AFINN
+text_tidy_finn <- text_tidy %>% inner_join(afinn, by = "word") %>% anti_join(stop_words, by = "word") %>% mutate(sentiment=ifelse(score < 0, "negative","positive"))
+
+#Of course we need to check for possible adjustments
+head(text_tidy_finn %>% count(word,score, sort = T),100)
+```
+
+There is my favorite keyword, Growth! 
+
+
+
+Let's now view the polarity throughout the conference call.
+```{r, eval=FALSE}
+#Calculate total words per section (or line number)
+total_words_finn <- text_tidy_finn %>% anti_join(stop_words, by = "word") %>% count(line_number,word) %>% group_by(line_number) %>% summarise(total_finn_words=sum(n))
+
+
+#Calculate polarity over time of the call
+afinn_scores <- text_tidy_finn %>% count(line_number,word,score) %>% group_by(line_number) %>% summarise(score = sum(score * n)) %>% inner_join(total_words_finn,by = "line_number") %>% mutate(polarity=cumsum(score/total_finn_words))
+
+
+#Plot the overall polarity over the entire lentgth call
+ggplot(afinn_scores, aes(line_number, polarity)) + geom_smooth(span = 0.2) + labs(x = "Line Number", y = "Polarity Score",title = "Conference Call Chronological Polarity Q4-19",subtitle="AFINN")  + theme_gdocs() 
+
+```
+
+![](/img/sentiment/Confcall_polarity_full_afinn_q119.png)
+![](/img/sentiment/Confcall_polarity_full_afinn_q419.png)
+
+
+When the score is plotted over the entire length of the conference call, the trend shows the same characteristics as the Bing visualization. Just like in the Bing Sentiment chart, the overall sentiment score begins to increase from the start and continues into the end of the earnings call.
+
+
+# Analysts vs Management: Afinn
+
+
+I want to take a look at the overall positive/negative sentiment from Analysts and Management. Below is the code for Q1-19 plot but the picture is of Q1-19 & Q4-19.
+```{r eval=FALSE}
+#Seperate sentiment by author
+author_sentiment_finn <- text_tidy_finn %>% count(author, score) %>% mutate(tot_score=score*n) %>% mutate(type = ifelse(score < 0,"negative", "positive")) %>% group_by(author, type) %>% summarise(tot_word=sum(n)) %>% mutate(percent = tot_word / sum(tot_word)) 
+
+
+
+#Plot each plot side by side
+afinnplot_q1 <- ggplot(author_sentiment_finn, aes(author, percent, fill = type)) + geom_col() + theme(axis.text.x = element_text(angle = 0)) + labs(x = "Author", y = "Total Percentage",title = "Makeup of Positive/Negative Sentiment", subtitle="AFINN: Q1-19") 
+
+
+gridExtra::grid.arrange(afinnplot_q1, afinnplot_q4, nrow = 1)
+```
+
+
+#### Afinn Frequency Stacked Barplot
+
+![](/img/sentiment/Confcall_polarity_full_split_afinn_q1q419.png)
+
+
+This also gives a similar view as the Bing database, but only because we plotted the frequency percentage of pos/neg key terms. I did not take into account the scores for each key term, so when comparing the new sentiment score vs the frequency of each positive/negative term we can see it shows a slightly different story. 
+
+```{r eval=FALSE}
+#Seperate by author sentiments 
+author_sentiment_finn_scored <- text_tidy_finn %>% count(author, score) %>% mutate(tot_score=score*n) %>% mutate(type = ifelse(score < 0,"negative", "positive")) %>% group_by(author, type) %>% summarise(tot_score=sum(tot_score)) %>% mutate(tot_score=ifelse(tot_score<0,tot_score*-1,tot_score*1)) %>% ungroup() %>% group_by(author) %>% mutate(percent = tot_score / sum(tot_score))
+
+
+
+#Plot each plot side by side
+afinnplot_scored_q1 <- ggplot(author_sentiment_finn_scored, aes(author, percent, fill = type)) + geom_col() + theme(axis.text.x = element_text(angle = 0)) + labs(x = "Author", y = "Total Percentage",title = "Makeup of Positive/Negative Sentiment", subtitle="AFINN: Q1-19") 
+
+
+gridExtra::grid.arrange(afinnplot_scored_q1, afinnplot_scored_q4, nrow = 1)
+```
+
+
+#### Afinn Scored Stacked Barplot
+
+![](/img/sentiment/Afinn_scored_q1q4.png)
+
+
+
+Using the new total sentiment score, it shows a slightly different narrative than the frequency graph above. In Q1, the analysts were *slightly* more positive than the management while the scored graph showed a wider difference. In Q4, the analysts were a little more positive than the management but the scored graph shows management having more positive tone in sentiment. This shows that the -5 to 5 scoring scale is effective in scoring some words with a higher weight than others.
+
+
+```{r eval=FALSE, include=FALSE}
+
+#getting the values needed for bing dataframe
+score <- afinn_scores$polarity[nrow(afinn_scores)]
+sentiment <- ifelse(score > 50,"positive","negative")
+pos_neg_words <- text_tidy_finn %>% group_by(sentiment) %>% count()
+lexicon <- "afinn"
+
+
+#creating sentiment dataframe for bing lexicon
+finn_sentiment_df <- tibble(Ticker=ticker,Earnings_date=earnings_date,Positive=pos_neg_words[pos_neg_words$sentiment == "positive","n"]$n,Negative=pos_neg_words[pos_neg_words$sentiment == "negative","n"]$n,Total_words=total_words,Score=score,Sentiment=sentiment, Lexicon=lexicon)
+
+
+
+#adding to our overall sentiment dataframe
+sentiment_df <- rbind(sentiment_df,finn_sentiment_df)
+
+```
+
+
+
+
+<br>
+
+# NRC Lexicon: Sentiment Emotions
+Another form of sentiment analysis can classify the emotion of the speaker by using NRC lexicon. This lexicon scores a distinct emotional class covering Plutchiks Wheel of Emotions. The NRC lexicon, developed by Saif Mohammad and Peter Turney, consists of 13,901 keywords and also includes positive and negative words. Since I've already done positive and negative scoring scales words, we will subset this type of scoring out and only analyze the remaining 8,265 key emotion words. Of course, I need to look at the biggest contributors to the score and if it is appropriate for our text. 
+```{r NRC}
+
+#NRC lexicon
+nrc <- tidytext::get_sentiments("nrc")
+
+nrc_score_tidy <- text_tidy %>% inner_join(nrc, by = "word") %>% anti_join(stop_words, by = "word") 
+
+#Check for possible adjustments
+head(nrc_score_tidy %>% count(word,sentiment, sort = T),100)
+```
+
+
+We can see the sentiment score scale change from integer to a categorical value. Since the executives have more airtime on these calls, they will have more words to count from so we will log the values to normalize the scale. I want to use a radar chart to view the overall emotions of the executives and analysts. Below is the code for creating the Q1 grouped NRC df, but the plots show both Q1 & Q4. I will also show stacked bar charts for comparison.
+
+
+```{r, eval=FALSE, include=FALSE}
+#Only take the emotional sentiments and not "Positive or Negative" since we already looked at that using the BING database. 
+nrc_scores_group <- nrc_score_tidy %>% filter(!grepl("positive|negative", sentiment)) %>% count(author, sentiment) %>% group_by(author) %>% mutate(positive = 100 * n / sum(n))
+
+
+#Plot it on a stacked barchart
+emotionstack_q4<-ggplot(nrc_scores_group, aes(x = author, y = positive, fill = sentiment)) + geom_col() + labs(x = "Section", y = "Total Percentage",title = "Emotional Makeup Q4-19")
+
+gridExtra::grid.arrange(emotionstack_q1,emotionstack_q4,nrow=1)
+
+
+#We can visualize it a bit better by using a multi-dimensional Radar graph. Since management had alot more time to speak, they got alot more words in so we will want to log the scores to get a better visualization of the overall sentiments. This is because when calculating sentiment this way, we use frequency to determine how "trust" worthy he/she seems to be. 
+nrc_scores_group_radar <- nrc_score_tidy %>% filter(!grepl("positive|negative", sentiment)) %>% count(author, sentiment) %>% spread(author,n)
+
+nrc_scores_group_radar[,c(2:3)] <- log(nrc_scores_group_radar[,c(2:3)])
+
+write_csv(nrc_scores_group_radar,"nrc_scores_group_radar_q4.csv")
+#read_csv("nrc_scores_group_radar_q1.csv")
+#Plot radar chart to view NRC scores
+chartJSRadar(nrc_scores_group_radar, main = "Wheel of Emotions Q4-19")
+```
+
+
+
+```{r,include=FALSE}
+nrc_scores_group_radar_q1 <- readr::read_csv("/Users/jagvill/Desktop/Github/data/earnings_sentiment_pt1/nrc_scores_group_radar_q1.csv")
+
+
+nrc_scores_group_radar_q4 <- readr::read_csv("/Users/jagvill/Desktop/Github/data/earnings_sentiment_pt1/nrc_scores_group_radar_q4.csv")
+```
+
+
+```{r,eval=FALSE}
+nrc_scores_group_radar_q1 <- nrc_score_tidy %>% filter(!grepl("positive|negative", sentiment)) %>% count(author, sentiment) %>% spread(author,n)
+```
+```{r Radar}
+
+
+#Plot radar chart to view NRC scores
+radarchart::chartJSRadar(nrc_scores_group_radar_q1, main = "Wheel of Emotions Q1-19")
+
+
+
+#Plot radar chart to view NRC scores
+radarchart::chartJSRadar(nrc_scores_group_radar_q4, main = "Wheel of Emotions Q4-19")
+
+
+```
+
+
+<br>
+
+![](/img/sentiment/Emotional_q1q419.png)
+
+
+
+It looks like *NONE* of the analysts sounded sad in Q1 or Q4! The management had the highest tone of Joy throughout the conference call. Overall, I would say that anticipation and trust seemed to be the overall emotion for the length of the call. I am not a big fan of this lexicon, as the emotions of the analysts or management at the time of call doesn't tell much regarding the long term future of the company.
+
+
+
+```{r eval=FALSE, include=FALSE}
+
+#getting the values needed for bing dataframe
+
+#To get overall positive / negative sentiment for nrc, we will use only sentiments of "positive" and "negative" to classify whether the emotions seem to make sense.
+
+nrc_score_tidy <- nrc_score_tidy %>% filter(grepl("positive|negative", sentiment)) %>% count(sentiment) 
+
+
+score <- (nrc_score_tidy[nrc_score_tidy$sentiment == "positive","n"]$n - nrc_score_tidy[nrc_score_tidy$sentiment == "negative","n"]$n) / (nrc_score_tidy[nrc_score_tidy$sentiment == "positive","n"]$n + nrc_score_tidy[nrc_score_tidy$sentiment == "negative","n"]$n)
+
+
+sentiment <- ifelse(score > 0.80,"positive","negative")
+pos_neg_words <- nrc_score_tidy
+lexicon <- "nrc"
+
+
+#creating sentiment dataframe for bing lexicon
+nrc_sentiment_df <- tibble(Ticker=ticker,Earnings_date=earnings_date,Positive=pos_neg_words[pos_neg_words$sentiment == "positive","n"]$n,Negative=pos_neg_words[pos_neg_words$sentiment == "negative","n"]$n,Total_words=total_words,Score=score,Sentiment=sentiment, Lexicon=lexicon)
+
+
+
+#adding to our overall sentiment dataframe
+sentiment_df <- rbind(sentiment_df,nrc_sentiment_df)
+
+```
+
+
+
+
+
+<br>
+
+
+
+# The Famous Loughran & Mcdonald Lexicon
+
+This lexicon contains 2702 key terms that relate to business operations. This lexicon is a list of positive, negative and uncertainty words according to the Loughran-McDonald finance-specific dictionary. This dictionary was first presented in the Journal of Finance and has been widely used in the finance domain ever since. In the "lexicon" package, we can load this lexicon which classifies "uncertainty" words as negative values. We could also use the "SentimentAnalysis" package that supplies only the words of the lexicon. I want to first view the Top 10 most frequent scored keywords.
+
+
+```{r}
+#Loughran & Mcdonald lexicon
+loughran_mcdonald <- lexicon::hash_sentiment_loughran_mcdonald
+
+
+#Create tiddy object that is filtered and scored
+text_tidy_hash_sentiment_loughran_mcdonald <- text_tidy %>% inner_join(loughran_mcdonald, by = c("word" = "x")) %>% anti_join(stop_words, by = "word")
+
+
+#Top 10 most frequent loughran_mcdonald scored words in our text.
+head(text_tidy_hash_sentiment_loughran_mcdonald %>% count(word, y, sort = TRUE),10)
+```
+
+Great! These type of keywords are more business oriented which is a great fit for conference call analysis. One thing that is not a great fit is the negative score placed on the word "question" which I will need to adjust.  
+
+After adjusting, I want to illustrate the top positive/negative scored terms.
+
+
+```{r, eval=FALSE,include=FALSE}
+#Adjustments
+
+hash_sentiment_loughran_mcdonald <- rbind(data.frame(x = "headwind", y = "-1", stringsAsFactors = F),hash_sentiment_loughran_mcdonald)
+
+text_tidy_hash_sentiment_loughran_mcdonald <- text_tidy_hash_sentiment_loughran_mcdonald %>% filter(!word %in% "questions" & !word %in% "question")
+
+hash_sentiment_loughran_mcdonald <- rbind(data.frame(x = "tailwind", y = "1", stringsAsFactors = F),hash_sentiment_loughran_mcdonald)
+
+
+
+#Now let us see the top terms in each sentiment from a better visualization that shows which are the biggest contributors to positive score in Bing
+top_hash_sentiment_loughran_mcdonald <- text_tidy %>% inner_join(hash_sentiment_loughran_mcdonald, by = c("word" = "x")) %>% count(word, y, sort = TRUE) %>%  filter(y > 0) %>% top_n(9, wt = n) 
+
+bot_hash_sentiment_loughran_mcdonald <- text_tidy %>% inner_join(hash_sentiment_loughran_mcdonald, by = c("word" = "x")) %>% count(word, y, sort = TRUE) %>% filter(y < 0) %>% filter(!word %in% "questions" & !word %in% "question") %>%  mutate(n = -n) %>% top_n(-9, wt = n)
+
+
+ggplot(full_join(top_hash_sentiment_loughran_mcdonald,bot_hash_sentiment_loughran_mcdonald), aes(x = reorder(word,n), y = n, fill = y)) + geom_col() + labs(y = "Occurrences", x = "", title = "Most frequent Positive/Negative Terms Q1-19",subtitle="Loughran & Mcdonald") + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + ggthemes::scale_fill_wsj()
+
+
+
+loughran_mcdonald_scored <- text_tidy_hash_sentiment_loughran_mcdonald %>% count(line_number,word,y) %>% mutate(score=y*n) %>% mutate(polarity=cumsum(score))
+
+
+
+ggplot(loughran_mcdonald_scored, aes(line_number, polarity)) + geom_smooth(span = 0.2) + labs(x = "Line Number", y = "Polarity Score",title = "Conference Call Chronological Polarity Q1-19",subtitle="Loughran & Mcdonald") + theme_gdocs() 
+
+```
+
+
+![](/img/sentiment/Front_topbtm_loughran_q119.png)
+![](/img/sentiment/Front_topbtm_loughran_q419.png)
+
+
+It looks like this dictionary scores the word "ill" as a negative term which makes sense. During my text cleanup, I changed all of "I'll" to "ill" which is being scored as a negative. You must always pay attention to detail even after you've cleaned your text! I will adjust for this as well and illustrate the polarity score throughout the conference call below. 
+
+<br>
+
+![](/img/sentiment/confcall_polarity_full_loughran_q119.png)
+
+![](/img/sentiment/confcall_polarity_full_loughran_q419.png)
+
+
+
+
+```{r eval=FALSE, include=FALSE}
+
+#getting the values needed for bing dataframe
+
+#To get overall positive / negative sentiment for nrc, we will use only sentiments of "positive" and "negative" to classify whether the emotions seem to make sense.
+
+loughran_score_tidy <- text_tidy_hash_sentiment_loughran_mcdonald %>% mutate(sentiment = ifelse(y < 0,"negative","positive")) %>% count(sentiment)
+
+polarity_score <- loughran_mcdonald_scored$polarity[nrow(loughran_mcdonald_scored)]
+
+
+score <- (loughran_score_tidy[loughran_score_tidy$sentiment == "positive","n"]$n - loughran_score_tidy[loughran_score_tidy$sentiment == "negative","n"]$n) / (loughran_score_tidy[loughran_score_tidy$sentiment == "positive","n"]$n + loughran_score_tidy[loughran_score_tidy$sentiment == "negative","n"]$n)
+
+sentiment <- ifelse(polarity_score > 95,"positive","negative")
+
+#Which is better to use?
+score <- paste(score,polarity_score,sep = ",",collapse = "")
+
+pos_neg_words <- loughran_score_tidy
+lexicon <- "loughran_mcdonald"
+
+#creating sentiment dataframe for bing lexicon
+loughran_sentiment_df <- tibble(Ticker=ticker,Earnings_date=earnings_date,Positive=pos_neg_words[pos_neg_words$sentiment == "positive","n"]$n,Negative=pos_neg_words[pos_neg_words$sentiment == "negative","n"]$n,Total_words=total_words,Score=score,Sentiment=sentiment, Lexicon=lexicon)
+
+
+
+#adding to our overall sentiment dataframe
+sentiment_df <- rbind(sentiment_df,loughran_sentiment_df)
+
+```
+
+
+
+```{r eval=FALSE, warning=FALSE, include=FALSE}
+
+sentiment_df <- drop_na(sentiment_df)
+
+
+
+dates <- unique(sentiment_df$Earnings_date)
+
+dates <- gsub("\\.","",dates)
+
+crct_date <- grep("AM",dates)
+
+dates <- as.Date(dates, "%b %d, %Y")
+
+#Use crct_date index for the date that needs to be corrected due to delay in transcript posting time
+dates[crct_date] <- dates[crct_date]-1
+
+
+dates1 <- c(dates[1]+1,dates[2]-1)
+
+dates2 <- c(dates[2]+1,dates[3]-1)
+
+dates3 <- c(dates[3]+1,dates[4])
+
+getSymbols(ticker)
+
+
+
+#ERROR OCCURS HERE, YOU MUST CREATE THE FULL SENTIMENT DF BEFORE RUNNING THE RETURN CALC.
+rtrn1 <- CRM[dates1]$CRM.Adjusted %>% Return.calculate() %>% as.vector() %>% .[-1]
+rtrn2 <- CRM[dates2]$CRM.Adjusted %>% Return.calculate() %>% as.vector() %>% .[-1]
+rtrn3 <- CRM[dates3]$CRM.Adjusted %>% Return.calculate() %>% as.vector() %>% .[-1]
+
+
+rtrn <- c(rep(rtrn1,4),rep(rtrn2,4),rep(rtrn3,4),rep(NA,4))
+
+sentiment_df <- sentiment_df %>% mutate(fwd_qtr_return=rtrn)
+```
+
+
+```{r include=FALSE}
+#Read in the dataframe so we dont need to loop the above code
+
+sentiment_df <- readr::read_csv("/Users/jagvill/Desktop/Github/Data/crm_q1-q4_19_sentiment.csv")
+```
+
+<br> 
+
+# Overall Lexicon Sentiment Results
+We can see from the final lexicon, that the sentiment throughout the call also shared similar characteristics to the other lexicons. Now that I have visualized all four sentiments from each lexicon, I want to take a look at a data frame with the earnings dates, positive scored words, negative scored words, total words, overall scores, positive/negative sentiment, lexicon, and even the adjusted 3-month forward adjusted returns. This is something I was saving behind the scenes as I analyzed each lexicon.
+```{r}
+print.data.frame(sentiment_df)
+```
+
+
+Looking at whether the score classified the transcript as positive or negative, I can see how accurate the classification was by comparing that to the adjusted 3-month forward return. If the transcript was classified as positive, then loosely speaking, that should translate to positive stock performance going into the following quarter. We can see that the NRC emotion lexicon failed to correctly classify one out of three transcripts while the other lexicons classified all three correctly according to adjusted forward returns. The four NA's are for the current quarter since the full 3-month adjusted return does not exist yet. 
+
+
+
+<br>
+
+
+
+# Tokenization
+
+Tokenization helps to divide the text into individual words. For performing tokenization process, there are many open source tools are available. Tokenization is the process of breaking a stream of textual content up into words, terms, symbols, or some other meaningful elements called tokens. During this post, I've only analyzed single-words that breaks up the text into one-word "tokens". Now, I want to look at a variety of bi-gram and tri-gram tokens, or two-word / three-word phrases. 
+
+
+
+
+### Bi-gram
+
+I can increase the amount of "tokens" or words that we use when building our n-grams, which would result in bi-gram or tri-gram for three-word phrases. Also, I can check for any negation words that may arrive before any of the highest positive words to see if anything needs to be adjusted. This is a bit more sophisticated than a single word analysis. If growth occurs 20x in a text, can I say that it is positive? Not exactly, because what if "slow growth" occurred 15 out of those 20 times. At the end of creating the bi-gram, I can check for negation words before any of our scored keywords.
+```{r eval=FALSE, include=FALSE}
+
+text_tidy_bi <- tibble_tidy %>% mutate(line_number = 1:nrow(.)) %>% group_by(author) %>% unnest_tokens(bigram, text, token = "ngrams", n = 2) %>% ungroup() %>% arrange(line_number)
+
+
+bi_words <- text_tidy_bi %>% separate(bigram, c("word1", "word2"), sep = " ") %>% filter(!word1 %in% stop_words$word & !word2 %in% stop_words$word) %>% mutate(word2 = str_replace_all(string = word2 , pattern = "s"%R%END, "")) %>% unite(bigram, word1, word2, sep = " ")
+
+
+management_words <- bi_words %>% filter(author == "management") %>% count(bigram, sort = TRUE) %>% head(25)
+
+analyst_words <- bi_words %>% filter(author == "analyst") %>% count(bigram, sort = TRUE) %>% head(25)
+
+
+p1 <-  ggplot(management_words, aes(y = n, x = reorder(bigram,n))) + geom_col() + theme(axis.text.x = element_text(angle = 70, hjust = 1, size = 7)) + labs(title = "Bi-gram Frequency",subtitle= "Q4-19: Management")
+
+
+p2 <- analyst_words %>% ggplot(aes(y = n, x = reorder(bigram,n))) + geom_col() + theme(axis.text.x = element_text(angle = 70, hjust = 1, size = 7)) + labs(title = "Bi-gram Frequency",subtitle= "Q4-19: Analysts")
+
+
+gridExtra::grid.arrange(p1, p2, nrow = 1)
+```
+
+
+![](/img/sentiment/Bigram_freq_split_q119.png)
+![](/img/sentiment/Bigram_freq_split_q419.png)
+
+
+
+```{r}
+
+#Create Bi-gram tibble. This creates a row for every bi-gram, or two-word phrase.
+text_tidy_bi <- tibble_tidy %>% mutate(line_number = 1:nrow(.)) %>% group_by(author) %>% unnest_tokens(bigram, text, token = "ngrams", n = 2) %>% ungroup() %>% arrange(line_number)
+
+
+#Seperate the bi-gram column into two column, one for each word. Filter for stop words.
+text_tidy_bi_filtsep <- text_tidy_bi %>% separate(bigram, c("word1", "word2"), sep = " ") %>% filter(!word1 %in% stop_words$word & !word2 %in% stop_words$word) 
+
+
+#Count most common bi-gram associated with groth
+text_tidy_bi_filtsep %>% filter(word2 == "growth" | word2 == "growing" | word1 == "growing" | word1 == "growth" | word2 == "grow" | word1 == "grow") %>% count(word1, word2, sort = TRUE)
+
+```
+
+
+#### Checking for negation words
+
+How often are words preceded by a word like "not" or "no" and is the score conflicting?
+```{r}
+#Seperate the bi-gram column into two columns but do not adjust for stop words to properly search for negation words.
+text_tidy_bi_sep <- text_tidy_bi %>% separate(bigram, c("word1", "word2"), sep = " ") 
+
+#Afinn 
+afinn <- tidytext::get_sentiments("afinn")
+
+#negation words before scored key word
+text_tidy_bi_sep %>% filter(word1 %in% qdapDictionaries::negation.words) %>% inner_join(afinn, by = c(word2 = "word"))
+```
+
+
+Nothing in Q1. One in Q4. Only one negation word occured before any of our scored key words which was "not". The key word was perfectly and this bi-gram occured 3 times. I do not think this needs to be accounted for but we can double check when analyzing "tri-grams". 
+
+
+
+
+
+
+# Tri-gram
+Moving from Bi-gram to Tri-gram, we can expect the same concept as bi-grams but with a little more power. We can now check for 3-word phrases and analyze before and after a scored keyword. 
+
+```{r eval=FALSE, include=FALSE}
+#Create Tri-gram tibble. This creates a row for every tri-gram, or three-word phrase.
+text_tidy_tri <- tibble_tidy %>% mutate(line_number = 1:nrow(.)) %>% group_by(author) %>% unnest_tokens(trigram, text, token = "ngrams", n = 3) %>% ungroup() %>% arrange(line_number)
+
+#Seperate the bi-gram column into two column, one for each word. Filter for stop words.
+tri_words <- text_tidy_tri %>% separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% filter(!word1 %in% stop_words$word & !word2 %in% stop_words$word & !word3 %in% stop_words$word) %>% unite(trigram, word1, word2, word3, sep = " ")
+
+#Count 10 most common tri-gram phrases.
+cnt_triwords <- tri_words %>% count(trigram, sort = TRUE) %>% head(10)
+
+management_triwords <- tri_words %>% filter(author == "management") %>% count(trigram, sort = TRUE) %>% head(25)
+
+analyst_triwords <- tri_words %>% filter(author == "analyst") %>% count(trigram, sort = TRUE) %>% head(25)
+
+
+p3 <- management_triwords %>% ggplot(aes(y = n, x = reorder(trigram,n))) + geom_col() + theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 7)) + labs(title = "Tri-gram Frequency",subtitle= "Q4-19: Management")
+
+
+
+p4 <- analyst_triwords %>% ggplot(aes(y = n, x = reorder(trigram,n))) + geom_col() + theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 7)) + labs(title = "Tri-gram Frequency",subtitle= "Q4-19: Analysts")
+
+
+
+
+triword_q4 <- gridExtra::grid.arrange(p3, p4, nrow = 1)
+
+
+
+print(management_triwords,n=25)
+print(analyst_triwords,n=25)
+
+#Checking different placements of growth in our text
+tri_words %>% separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% filter(str_detect(word1, "growth")| str_detect(word2, "growth") | str_detect(word3, "growth"))
+
+```
+
+
+
+```{r}
+#Create Tri-gram tibble. This creates a row for every tri-gram, or three-word phrase.
+text_tidy_tri <- tibble_tidy %>% mutate(line_number = 1:nrow(.)) %>% group_by(author) %>% unnest_tokens(trigram, text, token = "ngrams", n = 3) %>% ungroup() %>% arrange(line_number)
+
+#Seperate the bi-gram column into two column, one for each word. Filter for stop words.
+tri_words <- text_tidy_tri %>% separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% filter(!word1 %in% stop_words$word & !word2 %in% stop_words$word & !word3 %in% stop_words$word) %>% unite(trigram, word1, word2, word3, sep = " ")
+
+#Count 10 most common tri-gram phrases.
+tri_words %>% count(trigram, sort = TRUE) %>% head(10)
+```
+
+
+
+![](/img/sentiment/Trigram_freq_split_q119.png)
+![](/img/sentiment/Trigram_freq_split_q419.png)
+
+
+These charts look similar to each other from Q1 to Q4, but after taking a closer look you can see the tri-gram phrases differ. It seems like the management switched focus from scaling in the "fourth industrial revolution" in Q1 to now focusing on creating an all-in-one or "customer 360" platform in the most recent Q4 call.
+
+
+```{r}
+#Afinn lexicon as scored words
+afinn <- tidytext::get_sentiments("afinn")
+
+
+#Check negation words in word1 or word2 while joining to scored keywords by word 3
+text_tidy_tri %>% separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% filter(word1 %in% qdapDictionaries::negation.words | word2 %in% qdapDictionaries::negation.words) %>% inner_join(afinn, by = c(word3 = "word"))
+
+
+#Check negation words in word1 while joining to scored keywords by word 2
+text_tidy_tri %>% separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% filter(word1 %in% qdapDictionaries::negation.words) %>% inner_join(afinn, by = c(word2 = "word"))
+```
+
+
+Remember the "not perfectly" Negator bi-gram? By using a tri-gram, I can shed more light on the bi-gram that saw a negation word before the keyword. As we can see, the complete phrase of "not perfectly comparable" is something that doesn't need much attention, compared to something like "not growing revenue" which may signal red flags. 
+
+
+# Visualizing Textual Relationships
+
+Viewing relationships in the text through Network Graphs, Dendrograms, and Correlation Networks can be helpful to find unusual relationships. You can edit these to fit the patterns you are looking for, which I will continue to search for "growth" keywords. Without going into too much detail regarding these graphs, they are all attempting to show the relationships between the text. If the words share a strong relationship, you will see them clustered together or near each other on the below charts.
+
+# Network graphs
+```{r eval=FALSE, include=FALSE}
+#Maybe include line number to arrange?
+not_freq_bigrams <- tibble_tidy %>%
+         mutate(text = str_replace_all(string = text ,
+                                       pattern = "\\sa\\s",
+                                       " ")) %>%
+        
+         mutate(text = str_replace_all(string = text ,
+                                       pattern = "[[:punct:]]",
+                                       " ")) %>% 
+        unnest_tokens(output = bigram,
+                      input = text ,
+                      token = "ngrams",
+                      n = 2) %>% 
+        separate(bigram, c("word1", "word2"),sep =  " ")
+
+
+
+
+#Network of unfiltered bigram
+bigram_net <- text_tidy_bi_sep %>% count(word1, word2, sort = TRUE)
+
+bigram_igraph <- bigram_net %>%
+        filter(n>5 & n<40) %>% 
+        igraph::graph_from_data_frame()
+
+
+a <- grid::arrow(type = "closed", length = unit(.1, "inches"))
+
+ggraph(bigram_igraph, layout = "fr") + geom_edge_link(aes(edge_alpha = n), show.legend = FALSE, arrow = a, end_cap = circle(.08, 'inches')) + geom_node_point(color = "lightblue", size = 3) + geom_node_text(aes(label = name), vjust = 0.5, hjust = 0.5, size = 2) + theme_void() + ggtitle("bigram network, n>5 & n<40")
+
+
+
+
+
+
+#If we want to save this as functions
+count_bigrams <- function(dataset) {
+  dataset %>%
+    unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+    separate(bigram, c("word1", "word2"), sep = " ") %>%
+    filter(!word1 %in% stop_words$word,
+           !word2 %in% stop_words$word) %>%
+    count(word1, word2, sort = TRUE)
+}
+
+
+
+visualize_bigrams <- function(bigrams) {
+  set.seed(2016)
+  a <- grid::arrow(type = "closed", length = unit(.1, "inches"))
+  
+  bigrams %>%
+    igraph::graph_from_data_frame() %>%
+    ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), show.legend = FALSE, arrow = a,end_cap = circle(.1, 'inches'))+
+    geom_node_point(color = "lightblue", size = 4) +
+    geom_node_text(aes(label = name), vjust = 1.7, hjust = 0.5) +
+    labs(title="Bi-gram Network Graph Q1-19")+
+    theme_void()
+}
+
+
+
+
+
+
+#Filtered bigram network
+count_bigrams(tibble_tidy) %>% 
+  filter(n > 2,
+         !str_detect(word1, "\\d"),
+         !str_detect(word2, "\\d")) %>%
+  visualize_bigrams()
+
+
+
+
+
+#Dendogram
+tdm_sparse <- removeSparseTerms(all_tdm_tf, sparse = 0.81)
+
+#Create the word cluster to plot the Dendrogram
+tdm_m <- as.matrix(tdm_sparse)
+hc <- hclust(dist(tdm_m))
+
+hcd_colored <- branches_attr_by_labels(as.dendrogram(hc), c("growth"), col = "red")
+plot(hcd_colored,main="Dendrogram Q1-19")
+
+
+#Network using Widyr for correlation
+widy_words <- tibble_tidy %>% mutate(section = row_number() %/% 2) %>% filter(section > 0) %>% unnest_tokens(word,text) %>% filter(!word %in% stop_words$word)
+
+word_pairs <- widy_words %>% group_by(word) %>% filter(n() >= 15) %>% pairwise_cor(word, section, sort = T)
+
+
+
+
+#Find and pick interesting words and find the other words most associated with them
+word_pairs %>% filter(item2 %in% c("growth","revenue")) %>%
+  group_by(item2) %>%
+  top_n(9,correlation) %>%
+  ungroup() %>%
+  mutate(item1 = reorder(item1, correlation)) %>%
+  ggplot(aes(item1, correlation)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~ item2, scales = "free") +
+  coord_flip()
+
+```
+
+
+
+
+
+![](/img/sentiment/Bi-gram_network.png)
+![](/img/sentiment/Bi-gram_network_q4.png)
+
+<br>
+
+# Dendropgrams
+
+![](/img/sentiment/Dendropgram_q119.png)
+![](/img/sentiment/Dendropgram_q419.png)
+
+
+# Correlation with the word "Growth" Q1-19
+
+![](/img/sentiment/Growth_rev_corr_graph_q119.png)
+
+# Correlation with the word "Growth" Q4-19
+ 
+![](/img/sentiment/Growth_rev_corr_graph_q419.png)
+
+
+Remember how we saw the word "headwind" appear in our text but not in the scoring lexicons? Well, these visualizations exploit the cause of these "headwinds" which was FX. I can also see relationships such as "grew revenue", "durable growth" and "incredible innovation". These can be extremely powerful, especially in situations where I have a set of words that I need to analyze relationships within the text. I would highly suggest those who are interested in these charts to read more details on how these relationships are found.
+
+
+<br>
+
+
+# Looking Forward
+
+After reading ["Forecasting Returns Using Earnings Call Transcripts"](http://stanford.edu/class/msande448/2017/Final/Reports/gr1.pdf), I was inspired to consider a similar approach. I wanted to create multiple lists of words/phrases that represent factors which could drive excess returns to the set of stocks I am following. Since Salesforce is considered a growth stock, I would consider looking for growth factors and operational factors such as revenue growth, margin expansions, improved operating leverage, etc. We can count the number of terms that occurred within each of these categories, total terms within the document, and begin calculating scores for each of those categories in each transcript. The idea is to then use a regression using the scores against the forward adjusted returns to find the optimal ?t-stat weights? to use for each category. 
+
+
+Once I can get a sentiment analysis model similar to the Stanford research project, my plan is to run a few different analysis to test which lexicon approach is best to use for conference call sentiment analysis. This type of work and detail will need to be saved for the part 2 post, so stay tuned!!

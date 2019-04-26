@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.51 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Jagger Villalobos">
+<meta name="keywords" content="">
+<meta name="description" content="Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?">
+
+
+<meta property="og:description" content="Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sentiment Analysis on Earnings Call">
+<meta name="twitter:title" content="Sentiment Analysis on Earnings Call">
+<meta property="og:url" content="/2019/04/sentiment-analysis-conf-call/">
+<meta property="twitter:url" content="/2019/04/sentiment-analysis-conf-call/">
+<meta property="og:site_name" content="Running on R">
+<meta property="og:description" content="Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?">
+<meta name="twitter:description" content="Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-04-18T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-04-18T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="R">
+    
+      <meta property="article:section" content="R Markdown">
+    
+      <meta property="article:section" content="Investment">
+    
+      <meta property="article:section" content="Text Mining">
+    
+      <meta property="article:section" content="Earnings">
+    
+  
+  
+    
+      <meta property="article:tag" content="CRM">
+    
+      <meta property="article:tag" content="Cloud">
+    
+      <meta property="article:tag" content="Sentiment Analysis">
+    
+      <meta property="article:tag" content="Conference Call">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/c_scale,w_325/v1546624528/Slider-Sentiment-468x340.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/c_scale,w_325/v1546624528/Slider-Sentiment-468x340.png">
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+
+
+    <title>Sentiment Analysis on Earnings Call</title>
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="/2019/04/sentiment-analysis-conf-call/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-134862415-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Running on R</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
+        
+          <h5 class="sidebar-profile-bio">Bottom-Up Analysis | Equity Research</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/jagg19">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              post-header-cover--partial"
+       style="background-image:url('https://res.cloudinary.com/dyackvnwm/image/upload/c_scale,w_325/v1546624528/Slider-Sentiment-468x340.png')"
+       data-behavior="4">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Sentiment Analysis on Earnings Call
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-04-18T00:00:00Z">
+        
+  April 18, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/r">R</a>, 
+    
+      <a class="category-link" href="/categories/r-markdown">R Markdown</a>, 
+    
+      <a class="category-link" href="/categories/investment">Investment</a>, 
+    
+      <a class="category-link" href="/categories/text-mining">Text Mining</a>, 
+    
+      <a class="category-link" href="/categories/earnings">Earnings</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="4"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/chart.js/./dist/Chart.min.js"></script>
+<script src="/rmarkdown-libs/chartJSRadar-binding/chartJSRadar.js"></script>
+
+
+<div id="conference-call-text-mining-and-sentiment-analysis" class="section level1">
+<h1>Conference Call Text Mining and Sentiment Analysis</h1>
+<ul>
+<li>Executives are very careful with the language they use during a conference call</li>
+<li>Using sentiment scores to validate future / long-term goals</li>
+<li>Checking for negation words that can affect score</li>
+<li>Key takeaways from this analysis</li>
+</ul>
+<p>Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done? Are investors staring at twitter 24/7 ready to hit buy or sell? The answer, of course, is no, but algorithms programmed with NLP (natural language processing) scripts are. Sentiment analysis from tweets, social media postings, press releases, surveys, reviews, transcripts and many more occur millions of times every day. Even when you send your resume in to apply for a job, most likely your resume is being read through an ATS system which analyzes the text to find matching keywords. I’ve had this earnings scentiment script locked away in my useful financial scripts vault, and after reading a Stanford research paper titled <a href="http://stanford.edu/class/msande448/2017/Final/Reports/gr1.pdf">“Forecasting Returns Using Earnings Call Transcripts”</a> it inspired me to build upon my current script and create a post about earnings call sentiment. In part 1, I will review sentiment analysis in R and some of the basic terms for it, while in part 2 I will build a model to help us predict if the earnings call warrants a buy for the stock.</p>
+<p>I find it very interesting how during a conference call, the stock price fluctuates and can change at any second due to one, two or three said words. The company can beat top and bottom line estimates, but if the CEO guides in-line due to “future headwinds” then the stock price can plummet. I decided to build a model that can analyze the conference call transcript using multiple methods to get an overall view of the management and analysts sentiments throughout the call. I first used the very simple method of word frequency analysis, then I used a variety of lexicons for sentiment analysis to arrive at overall sentiment scores, adjusted the lexicons to fit our criteria, analyzed possible negation words, and use network graphs to visualize relationships between the text.</p>
+</div>
+<div id="getting-the-data" class="section level1">
+<h1>Getting the Data</h1>
+<p>I will web scrape the transcript from seeking alpha and clean the empty spaces from the data. Then, I can begin the tedious part which is extracting the key text using REGEX and putting it together into a data frame. For example, I’d like to extract all executive and analyst names so I can label who is speaking to get separate sentiments for management and analysts. I can do this by creating a regular expression pattern. Regular expression is a pattern matching tool that makes up a sequence of symbols to search and extract pattern in the text. If new to REGEX, it can look like nonsense but it is very powerful to sort through and filter textual data. As an example, look at the REGEX code below that I found off google that searches for simple email addresses;</p>
+<blockquote>
+<p>[a-zA-Z0-9_.+-]+@[a-zA-Z0-9_-]+\.[a-zA-Z0-9_.-]+</p>
+</blockquote>
+<p>Mine wont be this extensive but REGEX is not as easy to read at first. Luckily, R has a package called “Rebus” that makes it a bit easier which I will show shortly.</p>
+<pre class="r"><code>#Create empty sentiment dataframe that we will build for each lexicon
+sentiment_df &lt;- tibble(Ticker=NA,Earnings_date=NA,Positive=NA,Negative=NA,Total_words=NA,Score=NA,Sentiment=NA, Lexicon=NA)
+
+#Company Info
+company_name &lt;- &quot;salesforce&quot;
+ticker &lt;- &quot;CRM&quot;
+
+#Transcript URLs
+q1 &lt;- &quot;https://seekingalpha.com/article/4177957-salesforce-com-inc-crm-ceo-marc-benioff-q1-2019-results-earnings-call-transcript?part=single&quot;
+
+
+q4 &lt;- &quot;https://seekingalpha.com/article/4246320-salesforce-com-inc-crm-ceo-marc-benioff-q4-2019-results-earnings-call-transcript?part=single&quot;
+
+
+#Requesting html
+html1 &lt;- read_html(q4)
+
+#Reading the body of the html, and converting it to a readable text format
+transcript_text &lt;- html_text(html_nodes(html1, &quot;#a-body&quot;))
+
+#Seperating the text by new line characters in html code
+transcript_text &lt;- strsplit(transcript_text, &quot;\n&quot;) %&gt;% unlist()
+
+
+#Remove empty lines
+transcript_text &lt;- transcript_text[!stri_isempty(transcript_text)]
+
+#Getting the earnings date
+earnings_date &lt;- html_text(html_nodes(html1, &quot;time&quot;)) %&gt;% paste0(collapse = &quot;&quot;)</code></pre>
+<p>Below is the REGEX code to extract the names of executives and analysts in the transcript. We can do this by matching the text to a common format found in transcripts. The transcripts start out by listing the conference call participants, and the lines containing the names always use either “-” or “–” as separators for NAME - TITLE.</p>
+<p>If REGEX is too daunting for you, then R provides a package called “Rebus” that makes using REGEX as easy as using words to represent patterns. For example, the first the block of code below, and notice how it uses words like “upper, one_or_more, SPC, WRD, capture” instead of the REGEX syntax “[[:upper:]][\w]+”.</p>
+</div>
+<div id="splitting-the-text-into-sections-for-analysis" class="section level1">
+<h1>Splitting the text into sections for analysis</h1>
+<pre class="r"><code>#Create pattern to grab relevant names such as Analyst and Executives. Using this and REGEX to show difference
+pattern1 &lt;- capture(upper() %R% one_or_more(WRD) %R% SPC %R%
+  upper() %R% one_or_more(WRD)) %R% &quot; - &quot; %R% capture(one_or_more(WRD) %R%
+  optional(char_class(&quot;- ,&quot;)) %R% zero_or_more(WRD %R% SPC %R% WRD %R% &quot;-&quot; %R% WRD))
+
+
+#Grab just the executive names 
+
+#Give the names all common seperators
+transcript_text &lt;- gsub(&quot;–&quot;,&quot;-&quot;,transcript_text)
+
+#REGEX pattern to search for the starting index containing executive names. Finds something like &quot;Mark Benioff - CEO&quot;
+idx_e &lt;- min(which(str_detect(transcript_text, &quot;[[:upper:]][\\w]+ -&quot;)))
+
+#Dropping everything before the start of Executive names, and resetting the index back to 1
+transcript_text &lt;- transcript_text[idx_e:length(transcript_text)]
+
+idx_e &lt;- 1
+
+#Repeating to find the starting index containing the analyst names
+idx_a &lt;- min(which(!str_detect(transcript_text, &quot;[[:upper:]][\\w]+ -&quot;)))
+
+
+#Executive names will start from the starting index to 1 row before the analysts starting index. We will use the pattern we created to extract all names from our resulting vectors
+exec &lt;- transcript_text[idx_e:(idx_a-1)]
+exec &lt;- str_match(exec, pattern1)
+exec &lt;- exec[1:nrow(exec),2]
+
+
+#Repeat for the Analyst names. The ending index for the analyst names is the row before the opening remarks
+idx_o &lt;- min(which(!str_detect(transcript_text, &quot;[[:upper:]][\\w]+ -&quot;))[-1]) - 1
+analyst &lt;- transcript_text[(idx_a+1):idx_o]
+analyst &lt;- str_match(analyst, pattern1)
+analyst &lt;- analyst[1:nrow(analyst),2]
+
+
+
+#Save just the transcript text. Skip straight to the operators opening remarks
+transcript_text &lt;- transcript_text[(idx_o +1) : length(transcript_text)]
+
+
+
+#Splitting up the call between management on the conf_call and the Q&amp;A session
+
+#Start with Conf_call section and find the start of the Q&amp;A
+idx_c &lt;- min(which(str_detect(transcript_text, paste(exec,collapse = &quot;$|&quot;))))
+idx_q &lt;- which(str_detect(transcript_text, &quot;Question-and-Answer&quot;)) - 1
+conf_call &lt;- transcript_text[idx_c:idx_q]
+
+
+#Now for the QNA section
+idx_q &lt;- which(str_detect(transcript_text, &quot;Question-and-Answer&quot;)) + 1
+qna &lt;- transcript_text[idx_q:length(transcript_text)]
+
+
+
+#Get locations of the names so we can label the text in order
+conf_location_exec &lt;- str_which(conf_call, paste(exec,collapse = &quot;$|^&quot;))
+exec_names_conf &lt;- conf_call[conf_location_exec]
+
+
+#Get locations of the names so we can label the text in order
+qna_location_analysts &lt;- str_which(qna, paste(analyst, collapse = &quot;$|^&quot;))
+qna_location_exec &lt;- str_which(qna, paste(exec, collapse = &quot;$|^&quot;))
+
+
+#Create tibble then combine and arrange by row id to keep the correct order
+analyst_names_qna &lt;- tibble(name = qna[qna_location_analysts], id = qna_location_analysts)
+exec_names_qna &lt;- tibble(name = qna[qna_location_exec], id = qna_location_exec)
+all_names_qna &lt;- bind_rows(analyst_names_qna, exec_names_qna) %&gt;% arrange(id)</code></pre>
+<p>After extracting the information I need, the earnings transcript is then broken up into two parts. The first part is the first half of the call when the management announces results; then the second part is the question and answer session of the call which is labeled by who is asking and answering the question. After creating the above name vectors, I created two data frames for each part of the call. The first data frame is “conf_call” and the second is “qna_full”. This will help give additional visualization once we start getting sentiment scores. Take a look at the data frames below.</p>
+<pre class="r"><code>print(conf_call_df)</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   names        text                                                        
+##   &lt;chr&gt;        &lt;chr&gt;                                                       
+## 1 John Cummin… Thank you, Erica, thanks so much. Good afternoon, everyone.…
+## 2 Marc Benioff Well, thank you so much, John. And thank you to everyone on…
+## 3 Keith Block  Thanks Marc. Good afternoon, everybody. As Marc said, we&#39;re…
+## 4 Mark Hawkins Great. Thanks, Keith. Before discussing the results, I want…</code></pre>
+<pre class="r"><code>print(qna_full)</code></pre>
+<pre><code>## # A tibble: 43 x 2
+##    names       text                                                        
+##    &lt;chr&gt;       &lt;chr&gt;                                                       
+##  1 Phil Winsl… Congrats on a great start to the year and a particular shou…
+##  2 Marc Benio… Well, as we go deeper into our vision with so many of our c…
+##  3 Bret Taylor Yes, sure. When we talk to our customers, they talk about t…
+##  4 Marc Benio… And Bret I just want to ask before we go on. When we look a…
+##  5 Bret Taylor Well, I think the reason why Einstein has gotten so much ad…
+##  6 Marc Benio… So what you&#39;re saying is just by turning on Einstein our Co…
+##  7 Bret Taylor That&#39;s absolutely right. I mean, we see one of the biggest …
+##  8 Marc Benio… It&#39;s not a programmatic interface -- I mean, it is programm…
+##  9 Mark Grant  Mark Grant here on for Heather, just a quick one for me. Yo…
+## 10 Keith Block This is, Keith, let me try to address this. So generally sp…
+## # … with 33 more rows</code></pre>
+<div id="the-full-view-of-a-part-from-the-first-qna-question." class="section level5">
+<h5>The full view of a part from the <strong>first</strong> QNA question.</h5>
+<pre class="r"><code>kableExtra::kable(head(qna_full,3)) %&gt;% kableExtra::kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+names
+</th>
+<th style="text-align:left;">
+text
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Phil Winslow
+</td>
+<td style="text-align:left;">
+Congrats on a great start to the year and a particular shout out to Hawkins for the awesome 606 data historically, super helpful. A question for Marc B on MuleSoft, I mean obviously, nobody knows CRM data better than salesforce.com. But wondering if you could talk about Einstein and MuleSoft, and that in the AI context, because obviously you’re delivering already 2 billion predictions? How do you think MuleSoft, or how do you see MuleSoft, augmenting that? And what kind of uptick you think you’ll see their insight customers?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Marc Benioff
+</td>
+<td style="text-align:left;">
+Well, as we go deeper into our vision with so many of our customers, the key thing that we are focused on is their single view of their customer. We just talked about so many of our key wins in the quarter. I mean, it could be carrying with their reprocessing incredible brands like Gucci, or Bottega or Yves Saint Laurent, the UFDA and their relationship with their farmers and ranchers, it could be the work that we’re doing with the [Align] [ph], giving their orthodontist the ability to connect with their consumers in a whole new way, or it could be the incredible work that you’re seeing with Adidas.In each and every case, they’re working to understand and have a 360 degree view of their customer. And the power of that is really augmented by our suite of CRM applications that do that for them. Things like our sales, commerce, service, communities, analytics, our core platform, collaboration, marketing and exactly what you said, by adding integration in that, it helps us bring in data from multiple public clouds, because many of our customers are now using multiple public clouds and/or they might be, let’s say for example, the healthcare company seeking data from the healthcare system itself like an insurance system, or maybe some other type of key databank associated with the healthcare industry, integration is mission-critical for our customers to gain that 360 degree view of their customer.Now, we’ve always known that at Salesforce, that’s why we built up an open system. And that’s why we’ve had an application program interface. That’s why we’ve had an AppExchange. That’s why we focused on ISVs and had relationships with companies like MuleSoft. But it has become more important for our customers to be able to have and rely on an integration cloud. This idea of deeply embedded inside our products, they can rely on this technology to be able to integrate all the key data so they can build that single view of the customer.And we have Bret Taylor here who is our President and Chief Product Officer. And Bret, do you want to just touch on that and your – I know you’ve been traveling the country and talking to hundreds of our customers about their vision for integration. Can you tap that for us?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bret Taylor
+</td>
+<td style="text-align:left;">
+Yes, sure. When we talk to our customers, they talk about three main priorities as it relates to integration. They want to create customer experiences that transcend individual customer touch points. They want to integrate sales, service, and marketing into a single seamless customer experience. They want to make sure that they have multiple acquisitions and multiple regulatory climates, because they exist across international borders that they can accomplish that with our platform. And they want to unlock the data from other legacy systems, and bring it into these customer systems. So they can do these transformations around their customers.And about the point you’re asking about Einstein is very insightful. They know that their AI is only as powerful as data it has access to. And so when you think of MuleSoft think unlocking data. The data is trapped in all these isolated systems on-premises, private cloud, public cloud, and MuleSoft they can unlock this data and make it available to Einstein and make a smarter customer facing system. And that’s what we’re hoping to achieve with MuleSoft.And I think the thing you heard from Marc that I’ve heard over and over again from customers is that integration is a strategic priority for our customers, because without it they can’t move fast enough on their customer facing systems. So we’d like to say it unlocks the clock speed of innovation, and that’s what we’re really seeing from our customers. And I hope we’ll accelerate our ambitions with Einstein.
+</td>
+</tr>
+</tbody>
+</table>
+<p>Using the powerful REGEX language and a little bit of elbow grease, I’m left with a two-column data frame. The first column contains the names of the speaker and the second contains the text. I can proceed to clean and properly analyze the text further.</p>
+</div>
+</div>
+<div id="clean-the-text" class="section level1">
+<h1>Clean the Text</h1>
+<p>Now that I have appropriate sections and names in the data frames, I need to clean it even more for further analysis. Since computers read case sensitive, I need to make all text lower case, replace abbreviations (Sr. -&gt; senior), replace contractions (can’t -&gt; cannot), replace numbers (1 -&gt; one), replace ordinal’s (1st -&gt; first), and replace symbols (% -&gt; percent). This can be done by creating a custom function using cleaning functions from the “QDAP” package.</p>
+<pre class="r"><code>#Create function to clean the text
+qdap_clean &lt;- function(x){
+  x &lt;- replace_abbreviation(x)
+  x &lt;- replace_contraction(x)
+  #x &lt;- replace_number(x)
+  x &lt;- replace_ordinal(x)
+  #x &lt;- replace_symbol(x)
+  x&lt;- gsub(&quot;[’‘]&quot;,&quot;&quot;,x)
+  x &lt;- tolower(x)
+  return(x)
+}
+
+
+#Clean each of these
+conf_call_df$text &lt;- qdap_clean(conf_call_df$text)
+qna_full$text &lt;- qdap_clean(qna_full$text)</code></pre>
+<p>The next step is to create a corpus object, which is an object that separates the text by “documents”. Then, the corpus object is converted to a Term-Document Matrix which takes each term (as the row value) from each document (as the column value). Once a TDM is created, I can analyze the text in many different ways, starting with a simple word frequency analysis. First, I’ll explain why it is necessary for a little more text cleaning.</p>
+<p>First, all words at the end of the sentence will have the punctuation symbol included as part of the word and will be counted as a separate word (I.E “today vs today.”). Also, there are many common words which are called stop words that include “my”, “was”, “to”, “by”, etc. so I will remove these using the stopwords lexicon from the “tidytext” package. Last, I can expect to see executive and analyst names many times so these should also be removed for analysis purposes. This can be done by creating a function to clean the text from each document inside the corpus as seen below.</p>
+<pre class="r"><code>#Create corpus object
+all_corpus &lt;- c(conf = conf_call_df$text, qna = qna_full$text) %&gt;% VectorSource() %&gt;% VCorpus()
+
+
+#convert our name vectors to lowercase to match and remove from our text
+analyst_lowsplt &lt;- as.character(str_split(tolower(analyst), pattern = &quot; &quot;, simplify = TRUE))
+exec_lowsplt &lt;- as.character(str_split(tolower(exec), pattern = &quot; &quot;, simplify = TRUE))
+
+
+#Clean corpus function - Since it is a earnings call we will hear alot of names that we may want to remove for analysis purposes. (executive names, analyst names, operator)
+clean_corpus &lt;-function(corpus){
+  corpus &lt;- tm_map(corpus, removePunctuation)
+  corpus &lt;- tm_map(corpus, stripWhitespace)
+  corpus &lt;- tm_map(corpus, removeWords, c(stopwords(&quot;en&quot;), company_name , analyst_lowsplt, exec_lowsplt))
+  return(corpus)
+}
+
+
+all_corpus_clean &lt;- clean_corpus(all_corpus)</code></pre>
+<div id="simple-frequency-count-from-tdm" class="section level2">
+<h2>Simple Frequency Count from TDM</h2>
+<p>After cleaning the text a little more, I am ready to begin my analysis. I’ll start with a simple barplot illustrating the Top 20 most frequent words in our text.</p>
+<pre class="r"><code>#Create TDM from our clean corpus
+all_tdm_tf &lt;- TermDocumentMatrix(all_corpus_clean)
+
+
+#Sum the frequency of the tdm word count, sort and plot the top results
+word_freq &lt;- rowSums(as.matrix(all_tdm_tf))
+word_freq &lt;- sort(word_freq, decreasing = TRUE)
+
+#The plots below show both quarters
+barplot(word_freq[1:20], col = &quot;tan&quot;, las = 2, main = &quot;Top 20 Frequent Words Q1-19&quot;)</code></pre>
+<p><img src="/img/sentiment/Top20_frqnt_q119.png" /> <img src="/img/sentiment/Top20_frqnt_q419.png" /></p>
+<p>It looks like there is a common narrative associated with business operations such as “customers” cloud&quot; and “one”. I will drop these words out of the text as they don’t uncover much. On the bright side, it’s a good thing to see that “growth” ranked #14 in the top 20 list for Q4-19. I want to possibly find any associations with specific keywords. Being that “growth” was ranked #14 in our list, I will choose this word to find associations/correlations with. The “tm” package also offers a function called ‘findAssocs’ that returns a vector that holds matching terms from x and their rounded correlations satisfying the inclusive lower correlation limit of corlimit. See below for the word associations using this function for the word “growth” in both Q1-19 and Q4-19 earnings transcripts.</p>
+<p><br></p>
+<div class="figure">
+<img src="/img/sentiment/wrd_growth_cor_q119.png" />
+
+</div>
+<div class="figure">
+<img src="/img/sentiment/wrd_growth_cor_q419.png" />
+
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="running-sentiment-analysis" class="section level1">
+<h1>Running Sentiment Analysis</h1>
+<p>From this point on, I will convert the data frame into a tibble, which is a different form of data frame that is easier to work with. After the tibble object is created, each set of text can be labeled according to if its text from an executive or an analyst.</p>
+<pre class="r"><code>#Create tibble object
+tibble_tidy &lt;- data.frame(doc_id = c(conf_call_df$names,qna_full$names), text = c(conf_call_df$text, qna_full$text)) %&gt;% DataframeSource() %&gt;% VCorpus() %&gt;% tidy() 
+
+
+#Label according to who is speaking
+z &lt;- 0
+for(i in tibble_tidy$id){
+  z &lt;- z+1
+  if(i %in% analyst){
+    tibble_tidy$author[z] &lt;- &quot;analyst&quot;
+  } else tibble_tidy$author[z] &lt;- &quot;management&quot;
+}
+
+
+#Keep only the rows you are interested in
+tibble_tidy &lt;- tibble_tidy[,c(&quot;author&quot;, &quot;id&quot;, &quot;text&quot;)]
+
+#Unnest tokens, which converts all text to lowercase, and seperates our text by word
+text_tidy &lt;- tibble_tidy %&gt;% mutate(line_number = 1:nrow(.)) %&gt;% group_by(author) %&gt;% unnest_tokens(word, text) %&gt;% ungroup()</code></pre>
+<p><br></p>
+</div>
+<div id="bing-lexicon-scoring-sentiment-from--1-to-1" class="section level1">
+<h1>Bing Lexicon: Scoring Sentiment from -1 to 1</h1>
+<p>Let’s view the different levels of sentiment starting with the simple “Bing” lexicon designed by Bing Liu, a distinguished professor at the University of Illinois at Chicago. This lexicon classifies words either negative or positive from a dictionary of 6,788 keywords. Let’s take a look at the 10 most frequent bing scored words in the Q1 transcript. First, I want to quickly glance at the words and type of sentiment. Then, I can look at the top 10 most common filtered words that are scored in the text.</p>
+<pre class="r"><code>#Bing lexicon
+bing &lt;- tidytext::get_sentiments(&quot;bing&quot;)
+
+#We want to keep &quot;great&quot; as this is very positive in financial sentiment
+stop_words &lt;- tidytext::stop_words %&gt;% filter(word != &quot;great&quot;)
+
+#Create tiddy object that is filtered and scored
+text_tidy_bing &lt;- text_tidy %&gt;% inner_join(bing, by = &quot;word&quot;) %&gt;% anti_join(tidytext::stop_words, by = &quot;word&quot;)
+
+#Top 10 most frequent bing scored words in our text.
+head(text_tidy_bing %&gt;% count(word, sentiment, sort = TRUE),10)</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    word         sentiment     n
+##    &lt;chr&gt;        &lt;chr&gt;     &lt;int&gt;
+##  1 cloud        negative     53
+##  2 trust        positive     22
+##  3 guidance     positive     14
+##  4 incredible   positive     13
+##  5 success      positive     12
+##  6 innovation   positive     11
+##  7 intelligence positive     10
+##  8 amazing      positive      9
+##  9 strong       positive      8
+## 10 top          positive      8</code></pre>
+<p>No surprise to see cloud mentioned 50 times being that salesforce business segments operate in the cloud. What’s <strong>MOST</strong> surprising is that the Bing dictionary considers this a negative word. Imagine if this slipped by, and “cloud” was labeled a negative contribution to the sentiment!</p>
+</div>
+<div id="adjusting-the-database" class="section level1">
+<h1>Adjusting the Database</h1>
+<p>This can distort the sentiment outlook so I must be careful and look at words that are impacting the score the most. It is worth noting that this dictionary and others, will not always best fit our style of text as we can see. You should always analyze if whether or not it is in the dictionary your most frequent terms are in the dictionary and decide if it needs to be adjusted fit the industry and company that is under analysis. After quickly glancing through the top 50 frequent terms in the transcript, I noticed the term “headwinds” used in various quarters. In finance, headwinds are viewed as a negative term and will need to be adjusted the bing dictionary to score this negative term. We get can a cleaner view of positive vs negative terms once this is done. See below for a plot of the most frequent pos / neg terms used in Q1 &amp; Q4.</p>
+<p><img src="/img/sentiment/frqnt_pos_neg_bing_q119.png" /> <img src="/img/sentiment/frqnt_pos_neg_bing_q419.png" /></p>
+</div>
+<div id="analysts-vs-management-bing" class="section level1">
+<h1>Analysts vs Management: Bing</h1>
+<p>Were the analysts more positive than the management? Generally, management is mostly positive and attempts to shed light on any issues they may have. On the other hand, analysts are not as optimistic since it is their job to dig underneath the surface. I want to take a look at the overall positive/negative sentiment from Analysts and Management. Below is the code for Q1-19 plot but the picture is of Q1-19 &amp; Q4-19.</p>
+<pre class="r"><code>#Seperate sentiment by author
+author_sentiment_bing &lt;- text_tidy_bing %&gt;% count(author, sentiment) %&gt;% group_by(author) %&gt;%  mutate(percent = n / sum(n))
+
+
+bingplot_q1 &lt;- ggplot(author_sentiment_bing, aes(author, percent, fill = sentiment)) + geom_col() + theme(axis.text.x = element_text(angle = 0)) + labs(x = &quot;Author&quot;, y = &quot;Total Percentage&quot;,title = &quot;Makeup of Positive/Negative Sentiment&quot;, subtitle=&quot;Bing: Q1-19&quot;) 
+
+gridExtra::grid.arrange(bingplot_q1,bingplot_q4,nrow=1)</code></pre>
+<div class="figure">
+<img src="/img/sentiment/mkeup_posneg_bing_q1q419.png" />
+
+</div>
+</div>
+<div id="sentiment-throughout-earnings-call" class="section level1">
+<h1>Sentiment Throughout Earnings Call</h1>
+<p>Now, I would love to see the sentiment throughout the conference call to see if there are any noticeable dips at any point. This could signal bad news or something that should be looked into further.</p>
+<p>Sentiment or polarity is calculated by taking the positive-negative terms and dividing by the total # of positive/negative terms. Earning calls usually start off great due to management boasting any recent achievements, but once analysts begin to ask about future guidance or for more detail, you can see an initial slowdown in sentiment. We can see this below through the different plots of polarity over the course of the call.</p>
+<p><img src="/img/sentiment/confcall_polarity_full_q119.png" /> <img src="/img/sentiment/confcall_polarity_full_q419.png" /> <img src="/img/sentiment/confcall_polarity_full_split_q119.png" /> <img src="/img/sentiment/confcall_polarity_full_split_q419.png" /></p>
+<p>The above graphs are evidence for a conference call that had a positive sentiment. Later, I will check to see if this is true or not. In some cases, you will see a large dip in the score which could signal a very negative announcement that resulted in bad sentiment.</p>
+<p><br></p>
+</div>
+<div id="afinn-lexicon-scoring-sentiment-from--5-to-5" class="section level1">
+<h1>Afinn Lexicon: Scoring Sentiment from -5 to 5</h1>
+<p>Another lexicon used for sentiment analysis is the Afinn database. Its score has a scale of -5 to 5 based off sentiment for each of the 2,476 keywords. Some keywords hold larger weights with a score of five, while some hold a lighter weight of one. This lexicon was developed by a Danish researcher, Finn Arup Nielsen.</p>
+<pre class="r"><code>#Afinn lexicon
+afinn &lt;- tidytext::get_sentiments(&quot;afinn&quot;)
+
+#Create tibble for AFINN
+text_tidy_finn &lt;- text_tidy %&gt;% inner_join(afinn, by = &quot;word&quot;) %&gt;% anti_join(stop_words, by = &quot;word&quot;) %&gt;% mutate(sentiment=ifelse(score &lt; 0, &quot;negative&quot;,&quot;positive&quot;))
+
+#Of course we need to check for possible adjustments
+head(text_tidy_finn %&gt;% count(word,score, sort = T),100)</code></pre>
+<pre><code>## # A tibble: 100 x 3
+##    word       score     n
+##    &lt;chr&gt;      &lt;int&gt; &lt;int&gt;
+##  1 growth         2    22
+##  2 trust          1    22
+##  3 ability        2    20
+##  4 great          3    14
+##  5 success        2    12
+##  6 innovation     1    11
+##  7 amazing        4     9
+##  8 strong         2     8
+##  9 top            2     8
+## 10 vision         1     8
+## # … with 90 more rows</code></pre>
+<p>There is my favorite keyword, Growth!</p>
+<p>Let’s now view the polarity throughout the conference call.</p>
+<pre class="r"><code>#Calculate total words per section (or line number)
+total_words_finn &lt;- text_tidy_finn %&gt;% anti_join(stop_words, by = &quot;word&quot;) %&gt;% count(line_number,word) %&gt;% group_by(line_number) %&gt;% summarise(total_finn_words=sum(n))
+
+
+#Calculate polarity over time of the call
+afinn_scores &lt;- text_tidy_finn %&gt;% count(line_number,word,score) %&gt;% group_by(line_number) %&gt;% summarise(score = sum(score * n)) %&gt;% inner_join(total_words_finn,by = &quot;line_number&quot;) %&gt;% mutate(polarity=cumsum(score/total_finn_words))
+
+
+#Plot the overall polarity over the entire lentgth call
+ggplot(afinn_scores, aes(line_number, polarity)) + geom_smooth(span = 0.2) + labs(x = &quot;Line Number&quot;, y = &quot;Polarity Score&quot;,title = &quot;Conference Call Chronological Polarity Q4-19&quot;,subtitle=&quot;AFINN&quot;)  + theme_gdocs() </code></pre>
+<p><img src="/img/sentiment/Confcall_polarity_full_afinn_q119.png" /> <img src="/img/sentiment/Confcall_polarity_full_afinn_q419.png" /></p>
+<p>When the score is plotted over the entire length of the conference call, the trend shows the same characteristics as the Bing visualization. Just like in the Bing Sentiment chart, the overall sentiment score begins to increase from the start and continues into the end of the earnings call.</p>
+</div>
+<div id="analysts-vs-management-afinn" class="section level1">
+<h1>Analysts vs Management: Afinn</h1>
+<p>I want to take a look at the overall positive/negative sentiment from Analysts and Management. Below is the code for Q1-19 plot but the picture is of Q1-19 &amp; Q4-19.</p>
+<pre class="r"><code>#Seperate sentiment by author
+author_sentiment_finn &lt;- text_tidy_finn %&gt;% count(author, score) %&gt;% mutate(tot_score=score*n) %&gt;% mutate(type = ifelse(score &lt; 0,&quot;negative&quot;, &quot;positive&quot;)) %&gt;% group_by(author, type) %&gt;% summarise(tot_word=sum(n)) %&gt;% mutate(percent = tot_word / sum(tot_word)) 
+
+
+
+#Plot each plot side by side
+afinnplot_q1 &lt;- ggplot(author_sentiment_finn, aes(author, percent, fill = type)) + geom_col() + theme(axis.text.x = element_text(angle = 0)) + labs(x = &quot;Author&quot;, y = &quot;Total Percentage&quot;,title = &quot;Makeup of Positive/Negative Sentiment&quot;, subtitle=&quot;AFINN: Q1-19&quot;) 
+
+
+gridExtra::grid.arrange(afinnplot_q1, afinnplot_q4, nrow = 1)</code></pre>
+<div id="afinn-frequency-stacked-barplot" class="section level4">
+<h4>Afinn Frequency Stacked Barplot</h4>
+<div class="figure">
+<img src="/img/sentiment/Confcall_polarity_full_split_afinn_q1q419.png" />
+
+</div>
+<p>This also gives a similar view as the Bing database, but only because we plotted the frequency percentage of pos/neg key terms. I did not take into account the scores for each key term, so when comparing the new sentiment score vs the frequency of each positive/negative term we can see it shows a slightly different story.</p>
+<pre class="r"><code>#Seperate by author sentiments 
+author_sentiment_finn_scored &lt;- text_tidy_finn %&gt;% count(author, score) %&gt;% mutate(tot_score=score*n) %&gt;% mutate(type = ifelse(score &lt; 0,&quot;negative&quot;, &quot;positive&quot;)) %&gt;% group_by(author, type) %&gt;% summarise(tot_score=sum(tot_score)) %&gt;% mutate(tot_score=ifelse(tot_score&lt;0,tot_score*-1,tot_score*1)) %&gt;% ungroup() %&gt;% group_by(author) %&gt;% mutate(percent = tot_score / sum(tot_score))
+
+
+
+#Plot each plot side by side
+afinnplot_scored_q1 &lt;- ggplot(author_sentiment_finn_scored, aes(author, percent, fill = type)) + geom_col() + theme(axis.text.x = element_text(angle = 0)) + labs(x = &quot;Author&quot;, y = &quot;Total Percentage&quot;,title = &quot;Makeup of Positive/Negative Sentiment&quot;, subtitle=&quot;AFINN: Q1-19&quot;) 
+
+
+gridExtra::grid.arrange(afinnplot_scored_q1, afinnplot_scored_q4, nrow = 1)</code></pre>
+</div>
+<div id="afinn-scored-stacked-barplot" class="section level4">
+<h4>Afinn Scored Stacked Barplot</h4>
+<div class="figure">
+<img src="/img/sentiment/Afinn_scored_q1q4.png" />
+
+</div>
+<p>Using the new total sentiment score, it shows a slightly different narrative than the frequency graph above. In Q1, the analysts were <em>slightly</em> more positive than the management while the scored graph showed a wider difference. In Q4, the analysts were a little more positive than the management but the scored graph shows management having more positive tone in sentiment. This shows that the -5 to 5 scoring scale is effective in scoring some words with a higher weight than others.</p>
+<p><br></p>
+</div>
+</div>
+<div id="nrc-lexicon-sentiment-emotions" class="section level1">
+<h1>NRC Lexicon: Sentiment Emotions</h1>
+<p>Another form of sentiment analysis can classify the emotion of the speaker by using NRC lexicon. This lexicon scores a distinct emotional class covering Plutchiks Wheel of Emotions. The NRC lexicon, developed by Saif Mohammad and Peter Turney, consists of 13,901 keywords and also includes positive and negative words. Since I’ve already done positive and negative scoring scales words, we will subset this type of scoring out and only analyze the remaining 8,265 key emotion words. Of course, I need to look at the biggest contributors to the score and if it is appropriate for our text.</p>
+<pre class="r"><code>#NRC lexicon
+nrc &lt;- tidytext::get_sentiments(&quot;nrc&quot;)
+
+nrc_score_tidy &lt;- text_tidy %&gt;% inner_join(nrc, by = &quot;word&quot;) %&gt;% anti_join(stop_words, by = &quot;word&quot;) 
+
+#Check for possible adjustments
+head(nrc_score_tidy %&gt;% count(word,sentiment, sort = T),100)</code></pre>
+<pre><code>## # A tibble: 100 x 3
+##    word     sentiment        n
+##    &lt;chr&gt;    &lt;chr&gt;        &lt;int&gt;
+##  1 customer positive        65
+##  2 growth   positive        22
+##  3 system   trust           22
+##  4 trust    trust           22
+##  5 commerce trust           21
+##  6 ability  positive        20
+##  7 continue anticipation    14
+##  8 continue positive        14
+##  9 continue trust           14
+## 10 guidance positive        14
+## # … with 90 more rows</code></pre>
+<p>We can see the sentiment score scale change from integer to a categorical value. Since the executives have more airtime on these calls, they will have more words to count from so we will log the values to normalize the scale. I want to use a radar chart to view the overall emotions of the executives and analysts. Below is the code for creating the Q1 grouped NRC df, but the plots show both Q1 &amp; Q4. I will also show stacked bar charts for comparison.</p>
+<pre class="r"><code>nrc_scores_group_radar_q1 &lt;- nrc_score_tidy %&gt;% filter(!grepl(&quot;positive|negative&quot;, sentiment)) %&gt;% count(author, sentiment) %&gt;% spread(author,n)</code></pre>
+<pre class="r"><code>#Plot radar chart to view NRC scores
+radarchart::chartJSRadar(nrc_scores_group_radar_q1, main = &quot;Wheel of Emotions Q1-19&quot;)</code></pre>
+<canvas id="htmlwidget-1" class="chartJSRadar html-widget" width="672" height="480"></canvas>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"data":{"labels":["anger","anticipation","disgust","fear","joy","sadness","surprise","trust"],"datasets":[{"label":"analyst","data":[1.94591014905531,2.30258509299405,0.693147180559945,0.693147180559945,2.19722457733622,null,2.07944154167984,3.17805383034795],"backgroundColor":"rgba(255,0,0,0.2)","borderColor":"rgba(255,0,0,0.8)","pointBackgroundColor":"rgba(255,0,0,0.8)","pointBorderColor":"#fff","pointHoverBackgroundColor":"#fff","pointHoverBorderColor":"rgba(255,0,0,0.8)"},{"label":"management","data":[3.66356164612965,5.21493575760899,2.19722457733622,3.95124371858143,4.80402104473326,3.3322045101752,3.80666248977032,5.74939298590825],"backgroundColor":"rgba(0,255,0,0.2)","borderColor":"rgba(0,255,0,0.8)","pointBackgroundColor":"rgba(0,255,0,0.8)","pointBorderColor":"#fff","pointHoverBackgroundColor":"#fff","pointHoverBorderColor":"rgba(0,255,0,0.8)"}]},"options":{"responsive":true,"title":{"display":true,"text":"Wheel of Emotions Q1-19"},"scale":{"ticks":{"min":0},"pointLabels":{"fontSize":18}},"tooltips":{"enabled":true,"mode":"label"},"legend":{"display":true}}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>#Plot radar chart to view NRC scores
+radarchart::chartJSRadar(nrc_scores_group_radar_q4, main = &quot;Wheel of Emotions Q4-19&quot;)</code></pre>
+<canvas id="htmlwidget-2" class="chartJSRadar html-widget" width="672" height="480"></canvas>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"data":{"labels":["anger","anticipation","disgust","fear","joy","sadness","surprise","trust"],"datasets":[{"label":"analyst","data":[1.94591014905531,2.30258509299405,0.693147180559945,0.693147180559945,2.19722457733622,null,2.07944154167984,3.17805383034795],"backgroundColor":"rgba(255,0,0,0.2)","borderColor":"rgba(255,0,0,0.8)","pointBackgroundColor":"rgba(255,0,0,0.8)","pointBorderColor":"#fff","pointHoverBackgroundColor":"#fff","pointHoverBorderColor":"rgba(255,0,0,0.8)"},{"label":"management","data":[3.66356164612965,5.21493575760899,2.19722457733622,3.95124371858143,4.80402104473326,3.3322045101752,3.80666248977032,5.74939298590825],"backgroundColor":"rgba(0,255,0,0.2)","borderColor":"rgba(0,255,0,0.8)","pointBackgroundColor":"rgba(0,255,0,0.8)","pointBorderColor":"#fff","pointHoverBackgroundColor":"#fff","pointHoverBorderColor":"rgba(0,255,0,0.8)"}]},"options":{"responsive":true,"title":{"display":true,"text":"Wheel of Emotions Q4-19"},"scale":{"ticks":{"min":0},"pointLabels":{"fontSize":18}},"tooltips":{"enabled":true,"mode":"label"},"legend":{"display":true}}},"evals":[],"jsHooks":[]}</script>
+<p><br></p>
+<div class="figure">
+<img src="/img/sentiment/Emotional_q1q419.png" />
+
+</div>
+<p>It looks like <em>NONE</em> of the analysts sounded sad in Q1 or Q4! The management had the highest tone of Joy throughout the conference call. Overall, I would say that anticipation and trust seemed to be the overall emotion for the length of the call. I am not a big fan of this lexicon, as the emotions of the analysts or management at the time of call doesn’t tell much regarding the long term future of the company.</p>
+<p><br></p>
+</div>
+<div id="the-famous-loughran-mcdonald-lexicon" class="section level1">
+<h1>The Famous Loughran &amp; Mcdonald Lexicon</h1>
+<p>This lexicon contains 2702 key terms that relate to business operations. This lexicon is a list of positive, negative and uncertainty words according to the Loughran-McDonald finance-specific dictionary. This dictionary was first presented in the Journal of Finance and has been widely used in the finance domain ever since. In the “lexicon” package, we can load this lexicon which classifies “uncertainty” words as negative values. We could also use the “SentimentAnalysis” package that supplies only the words of the lexicon. I want to first view the Top 10 most frequent scored keywords.</p>
+<pre class="r"><code>#Loughran &amp; Mcdonald lexicon
+loughran_mcdonald &lt;- lexicon::hash_sentiment_loughran_mcdonald
+
+
+#Create tiddy object that is filtered and scored
+text_tidy_hash_sentiment_loughran_mcdonald &lt;- text_tidy %&gt;% inner_join(loughran_mcdonald, by = c(&quot;word&quot; = &quot;x&quot;)) %&gt;% anti_join(stop_words, by = &quot;word&quot;)
+
+
+#Top 10 most frequent loughran_mcdonald scored words in our text.
+head(text_tidy_hash_sentiment_loughran_mcdonald %&gt;% count(word, y, sort = TRUE),10)</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    word           y     n
+##    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;
+##  1 great          1    14
+##  2 incredible     1    13
+##  3 question      -1    12
+##  4 success        1    12
+##  5 innovation     1    11
+##  6 strong         1     8
+##  7 tremendous     1     8
+##  8 leading        1     7
+##  9 miss          -1     6
+## 10 achieve        1     4</code></pre>
+<p>Great! These type of keywords are more business oriented which is a great fit for conference call analysis. One thing that is not a great fit is the negative score placed on the word “question” which I will need to adjust.</p>
+<p>After adjusting, I want to illustrate the top positive/negative scored terms.</p>
+<p><img src="/img/sentiment/Front_topbtm_loughran_q119.png" /> <img src="/img/sentiment/Front_topbtm_loughran_q419.png" /></p>
+<p>It looks like this dictionary scores the word “ill” as a negative term which makes sense. During my text cleanup, I changed all of “I’ll” to “ill” which is being scored as a negative. You must always pay attention to detail even after you’ve cleaned your text! I will adjust for this as well and illustrate the polarity score throughout the conference call below.</p>
+<p><br></p>
+<div class="figure">
+<img src="/img/sentiment/confcall_polarity_full_loughran_q119.png" />
+
+</div>
+<div class="figure">
+<img src="/img/sentiment/confcall_polarity_full_loughran_q419.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="overall-lexicon-sentiment-results" class="section level1">
+<h1>Overall Lexicon Sentiment Results</h1>
+<p>We can see from the final lexicon, that the sentiment throughout the call also shared similar characteristics to the other lexicons. Now that I have visualized all four sentiments from each lexicon, I want to take a look at a data frame with the earnings dates, positive scored words, negative scored words, total words, overall scores, positive/negative sentiment, lexicon, and even the adjusted 3-month forward adjusted returns. This is something I was saving behind the scenes as I analyzed each lexicon.</p>
+<pre class="r"><code>print.data.frame(sentiment_df)</code></pre>
+<pre><code>##    Ticker             Earnings_date Positive Negative Total_words
+## 1     CRM  May 29, 2018  8:53 PM ET      276       92       10142
+## 2     CRM  May 29, 2018  8:53 PM ET      309       37       10142
+## 3     CRM  May 29, 2018  8:53 PM ET      580       59       10142
+## 4     CRM  May 29, 2018  8:53 PM ET      146       47       10142
+## 5     CRM Aug. 29, 2018  9:54 PM ET      280       88        8646
+## 6     CRM Aug. 29, 2018  9:54 PM ET      277       30        8646
+## 7     CRM Aug. 29, 2018  9:54 PM ET      509       57        8646
+## 8     CRM Aug. 29, 2018  9:54 PM ET      139       47        8646
+## 9     CRM Nov. 28, 2018 12:01 AM ET      314      102        9496
+## 10    CRM Nov. 28, 2018 12:01 AM ET      309       37        9496
+## 11    CRM Nov. 28, 2018 12:01 AM ET      539       93        9496
+## 12    CRM Nov. 28, 2018 12:01 AM ET      157       46        9496
+## 13    CRM Mar.  4, 2019 11:53 PM ET      282       85        8953
+## 14    CRM Mar.  4, 2019 11:53 PM ET      312       26        8953
+## 15    CRM Mar.  4, 2019 11:53 PM ET      538       59        8953
+## 16    CRM Mar.  4, 2019 11:53 PM ET      152       40        8953
+##         Score Sentiment           Lexicon fwd_qtr_return
+## 1  19.0045208  positive              bing      0.1832173
+## 2  67.6090723  positive             afinn      0.1832173
+## 3   0.8153365  positive               nrc      0.1832173
+## 4   0.5129534  positive loughran_mcdonald      0.1832173
+## 5  14.8544156  negative              bing     -0.1691205
+## 6  44.8652201  negative             afinn     -0.1691205
+## 7   0.7985866  negative               nrc     -0.1691205
+## 8   0.4946237  negative loughran_mcdonald     -0.1691205
+## 9  18.6783881  positive              bing      0.1269909
+## 10 67.6090723  positive             afinn      0.1269909
+## 11  0.7056962  negative               nrc      0.1269909
+## 12  0.5467980  positive loughran_mcdonald      0.1269909
+## 13 12.6184193  negative              bing             NA
+## 14 49.7076174  negative             afinn             NA
+## 15  0.8023451  positive               nrc             NA
+## 16  0.5833333  positive loughran_mcdonald             NA</code></pre>
+<p>Looking at whether the score classified the transcript as positive or negative, I can see how accurate the classification was by comparing that to the adjusted 3-month forward return. If the transcript was classified as positive, then loosely speaking, that should translate to positive stock performance going into the following quarter. We can see that the NRC emotion lexicon failed to correctly classify one out of three transcripts while the other lexicons classified all three correctly according to adjusted forward returns. The four NA’s are for the current quarter since the full 3-month adjusted return does not exist yet.</p>
+<p><br></p>
+</div>
+<div id="tokenization" class="section level1">
+<h1>Tokenization</h1>
+<p>Tokenization helps to divide the text into individual words. For performing tokenization process, there are many open source tools are available. Tokenization is the process of breaking a stream of textual content up into words, terms, symbols, or some other meaningful elements called tokens. During this post, I’ve only analyzed single-words that breaks up the text into one-word “tokens”. Now, I want to look at a variety of bi-gram and tri-gram tokens, or two-word / three-word phrases.</p>
+<div id="bi-gram" class="section level3">
+<h3>Bi-gram</h3>
+<p>I can increase the amount of “tokens” or words that we use when building our n-grams, which would result in bi-gram or tri-gram for three-word phrases. Also, I can check for any negation words that may arrive before any of the highest positive words to see if anything needs to be adjusted. This is a bit more sophisticated than a single word analysis. If growth occurs 20x in a text, can I say that it is positive? Not exactly, because what if “slow growth” occurred 15 out of those 20 times. At the end of creating the bi-gram, I can check for negation words before any of our scored keywords.</p>
+<p><img src="/img/sentiment/Bigram_freq_split_q119.png" /> <img src="/img/sentiment/Bigram_freq_split_q419.png" /></p>
+<pre class="r"><code>#Create Bi-gram tibble. This creates a row for every bi-gram, or two-word phrase.
+text_tidy_bi &lt;- tibble_tidy %&gt;% mutate(line_number = 1:nrow(.)) %&gt;% group_by(author) %&gt;% unnest_tokens(bigram, text, token = &quot;ngrams&quot;, n = 2) %&gt;% ungroup() %&gt;% arrange(line_number)
+
+
+#Seperate the bi-gram column into two column, one for each word. Filter for stop words.
+text_tidy_bi_filtsep &lt;- text_tidy_bi %&gt;% separate(bigram, c(&quot;word1&quot;, &quot;word2&quot;), sep = &quot; &quot;) %&gt;% filter(!word1 %in% stop_words$word &amp; !word2 %in% stop_words$word) 
+
+
+#Count most common bi-gram associated with groth
+text_tidy_bi_filtsep %&gt;% filter(word2 == &quot;growth&quot; | word2 == &quot;growing&quot; | word1 == &quot;growing&quot; | word1 == &quot;growth&quot; | word2 == &quot;grow&quot; | word1 == &quot;grow&quot;) %&gt;% count(word1, word2, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 23 x 3
+##    word1      word2       n
+##    &lt;chr&gt;      &lt;chr&gt;   &lt;int&gt;
+##  1 growth     rate        6
+##  2 revenue    growth      3
+##  3 fastest    growing     2
+##  4 remarkable growth      2
+##  5 25         growth      1
+##  6 35         growth      1
+##  7 amazing    growth      1
+##  8 apples     growth      1
+##  9 basis      growing     1
+## 10 cloud      growth      1
+## # … with 13 more rows</code></pre>
+<div id="checking-for-negation-words" class="section level4">
+<h4>Checking for negation words</h4>
+<p>How often are words preceded by a word like “not” or “no” and is the score conflicting?</p>
+<pre class="r"><code>#Seperate the bi-gram column into two columns but do not adjust for stop words to properly search for negation words.
+text_tidy_bi_sep &lt;- text_tidy_bi %&gt;% separate(bigram, c(&quot;word1&quot;, &quot;word2&quot;), sep = &quot; &quot;) 
+
+#Afinn 
+afinn &lt;- tidytext::get_sentiments(&quot;afinn&quot;)
+
+#negation words before scored key word
+text_tidy_bi_sep %&gt;% filter(word1 %in% qdapDictionaries::negation.words) %&gt;% inner_join(afinn, by = c(word2 = &quot;word&quot;))</code></pre>
+<pre><code>## # A tibble: 0 x 6
+## # … with 6 variables: author &lt;chr&gt;, id &lt;chr&gt;, line_number &lt;int&gt;,
+## #   word1 &lt;chr&gt;, word2 &lt;chr&gt;, score &lt;int&gt;</code></pre>
+<p>Nothing in Q1. One in Q4. Only one negation word occured before any of our scored key words which was “not”. The key word was perfectly and this bi-gram occured 3 times. I do not think this needs to be accounted for but we can double check when analyzing “tri-grams”.</p>
+</div>
+</div>
+</div>
+<div id="tri-gram" class="section level1">
+<h1>Tri-gram</h1>
+<p>Moving from Bi-gram to Tri-gram, we can expect the same concept as bi-grams but with a little more power. We can now check for 3-word phrases and analyze before and after a scored keyword.</p>
+<pre class="r"><code>#Create Tri-gram tibble. This creates a row for every tri-gram, or three-word phrase.
+text_tidy_tri &lt;- tibble_tidy %&gt;% mutate(line_number = 1:nrow(.)) %&gt;% group_by(author) %&gt;% unnest_tokens(trigram, text, token = &quot;ngrams&quot;, n = 3) %&gt;% ungroup() %&gt;% arrange(line_number)
+
+#Seperate the bi-gram column into two column, one for each word. Filter for stop words.
+tri_words &lt;- text_tidy_tri %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;, &quot;word3&quot;), sep = &quot; &quot;) %&gt;% filter(!word1 %in% stop_words$word &amp; !word2 %in% stop_words$word &amp; !word3 %in% stop_words$word) %&gt;% unite(trigram, word1, word2, word3, sep = &quot; &quot;)
+
+#Count 10 most common tri-gram phrases.
+tri_words %&gt;% count(trigram, sort = TRUE) %&gt;% head(10)</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    trigram                           n
+##    &lt;chr&gt;                         &lt;int&gt;
+##  1 remaining transaction price       7
+##  2 360 degree view                   6
+##  3 asc 2016 01                       4
+##  4 asc 340 40                        4
+##  5 field service lightning           4
+##  6 national privacy law              4
+##  7 operating cash flow               4
+##  8 2 billion predictions             3
+##  9 accounting standards asc          3
+## 10 current remaining transaction     3</code></pre>
+<p><img src="/img/sentiment/Trigram_freq_split_q119.png" /> <img src="/img/sentiment/Trigram_freq_split_q419.png" /></p>
+<p>These charts look similar to each other from Q1 to Q4, but after taking a closer look you can see the tri-gram phrases differ. It seems like the management switched focus from scaling in the “fourth industrial revolution” in Q1 to now focusing on creating an all-in-one or “customer 360” platform in the most recent Q4 call.</p>
+<pre class="r"><code>#Afinn lexicon as scored words
+afinn &lt;- tidytext::get_sentiments(&quot;afinn&quot;)
+
+
+#Check negation words in word1 or word2 while joining to scored keywords by word 3
+text_tidy_tri %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;, &quot;word3&quot;), sep = &quot; &quot;) %&gt;% filter(word1 %in% qdapDictionaries::negation.words | word2 %in% qdapDictionaries::negation.words) %&gt;% inner_join(afinn, by = c(word3 = &quot;word&quot;))</code></pre>
+<pre><code>## # A tibble: 0 x 7
+## # … with 7 variables: author &lt;chr&gt;, id &lt;chr&gt;, line_number &lt;int&gt;,
+## #   word1 &lt;chr&gt;, word2 &lt;chr&gt;, word3 &lt;chr&gt;, score &lt;int&gt;</code></pre>
+<pre class="r"><code>#Check negation words in word1 while joining to scored keywords by word 2
+text_tidy_tri %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;, &quot;word3&quot;), sep = &quot; &quot;) %&gt;% filter(word1 %in% qdapDictionaries::negation.words) %&gt;% inner_join(afinn, by = c(word2 = &quot;word&quot;))</code></pre>
+<pre><code>## # A tibble: 0 x 7
+## # … with 7 variables: author &lt;chr&gt;, id &lt;chr&gt;, line_number &lt;int&gt;,
+## #   word1 &lt;chr&gt;, word2 &lt;chr&gt;, word3 &lt;chr&gt;, score &lt;int&gt;</code></pre>
+<p>Remember the “not perfectly” Negator bi-gram? By using a tri-gram, I can shed more light on the bi-gram that saw a negation word before the keyword. As we can see, the complete phrase of “not perfectly comparable” is something that doesn’t need much attention, compared to something like “not growing revenue” which may signal red flags.</p>
+</div>
+<div id="visualizing-textual-relationships" class="section level1">
+<h1>Visualizing Textual Relationships</h1>
+<p>Viewing relationships in the text through Network Graphs, Dendrograms, and Correlation Networks can be helpful to find unusual relationships. You can edit these to fit the patterns you are looking for, which I will continue to search for “growth” keywords. Without going into too much detail regarding these graphs, they are all attempting to show the relationships between the text. If the words share a strong relationship, you will see them clustered together or near each other on the below charts.</p>
+</div>
+<div id="network-graphs" class="section level1">
+<h1>Network graphs</h1>
+<p><img src="/img/sentiment/Bi-gram_network.png" /> <img src="/img/sentiment/Bi-gram_network_q4.png" /></p>
+<p><br></p>
+</div>
+<div id="dendropgrams" class="section level1">
+<h1>Dendropgrams</h1>
+<p><img src="/img/sentiment/Dendropgram_q119.png" /> <img src="/img/sentiment/Dendropgram_q419.png" /></p>
+</div>
+<div id="correlation-with-the-word-growth-q1-19" class="section level1">
+<h1>Correlation with the word “Growth” Q1-19</h1>
+<div class="figure">
+<img src="/img/sentiment/Growth_rev_corr_graph_q119.png" />
+
+</div>
+</div>
+<div id="correlation-with-the-word-growth-q4-19" class="section level1">
+<h1>Correlation with the word “Growth” Q4-19</h1>
+<div class="figure">
+<img src="/img/sentiment/Growth_rev_corr_graph_q419.png" />
+
+</div>
+<p>Remember how we saw the word “headwind” appear in our text but not in the scoring lexicons? Well, these visualizations exploit the cause of these “headwinds” which was FX. I can also see relationships such as “grew revenue”, “durable growth” and “incredible innovation”. These can be extremely powerful, especially in situations where I have a set of words that I need to analyze relationships within the text. I would highly suggest those who are interested in these charts to read more details on how these relationships are found.</p>
+<p><br></p>
+</div>
+<div id="looking-forward" class="section level1">
+<h1>Looking Forward</h1>
+<p>After reading <a href="http://stanford.edu/class/msande448/2017/Final/Reports/gr1.pdf">“Forecasting Returns Using Earnings Call Transcripts”</a>, I was inspired to consider a similar approach. I wanted to create multiple lists of words/phrases that represent factors which could drive excess returns to the set of stocks I am following. Since Salesforce is considered a growth stock, I would consider looking for growth factors and operational factors such as revenue growth, margin expansions, improved operating leverage, etc. We can count the number of terms that occurred within each of these categories, total terms within the document, and begin calculating scores for each of those categories in each transcript. The idea is to then use a regression using the scores against the forward adjusted returns to find the optimal ?t-stat weights? to use for each category.</p>
+<p>Once I can get a sentiment analysis model similar to the Stanford research project, my plan is to run a few different analysis to test which lexicon approach is best to use for conference call sentiment analysis. This type of work and detail will need to be saved for the part 2 post, so stay tuned!!</p>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/crm/">CRM</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/cloud/">Cloud</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/sentiment-analysis/">Sentiment Analysis</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/conference-call/">Conference Call</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/alpaca-for-r/" data-tooltip="AlpacaforR">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/04/sentiment-analysis-conf-call/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/04/sentiment-analysis-conf-call/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/04/sentiment-analysis-conf-call/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Jagger Villalobos. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/alpaca-for-r/" data-tooltip="AlpacaforR">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/04/sentiment-analysis-conf-call/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/04/sentiment-analysis-conf-call/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/04/sentiment-analysis-conf-call/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F04%2Fsentiment-analysis-conf-call%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F04%2Fsentiment-analysis-conf-call%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F04%2Fsentiment-analysis-conf-call%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jagger Villalobos</h4>
+    
+      <div id="about-card-bio">Bottom-Up Analysis | Equity Research</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Seeking Analyst Position
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        New York, New York
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/sentiment-analysis-conf-call/">
+                <h3 class="media-heading">Sentiment Analysis on Earnings Call</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/alpaca-for-r/">
+                <h3 class="media-heading">AlpacaforR</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
+                <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
+                <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">IPO Estimate &amp; Review  Taking a look at LYFT financials for the first time Review of Dropbox IPO and stock performance  
+ Can the slow IPO market get a lift from LYFT? Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
+                <h3 class="media-heading">Salesforce Q3 Update</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Salesforce Q3 Update  Updated model from previous post, click here to read previous Salesforce post Management raised top and bottom line forecasts for FY19 guidance Management gave more details on FY20 &amp; FY22 goals and confirmed forecasts Near bulletproof business model during economic slowdown Key risks to management goals Recommendation and price targets  
+Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/12/yield-curve-fun/">
+                <h3 class="media-heading">Yield Curve Inversion - Marks End to Bull Market?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Going, Going, Inverted!  Yield Curve inversions are typically a leading indicator for a recession Historic analysis on inversions for specific yields since 1990 Yield Curve over 5 different time frames since the start of 2018 Takeaway from recent inversions   Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/11/salesforce-enough-to-buy/">
+                <h3 class="media-heading">Salesforce, Inc. - Are Expanding Margins Enough to Buy?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Salesforce, Inc.  Leader in the growing CRM market Modestly expanding margins Monetizing existing customer base  
+Customer Relationship Management Pioneer Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig in to Salesforce specifically, let’s explore what exactly CRM is and the growth prospects.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/11/ml-airbnb-prices/">
+                <h3 class="media-heading">Teaching a Machine to Learn NYC Airbnb Prices</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Using Airbnb By now, most Gen Z and millenials have heard of or used Airbnb for a range of many reasons, such as looking for a place to crash or taking a vacation. I believe what won the consumer’s attention over hotels was the fact that you are getting the “homey” setting and privacy while away on vacation instead of a hotel environment. I realize not everyone wants to part ways with room service, benefits of a having full-service bar in the lobby, pool &amp; spas, sometimes a gym, and the 100+ channels, but when comparing the prices and the extra sq.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         8 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2019\/04\/sentiment-analysis-conf-call\/';
+          
+            this.page.identifier = '\/2019\/04\/sentiment-analysis-conf-call\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
