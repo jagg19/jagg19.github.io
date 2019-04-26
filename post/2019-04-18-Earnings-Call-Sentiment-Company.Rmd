@@ -313,6 +313,9 @@ all_corpus_clean <- clean_corpus(all_corpus)
 ```
 
 
+<br>
+
+
 ## Simple Frequency Count from TDM
 
 After cleaning the text a little more, I am ready to begin my analysis. I'll start with a simple barplot illustrating the Top 20 most frequent words in our text.
@@ -1062,6 +1065,11 @@ text_tidy_tri %>% separate(trigram, c("word1", "word2", "word3"), sep = " ") %>%
 Remember the "not perfectly" Negator bi-gram? By using a tri-gram, I can shed more light on the bi-gram that saw a negation word before the keyword. As we can see, the complete phrase of "not perfectly comparable" is something that doesn't need much attention, compared to something like "not growing revenue" which may signal red flags. 
 
 
+
+<br>
+
+
+
 # Visualizing Textual Relationships
 
 Viewing relationships in the text through Network Graphs, Dendrograms, and Correlation Networks can be helpful to find unusual relationships. You can edit these to fit the patterns you are looking for, which I will continue to search for "growth" keywords. Without going into too much detail regarding these graphs, they are all attempting to show the relationships between the text. If the words share a strong relationship, you will see them clustered together or near each other on the below charts.
@@ -1192,11 +1200,11 @@ word_pairs %>% filter(item2 %in% c("growth","revenue")) %>%
 ![](/img/sentiment/Dendropgram_q419.png)
 
 
-# Correlation with the word "Growth" Q1-19
+## Correlation with the word "Growth" Q1-19
 
 ![](/img/sentiment/Growth_rev_corr_graph_q119.png)
 
-# Correlation with the word "Growth" Q4-19
+## Correlation with the word "Growth" Q4-19
  
 ![](/img/sentiment/Growth_rev_corr_graph_q419.png)
 

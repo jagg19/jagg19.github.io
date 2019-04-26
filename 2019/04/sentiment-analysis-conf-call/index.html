@@ -524,6 +524,7 @@ clean_corpus &lt;-function(corpus){
 
 
 all_corpus_clean &lt;- clean_corpus(all_corpus)</code></pre>
+<p><br></p>
 <div id="simple-frequency-count-from-tdm" class="section level2">
 <h2>Simple Frequency Count from TDM</h2>
 <p>After cleaning the text a little more, I am ready to begin my analysis. I’ll start with a simple barplot illustrating the Top 20 most frequent words in our text.</p>
@@ -927,6 +928,7 @@ text_tidy_tri %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;, &
 ## # … with 7 variables: author &lt;chr&gt;, id &lt;chr&gt;, line_number &lt;int&gt;,
 ## #   word1 &lt;chr&gt;, word2 &lt;chr&gt;, word3 &lt;chr&gt;, score &lt;int&gt;</code></pre>
 <p>Remember the “not perfectly” Negator bi-gram? By using a tri-gram, I can shed more light on the bi-gram that saw a negation word before the keyword. As we can see, the complete phrase of “not perfectly comparable” is something that doesn’t need much attention, compared to something like “not growing revenue” which may signal red flags.</p>
+<p><br></p>
 </div>
 <div id="visualizing-textual-relationships" class="section level1">
 <h1>Visualizing Textual Relationships</h1>
@@ -940,22 +942,22 @@ text_tidy_tri %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;, &
 <div id="dendropgrams" class="section level1">
 <h1>Dendropgrams</h1>
 <p><img src="https://jagg19.github.io/img/sentiment/Dendropgram_q119.png" /> <img src="https://jagg19.github.io/img/sentiment/Dendropgram_q419.png" /></p>
-</div>
-<div id="correlation-with-the-word-growth-q1-19" class="section level1">
-<h1>Correlation with the word “Growth” Q1-19</h1>
+<div id="correlation-with-the-word-growth-q1-19" class="section level2">
+<h2>Correlation with the word “Growth” Q1-19</h2>
 <div class="figure">
 <img src="https://jagg19.github.io/img/sentiment/Growth_rev_corr_graph_q119.png" />
 
 </div>
 </div>
-<div id="correlation-with-the-word-growth-q4-19" class="section level1">
-<h1>Correlation with the word “Growth” Q4-19</h1>
+<div id="correlation-with-the-word-growth-q4-19" class="section level2">
+<h2>Correlation with the word “Growth” Q4-19</h2>
 <div class="figure">
 <img src="https://jagg19.github.io/img/sentiment/Growth_rev_corr_graph_q419.png" />
 
 </div>
 <p>Remember how we saw the word “headwind” appear in our text but not in the scoring lexicons? Well, these visualizations exploit the cause of these “headwinds” which was FX. I can also see relationships such as “grew revenue”, “durable growth” and “incredible innovation”. These can be extremely powerful, especially in situations where I have a set of words that I need to analyze relationships within the text. I would highly suggest those who are interested in these charts to read more details on how these relationships are found.</p>
 <p><br></p>
+</div>
 </div>
 <div id="looking-forward" class="section level1">
 <h1>Looking Forward</h1>
