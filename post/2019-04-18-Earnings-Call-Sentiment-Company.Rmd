@@ -13,6 +13,7 @@ output:
     df_print: paged
 editor_options: 
   chunk_output_type: console
+summary: "Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done? Are investors staring at twitter 24/7 ready to hit buy or sell? The answer, of course, is no, but algorithms programmed with NLP (natural language processing) scripts are. Sentiment analysis from tweets, social media postings, press releases, surveys, reviews, transcripts and many more occur millions of times every day."  
 ---
 
 ```{r Libraries, eval=FALSE, include=FALSE}
@@ -44,18 +45,14 @@ library(tidytext)
 
 
 
-Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done? Are investors staring at twitter 24/7 ready to hit buy or sell? The answer, of course, is no, but algorithms programmed with NLP (natural language processing) scripts are. Sentiment analysis from tweets, social media postings, press releases, surveys, reviews, transcripts and many more occur millions of times every day. Even when you send your resume in to apply for a job, most likely your resume is being read through an ATS system which analyzes the text to find matching keywords. I've had this earnings sentiment script locked away in my useful financial scripts vault, and after reading a Stanford research paper titled ["Forecasting Returns Using Earnings Call Transcripts"](http://stanford.edu/class/msande448/2017/Final/Reports/gr1.pdf) it inspired me to build upon my current script and create a post about earnings call sentiment. In part 1, I will review sentiment analysis in R and some of the basic terms for it, while in part 2 I will build a model to help us predict if the earnings call warrants a buy for the stock. 
+Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done? Are investors staring at twitter 24/7 ready to hit buy or sell? The answer, of course, is no, but algorithms programmed with NLP (natural language processing) scripts are. Sentiment analysis from tweets, social media postings, press releases, surveys, reviews, transcripts and many more occur millions of times every day. Even when you send your resume in to apply for a job, most likely your resume is being read through an ATS system which analyzes the text to find matching keywords. I've had this earnings sentiment script locked away in my useful financial scripts vault, and after reading a Stanford research paper titled ["Forecasting Returns Using Earnings Call Transcripts"](http://stanford.edu/class/msande448/2017/Final/Reports/gr1.pdf) it inspired me to build upon my current script and create a post about earnings call sentiment.  
 
 
-I find it very interesting how during a conference call, the stock price fluctuates and can change at any second due to one, two or three said words. The company can beat top and bottom line estimates, but if the CEO guides in-line due to “future headwinds” then the stock price can plummet. I decided to build a model that can analyze the conference call transcript using multiple methods to get an overall view of the management and analysts sentiments throughout the call. I first used the very simple method of word frequency analysis, then I used a variety of lexicons for sentiment analysis to arrive at overall sentiment scores, adjusted the lexicons to fit our criteria, analyzed possible negation words, and use network graphs to visualize relationships between the text.
+I'll create part 1 and 2 for this subject because while attempting to cover all the basics, part 1 resulted in a somewhat lengthy post. After cleaning the text, I will use the simple method of word frequency analysis, incorporate a variety of lexicons for sentiment analysis to arrive at overall sentiment scores, adjust the lexicons to fit our criteria, search for possible negation words, and use network graphs to visualize relationships between the text. In part 1, I will review the basics of sentiment analysis in R while in part 2 I will build a model to help us predict if the earnings call warrants a buy for the stock.  
 
 
 # Getting the Data
-I will web scrape the transcript from seeking alpha and clean the empty spaces from the data. Then, I can begin the tedious part which is extracting the key text using REGEX and putting it together into a data frame. For example, I'd like to extract all executive and analyst names so I can label who is speaking to get separate sentiments for management and analysts. I can do this by creating a regular expression pattern. Regular expression is a pattern matching tool that makes up a sequence of symbols to search and extract pattern in the text. If new to REGEX, it can look like nonsense but it is very powerful to sort through and filter textual data. As an example, look at the REGEX code below that I found off google that searches for simple email addresses;
-
->[a-zA-Z0-9_.+-]+@[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_.-]+
-
-Mine wont be this extensive but REGEX is not as easy to read at first. Luckily, R has a package called "Rebus" that makes it a bit easier which I will show shortly. 
+First, I want to create an empty data frame that will hold the results of each lexicon. After, I will web scrape the transcript from seeking alpha and clean any empty spaces from the data. Then, I can begin extracting the key text using Regular Expression (REGEX) and putting it together into seperate data frames. Regular expression is a pattern matching tool that makes up a sequence of symbols to search and extract pattern in the text. 
 
 ```{r Getting the Data, eval=FALSE}
 
@@ -91,37 +88,48 @@ earnings_date <- html_text(html_nodes(html1, "time")) %>% paste0(collapse = "")
 ```
 
 
-Below is the REGEX code to extract the names of executives and analysts in the transcript. We can do this by matching the text to a common format found in transcripts. The transcripts start out by listing the conference call participants, and the lines containing the names always use either "-" or "–" as separators for NAME - TITLE.  
+# Regular Expression 
 
-If REGEX is too daunting for you, then R provides a package called "Rebus" that makes using REGEX as easy as using words to represent patterns. For example, the first the block of code below, and notice how it uses words like "upper, one_or_more, SPC, WRD, capture" instead of the REGEX syntax "[[:upper:]][\\w]+ ". 
+If new to REGEX, it can look like nonsense but it is very powerful to sort through and filter textual data. As an example, look at the REGEX code below that I found off google that searches for simple email addresses;
+
+>[a-zA-Z0-9_.+-]+@[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_.-]+
+
+
+I want to extract the names of executives and analysts in the transcript. I can do this by matching the text to a common format found in transcripts. The transcripts start out by listing the conference call participants, and the lines containing the names always use either "-" or "–" as separators for NAME - TITLE. 
+
+>TIP: If REGEX is too daunting for you, then R provides a package called "Rebus" that makes using REGEX as easy as using words to represent patterns. For example, the first the block of code below, and notice how it uses words like "upper, one_or_more, SPC, WRD, capture" instead of the REGEX syntax "[[:upper:]][\\w]+ ". 
 
 # Splitting the text into sections for analysis 
 ```{r Splitting the data into sections,eval=FALSE}
 
-#Create pattern to grab relevant names such as Analyst and Executives. Using this and REGEX to show difference
+#Create pattern to grab relevant names such as Analyst and Executives. 
+
+
+#Using Rebus
 pattern1 <- capture(upper() %R% one_or_more(WRD) %R% SPC %R%
   upper() %R% one_or_more(WRD)) %R% " - " %R% capture(one_or_more(WRD) %R%
   optional(char_class("- ,")) %R% zero_or_more(WRD %R% SPC %R% WRD %R% "-" %R% WRD))
 
 
-#Grab just the executive names 
-
 #Give the names all common seperators
 transcript_text <- gsub("–","-",transcript_text)
+
+
 
 #REGEX pattern to search for the starting index containing executive names. Finds something like "Mark Benioff - CEO"
 idx_e <- min(which(str_detect(transcript_text, "[[:upper:]][\\w]+ -")))
 
+
 #Dropping everything before the start of Executive names, and resetting the index back to 1
 transcript_text <- transcript_text[idx_e:length(transcript_text)]
-
 idx_e <- 1
 
-#Repeating to find the starting index containing the analyst names
+
+#Repeating to find the starting index for the analyst names
 idx_a <- min(which(!str_detect(transcript_text, "[[:upper:]][\\w]+ -")))
 
 
-#Executive names will start from the starting index to 1 row before the analysts starting index. We will use the pattern we created to extract all names from our resulting vectors
+#Executive names will start from the starting index, idx_e, to 1 row before the analysts starting index, idx_a. We will use the Rebus pattern we created to extract all names from our resulting vectors
 exec <- transcript_text[idx_e:(idx_a-1)]
 exec <- str_match(exec, pattern1)
 exec <- exec[1:nrow(exec),2]
@@ -137,6 +145,8 @@ analyst <- analyst[1:nrow(analyst),2]
 
 #Save just the transcript text. Skip straight to the operators opening remarks
 transcript_text <- transcript_text[(idx_o +1) : length(transcript_text)]
+
+
 
 
 
@@ -171,7 +181,10 @@ all_names_qna <- bind_rows(analyst_names_qna, exec_names_qna) %>% arrange(id)
 ```
 
 
-After extracting the information I need, the earnings transcript is then broken up into two parts. The first part is the first half of the call when the management announces results; then the second part is the question and answer session of the call which is labeled by who is asking and answering the question. After creating the above name vectors, I created two data frames for each part of the call. The first data frame is "conf_call" and the second is "qna_full". This will help give additional visualization once we start getting sentiment scores. Take a look at the data frames below.
+<br> 
+
+
+After extracting the information I need, the earnings transcript is then broken up into two data frames. The first data frame is the first half of the call when the management announces results; then the second data frame is the question and answer session of the call which both are labeled by who is speaking. The first data frame is "conf_call_df" and the second is "qna_full". This will help give additional visualization once we start getting sentiment scores. Take a look at the first three interactions from the qna_full data frame below. 
 
 
 ```{r eval=FALSE, include=FALSE}
@@ -242,21 +255,13 @@ qna_full <- readr::read_csv("/Users/jagvill/Desktop/Github/Data/earnings_sentime
 
 
 
-
-```{r Viewing data we have}
-
-print(conf_call_df)
-print(qna_full)
-```
-
-
-##### The full view of a part from the **first** QNA question.
+##### The first three interactions from the qna_full data frame
 ```{r}
 kableExtra::kable(head(qna_full,3)) %>% kableExtra::kable_styling()
 ```
 
 
-Using the powerful REGEX language and a little bit of elbow grease, I'm left with a two-column data frame. The first column contains the names of the speaker and the second contains the text. I can proceed to clean and properly analyze the text further. 
+Using the powerful REGEX language and a little bit of elbow grease, I'm left with two-column data frames. The first column contains the names of the speaker and the second contains the text. I can proceed to clean and properly analyze the text further. 
 
 
 
@@ -288,7 +293,7 @@ qna_full$text <- qdap_clean(qna_full$text)
 
 The next step is to create a corpus object, which is an object that separates the text by "documents". Then, the corpus object is converted to a Term-Document Matrix which takes each term (as the row value) from each document (as the column value). Once a TDM is created, I can analyze the text in many different ways, starting with a simple word frequency analysis. First, I'll explain why it is necessary for a little more text cleaning. 
 
-First, all words at the end of the sentence will have the punctuation symbol included as part of the word and will be counted as a separate word (I.E "today vs today."). Also, there are many common words which are called stop words that include "my", "was", "to", "by", etc. so I will remove these using the stopwords lexicon from the "tidytext" package. Last, I can expect to see executive and analyst names many times so these should also be removed for analysis purposes. This can be done by creating a function to clean the text from each document inside the corpus as seen below.
+All words at the end of each sentence will have the punctuation symbol included as part of the word and will be counted as a separate word (I.E "today vs today."). Also, there are many common words which are called stop words that include "my", "was", "to", "by", etc. so I will remove these using the stopwords lexicon from the "tidytext" package. Last, I can expect to see executive and analyst names many times so these should also be removed for analysis purposes. This can be done by creating a function to clean the text from each document inside the corpus as seen below.
 
 ```{r eval=FALSE}
 #Create corpus object
@@ -363,7 +368,9 @@ growth_ass_plot <- ggplot(growth_df, aes(score, word)) + geom_point(size = 1.5) 
 
 ![](/img/sentiment/wrd_growth_cor_q419.png)
 
+
 <br>
+
 
 #Running Sentiment Analysis
 From this point on, I will convert the data frame into a tibble, which is a different form of data frame that is easier to work with. After the tibble object is created, each set of text can be labeled according to if its text from an executive or an analyst.
@@ -708,7 +715,7 @@ radarchart::chartJSRadar(nrc_scores_group_radar_q4, main = "Wheel of Emotions Q4
 
 
 
-It looks like *NONE* of the analysts sounded sad in Q1 or Q4! The management had the highest tone of Joy throughout the conference call. Overall, I would say that anticipation and trust seemed to be the overall emotion for the length of the call. I am not a big fan of this lexicon, as the emotions of the analysts or management at the time of call doesn't tell much regarding the long term future of the company.
+It looks like **NONE** of the analysts sounded sad in Q1 or Q4! The management had the highest tone of Joy throughout the conference call. Overall, I would say that anticipation and trust seemed to be the overall emotion for the length of the call. I am not a big fan of this lexicon, as the emotions of the analysts or management at the time of call doesn't tell much regarding the long term future of the company.
 
 
 
@@ -749,7 +756,7 @@ sentiment_df <- rbind(sentiment_df,nrc_sentiment_df)
 
 # The Famous Loughran & Mcdonald Lexicon
 
-This lexicon contains 2702 key terms that relate to business operations. This lexicon is a list of positive, negative and uncertainty words according to the Loughran-McDonald finance-specific dictionary. This dictionary was first presented in the Journal of Finance and has been widely used in the finance domain ever since. In the "lexicon" package, we can load this lexicon which classifies "uncertainty" words as negative values. We could also use the "SentimentAnalysis" package that supplies only the words of the lexicon. I want to first view the Top 10 most frequent scored keywords.
+This lexicon contains 2702 key terms that relate to business operations. This lexicon is a list of positive, negative and uncertainty words according to the Loughran-McDonald finance-specific dictionary. This dictionary was first presented in the Journal of Finance and has been widely used in the finance domain ever since. In the "lexicon" package, we can load this lexicon which classifies "uncertainty" words as negative values. We could also use the "SentimentAnalysis" package that supplies only the words of the lexicon. First, I want to view the Top 10 most frequent scored keywords.
 
 
 ```{r}
@@ -1194,7 +1201,7 @@ word_pairs %>% filter(item2 %in% c("growth","revenue")) %>%
 
 <br>
 
-# Dendropgrams
+# Dendrograms
 
 ![](/img/sentiment/Dendropgram_q119.png)
 ![](/img/sentiment/Dendropgram_q419.png)
@@ -1209,7 +1216,7 @@ word_pairs %>% filter(item2 %in% c("growth","revenue")) %>%
 ![](/img/sentiment/Growth_rev_corr_graph_q419.png)
 
 
-Remember how we saw the word "headwind" appear in our text but not in the scoring lexicons? Well, these visualizations exploit the cause of these "headwinds" which was FX. I can also see relationships such as "grew revenue", "durable growth" and "incredible innovation". These can be extremely powerful, especially in situations where I have a set of words that I need to analyze relationships within the text. I would highly suggest those who are interested in these charts to read more details on how these relationships are found.
+Remember how we saw the word "headwind" appear in our text but not in the scoring lexicons? Well, these visualizations exploit the cause of these "headwinds" which was FX as seen in the Q4 network graph. I can also see relationships such as "grew revenue", "durable growth" and "incredible innovation". These can be extremely powerful, especially in situations where I have a set of words that I want to find any relationships for or correlations within the text. I would highly suggest those who are interested in these charts to read more details on how these relationships are found.
 
 
 <br>
@@ -1217,7 +1224,7 @@ Remember how we saw the word "headwind" appear in our text but not in the scorin
 
 # Looking Forward
 
-After reading ["Forecasting Returns Using Earnings Call Transcripts"](http://stanford.edu/class/msande448/2017/Final/Reports/gr1.pdf), I was inspired to consider a similar approach. I wanted to create multiple lists of words/phrases that represent factors which could drive excess returns to the set of stocks I am following. Since Salesforce is considered a growth stock, I would consider looking for growth factors and operational factors such as revenue growth, margin expansions, improved operating leverage, etc. We can count the number of terms that occurred within each of these categories, total terms within the document, and begin calculating scores for each of those categories in each transcript. The idea is to then use a regression using the scores against the forward adjusted returns to find the optimal ?t-stat weights? to use for each category. 
+After reading ["Forecasting Returns Using Earnings Call Transcripts"](http://stanford.edu/class/msande448/2017/Final/Reports/gr1.pdf), I was inspired to consider a similar approach. I wanted to create multiple lists of words/phrases as a lexicon that represent factors which could drive excess returns to the set of stocks I am following. Since Salesforce is considered a growth stock, I would consider looking for growth factors and operational factors such as revenue growth, margin expansions, improved operating leverage, etc. We can count the number of terms that occurred within each of these categories, total terms within the document, and begin calculating scores for each of those categories in each transcript. The idea is to use a regression using the scores against the forward adjusted returns to find the optimal weights to use for each category. 
 
 
 Once I can get a sentiment analysis model similar to the Stanford research project, my plan is to run a few different analysis to test which lexicon approach is best to use for conference call sentiment analysis. This type of work and detail will need to be saved for the part 2 post, so stay tuned!!
