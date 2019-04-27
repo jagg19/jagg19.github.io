@@ -255,7 +255,7 @@ qna_full <- readr::read_csv("/Users/jagvill/Desktop/Github/Data/earnings_sentime
 
 
 
-##### The first three interactions from the qna_full data frame
+#### The first three interactions from the qna_full data frame
 ```{r}
 kableExtra::kable(head(qna_full,3)) %>% kableExtra::kable_styling()
 ```
@@ -675,7 +675,7 @@ nrc_scores_group_radar <- nrc_score_tidy %>% filter(!grepl("positive|negative", 
 
 nrc_scores_group_radar[,c(2:3)] <- log(nrc_scores_group_radar[,c(2:3)])
 
-write_csv(nrc_scores_group_radar,"nrc_scores_group_radar_q4.csv")
+#write_csv(nrc_scores_group_radar,"nrc_scores_group_radar_q4.csv")
 #read_csv("nrc_scores_group_radar_q1.csv")
 #Plot radar chart to view NRC scores
 chartJSRadar(nrc_scores_group_radar, main = "Wheel of Emotions Q4-19")
@@ -898,7 +898,7 @@ sentiment_df <- sentiment_df %>% mutate(fwd_qtr_return=rtrn)
 ```{r include=FALSE}
 #Read in the dataframe so we dont need to loop the above code
 
-sentiment_df <- readr::read_csv("/Users/jagvill/Desktop/Github/Data/crm_q1-q4_19_sentiment.csv")
+sentiment_df <- readr::read_csv("/Users/jagvill/Desktop/Github/Data/earnings_sentiment_pt1/crm_q1-q4_19_sentiment.csv")
 ```
 
 <br> 
@@ -925,10 +925,12 @@ Tokenization helps to divide the text into individual words. For performing toke
 
 
 
-### Bi-gram
+## Bi-gram
 
-I can increase the amount of "tokens" or words that we use when building our n-grams, which would result in bi-gram or tri-gram for three-word phrases. Also, I can check for any negation words that may arrive before any of the highest positive words to see if anything needs to be adjusted. This is a bit more sophisticated than a single word analysis. If growth occurs 20x in a text, can I say that it is positive? Not exactly, because what if "slow growth" occurred 15 out of those 20 times. At the end of creating the bi-gram, I can check for negation words before any of our scored keywords.
+I can increase the amount of "tokens" or words that we use when building our n-grams which would result in bi-gram, or a tri-gram for three-word phrases. Also, I can check for any negation words that may arrive before any of the highest positive words to see if anything needs to be adjusted. This is a bit more sophisticated than a single word analysis. If growth occurs 20x in a text, can I say that it is positive? Not exactly, because what if "slow growth" occurred 15 out of those 20 times. At the end of creating the bi-gram, I can check for any negation words that occur before any of our scored keywords.
 ```{r eval=FALSE, include=FALSE}
+
+
 
 text_tidy_bi <- tibble_tidy %>% mutate(line_number = 1:nrow(.)) %>% group_by(author) %>% unnest_tokens(bigram, text, token = "ngrams", n = 2) %>% ungroup() %>% arrange(line_number)
 
@@ -955,6 +957,11 @@ gridExtra::grid.arrange(p1, p2, nrow = 1)
 ![](/img/sentiment/Bigram_freq_split_q419.png)
 
 
+<br>
+
+
+#### Most frequent bi-grams with "growth"
+
 
 ```{r}
 
@@ -974,10 +981,21 @@ text_tidy_bi_filtsep %>% filter(word2 == "growth" | word2 == "growing" | word1 =
 
 #### Checking for negation words
 
-How often are words preceded by a word like "not" or "no" and is the score conflicting?
+How often are words preceded by a word like "not" or "no" and is the score conflicting? I found none in the Q1 call but see below for what I found in Q4.
+
+
+```{r include=FALSE}
+write_csv(tibble_tidy,"tibble_tidy_q4.csv")
+
+tibble_tidy_q4 <- read_csv("/Users/jagvill/Desktop/Github/Data/earnings_sentiment_pt1/tibble_tidy_q4.csv")
+
+text_tidy_bi_q4 <- tibble_tidy_q4 %>% mutate(line_number = 1:nrow(.)) %>% group_by(author) %>% unnest_tokens(bigram, text, token = "ngrams", n = 2) %>% ungroup() %>% arrange(line_number)
+```
+
+
 ```{r}
 #Seperate the bi-gram column into two columns but do not adjust for stop words to properly search for negation words.
-text_tidy_bi_sep <- text_tidy_bi %>% separate(bigram, c("word1", "word2"), sep = " ") 
+text_tidy_bi_sep <- text_tidy_bi_q4 %>% separate(bigram, c("word1", "word2"), sep = " ") 
 
 #Afinn 
 afinn <- tidytext::get_sentiments("afinn")
@@ -987,14 +1005,14 @@ text_tidy_bi_sep %>% filter(word1 %in% qdapDictionaries::negation.words) %>% inn
 ```
 
 
-Nothing in Q1. One in Q4. Only one negation word occured before any of our scored key words which was "not". The key word was perfectly and this bi-gram occured 3 times. I do not think this needs to be accounted for but we can double check when analyzing "tri-grams". 
+Only one negation word in Q4 occured before any of our scored key words which was "not". The key word was perfectly and this bi-gram occured 3 times. I do not think this needs to be accounted for but we can double check when analyzing "tri-grams". 
 
 
 
 
 
 
-# Tri-gram
+## Tri-gram
 Moving from Bi-gram to Tri-gram, we can expect the same concept as bi-grams but with a little more power. We can now check for 3-word phrases and analyze before and after a scored keyword. 
 
 ```{r eval=FALSE, include=FALSE}
@@ -1052,7 +1070,19 @@ tri_words %>% count(trigram, sort = TRUE) %>% head(10)
 ![](/img/sentiment/Trigram_freq_split_q419.png)
 
 
-These charts look similar to each other from Q1 to Q4, but after taking a closer look you can see the tri-gram phrases differ. It seems like the management switched focus from scaling in the "fourth industrial revolution" in Q1 to now focusing on creating an all-in-one or "customer 360" platform in the most recent Q4 call.
+These charts look similar to each other from Q1 to Q4, but after taking a closer look you can see the tri-gram phrases differ. It seems like the management switched focus from covering the mulesoft acquisition "remaining transction price" in Q1 to now focusing on creating an all-in-one or "customer 360" platform in the most recent Q4 call. 
+
+
+<br>
+
+
+#### Checking for negation words
+How often are words preceded by a word like "not" or "no" and is the score conflicting? I found none in the Q1 call but see below for what I found in Q4.
+
+```{r include=FALSE}
+text_tidy_tri_q4 <- tibble_tidy_q4 %>% mutate(line_number = 1:nrow(.)) %>% group_by(author) %>% unnest_tokens(trigram, text, token = "ngrams", n = 3) %>% ungroup() %>% arrange(line_number)
+```
+
 
 
 ```{r}
@@ -1061,15 +1091,15 @@ afinn <- tidytext::get_sentiments("afinn")
 
 
 #Check negation words in word1 or word2 while joining to scored keywords by word 3
-text_tidy_tri %>% separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% filter(word1 %in% qdapDictionaries::negation.words | word2 %in% qdapDictionaries::negation.words) %>% inner_join(afinn, by = c(word3 = "word"))
+text_tidy_tri_q4 %>% separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% filter(word1 %in% qdapDictionaries::negation.words | word2 %in% qdapDictionaries::negation.words) %>% inner_join(afinn, by = c(word3 = "word"))
 
 
 #Check negation words in word1 while joining to scored keywords by word 2
-text_tidy_tri %>% separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% filter(word1 %in% qdapDictionaries::negation.words) %>% inner_join(afinn, by = c(word2 = "word"))
+text_tidy_tri_q4 %>% separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% filter(word1 %in% qdapDictionaries::negation.words) %>% inner_join(afinn, by = c(word2 = "word"))
 ```
 
 
-Remember the "not perfectly" Negator bi-gram? By using a tri-gram, I can shed more light on the bi-gram that saw a negation word before the keyword. As we can see, the complete phrase of "not perfectly comparable" is something that doesn't need much attention, compared to something like "not growing revenue" which may signal red flags. 
+Remember the "not perfectly" Negator bi-gram that we saw? By using a tri-gram, I can shed more light on the bi-gram that saw a negation word before the keyword. As we can see with a score of only 3, the complete phrase of "not perfectly comparable" is something that doesn't need much attention, compared to something like "not growing revenue" which may signal red flags. 
 
 
 

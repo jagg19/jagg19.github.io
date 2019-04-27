@@ -429,8 +429,8 @@ exec_names_qna &lt;- tibble(name = qna[qna_location_exec], id = qna_location_exe
 all_names_qna &lt;- bind_rows(analyst_names_qna, exec_names_qna) %&gt;% arrange(id)</code></pre>
 <p><br></p>
 <p>After extracting the information I need, the earnings transcript is then broken up into two data frames. The first data frame is the first half of the call when the management announces results; then the second data frame is the question and answer session of the call which both are labeled by who is speaking. The first data frame is “conf_call_df” and the second is “qna_full”. This will help give additional visualization once we start getting sentiment scores. Take a look at the first three interactions from the qna_full data frame below.</p>
-<div id="the-first-three-interactions-from-the-qna_full-data-frame" class="section level5">
-<h5>The first three interactions from the qna_full data frame</h5>
+<div id="the-first-three-interactions-from-the-qna_full-data-frame" class="section level4">
+<h4>The first three interactions from the qna_full data frame</h4>
 <pre class="r"><code>kableExtra::kable(head(qna_full,3)) %&gt;% kableExtra::kable_styling()</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -736,7 +736,7 @@ radarchart::chartJSRadar(nrc_scores_group_radar_q1, main = &quot;Wheel of Emotio
 <pre class="r"><code>#Plot radar chart to view NRC scores
 radarchart::chartJSRadar(nrc_scores_group_radar_q4, main = &quot;Wheel of Emotions Q4-19&quot;)</code></pre>
 <canvas id="htmlwidget-2" class="chartJSRadar html-widget" width="672" height="480"></canvas>
-<script type="application/json" data-for="htmlwidget-2">{"x":{"data":{"labels":["anger","anticipation","disgust","fear","joy","sadness","surprise","trust"],"datasets":[{"label":"analyst","data":[1.94591014905531,2.30258509299405,0.693147180559945,0.693147180559945,2.19722457733622,null,2.07944154167984,3.17805383034795],"backgroundColor":"rgba(255,0,0,0.2)","borderColor":"rgba(255,0,0,0.8)","pointBackgroundColor":"rgba(255,0,0,0.8)","pointBorderColor":"#fff","pointHoverBackgroundColor":"#fff","pointHoverBorderColor":"rgba(255,0,0,0.8)"},{"label":"management","data":[3.66356164612965,5.21493575760899,2.19722457733622,3.95124371858143,4.80402104473326,3.3322045101752,3.80666248977032,5.74939298590825],"backgroundColor":"rgba(0,255,0,0.2)","borderColor":"rgba(0,255,0,0.8)","pointBackgroundColor":"rgba(0,255,0,0.8)","pointBorderColor":"#fff","pointHoverBackgroundColor":"#fff","pointHoverBorderColor":"rgba(0,255,0,0.8)"}]},"options":{"responsive":true,"title":{"display":true,"text":"Wheel of Emotions Q4-19"},"scale":{"ticks":{"min":0},"pointLabels":{"fontSize":18}},"tooltips":{"enabled":true,"mode":"label"},"legend":{"display":true}}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"data":{"labels":["anger","anticipation","disgust","fear","joy","sadness","surprise","trust"],"datasets":[{"label":"analyst","data":[1.09861228866811,2.77258872223978,0.693147180559945,1.79175946922805,2.30258509299405,null,1.09861228866811,2.99573227355399],"backgroundColor":"rgba(255,0,0,0.2)","borderColor":"rgba(255,0,0,0.8)","pointBackgroundColor":"rgba(255,0,0,0.8)","pointBorderColor":"#fff","pointHoverBackgroundColor":"#fff","pointHoverBorderColor":"rgba(255,0,0,0.8)"},{"label":"management","data":[3.61091791264422,5.11198778835654,2.56494935746154,3.76120011569356,4.69134788222914,3.13549421592915,3.85014760171006,5.35658627467201],"backgroundColor":"rgba(0,255,0,0.2)","borderColor":"rgba(0,255,0,0.8)","pointBackgroundColor":"rgba(0,255,0,0.8)","pointBorderColor":"#fff","pointHoverBackgroundColor":"#fff","pointHoverBorderColor":"rgba(0,255,0,0.8)"}]},"options":{"responsive":true,"title":{"display":true,"text":"Wheel of Emotions Q4-19"},"scale":{"ticks":{"min":0},"pointLabels":{"fontSize":18}},"tooltips":{"enabled":true,"mode":"label"},"legend":{"display":true}}},"evals":[],"jsHooks":[]}</script>
 <p><br></p>
 <div class="figure">
 <img src="https://jagg19.github.io/img/sentiment/Emotional_q1q419.png" />
@@ -830,10 +830,13 @@ head(text_tidy_hash_sentiment_loughran_mcdonald %&gt;% count(word, y, sort = TRU
 <div id="tokenization" class="section level1">
 <h1>Tokenization</h1>
 <p>Tokenization helps to divide the text into individual words. For performing tokenization process, there are many open source tools are available. Tokenization is the process of breaking a stream of textual content up into words, terms, symbols, or some other meaningful elements called tokens. During this post, I’ve only analyzed single-words that breaks up the text into one-word “tokens”. Now, I want to look at a variety of bi-gram and tri-gram tokens, or two-word / three-word phrases.</p>
-<div id="bi-gram" class="section level3">
-<h3>Bi-gram</h3>
-<p>I can increase the amount of “tokens” or words that we use when building our n-grams, which would result in bi-gram or tri-gram for three-word phrases. Also, I can check for any negation words that may arrive before any of the highest positive words to see if anything needs to be adjusted. This is a bit more sophisticated than a single word analysis. If growth occurs 20x in a text, can I say that it is positive? Not exactly, because what if “slow growth” occurred 15 out of those 20 times. At the end of creating the bi-gram, I can check for negation words before any of our scored keywords.</p>
+<div id="bi-gram" class="section level2">
+<h2>Bi-gram</h2>
+<p>I can increase the amount of “tokens” or words that we use when building our n-grams which would result in bi-gram, or a tri-gram for three-word phrases. Also, I can check for any negation words that may arrive before any of the highest positive words to see if anything needs to be adjusted. This is a bit more sophisticated than a single word analysis. If growth occurs 20x in a text, can I say that it is positive? Not exactly, because what if “slow growth” occurred 15 out of those 20 times. At the end of creating the bi-gram, I can check for any negation words that occur before any of our scored keywords.</p>
 <p><img src="https://jagg19.github.io/img/sentiment/Bigram_freq_split_q119.png" /> <img src="https://jagg19.github.io/img/sentiment/Bigram_freq_split_q419.png" /></p>
+<p><br></p>
+<div id="most-frequent-bi-grams-with-growth" class="section level4">
+<h4>Most frequent bi-grams with “growth”</h4>
 <pre class="r"><code>#Create Bi-gram tibble. This creates a row for every bi-gram, or two-word phrase.
 text_tidy_bi &lt;- tibble_tidy %&gt;% mutate(line_number = 1:nrow(.)) %&gt;% group_by(author) %&gt;% unnest_tokens(bigram, text, token = &quot;ngrams&quot;, n = 2) %&gt;% ungroup() %&gt;% arrange(line_number)
 
@@ -858,26 +861,27 @@ text_tidy_bi_filtsep %&gt;% filter(word2 == &quot;growth&quot; | word2 == &quot;
 ##  9 basis      growing     1
 ## 10 cloud      growth      1
 ## # … with 13 more rows</code></pre>
+</div>
 <div id="checking-for-negation-words" class="section level4">
 <h4>Checking for negation words</h4>
-<p>How often are words preceded by a word like “not” or “no” and is the score conflicting?</p>
+<p>How often are words preceded by a word like “not” or “no” and is the score conflicting? I found none in the Q1 call but see below for what I found in Q4.</p>
 <pre class="r"><code>#Seperate the bi-gram column into two columns but do not adjust for stop words to properly search for negation words.
-text_tidy_bi_sep &lt;- text_tidy_bi %&gt;% separate(bigram, c(&quot;word1&quot;, &quot;word2&quot;), sep = &quot; &quot;) 
+text_tidy_bi_sep &lt;- text_tidy_bi_q4 %&gt;% separate(bigram, c(&quot;word1&quot;, &quot;word2&quot;), sep = &quot; &quot;) 
 
 #Afinn 
 afinn &lt;- tidytext::get_sentiments(&quot;afinn&quot;)
 
 #negation words before scored key word
 text_tidy_bi_sep %&gt;% filter(word1 %in% qdapDictionaries::negation.words) %&gt;% inner_join(afinn, by = c(word2 = &quot;word&quot;))</code></pre>
-<pre><code>## # A tibble: 0 x 6
-## # … with 6 variables: author &lt;chr&gt;, id &lt;chr&gt;, line_number &lt;int&gt;,
-## #   word1 &lt;chr&gt;, word2 &lt;chr&gt;, score &lt;int&gt;</code></pre>
-<p>Nothing in Q1. One in Q4. Only one negation word occured before any of our scored key words which was “not”. The key word was perfectly and this bi-gram occured 3 times. I do not think this needs to be accounted for but we can double check when analyzing “tri-grams”.</p>
+<pre><code>## # A tibble: 1 x 6
+##   author     id           line_number word1 word2     score
+##   &lt;chr&gt;      &lt;chr&gt;              &lt;int&gt; &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;
+## 1 management Mark Hawkins          10 not   perfectly     3</code></pre>
+<p>Only one negation word in Q4 occured before any of our scored key words which was “not”. The key word was perfectly and this bi-gram occured 3 times. I do not think this needs to be accounted for but we can double check when analyzing “tri-grams”.</p>
 </div>
 </div>
-</div>
-<div id="tri-gram" class="section level1">
-<h1>Tri-gram</h1>
+<div id="tri-gram" class="section level2">
+<h2>Tri-gram</h2>
 <p>Moving from Bi-gram to Tri-gram, we can expect the same concept as bi-grams but with a little more power. We can now check for 3-word phrases and analyze before and after a scored keyword.</p>
 <pre class="r"><code>#Create Tri-gram tibble. This creates a row for every tri-gram, or three-word phrase.
 text_tidy_tri &lt;- tibble_tidy %&gt;% mutate(line_number = 1:nrow(.)) %&gt;% group_by(author) %&gt;% unnest_tokens(trigram, text, token = &quot;ngrams&quot;, n = 3) %&gt;% ungroup() %&gt;% arrange(line_number)
@@ -901,23 +905,31 @@ tri_words %&gt;% count(trigram, sort = TRUE) %&gt;% head(10)</code></pre>
 ##  9 accounting standards asc          3
 ## 10 current remaining transaction     3</code></pre>
 <p><img src="https://jagg19.github.io/img/sentiment/Trigram_freq_split_q119.png" /> <img src="https://jagg19.github.io/img/sentiment/Trigram_freq_split_q419.png" /></p>
-<p>These charts look similar to each other from Q1 to Q4, but after taking a closer look you can see the tri-gram phrases differ. It seems like the management switched focus from scaling in the “fourth industrial revolution” in Q1 to now focusing on creating an all-in-one or “customer 360” platform in the most recent Q4 call.</p>
+<p>These charts look similar to each other from Q1 to Q4, but after taking a closer look you can see the tri-gram phrases differ. It seems like the management switched focus from covering the mulesoft acquisition “remaining transction price” in Q1 to now focusing on creating an all-in-one or “customer 360” platform in the most recent Q4 call.</p>
+<p><br></p>
+<div id="checking-for-negation-words-1" class="section level4">
+<h4>Checking for negation words</h4>
+<p>How often are words preceded by a word like “not” or “no” and is the score conflicting? I found none in the Q1 call but see below for what I found in Q4.</p>
 <pre class="r"><code>#Afinn lexicon as scored words
 afinn &lt;- tidytext::get_sentiments(&quot;afinn&quot;)
 
 
 #Check negation words in word1 or word2 while joining to scored keywords by word 3
-text_tidy_tri %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;, &quot;word3&quot;), sep = &quot; &quot;) %&gt;% filter(word1 %in% qdapDictionaries::negation.words | word2 %in% qdapDictionaries::negation.words) %&gt;% inner_join(afinn, by = c(word3 = &quot;word&quot;))</code></pre>
-<pre><code>## # A tibble: 0 x 7
-## # … with 7 variables: author &lt;chr&gt;, id &lt;chr&gt;, line_number &lt;int&gt;,
-## #   word1 &lt;chr&gt;, word2 &lt;chr&gt;, word3 &lt;chr&gt;, score &lt;int&gt;</code></pre>
+text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;, &quot;word3&quot;), sep = &quot; &quot;) %&gt;% filter(word1 %in% qdapDictionaries::negation.words | word2 %in% qdapDictionaries::negation.words) %&gt;% inner_join(afinn, by = c(word3 = &quot;word&quot;))</code></pre>
+<pre><code>## # A tibble: 1 x 7
+##   author     id           line_number word1 word2 word3     score
+##   &lt;chr&gt;      &lt;chr&gt;              &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;
+## 1 management Mark Hawkins          10 is    not   perfectly     3</code></pre>
 <pre class="r"><code>#Check negation words in word1 while joining to scored keywords by word 2
-text_tidy_tri %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;, &quot;word3&quot;), sep = &quot; &quot;) %&gt;% filter(word1 %in% qdapDictionaries::negation.words) %&gt;% inner_join(afinn, by = c(word2 = &quot;word&quot;))</code></pre>
-<pre><code>## # A tibble: 0 x 7
-## # … with 7 variables: author &lt;chr&gt;, id &lt;chr&gt;, line_number &lt;int&gt;,
-## #   word1 &lt;chr&gt;, word2 &lt;chr&gt;, word3 &lt;chr&gt;, score &lt;int&gt;</code></pre>
-<p>Remember the “not perfectly” Negator bi-gram? By using a tri-gram, I can shed more light on the bi-gram that saw a negation word before the keyword. As we can see, the complete phrase of “not perfectly comparable” is something that doesn’t need much attention, compared to something like “not growing revenue” which may signal red flags.</p>
+text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;, &quot;word3&quot;), sep = &quot; &quot;) %&gt;% filter(word1 %in% qdapDictionaries::negation.words) %&gt;% inner_join(afinn, by = c(word2 = &quot;word&quot;))</code></pre>
+<pre><code>## # A tibble: 1 x 7
+##   author     id           line_number word1 word2     word3      score
+##   &lt;chr&gt;      &lt;chr&gt;              &lt;int&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;int&gt;
+## 1 management Mark Hawkins          10 not   perfectly comparable     3</code></pre>
+<p>Remember the “not perfectly” Negator bi-gram that we saw? By using a tri-gram, I can shed more light on the bi-gram that saw a negation word before the keyword. As we can see with a score of only 3, the complete phrase of “not perfectly comparable” is something that doesn’t need much attention, compared to something like “not growing revenue” which may signal red flags.</p>
 <p><br></p>
+</div>
+</div>
 </div>
 <div id="visualizing-textual-relationships" class="section level1">
 <h1>Visualizing Textual Relationships</h1>
