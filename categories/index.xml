@@ -2,183 +2,201 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Running on R</title>
-    <link>https://jagg19.github.io/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 15 Apr 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jagg19.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Backtest</title>
-      <link>https://jagg19.github.io/categories/backtest/</link>
+      <link>/categories/backtest/</link>
       <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/backtest/</guid>
+      <guid>/categories/backtest/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Data Analysis</title>
-      <link>https://jagg19.github.io/categories/data-analysis/</link>
+      <link>/categories/data-analysis/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/data-analysis/</guid>
+      <guid>/categories/data-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Earnings</title>
-      <link>https://jagg19.github.io/categories/earnings/</link>
+      <link>/categories/earnings/</link>
       <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/earnings/</guid>
+      <guid>/categories/earnings/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Equity Valuation</title>
-      <link>https://jagg19.github.io/categories/equity-valuation/</link>
+      <link>/categories/equity-valuation/</link>
       <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/equity-valuation/</guid>
+      <guid>/categories/equity-valuation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Forecasting</title>
-      <link>https://jagg19.github.io/categories/forecasting/</link>
+      <link>/categories/forecasting/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/forecasting/</guid>
+      <guid>/categories/forecasting/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Investment</title>
-      <link>https://jagg19.github.io/categories/investment/</link>
+      <link>/categories/investment/</link>
       <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/investment/</guid>
+      <guid>/categories/investment/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ipo</title>
-      <link>https://jagg19.github.io/categories/ipo/</link>
+      <link>/categories/ipo/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/ipo/</guid>
+      <guid>/categories/ipo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Large Datasets</title>
+      <link>/categories/large-datasets/</link>
+      <pubDate>Tue, 14 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/large-datasets/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Market</title>
-      <link>https://jagg19.github.io/categories/market/</link>
+      <link>/categories/market/</link>
       <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/market/</guid>
+      <guid>/categories/market/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Opinion</title>
-      <link>https://jagg19.github.io/categories/opinion/</link>
+      <link>/categories/opinion/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/opinion/</guid>
+      <guid>/categories/opinion/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Predictions</title>
-      <link>https://jagg19.github.io/categories/predictions/</link>
+      <link>/categories/predictions/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/predictions/</guid>
+      <guid>/categories/predictions/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Programming</title>
-      <link>https://jagg19.github.io/categories/programming/</link>
+      <link>/categories/programming/</link>
       <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/programming/</guid>
+      <guid>/categories/programming/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>https://jagg19.github.io/categories/r/</link>
-      <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
+      <link>/categories/r/</link>
+      <pubDate>Tue, 14 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/r/</guid>
+      <guid>/categories/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R Markdown</title>
-      <link>https://jagg19.github.io/categories/r-markdown/</link>
+      <link>/categories/r-markdown/</link>
       <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/r-markdown/</guid>
+      <guid>/categories/r-markdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R Package</title>
-      <link>https://jagg19.github.io/categories/r-package/</link>
+      <link>/categories/r-package/</link>
       <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/r-package/</guid>
+      <guid>/categories/r-package/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Relational Database</title>
+      <link>/categories/relational-database/</link>
+      <pubDate>Tue, 14 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/relational-database/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Review</title>
-      <link>https://jagg19.github.io/categories/review/</link>
+      <link>/categories/review/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/review/</guid>
+      <guid>/categories/review/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Text Mining</title>
-      <link>https://jagg19.github.io/categories/text-mining/</link>
+      <link>/categories/text-mining/</link>
       <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/text-mining/</guid>
+      <guid>/categories/text-mining/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Trading</title>
-      <link>https://jagg19.github.io/categories/trading/</link>
+      <link>/categories/trading/</link>
       <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/trading/</guid>
+      <guid>/categories/trading/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Valuations</title>
-      <link>https://jagg19.github.io/categories/valuations/</link>
+      <link>/categories/valuations/</link>
       <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/valuations/</guid>
+      <guid>/categories/valuations/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Yield Curve</title>
-      <link>https://jagg19.github.io/categories/yield-curve/</link>
+      <link>/categories/yield-curve/</link>
       <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/categories/yield-curve/</guid>
+      <guid>/categories/yield-curve/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.51 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Jagger Villalobos">
+<meta name="keywords" content="">
+<meta name="description" content="Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading &#43; writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB&#43;. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.">
+
+
+<meta property="og:description" content="Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading &#43; writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB&#43;. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Using MySQL with R">
+<meta name="twitter:title" content="Using MySQL with R">
+<meta property="og:url" content="/2019/05/mysql-r/">
+<meta property="twitter:url" content="/2019/05/mysql-r/">
+<meta property="og:site_name" content="Running on R">
+<meta property="og:description" content="Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading &#43; writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB&#43;. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.">
+<meta name="twitter:description" content="Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading &#43; writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB&#43;. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-05-14T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-05-14T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="R">
+    
+      <meta property="article:section" content="Relational Database">
+    
+      <meta property="article:section" content="Large Datasets">
+    
+  
+  
+    
+      <meta property="article:tag" content="MySQL">
+    
+      <meta property="article:tag" content="programming">
+    
+      <meta property="article:tag" content="beautiful-plots">
+    
+      <meta property="article:tag" content="database">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1557824027/hqdefault.jpg">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1557824027/hqdefault.jpg">
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+
+
+    <title>Using MySQL with R</title>
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="/2019/05/mysql-r/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-134862415-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Running on R</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
+        
+          <h5 class="sidebar-profile-bio">Bottom-Up Analysis | Equity Research</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/jagg19">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              post-header-cover--partial"
+       style="background-image:url('https://res.cloudinary.com/dyackvnwm/image/upload/v1557824027/hqdefault.jpg')"
+       data-behavior="4">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Using MySQL with R
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-05-14T00:00:00Z">
+        
+  May 14, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/r">R</a>, 
+    
+      <a class="category-link" href="/categories/relational-database">Relational Database</a>, 
+    
+      <a class="category-link" href="/categories/large-datasets">Large Datasets</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="4"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+
+<div id="using-mysql-with-r" class="section level1">
+<h1>Using MySQL with R</h1>
+<ul>
+<li>Benefits of a Relational Database</li>
+<li>Connecting to MySQL and reading + writing data from R</li>
+<li>Simple analysis using the tables from MySQL</li>
+</ul>
+<p>If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB+. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”. Since R executes code in-memory, which is the computers available RAM, you will encounter failures when reading datasets larger than the available memory. Also, once you have enough data frames stored, then your R session can become extremely slow and affect your work severely. One of my classes at Pace University showed me the value in storing your larger datasets in a MySQL database, and I decided to learn how to stream these datasets in R, so we do not have to store the larger datasets in-memory. This post will briefly discuss a few advantages of using a database to store your data and run through a basic example of using R to transfer data to and from MySQL. I will assume you already have access to a MySQL database.</p>
+<p><br></p>
+</div>
+<div id="relational-database-vs-in-memory" class="section level1">
+<h1>Relational Database vs In Memory</h1>
+<p>Relational databases like MySQL, organize data into tables (spreadsheet format) and can link values in tables to each other (hence “relational”). These relationships are columns that are stored as “unique” &amp; “foreign” key values. Generally speaking, they are better at handling large datasets and are more efficient at storing and accessing data than CSVs due to compression and indexing rules. The data is stored on-disk with MySQL, until it is called through a query, which is different from the in-memory approach R uses for data.frames, matrices, tibbles, vectors, etc. When reading data stored in a file or data.frame in R, the data must all fit in the current available RAM memory.</p>
+<p><br></p>
+</div>
+<div id="the-data" class="section level1">
+<h1>The Data</h1>
+<p>We will use the Chicago Parking Ticket dataset from <a href="%22https://www.propublica.org/datastore/dataset/chicago-parking-ticket-data%22">here</a> which contains 2.07GB 28,272,580 rows containing details on all parking and vehicle compliance tickets issued in Chicago from Jan. 1, 2007 to May 14, 2018, from the Chicago Department of Finance. This isn’t necessarily a “large” dataset, but I believe it’s a large enough size to notice a difference in the performance. First, I am going to read a smaller portion of the data to get an idea of the data types inside the table.</p>
+<pre class="r"><code>#Fread to quickly load into R to get a sense of what your data looks like. 
+test.csv &lt;- data.table::fread(&quot;/usr/local/mysql-8.0.15-macos10.14-x86_64/data/parking_tickets.csv&quot;, nrows = 1000000)
+
+#View
+str(test.csv)</code></pre>
+<pre><code>## Classes &#39;data.table&#39; and &#39;data.frame&#39;:   1000000 obs. of  23 variables:
+##  $ ticket_number        :integer64 51551278 51491256 50433524 51430906 51507779 51260468 51501733 51260469 ... 
+##  $ issue_date           : chr  &quot;2007-01-01 00:00:00&quot; &quot;2007-01-01 00:00:00&quot; &quot;2007-01-01 00:01:00&quot; &quot;2007-01-01 00:01:00&quot; ...
+##  $ violation_location   : chr  &quot;6014 W 64TH ST&quot; &quot;530 N MICHIGAN&quot; &quot;4001 N LONG&quot; &quot;303 E WACKER&quot; ...
+##  $ license_plate_number : chr  &quot;90ad622c3274c9bdc9d8c812b79a01d0aaf7479f2bd7431f8935baa4048d0c86&quot; &quot;bce4dc26b2c96965380cb2b838cdbb95632b7b5716061255c7ed9aa52b17163c&quot; &quot;44641e828f4d894c883c07c566063c2d99d08f2c03b3d41682d6d8201a0939bd&quot; &quot;eee50ca0d9be2debd0e7d45bad05b8674a6cf5b892230f54cf1923e36990ada9&quot; ...
+##  $ license_plate_state  : chr  &quot;IL&quot; &quot;IL&quot; &quot;IL&quot; &quot;IL&quot; ...
+##  $ license_plate_type   : chr  &quot;PAS&quot; &quot;PAS&quot; &quot;PAS&quot; &quot;PAS&quot; ...
+##  $ zipcode              : chr  &quot;60638&quot; &quot;606343801&quot; &quot;60148&quot; &quot;60601&quot; ...
+##  $ violation_code       : chr  &quot;0976160F&quot; &quot;0964150B&quot; &quot;0976160F&quot; &quot;0964110A&quot; ...
+##  $ violation_description: chr  &quot;EXPIRED PLATES OR TEMPORARY REGISTRATION&quot; &quot;PARKING/STANDING PROHIBITED ANYTIME&quot; &quot;EXPIRED PLATES OR TEMPORARY REGISTRATION&quot; &quot;DOUBLE PARKING OR STANDING&quot; ...
+##  $ unit                 : chr  &quot;8&quot; &quot;18&quot; &quot;16&quot; &quot;152&quot; ...
+##  $ unit_description     : chr  &quot;CPD&quot; &quot;CPD&quot; &quot;CPD&quot; &quot;CPD&quot; ...
+##  $ vehicle_make         : chr  &quot;CHEV&quot; &quot;CHRY&quot; &quot;BUIC&quot; &quot;NISS&quot; ...
+##  $ fine_level1_amount   : int  50 50 50 100 25 50 100 50 120 50 ...
+##  $ fine_level2_amount   : int  100 100 100 200 50 100 200 100 240 100 ...
+##  $ current_amount_due   : num  0 50 0 0 0 50 244 0 0 0 ...
+##  $ total_payments       : num  100 0 50 100 50 0 0 50 240 100 ...
+##  $ ticket_queue         : chr  &quot;Paid&quot; &quot;Define&quot; &quot;Paid&quot; &quot;Paid&quot; ...
+##  $ ticket_queue_date    : chr  &quot;2007-05-21 00:00:00&quot; &quot;2007-01-22 00:00:00&quot; &quot;2007-01-31 00:00:00&quot; &quot;2007-03-08 00:00:00&quot; ...
+##  $ notice_level         : chr  &quot;SEIZ&quot; &quot;&quot; &quot;VIOL&quot; &quot;DETR&quot; ...
+##  $ hearing_disposition  : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;Liable&quot; ...
+##  $ notice_number        :integer64 5048648030 0 5079875240 5023379950 5079891400 0 5038039180 5052314130 ... 
+##  $ officer              : chr  &quot;15227&quot; &quot;18320&quot; &quot;3207&quot; &quot;19410&quot; ...
+##  $ address              : chr  &quot;6000 w 64th st, chicago, il&quot; &quot;500 n michigan, chicago, il&quot; &quot;4000 n long, chicago, il&quot; &quot;300 e wacker, chicago, il&quot; ...
+##  - attr(*, &quot;.internal.selfref&quot;)=&lt;externalptr&gt;</code></pre>
+<pre class="r"><code>head(test.csv)</code></pre>
+<pre><code>##    ticket_number          issue_date violation_location
+## 1:      51551278 2007-01-01 00:00:00     6014 W 64TH ST
+## 2:      51491256 2007-01-01 00:00:00     530 N MICHIGAN
+## 3:      50433524 2007-01-01 00:01:00        4001 N LONG
+## 4:      51430906 2007-01-01 00:01:00       303 E WACKER
+## 5:      51507779 2007-01-01 00:01:00        7 E 41ST ST
+## 6:      51260468 2007-01-01 00:03:00      1039 W LELAND
+##                                                license_plate_number
+## 1: 90ad622c3274c9bdc9d8c812b79a01d0aaf7479f2bd7431f8935baa4048d0c86
+## 2: bce4dc26b2c96965380cb2b838cdbb95632b7b5716061255c7ed9aa52b17163c
+## 3: 44641e828f4d894c883c07c566063c2d99d08f2c03b3d41682d6d8201a0939bd
+## 4: eee50ca0d9be2debd0e7d45bad05b8674a6cf5b892230f54cf1923e36990ada9
+## 5: 244116ca3eed4235b1f61f6d753d8c688be2a48c9fdd976fa4c729c6f90f3d76
+## 6: b167d28412271c62a8e30cbb5396ffb97f12c08382f9a6f46be4e1c8bb02f444
+##    license_plate_state license_plate_type   zipcode violation_code
+## 1:                  IL                PAS     60638       0976160F
+## 2:                  IL                PAS 606343801       0964150B
+## 3:                  IL                PAS     60148       0976160F
+## 4:                  IL                PAS     60601       0964110A
+## 5:                  IL                PAS 605053013       0976220B
+## 6:                  IL                TMP     60632       0964150B
+##                       violation_description unit unit_description
+## 1: EXPIRED PLATES OR TEMPORARY REGISTRATION    8              CPD
+## 2:      PARKING/STANDING PROHIBITED ANYTIME   18              CPD
+## 3: EXPIRED PLATES OR TEMPORARY REGISTRATION   16              CPD
+## 4:               DOUBLE PARKING OR STANDING  152              CPD
+## 5:    SMOKED/TINTED WINDOWS PARKED/STANDING    2              CPD
+## 6:      PARKING/STANDING PROHIBITED ANYTIME   23              CPD
+##    vehicle_make fine_level1_amount fine_level2_amount current_amount_due
+## 1:         CHEV                 50                100                  0
+## 2:         CHRY                 50                100                 50
+## 3:         BUIC                 50                100                  0
+## 4:         NISS                100                200                  0
+## 5:         INFI                 25                 50                  0
+## 6:         BUIC                 50                100                 50
+##    total_payments ticket_queue   ticket_queue_date notice_level
+## 1:            100         Paid 2007-05-21 00:00:00         SEIZ
+## 2:              0       Define 2007-01-22 00:00:00             
+## 3:             50         Paid 2007-01-31 00:00:00         VIOL
+## 4:            100         Paid 2007-03-08 00:00:00         DETR
+## 5:             50         Paid 2007-08-29 00:00:00         SEIZ
+## 6:              0       Define 2007-01-04 00:00:00             
+##    hearing_disposition notice_number officer                     address
+## 1:                        5048648030   15227 6000 w 64th st, chicago, il
+## 2:                                 0   18320 500 n michigan, chicago, il
+## 3:                        5079875240    3207    4000 n long, chicago, il
+## 4:              Liable    5023379950   19410   300 e wacker, chicago, il
+## 5:                        5079891400   66396    7 e 41st st, chicago, il
+## 6:                                 0    3307  1000 w leland, chicago, il</code></pre>
+<p>Great, so it looks like our data is mixed between integers, numeric, and character types. We can also see some missing values in some column like “hearing_disposition”. Now its time to insert some of this data into MySQL.</p>
+<p><br></p>
+</div>
+<div id="connecting-to-mysql-from-r" class="section level1">
+<h1>Connecting to MySQL from R</h1>
+<p>When connecting to any database or connection that requires passwords, it is always highly recommended to store these passwords in your local environment for security reasons. This is especially the case when sharing your code to others or via the internet.</p>
+<pre class="r"><code>#Load RMariaDB if it is not loaded already
+if(!&quot;RMariaDB&quot; %in% (.packages())){require(RMariaDB)}
+
+#Connecting to MySQL DB
+stuffDB &lt;- dbConnect(MariaDB(), user = &quot;root&quot;, password = Sys.getenv(&quot;MYSQL_PASSWORD&quot;), dbname = &quot;my_db&quot;, host = &quot;localhost&quot;)
+
+#List tables in DB
+dbListTables(stuffDB)</code></pre>
+<pre><code>## [1] &quot;alpaca_tradeable_assets_nas_nyse_earnings_tbl&quot;
+## [2] &quot;parking_tickets_chicago&quot;</code></pre>
+<p>If connected succesfully, you should see the names of your tables when “dbListTables” is called.</p>
+<p><br></p>
+</div>
+<div id="creating-tables-in-mysql-from-r" class="section level1">
+<h1>Creating tables in MySQL from R</h1>
+<p>Since I want to load the data into MySQL, I need to first create the table that reflects the same columns as the CSV and ensure the data type columns are set correctly. We can see the data types for each column from our earlier “str()” call. See below on how to create a query variable containing SQL syntax.</p>
+<pre class="r"><code>query&lt;-&quot;CREATE TABLE parking_tickets_chicago (
+  ticket_number TEXT,
+  issue_date TEXT,
+  violation_location  TEXT,
+  license_plate_number TEXT,
+  license_plate_state TEXT,
+  license_plate_type TEXT,
+  zipcode TEXT,
+  violation_code TEXT,
+  violation_description TEXT,
+  unit INT,
+  unit_description TEXT,
+  vehicle_make TEXT,
+  fine_level1_amount INT,
+  fine_level2_amount INT,
+  current_amount_due INT,
+  total_payments INT,
+  ticket_queue TEXT,
+  ticket_queue_date TEXT,
+  notice_level TEXT,
+  hearing_disposition TEXT,
+  notice_number TEXT,
+  officer TEXT,
+  address TEXT);&quot;
+
+
+#Send the query to MySQL for execution
+results &lt;- dbSendQuery(stuffDB, query)
+dbClearResult(results)</code></pre>
+<p><br></p>
+</div>
+<div id="inserting-the-data" class="section level1">
+<h1>Inserting the data</h1>
+<p>Now that we have created the table correctly, we can begin inserting the data into the MySQL table directly from R. First we will use a small example before inserting all 28 million rows.</p>
+<pre class="r"><code>query &lt;- &quot;INSERT INTO parking_tickets_chicago(ticket_number,issue_date,violation_location,license_plate_number,license_plate_state,license_plate_type,zipcode,violation_code,violation_description,unit,unit_description,vehicle_make,fine_level1_amount,fine_level2_amount,current_amount_due,total_payments,ticket_queue,ticket_queue_date,notice_level,hearing_disposition,notice_number,officer,address)
+VALUES(51636768,&#39;2007-01-12 10:34:00&#39;,&#39;1450 N THORNDALE&#39;,&#39;fc4a98382378c750027d71138b4cbf3237216a6452ec9c3b8c3533f0c1c20d02&#39;,&#39;IL&#39;,&#39;TRK&#39;,605152677,&#39;0976160F&#39;,&#39;EXPIRED PLATES OR TEMPORARY REGISTRATION&#39;,24,&#39;CPD&#39;,&#39;TOYT&#39;,50,100,0,50,&#39;Paid&#39;,&#39;2007-01-30 00:00:00&#39;,&#39;&#39;,&#39;&#39;,0,17482,&#39;1400 n thorndale, chicago, il&#39;);&quot;
+
+
+
+#Sending the query to MySQL for execution and getting the result.
+results &lt;- dbSendQuery(stuffDB, query)
+
+
+#Checking if it was added correctly
+dbReadTable(stuffDB,&quot;parking_tickets_chicago&quot;)</code></pre>
+<p>So far so good!! We have connected to our database, created a table, inserted data into our new table and check the results. Now let’s do the entire dataset so we can illustrate the value and efficiency of integrating MySQL &amp; R!</p>
+<p><br></p>
+</div>
+<div id="reading-all-data---chunk-wise" class="section level1">
+<h1>Reading all data - Chunk Wise</h1>
+<p>For any large datasets, I like to use the “read.table” function and create a open connection to the file using file(open=“r”). This way, we can read or write the data chunkwise, instead of all at once in one big operation.</p>
+<pre class="r"><code>#Create index and select a chunksize
+index &lt;- 0
+chunkSize &lt;- 100000
+
+#Create column name vector
+col_names &lt;- c(&quot;ticket_number&quot;, &quot;issue_date&quot;, &quot;violation_location&quot;, &quot;license_plate_number&quot;, &quot;license_plate_state&quot;, &quot;license_plate_type&quot;, &quot;zipcode&quot;, &quot;violation_code&quot;, &quot;violation_description&quot;, &quot;unit&quot;, &quot;unit_description&quot;, &quot;vehicle_make&quot;, &quot;fine_level1_amount&quot;, &quot;fine_level2_amount&quot;, &quot;current_amount_due&quot;, &quot;total_payments&quot;, &quot;ticket_queue&quot;, &quot;ticket_queue_date&quot;, &quot;notice_level&quot;, &quot;hearing_disposition&quot;, &quot;notice_number&quot;, &quot;officer&quot;, &quot;address&quot;)
+
+
+#Open the file connection
+con &lt;- file(description=&quot;/usr/local/mysql-8.0.15-macos10.14-x86_64/data/parking_tickets.csv&quot;,open=&quot;r&quot;)   
+
+#Read the data chunkWise
+dataChunk &lt;- read.table(con, nrows=chunkSize, header=F, fill=TRUE, sep=&quot;,&quot;, quote = &#39;&quot;&#39;, col.names = col_names)
+
+#Write &amp; append the tables chunkWise
+dbWriteTable(stuffDB, value = dataChunk, row.names = FALSE, name = &quot;parking_tickets_chicago&quot;, append = TRUE)
+
+
+#Repeat for each dataChunk
+while (nrow(dataChunk) &gt; 0) {
+  index &lt;- index + 1
+  print(paste(&#39;Processing rows:&#39;, index * chunkSize))
+  
+  dataChunk &lt;- read.table(con, nrows=chunkSize, skip=0, header=FALSE, fill = TRUE, sep=&quot;,&quot;, col.names = col_names)
+  
+  dbWriteTable(stuffDB, value = dataChunk, row.names = FALSE, name = &quot;parking_tickets_chicago&quot;, append = TRUE)
+}
+
+#Close the open file connection
+close(con)</code></pre>
+<p>Let me explain the above process step by step so it easier to understand.</p>
+<p><strong>Step 1</strong>. Create our index, chunk size, col_names, and file connection variables. We are choosing a chunk size of 100k. This means that each index is 100,000 rows of the data frame, so index 1 is 1-100k, index 2 is 100k-200k, index 3 is 200-300k, and keeps increasing until all of our rows have been read chunkwise. This allows you to run arithmetic operations on datasets too large to read in memory.</p>
+<p><strong>Step 2</strong>. Once we set these, we can create our “dataChunk” using our variables as the values for read.table arguments.</p>
+<p><strong>Step 3</strong>. Each dataChunk is sent to our newly created table in MySQL and will be appended to our newly created table since we set “append=TRUE” in our dbWriteTable() call.</p>
+<p><strong>Step 4</strong>. Repeat this until all the data has been read through each chunk and our while statement is satisfied.</p>
+<p>Now let us run a simple SQL and R query to interact with the MySQL database. The “dplyr” package makes it possible for us to use R code instead of SQL, to extract and manipulate from the database because it converts the R query to SQL before it’s sent to the DB.</p>
+</div>
+<div id="mysql-query" class="section level1">
+<h1>MySQL query</h1>
+<p>Let us do a very simple query to count the issued tickets by month. We can create a graph to visualize which month had the most tickets issued.</p>
+<pre class="r"><code>query &lt;- &quot;SELECT monthname(issue_date) as month, year(issue_date) as year, count(ticket_number) as number 
+FROM my_db.parking_tickets_chicago 
+GROUP BY month,year
+HAVING month is not null AND year is not null;&quot;
+
+
+results &lt;- dbSendQuery(stuffDB, query)
+db_results &lt;- dbFetch(results)
+dbClearResult(results)
+
+#Filter out any results that could possibly be an error due to the data-entry mistake for date
+db_results &lt;- db_results %&gt;% filter(number != 1) %&gt;% mutate(month = factor(month,levels = month.name), year = as.integer(year), number = as.numeric(number)) %&gt;% arrange(year)
+
+
+#Preview of our results
+head(db_results)
+
+#Plot 
+ggplot(db_results, aes(factor(month,levels = month.name),number)) + 
+  geom_bar(stat=&quot;identity&quot;, aes(fill = year)) + 
+  labs(
+    title = &quot;Boxplot&quot;, 
+    subtitle = &quot;Count of Tickets by Month&quot;,
+    x=&quot;Month&quot;, 
+    y=&quot;Occurences&quot;
+    ) + 
+  scale_y_continuous(labels = scales::comma) +
+  scale_fill_continuous(&quot;Year&quot;, breaks=c(2008:2018), labels = c(2008:2018), type = &quot;viridis&quot;) +
+  theme_dark() + 
+  theme(axis.text.x = element_text(angle=50, vjust=0.65)) </code></pre>
+<div class="figure">
+<img src="/img/MySQL-R/tickets_month_year.png" />
+
+</div>
+</div>
+<div id="r-query-using-dplyr" class="section level1">
+<h1>R query using Dplyr</h1>
+<p>We can even do the same thing but all in R without having to use any SQL. This is beneficial for the users who don’t use SQL and also makes it easier to share. Although, the time difference in performance is noticeable between these two approaches. I believe it’s best to just use SQL syntax since it seems more efficient, but I will review this using R syntax below.</p>
+<pre class="r"><code>library(dplyr)   
+library(lubridate)  </code></pre>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     date</code></pre>
+<pre class="r"><code>#Reads part of the dataframe in our DB so it does not store it all in memory
+search_db &lt;- tbl(stuffDB, &quot;parking_tickets_chicago&quot;)
+
+#R syntax using dplyr
+search_db &lt;- search_db %&gt;% 
+  select(issue_date, ticket_number) %&gt;%
+  mutate(month = month(issue_date), year = year(issue_date), number = ticket_number) %&gt;% 
+  filter(month != &quot;&quot; &amp; year != &quot;&quot;) %&gt;% 
+  group_by(month, year) %&gt;% select(month,year,number)
+
+
+print(search_db)</code></pre>
+<pre><code>## # Source:   lazy query [?? x 3]
+## # Database: mysql 8.0.15 [root@localhost:/my_db]
+## # Groups:   month, year
+##    month           year            number  
+##    &lt;S3: integer64&gt; &lt;S3: integer64&gt; &lt;chr&gt;   
+##  1 1               2007            51636768
+##  2 1               2007            51551278
+##  3 1               2007            51491256
+##  4 1               2007            50433524
+##  5 1               2007            51430906
+##  6 1               2007            51507779
+##  7 1               2007            51260468
+##  8 1               2007            51501733
+##  9 1               2007            51260469
+## 10 1               2007            51417189
+## # … with more rows</code></pre>
+<pre class="r"><code>#Show how dplyr converts the R code to SQL behind the scenes.
+show_query(search_db)</code></pre>
+<pre><code>## &lt;SQL&gt;
+## SELECT `month`, `year`, `number`
+## FROM (SELECT `issue_date`, `ticket_number`, EXTRACT(month FROM `issue_date`) AS `month`, EXTRACT(year FROM `issue_date`) AS `year`, `ticket_number` AS `number`
+## FROM `parking_tickets_chicago`) `dbplyr_002`
+## WHERE (`month` != &#39;&#39; AND `year` != &#39;&#39;)</code></pre>
+<pre class="r"><code>#Close connection
+dbDisconnect(stuffDB)</code></pre>
+</div>
+<div id="wraping-it-up" class="section level1">
+<h1>Wraping it up</h1>
+<p>Not only did we use SQL syntax to read/write data to our MySQL database from R, but we also used R syntax to do it as well! With the help of the “dplyr” package, you can use only R syntax to wrangle data stored in your MySQL database. Clearly, using MySQL with R will not only prevent unnecessary data clogging the memory but also saves time since the chunkWise approach cuts the writing time down significantly. If you’re an R programmer who runs into large datasets, even if it’s just occasionally, then I highly suggest you look into using MySQL or any other relational databases with R.</p>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/mysql/">MySQL</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/programming/">programming</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/beautiful-plots/">beautiful-plots</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/database/">database</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/sentiment-analysis-conf-call/" data-tooltip="Sentiment Analysis on Earnings Call">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/05/mysql-r/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/05/mysql-r/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/05/mysql-r/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Jagger Villalobos. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/sentiment-analysis-conf-call/" data-tooltip="Sentiment Analysis on Earnings Call">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/05/mysql-r/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/05/mysql-r/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/05/mysql-r/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F05%2Fmysql-r%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F05%2Fmysql-r%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F05%2Fmysql-r%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jagger Villalobos</h4>
+    
+      <div id="about-card-bio">Bottom-Up Analysis | Equity Research</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Seeking Analyst Position
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        New York, New York
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/05/mysql-r/">
+                <h3 class="media-heading">Using MySQL with R</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading + writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB+. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/sentiment-analysis-conf-call/">
+                <h3 class="media-heading">Sentiment Analysis on Earnings Call</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/alpaca-for-r/">
+                <h3 class="media-heading">AlpacaforR</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
+                <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
+                <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">IPO Estimate &amp; Review  Taking a look at LYFT financials for the first time Review of Dropbox IPO and stock performance  
+ Can the slow IPO market get a lift from LYFT? Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
+                <h3 class="media-heading">Salesforce Q3 Update</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Salesforce Q3 Update  Updated model from previous post, click here to read previous Salesforce post Management raised top and bottom line forecasts for FY19 guidance Management gave more details on FY20 &amp; FY22 goals and confirmed forecasts Near bulletproof business model during economic slowdown Key risks to management goals Recommendation and price targets  
+Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/12/yield-curve-fun/">
+                <h3 class="media-heading">Yield Curve Inversion - Marks End to Bull Market?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Going, Going, Inverted!  Yield Curve inversions are typically a leading indicator for a recession Historic analysis on inversions for specific yields since 1990 Yield Curve over 5 different time frames since the start of 2018 Takeaway from recent inversions   Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/11/salesforce-enough-to-buy/">
+                <h3 class="media-heading">Salesforce, Inc. - Are Expanding Margins Enough to Buy?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Salesforce, Inc.  Leader in the growing CRM market Modestly expanding margins Monetizing existing customer base  
+Customer Relationship Management Pioneer Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig in to Salesforce specifically, let’s explore what exactly CRM is and the growth prospects.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/11/ml-airbnb-prices/">
+                <h3 class="media-heading">Teaching a Machine to Learn NYC Airbnb Prices</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Using Airbnb By now, most Gen Z and millenials have heard of or used Airbnb for a range of many reasons, such as looking for a place to crash or taking a vacation. I believe what won the consumer’s attention over hotels was the fact that you are getting the “homey” setting and privacy while away on vacation instead of a hotel environment. I realize not everyone wants to part ways with room service, benefits of a having full-service bar in the lobby, pool &amp; spas, sometimes a gym, and the 100+ channels, but when comparing the prices and the extra sq.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         9 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2019\/05\/mysql-r\/';
+          
+            this.page.identifier = '\/2019\/05\/mysql-r\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
