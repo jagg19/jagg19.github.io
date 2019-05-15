@@ -38,7 +38,7 @@ Relational databases like MySQL, organize data into tables (spreadsheet format) 
 
 #The Data
 
-We will use the Chicago Parking Ticket dataset from [here]("https://www.propublica.org/datastore/dataset/chicago-parking-ticket-data") which contains 2.07GB 28,272,580 rows containing details on all parking and vehicle compliance tickets issued in Chicago from Jan. 1, 2007 to May 14, 2018, from the Chicago Department of Finance. This isn't necessarily a "large" dataset, but I believe it's a large enough size to notice a difference in the performance. First, I am going to read a smaller portion of the data to get an idea of the data types inside the table.
+We will use the Chicago Parking Ticket dataset from [here](https://www.propublica.org/datastore/dataset/chicago-parking-ticket-data) which contains 2.07GB 28,272,580 rows containing details on all parking and vehicle compliance tickets issued in Chicago from Jan. 1, 2007 to May 14, 2018, from the Chicago Department of Finance. This isn't necessarily a "large" dataset, but I believe it's a large enough size to notice a difference in the performance. First, I am going to read a smaller portion of the data to get an idea of the data types inside the table.
 
 ```{r}
 #Fread to quickly load into R to get a sense of what your data looks like. 
@@ -57,7 +57,7 @@ Great, so it looks like our data is mixed between integers, numeric, and charact
 <br>
 
 #Connecting to MySQL from R
-When connecting to any database or connection that requires passwords, it is always highly recommended to store these passwords in your local environment for security reasons. This is especially the case when sharing your code to others or via the internet.
+When connecting to any database or connection that requires passwords, it is always highly recommended to store these passwords in your local environment for security reasons. This is especially the case when sharing your code to others or via the internet. Using MariaDB() as the DBI, you need to enter the "user" name, "password" value, "dbname" where your tables are stored, and the "local host".
 ```{r}
 #Load RMariaDB if it is not loaded already
 if(!"RMariaDB" %in% (.packages())){require(RMariaDB)}
