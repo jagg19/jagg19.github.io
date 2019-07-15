@@ -12,15 +12,6 @@
     
     
     <item>
-      <title>Building a Financial Shiny Dashboard for Personal Daily Use</title>
-      <link>https://jagg19.github.io/2019/07/shiny-financial-personal/</link>
-      <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://jagg19.github.io/2019/07/shiny-financial-personal/</guid>
-      <description> Shiny Dashboards with AWS RDS Data feed  </description>
-    </item>
-    
-    <item>
       <title>Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</title>
       <link>https://jagg19.github.io/2019/07/aws-rds-mysql/</link>
       <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>

@@ -6,19 +6,10 @@
     <description>Recent content in Earnings on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jagg19.github.io/categories/earnings/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Scaling Correlation Strategies to the NASDAQ for Earnings Trades</title>
-      <link>https://jagg19.github.io/2019/07/backtest-cortrade-earnings/</link>
-      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://jagg19.github.io/2019/07/backtest-cortrade-earnings/</guid>
-      <description>Pure Earnings Play 2  Correlation Reviewing different versions Top pairs from results Beautiful plots to visualize the results Quick review  In a previous post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I backtested a simple earnings strategy and analyzed the results across all stocks in the NASDAQ with a market cap above $5 Billion. While writing that post, I created a correlation plot which sparked the idea of writing someday writing a continuation post by backtesting an earnings trade on only the highly correlated stocks.</description>
-    </item>
     
     <item>
       <title>Sentiment Analysis on Earnings Call</title>
