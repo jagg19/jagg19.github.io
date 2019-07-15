@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ec on Running on R</title>
+    <link>https://jagg19.github.io/tags/ec/</link>
+    <description>Recent content in Ec on Running on R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 09 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://jagg19.github.io/tags/ec/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Running R on an AWS Enstance</title>
+      <link>https://jagg19.github.io/2019/07/aws-r/</link>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jagg19.github.io/2019/07/aws-r/</guid>
+      <description>Amazon Web Services with R I went over a bit about AWS in my previous post TK and how benefitial it is. Amazon EC2 is just another great service offered by Amazon. EC2 is basiacally a virtual machine that offers an variety of operating systems and computational power.
+EC2 allows users to build apps, automate scaling according to changing needs and peak periods, deploy computational intensive models, streamline development processes, and create virtual servers to manage storage, lessening the need to invest in infrastructure.</description>
+    </item>
+    
+  </channel>
+</rss>

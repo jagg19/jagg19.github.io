@@ -58,7 +58,7 @@ Great, so it looks like our data is mixed between integers, numeric, and charact
 
 #Connecting to MySQL from R
 When connecting to any database or connection that requires passwords, it is always highly recommended to store these passwords in your local environment for security reasons. This is especially the case when sharing your code to others or via the internet. Using MariaDB() as the DBI, you need to enter the "user" name, "password" value, "dbname" where your tables are stored, and the "local host".
-```{r}
+```{r eval=FALSE}
 #Load RMariaDB if it is not loaded already
 if(!"RMariaDB" %in% (.packages())){require(RMariaDB)}
 
@@ -248,7 +248,7 @@ ggplot(db_results, aes(factor(month,levels = month.name),number)) +
 
 We can even do the same thing but all in R without having to use any SQL. This is beneficial for the users who don't use SQL and also makes it easier to share. Although, the time difference in performance is noticeable between these two approaches. I believe it's best to just use SQL syntax since it seems more efficient, but I will review this using R syntax below.
 
-```{r}
+```{r eval=FALSE}
 
 library(dplyr)   
 library(lubridate)  

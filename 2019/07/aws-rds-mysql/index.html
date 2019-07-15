@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.51 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Jagger Villalobos">
+<meta name="keywords" content="">
+<meta name="description" content="Amazon Web Services RDS with MySQL &amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal &#43; MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.">
+
+
+<meta property="og:description" content="Amazon Web Services RDS with MySQL &amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal &#43; MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
+<meta name="twitter:title" content="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
+<meta property="og:url" content="https://jagg19.github.io/2019/07/aws-rds-mysql/">
+<meta property="twitter:url" content="https://jagg19.github.io/2019/07/aws-rds-mysql/">
+<meta property="og:site_name" content="Running on R">
+<meta property="og:description" content="Amazon Web Services RDS with MySQL &amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal &#43; MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.">
+<meta name="twitter:description" content="Amazon Web Services RDS with MySQL &amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal &#43; MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-07-15T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-07-15T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="AWS">
+    
+      <meta property="article:section" content="R">
+    
+      <meta property="article:section" content="MySQL">
+    
+      <meta property="article:section" content="Programming">
+    
+  
+  
+    
+      <meta property="article:tag" content="RDS">
+    
+      <meta property="article:tag" content="Cloud">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1563205259/rds-mysql.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1563205259/rds-mysql.png">
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+
+
+    <title>Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</title>
+
+    <link rel="icon" href="https://jagg19.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://jagg19.github.io/2019/07/aws-rds-mysql/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://jagg19.github.io/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-134862415-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://jagg19.github.io/">Running on R</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://jagg19.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://jagg19.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
+        
+          <h5 class="sidebar-profile-bio">Bottom-Up Analysis | Equity Research</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://jagg19.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://jagg19.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://jagg19.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://jagg19.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://jagg19.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/jagg19" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              post-header-cover--partial"
+       style="background-image:url('https://res.cloudinary.com/dyackvnwm/image/upload/v1563205259/rds-mysql.png')"
+       data-behavior="4">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-07-15T00:00:00Z">
+        
+  July 15, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://jagg19.github.io/categories/aws">AWS</a>, 
+    
+      <a class="category-link" href="https://jagg19.github.io/categories/r">R</a>, 
+    
+      <a class="category-link" href="https://jagg19.github.io/categories/mysql">MySQL</a>, 
+    
+      <a class="category-link" href="https://jagg19.github.io/categories/programming">Programming</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="4"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+
+<div id="amazon-web-services-rds-with-mysql-mysql-workbench" class="section level1">
+<h1>Amazon Web Services RDS with MySQL &amp; MySQL Workbench</h1>
+<ul>
+<li>What is Amazon RDS</li>
+<li>How to create a MySQL RDS</li>
+<li>Connecting to your RDS: Terminal + MySQL Workbench</li>
+<li>Importing local database into new RDS</li>
+</ul>
+<p>If you had a chance to read my post <a href="https://jagg19.github.io/2019/05/mysql-r/">Using MySQL with R</a>, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy. After googling around a bit, the best solution was to utilize Amazon RDS (Relational Database Service) to properly provide access to the database on my shiny app.</p>
+<p>Amazon RDS is another amazing service provided by AWS (Amazon Web Services) that is designed to set up, manage, and scale a relational database such as MySQL, PostgreSQL, Oracle, SQL Server, and more in the cloud. Not only that, but Amazon RDS assumes the day-to-day management tasks associated with MySQL such as backups, failure detections, recovery, and scaling. I decided to make the switch onto Amazon RDS using the free tier so I could make my database easily accessible for my shiny app. In this post, I will provide two ways for you to make this necessary switch and why you should.</p>
+<p>At the minimum, you will need an <a href="https://aws.amazon.com">Amazon Web Services</a> account to create an RDS. When you create an RDS, you are provided with an endpoint URL which we will use as the host when connecting through SSH or on MySQL Workbench. See below on how to create an RDS after you log in to AWS.</p>
+<p><br> <br></p>
+</div>
+<div id="launching-a-aws-rds-instance-to-run-mysql" class="section level1">
+<h1>Launching a AWS RDS Instance to run MySQL</h1>
+<p>To start, select the services tab, RDS under database, and then click create database.</p>
+<div id="step-1" class="section level5">
+<h5>Step 1</h5>
+<p>Select the DB Engine. We will select MySQL and make sure to check the box that says “Only enable options eligible for RDS free Usage Tier.” Click Next.</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_step1.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-2" class="section level5">
+<h5>Step 2</h5>
+<p>Select the DB engine version. I’m selecting MySQL 8.0.15 since I have the same engine on my local desktop. Since we selected the Free Tier, our only DB Instance Class option is the “db.t2.micro - 1vCPU, 1GiB RAM” and our Allocated storage will be set to 20GiB.</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_step2.png" />
+
+</div>
+<p><br></p>
+<p>Scroll down the page to Settings and add your DB identifier, master username, and master password. Set and remember your password since you will be prompted for it multiple times. Click Next.</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_step2b.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-3" class="section level5">
+<h5>Step 3</h5>
+<p>Make sure your public accessibility is set to “Yes” or else our instance will not have a public IP address assigned. Also, please make sure “Create new VPC security group” is selected so we can allow access to read the data to anyone. If you are storing sensitive data then you will need to configure the security group settings or subnet groups which is beyond this scope. I am only looking for easy ways to access non-sensitive data seamlessly at any location.</p>
+<p>Under Database options, just enter a database called “testing” so we can ensure everything was loaded correctly once we connect to our DB Instance. Leave the rest of the settings to default unless you’d like to snoop a little more. For these purposes, we do not need to change any settings so click create database. It will take ~10 minutes to launch the database and back it up so be patient :)</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_step3.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-4" class="section level5">
+<h5>Step 4</h5>
+<p>Wait for our RDS to finish launching. Under the Summary tab for our new RDS, you will see it turn to “Available” (Please keep note of where your endpoint is located as we will later need it).</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_endpoint_location.png" />
+
+</div>
+<p><br></p>
+<p>After, scroll down to Security group rules. Under “Type” you will see one rule for Inbound and one for Outbound. Click the Inbound security group link and it will navigate you to the “Security Group” tab.</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_security_pre.png" />
+
+</div>
+<p><br></p>
+<p>Click the “Inbound” security group checkbox and then click the inbound tab on the lower screen. Hit “Edit” and open the dropdown under Source to change it to “Anywhere” and click save. See below:</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_security_inbtab.png" />
+
+</div>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_security_action.png" />
+
+</div>
+<p><br></p>
+<p>Once you go back to your RDS instance, you should see the changes made under “Security group rules”. Its now time to connect to your new MySQL RDS Instance!</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_security_postchng.png" />
+
+</div>
+<p><br> <br></p>
+</div>
+</div>
+<div id="connecting-through-terminal-and-mysql-workbench" class="section level1">
+<h1>Connecting Through Terminal and MySQL Workbench</h1>
+<p>I’m going to show two ways to connect to our new AWS RDS Instance. If you have no interest in using the terminal to connect, then you can <a href="#workbench">click here</a> to learn how to connect your Instance to MySQL Workbench.</p>
+<div id="terminal" class="section level4">
+<h4>Terminal</h4>
+<p>Copy and paste your Endpoint which you will find under “Connectivity and security”. To connect through your local terminal, enter the below command with your appropriate values.</p>
+<p><code>mysql -h &lt;Endpoint&gt; -u &lt;Master Username&gt; -p</code></p>
+<p>Then it will prompt you for a password which is the master password you created with your username. Once you entered everything correctly, you will be logged into your MySQL DB that is hosted on Amazon RDS. Let’s see if the “testing” database was loading correctly during the initial set up.</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_term_login.png" />
+
+</div>
+<p>We can see our testing database so we’ve configured Mysql correctly! Now we are up and running through the local terminal. Let’s see how we can do this through MySQL Workbench.</p>
+<p><br></p>
+<p><a id="workbench"></a></p>
+</div>
+<div id="mysql-workbench" class="section level4">
+<h4>MySQL Workbench</h4>
+<p>Launch MySQL Workbench and click <code>+</code> next to MySQL Connections. You will then be prompted to enter some details about the host, user, password, port, etc.</p>
+<p>Give your connection a name. I named mine RDS MySQL. Enter your RDS Instance Endpoint as the Hostname. Add “3306” to the port, and your master username and master password under Username and Password. Store your password so you do not need to enter it each time. Click OK once you’re done and then click your new connection.</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_create_cnt_wrkbnc.png" />
+
+</div>
+<p><br></p>
+<p>If successful, you will be logged in and should see our “testing” database.</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_create_cntpst.png" />
+
+</div>
+<p>Everything looks great! Now let’s add some data. If you want to put your current local database onto the new RDS, it is very using the MySQL Workbench interface.</p>
+<p><br></p>
+</div>
+</div>
+<div id="importing-local-mysql-to-your-new-remote-mysql" class="section level1">
+<h1>Importing Local MySQL to your new Remote MySQL</h1>
+<p>Log into your local root user MySQL DB and navigate to the Administration tab and click Data Export. Select the database you want to export and select “Export to Self-contained File” then click Start Export.</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_start_export.png" />
+
+</div>
+<p><br></p>
+<p>Log into your remote AWS RDS Instance and navigate to the Administration tab and click Data Import/Restore. Check “Import from Self-Contained file” and navigate to the file to add the path. Then, we will select the database we want to import it to which in our example will be the testing database. Now we can hit Start Import and after a minute or two we can see all of the data was imported successfully.</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_start_import.png" />
+
+</div>
+<p><br></p>
+<p>Let’s run a simple sql command to see the last 10 rows of one of the tables that were imported.</p>
+<div class="figure">
+<img src="https://jagg19.github.io/img/RDS-MYSQL/rds_check_import.png" />
+
+</div>
+<p>After importing the data, we can see 9 new tables in our testing database. Now we can access the data using the endpoint as the host on any device. This also means I can easily integrate this database to my public applications such as any Shiny Apps.</p>
+<p><br></p>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>We went over how to create an RDS using Amazon Web Services and how to deploy a MySQL Database to the cloud. Creating a MySQL RDS can make all of the data easily accessible. With just a minor security setting, the database can be reached via the internet through the shiny app. Amazon RDS uses a feature called Multi-AZ which provides an up-time of at least 99.95% and contains “standby” replica’s of your database in another “zone” to ensure a database is always up and running. Creating backups and scaling your database to easily handle user traffic could not be any easier using RDS.</p>
+<p>Next, I will go over different options for creating EC2 instances that can run R, RStudio, and MySQL using our free-tier (Rstudio provides EC2 instances but require “Paid” instance types). This is great for many reasons, but just like Amazon RDS, two of the greatest benefits is scalability and accessibility. For now, go ahead and use this article to start switching your small project DBs to the cloud using AWS!</p>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/rds/">RDS</a>
+
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/cloud/">Cloud</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/07/shiny-financial-personal/" data-tooltip="Building a Financial Shiny Dashboard for Personal Daily Use">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/07/aws-r/" data-tooltip="Running R on an AWS Enstance">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/07/aws-rds-mysql/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/07/aws-rds-mysql/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/07/aws-rds-mysql/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Jagger Villalobos. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/07/shiny-financial-personal/" data-tooltip="Building a Financial Shiny Dashboard for Personal Daily Use">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/07/aws-r/" data-tooltip="Running R on an AWS Enstance">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/07/aws-rds-mysql/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/07/aws-rds-mysql/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/07/aws-rds-mysql/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F07%2Faws-rds-mysql%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fjagg19.github.io%2F2019%2F07%2Faws-rds-mysql%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F07%2Faws-rds-mysql%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jagger Villalobos</h4>
+    
+      <div id="about-card-bio">Bottom-Up Analysis | Equity Research</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Seeking Analyst Position
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        New York, New York
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/07/shiny-financial-personal/">
+                <h3 class="media-heading">Building a Financial Shiny Dashboard for Personal Daily Use</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"> Shiny Dashboards with AWS RDS Data feed  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/07/aws-rds-mysql/">
+                <h3 class="media-heading">Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Amazon Web Services RDS with MySQL &amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal + MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/07/aws-r/">
+                <h3 class="media-heading">Running R on an AWS Enstance</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Amazon Web Services with R I went over a bit about AWS in my previous post TK and how benefitial it is. Amazon EC2 is just another great service offered by Amazon. EC2 is basiacally a virtual machine that offers an variety of operating systems and computational power.
+EC2 allows users to build apps, automate scaling according to changing needs and peak periods, deploy computational intensive models, streamline development processes, and create virtual servers to manage storage, lessening the need to invest in infrastructure.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/07/backtest-cortrade-earnings/">
+                <h3 class="media-heading">Scaling Correlation Strategies to the NASDAQ for Earnings Trades</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Pure Earnings Play 2  Correlation Reviewing different versions Top pairs from results Beautiful plots to visualize the results Quick review  In a previous post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I backtested a simple earnings strategy and analyzed the results across all stocks in the NASDAQ with a market cap above $5 Billion. While writing that post, I created a correlation plot which sparked the idea of writing someday writing a continuation post by backtesting an earnings trade on only the highly correlated stocks.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/05/mysql-r/">
+                <h3 class="media-heading">Using MySQL with R</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading + writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB+. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
+                <h3 class="media-heading">Sentiment Analysis on Earnings Call</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/alpaca-for-r/">
+                <h3 class="media-heading">AlpacaforR</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/backtest-simple-earnings/">
+                <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/">
+                <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">IPO Estimate &amp; Review  Taking a look at LYFT financials for the first time Review of Dropbox IPO and stock performance  
+ Can the slow IPO market get a lift from LYFT? Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/01/salesforce-q3-update/">
+                <h3 class="media-heading">Salesforce Q3 Update</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Salesforce Q3 Update  Updated model from previous post, click here to read previous Salesforce post Management raised top and bottom line forecasts for FY19 guidance Management gave more details on FY20 &amp; FY22 goals and confirmed forecasts Near bulletproof business model during economic slowdown Key risks to management goals Recommendation and price targets  
+Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         13 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://jagg19.github.io/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://jagg19.github.io/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/jagg19.github.io\/2019\/07\/aws-rds-mysql\/';
+          
+            this.page.identifier = '\/2019\/07\/aws-rds-mysql\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

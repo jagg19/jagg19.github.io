@@ -23,7 +23,7 @@
     <item>
       <title>Algo</title>
       <link>https://jagg19.github.io/tags/algo/</link>
-      <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jagg19.github.io/tags/algo/</guid>
       <description></description>
@@ -59,7 +59,7 @@
     <item>
       <title>Cloud</title>
       <link>https://jagg19.github.io/tags/cloud/</link>
-      <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jagg19.github.io/tags/cloud/</guid>
       <description></description>
@@ -84,11 +84,29 @@
     </item>
     
     <item>
+      <title>Correlation</title>
+      <link>https://jagg19.github.io/tags/correlation/</link>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jagg19.github.io/tags/correlation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Crm</title>
       <link>https://jagg19.github.io/tags/crm/</link>
       <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jagg19.github.io/tags/crm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dashboard</title>
+      <link>https://jagg19.github.io/tags/dashboard/</link>
+      <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jagg19.github.io/tags/dashboard/</guid>
       <description></description>
     </item>
     
@@ -116,6 +134,15 @@
       <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jagg19.github.io/tags/dcf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ec</title>
+      <link>https://jagg19.github.io/tags/ec/</link>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jagg19.github.io/tags/ec/</guid>
       <description></description>
     </item>
     
@@ -167,7 +194,7 @@
     <item>
       <title>Nasdaq</title>
       <link>https://jagg19.github.io/tags/nasdaq/</link>
-      <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jagg19.github.io/tags/nasdaq/</guid>
       <description></description>
@@ -212,9 +239,18 @@
     <item>
       <title>Quarterly Results</title>
       <link>https://jagg19.github.io/tags/quarterly-results/</link>
-      <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jagg19.github.io/tags/quarterly-results/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rds</title>
+      <link>https://jagg19.github.io/tags/rds/</link>
+      <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jagg19.github.io/tags/rds/</guid>
       <description></description>
     </item>
     

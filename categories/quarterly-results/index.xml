@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Quarterly Results on Running on R</title>
+    <link>/categories/quarterly-results/</link>
+    <description>Recent content in Quarterly Results on Running on R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 25 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/quarterly-results/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Earnings Sentiment Analysis Part 2: Using Machine Learning</title>
+      <link>/2019/07/earnings-sentiment-pt2/</link>
+      <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/07/earnings-sentiment-pt2/</guid>
+      <description> Earnings Sentiment Analysis Part 2 From a post of mine earlier this year, I wanted to do a continuation post that is long due. I did not want to rush it as I was touching on more advanced material regarding machine learning methods to score sentiment from an earnings transcript. I also became really busy but without further a due.
+ </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -3,6 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://jagg19.github.io/2019/07/shiny-financial-personal/</loc>
+    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jagg19.github.io/2019/07/aws-rds-mysql/</loc>
+    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jagg19.github.io/2019/07/aws-r/</loc>
+    <lastmod>2019-07-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jagg19.github.io/2019/07/backtest-cortrade-earnings/</loc>
+    <lastmod>2019-07-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jagg19.github.io/2019/05/mysql-r/</loc>
     <lastmod>2019-05-14T00:00:00+00:00</lastmod>
   </url>
@@ -55,7 +75,7 @@
   
   <url>
     <loc>https://jagg19.github.io/tags/algo/</loc>
-    <lastmod>2019-04-15T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -71,8 +91,14 @@
   </url>
   
   <url>
+    <loc>https://jagg19.github.io/categories/aws/</loc>
+    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://jagg19.github.io/categories/backtest/</loc>
-    <lastmod>2019-04-15T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -90,13 +116,13 @@
   
   <url>
     <loc>https://jagg19.github.io/categories/</loc>
-    <lastmod>2019-04-15T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://jagg19.github.io/tags/cloud/</loc>
-    <lastmod>2019-04-26T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -113,14 +139,26 @@
   </url>
   
   <url>
+    <loc>https://jagg19.github.io/tags/correlation/</loc>
+    <lastmod>2019-07-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://jagg19.github.io/tags/crm/</loc>
     <lastmod>2019-04-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://jagg19.github.io/tags/dashboard/</loc>
+    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://jagg19.github.io/categories/data-analysis/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -144,7 +182,13 @@
   
   <url>
     <loc>https://jagg19.github.io/categories/earnings/</loc>
-    <lastmod>2019-04-26T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jagg19.github.io/tags/ec/</loc>
+    <lastmod>2019-07-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -209,6 +253,12 @@
   </url>
   
   <url>
+    <loc>https://jagg19.github.io/categories/mysql/</loc>
+    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://jagg19.github.io/tags/mysql/</loc>
     <lastmod>2019-05-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -216,7 +266,7 @@
   
   <url>
     <loc>https://jagg19.github.io/tags/nasdaq/</loc>
-    <lastmod>2019-04-15T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -234,7 +284,7 @@
   
   <url>
     <loc>https://jagg19.github.io/post/</loc>
-    <lastmod>2019-05-14T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -251,14 +301,14 @@
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/programming/</loc>
-    <lastmod>2019-05-14T00:00:00+00:00</lastmod>
+    <loc>https://jagg19.github.io/categories/programming/</loc>
+    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/programming/</loc>
-    <lastmod>2019-04-15T00:00:00+00:00</lastmod>
+    <loc>https://jagg19.github.io/tags/programming/</loc>
+    <lastmod>2019-05-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -270,13 +320,13 @@
   
   <url>
     <loc>https://jagg19.github.io/tags/quarterly-results/</loc>
-    <lastmod>2019-04-15T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://jagg19.github.io/categories/r/</loc>
-    <lastmod>2019-05-14T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -289,6 +339,12 @@
   <url>
     <loc>https://jagg19.github.io/categories/r-package/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jagg19.github.io/tags/rds/</loc>
+    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -312,13 +368,19 @@
   
   <url>
     <loc>https://jagg19.github.io/</loc>
-    <lastmod>2019-05-14T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://jagg19.github.io/tags/sentiment-analysis/</loc>
     <lastmod>2019-04-26T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jagg19.github.io/categories/shiny/</loc>
+    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -336,7 +398,7 @@
   
   <url>
     <loc>https://jagg19.github.io/categories/trading/</loc>
-    <lastmod>2019-04-15T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

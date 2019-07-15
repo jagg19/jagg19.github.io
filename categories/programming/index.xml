@@ -6,10 +6,47 @@
     <description>Recent content in Programming on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jagg19.github.io/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Building a Financial Shiny Dashboard for Personal Daily Use</title>
+      <link>https://jagg19.github.io/2019/07/shiny-financial-personal/</link>
+      <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jagg19.github.io/2019/07/shiny-financial-personal/</guid>
+      <description> Shiny Dashboards with AWS RDS Data feed  </description>
+    </item>
+    
+    <item>
+      <title>Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</title>
+      <link>https://jagg19.github.io/2019/07/aws-rds-mysql/</link>
+      <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jagg19.github.io/2019/07/aws-rds-mysql/</guid>
+      <description>Amazon Web Services RDS with MySQL &amp;amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal + MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.</description>
+    </item>
+    
+    <item>
+      <title>Running R on an AWS Enstance</title>
+      <link>https://jagg19.github.io/2019/07/aws-r/</link>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jagg19.github.io/2019/07/aws-r/</guid>
+      <description>Amazon Web Services with R I went over a bit about AWS in my previous post TK and how benefitial it is. Amazon EC2 is just another great service offered by Amazon. EC2 is basiacally a virtual machine that offers an variety of operating systems and computational power.
+EC2 allows users to build apps, automate scaling according to changing needs and peak periods, deploy computational intensive models, streamline development processes, and create virtual servers to manage storage, lessening the need to invest in infrastructure.</description>
+    </item>
+    
+    <item>
+      <title>Scaling Correlation Strategies to the NASDAQ for Earnings Trades</title>
+      <link>https://jagg19.github.io/2019/07/backtest-cortrade-earnings/</link>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jagg19.github.io/2019/07/backtest-cortrade-earnings/</guid>
+      <description>Pure Earnings Play 2  Correlation Reviewing different versions Top pairs from results Beautiful plots to visualize the results Quick review  In a previous post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I backtested a simple earnings strategy and analyzed the results across all stocks in the NASDAQ with a market cap above $5 Billion. While writing that post, I created a correlation plot which sparked the idea of writing someday writing a continuation post by backtesting an earnings trade on only the highly correlated stocks.</description>
+    </item>
     
     <item>
       <title>AlpacaforR</title>
