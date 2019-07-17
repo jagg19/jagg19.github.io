@@ -44,7 +44,7 @@ At the minimum, you will need an [Amazon Web Services](https://aws.amazon.com) a
 
 # Launching a AWS RDS Instance to run MySQL
 
-To start, select the services tab, RDS under database, and then click create database.
+To start, select the services tab, RDS under database, and then click create database. There are plenty of configuration settings, but leave them to default unless stated below.
 
 ##### Step 1
 
@@ -120,6 +120,8 @@ Once you go back to your RDS instance, you should see the changes made under "Se
 I'm going to show two ways to connect to our new AWS RDS Instance. If you have no interest in using the terminal to connect, then you can [click here](#workbench) to learn how to connect your Instance to MySQL Workbench.
 
 #### Terminal
+
+>You must already have a version mysql installed into your computer before you can call mysql. Please see [MySQL Installation](https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/) and choose the instructions for the appropiate operating system. 
 
 Copy and paste your Endpoint which you will find under "Connectivity and security". To connect through your local terminal, enter the below command with your appropriate values.
 
