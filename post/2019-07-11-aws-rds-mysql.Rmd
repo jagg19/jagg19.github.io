@@ -41,6 +41,19 @@ At the minimum, you will need an [Amazon Web Services](https://aws.amazon.com) a
 <br>
 <br>
 
+#Creating Security Group for RDS
+
+The first thing we will want to do is configure a security group so we can have access to our RDS database. Go to the services tab and select EC2 then navigate to "Security Groups" under Network & Security on the left navigation bar. 
+
+![](/img/RDS-MYSQL/rds_security_pre.png)
+
+
+Click Create Security Group, and then enter a name for your security group, and select the appropiate VPC (it will suually be default if this is your first RDS instance). Select add rule, and choose "MYSQL/Aurora" under the Type drop-down. Change Source to "Anywhere" and click Create.
+
+
+![](/img/RDS-MYSQL/rds_security_intab.png)
+
+<br>
 
 # Launching a AWS RDS Instance to run MySQL
 
@@ -74,7 +87,7 @@ Scroll down the page to Settings and add your DB identifier, master username, an
 
 ##### Step 3
 
-Make sure your public accessibility is set to "Yes" or else our instance will not have a public IP address assigned. Also, please make sure "Create new VPC security group" is selected so we can allow access to read the data to anyone. If you are storing sensitive data then you will need to configure the security group settings or subnet groups which is beyond this scope. I am only looking for easy ways to access non-sensitive data seamlessly at any location.  
+Make sure your public accessibility is set to "Yes" or else our instance will not have a public IP address assigned. Also, please make sure "Choose exisiting VPC secuirty groups" is selected so we can choose the RDS secuirty group we initially created. If you are storing sensitive data then you will need to configure the security group settings or subnet groups which is beyond this scope. I am only looking for easy ways to access non-sensitive data seamlessly at any location.  
 
 Under Database options, just enter a database called "testing" so we can ensure everything was loaded correctly once we connect to our DB Instance. Leave the rest of the settings to default unless you'd like to snoop a little more. For these purposes, we do not need to change any settings so click create database. It will take ~10 minutes to launch the database and back it up so be patient :)
 
@@ -89,30 +102,20 @@ Wait for our RDS to finish launching. Under the Summary tab for our new RDS, you
 
 ![](/img/RDS-MYSQL/rds_endpoint_location.png)
 
-<br>
 
-After, scroll down to Security group rules. Under "Type" you will see one rule for Inbound and one for Outbound. Click the Inbound security group link and it will navigate you to the "Security Group" tab.
-
-![](/img/RDS-MYSQL/rds_security_pre.png)
 
 <br>
 
-Click the "Inbound" security group checkbox and then click the inbound tab on the lower screen. Hit "Edit" and open the dropdown under Source to change it to "Anywhere" and click save. See below:
 
-![](/img/RDS-MYSQL/rds_security_inbtab.png)
-
-![](/img/RDS-MYSQL/rds_security_action.png)
-
-<br>
-
-Once you go back to your RDS instance, you should see the changes made under "Security group rules". Its now time to connect to your new MySQL RDS Instance!
+Let's quickly check if the secuirty group settings look correct. It should read "0.0.0.0/0" for both Inbound & Outbound. 
 
 ![](/img/RDS-MYSQL/rds_security_postchng.png)
 
 
+Great, the security group setting is set to the one we initially created. Its now time to connect to your new MySQL RDS Instance!
 
 
-<br>
+
 <br>
 
 # Connecting Through Terminal and MySQL Workbench
@@ -121,7 +124,23 @@ I'm going to show two ways to connect to our new AWS RDS Instance. If you have n
 
 #### Terminal
 
->You must already have a version mysql installed into your computer before you can call mysql. Please see [MySQL Installation](https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/) and choose the instructions for the appropiate operating system. 
+>You must already have a version mysql installed into your computer before you can call mysql. Please see [MySQL Installation](https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/) and choose the instructions for the appropiate operating system. For Mac users installing mysql 8.0 or higher, see [Installing MySQL on macOS Using Native Packages](https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/osx-installation-pkg.html)
+
+
+###### Install MySQL on Mac - Quick & Easy using HomeBrew
+
+If you dont have Homebrew, then do this first:
+
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+
+Then install MySQL client to your Mac:
+
+`brew install mysql-client`
+
+
+<br>
+
+#MySQL Installed
 
 Copy and paste your Endpoint which you will find under "Connectivity and security". To connect through your local terminal, enter the below command with your appropriate values.
 

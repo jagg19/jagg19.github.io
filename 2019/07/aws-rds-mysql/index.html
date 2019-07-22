@@ -295,6 +295,20 @@ if (!doNotTrack) {
 <p>At the minimum, you will need an <a href="https://aws.amazon.com">Amazon Web Services</a> account to create an RDS. When you create an RDS, you are provided with an endpoint URL which we will use as the host when connecting through SSH or on MySQL Workbench. See below on how to create an RDS after you log in to AWS.</p>
 <p><br> <br></p>
 </div>
+<div id="creating-security-group-for-rds" class="section level1">
+<h1>Creating Security Group for RDS</h1>
+<p>The first thing we will want to do is configure a security group so we can have access to our RDS database. Go to the services tab and select EC2 then navigate to “Security Groups” under Network &amp; Security on the left navigation bar.</p>
+<div class="figure">
+<img src="/img/RDS-MYSQL/rds_security_pre.png" />
+
+</div>
+<p>Click Create Security Group, and then enter a name for your security group, and select the appropiate VPC (it will suually be default if this is your first RDS instance). Select add rule, and choose “MYSQL/Aurora” under the Type drop-down. Change Source to “Anywhere” and click Create.</p>
+<div class="figure">
+<img src="/img/RDS-MYSQL/rds_security_intab.png" />
+
+</div>
+<p><br></p>
+</div>
 <div id="launching-a-aws-rds-instance-to-run-mysql" class="section level1">
 <h1>Launching a AWS RDS Instance to run MySQL</h1>
 <p>To start, select the services tab, RDS under database, and then click create database. There are plenty of configuration settings, but leave them to default unless stated below.</p>
@@ -324,7 +338,7 @@ if (!doNotTrack) {
 </div>
 <div id="step-3" class="section level5">
 <h5>Step 3</h5>
-<p>Make sure your public accessibility is set to “Yes” or else our instance will not have a public IP address assigned. Also, please make sure “Create new VPC security group” is selected so we can allow access to read the data to anyone. If you are storing sensitive data then you will need to configure the security group settings or subnet groups which is beyond this scope. I am only looking for easy ways to access non-sensitive data seamlessly at any location.</p>
+<p>Make sure your public accessibility is set to “Yes” or else our instance will not have a public IP address assigned. Also, please make sure “Choose exisiting VPC secuirty groups” is selected so we can choose the RDS secuirty group we initially created. If you are storing sensitive data then you will need to configure the security group settings or subnet groups which is beyond this scope. I am only looking for easy ways to access non-sensitive data seamlessly at any location.</p>
 <p>Under Database options, just enter a database called “testing” so we can ensure everything was loaded correctly once we connect to our DB Instance. Leave the rest of the settings to default unless you’d like to snoop a little more. For these purposes, we do not need to change any settings so click create database. It will take ~10 minutes to launch the database and back it up so be patient :)</p>
 <div class="figure">
 <img src="/img/RDS-MYSQL/rds_step3.png" />
@@ -340,28 +354,13 @@ if (!doNotTrack) {
 
 </div>
 <p><br></p>
-<p>After, scroll down to Security group rules. Under “Type” you will see one rule for Inbound and one for Outbound. Click the Inbound security group link and it will navigate you to the “Security Group” tab.</p>
-<div class="figure">
-<img src="/img/RDS-MYSQL/rds_security_pre.png" />
-
-</div>
-<p><br></p>
-<p>Click the “Inbound” security group checkbox and then click the inbound tab on the lower screen. Hit “Edit” and open the dropdown under Source to change it to “Anywhere” and click save. See below:</p>
-<div class="figure">
-<img src="/img/RDS-MYSQL/rds_security_inbtab.png" />
-
-</div>
-<div class="figure">
-<img src="/img/RDS-MYSQL/rds_security_action.png" />
-
-</div>
-<p><br></p>
-<p>Once you go back to your RDS instance, you should see the changes made under “Security group rules”. Its now time to connect to your new MySQL RDS Instance!</p>
+<p>Let’s quickly check if the secuirty group settings look correct. It should read “0.0.0.0/0” for both Inbound &amp; Outbound.</p>
 <div class="figure">
 <img src="/img/RDS-MYSQL/rds_security_postchng.png" />
 
 </div>
-<p><br> <br></p>
+<p>Great, the security group setting is set to the one we initially created. Its now time to connect to your new MySQL RDS Instance!</p>
+<p><br></p>
 </div>
 </div>
 <div id="connecting-through-terminal-and-mysql-workbench" class="section level1">
@@ -370,8 +369,20 @@ if (!doNotTrack) {
 <div id="terminal" class="section level4">
 <h4>Terminal</h4>
 <blockquote>
-<p>You must already have a version mysql installed into your computer before you can call mysql. Please see <a href="https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/">MySQL Installation</a> and choose the instructions for the appropiate operating system.</p>
+<p>You must already have a version mysql installed into your computer before you can call mysql. Please see <a href="https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/">MySQL Installation</a> and choose the instructions for the appropiate operating system. For Mac users installing mysql 8.0 or higher, see <a href="https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/osx-installation-pkg.html">Installing MySQL on macOS Using Native Packages</a></p>
 </blockquote>
+<div id="install-mysql-on-mac---quick-easy-using-homebrew" class="section level6">
+<h6>Install MySQL on Mac - Quick &amp; Easy using HomeBrew</h6>
+<p>If you dont have Homebrew, then do this first:</p>
+<p><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code></p>
+<p>Then install MySQL client to your Mac:</p>
+<p><code>brew install mysql-client</code></p>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="mysql-installed" class="section level1">
+<h1>MySQL Installed</h1>
 <p>Copy and paste your Endpoint which you will find under “Connectivity and security”. To connect through your local terminal, enter the below command with your appropriate values.</p>
 <p><code>mysql -h &lt;Endpoint&gt; -u &lt;Master Username&gt; -p</code></p>
 <p>Then it will prompt you for a password which is the master password you created with your username. Once you entered everything correctly, you will be logged into your MySQL DB that is hosted on Amazon RDS. Let’s see if the “testing” database was loading correctly during the initial set up.</p>
@@ -382,7 +393,6 @@ if (!doNotTrack) {
 <p>We can see our testing database so we’ve configured Mysql correctly! Now we are up and running through the local terminal. Let’s see how we can do this through MySQL Workbench.</p>
 <p><br></p>
 <p><a id="workbench"></a></p>
-</div>
 <div id="mysql-workbench" class="section level4">
 <h4>MySQL Workbench</h4>
 <p>Launch MySQL Workbench and click <code>+</code> next to MySQL Connections. You will then be prompted to enter some details about the host, user, password, port, etc.</p>
