@@ -39,7 +39,6 @@ At the minimum, you will need an [Amazon Web Services](https://aws.amazon.com) a
 
 
 <br>
-<br>
 
 #Creating Security Group for RDS
 

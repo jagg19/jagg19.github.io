@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Aws on Running on R</title>
-    <link>/categories/aws/</link>
+    <link>https://jagg19.github.io/categories/aws/</link>
     <description>Recent content in Aws on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 15 Jul 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/aws/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jagg19.github.io/categories/aws/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</title>
-      <link>/2019/07/aws-rds-mysql/</link>
+      <link>https://jagg19.github.io/2019/07/aws-rds-mysql/</link>
       <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/07/aws-rds-mysql/</guid>
+      <guid>https://jagg19.github.io/2019/07/aws-rds-mysql/</guid>
       <description>Amazon Web Services RDS with MySQL &amp;amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal + MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.</description>
     </item>
     
