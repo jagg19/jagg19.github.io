@@ -2,107 +2,116 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Running on R</title>
-    <link>https://jagg19.github.io/post/</link>
+    <link>/post/</link>
     <description>Recent content in Posts on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jagg19.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Running R on AWS EC2 and Logging into Rstudio from Anywhere</title>
+      <link>/2019/08/aws-r/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/08/aws-r/</guid>
+      <description>Amazon Web Services with R  Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database, I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.</description>
+    </item>
+    
+    <item>
       <title>Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</title>
-      <link>https://jagg19.github.io/2019/07/aws-rds-mysql/</link>
+      <link>/2019/07/aws-rds-mysql/</link>
       <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/07/aws-rds-mysql/</guid>
+      <guid>/2019/07/aws-rds-mysql/</guid>
       <description>Amazon Web Services RDS with MySQL &amp;amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal + MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.</description>
     </item>
     
     <item>
       <title>Using MySQL with R</title>
-      <link>https://jagg19.github.io/2019/05/mysql-r/</link>
+      <link>/2019/05/mysql-r/</link>
       <pubDate>Tue, 14 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/05/mysql-r/</guid>
+      <guid>/2019/05/mysql-r/</guid>
       <description>Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading + writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB+. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.</description>
     </item>
     
     <item>
       <title>Sentiment Analysis on Earnings Call</title>
-      <link>https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/</link>
+      <link>/2019/04/sentiment-analysis-conf-call/</link>
       <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/</guid>
+      <guid>/2019/04/sentiment-analysis-conf-call/</guid>
       <description>Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?</description>
     </item>
     
     <item>
       <title>AlpacaforR</title>
-      <link>https://jagg19.github.io/2019/04/alpaca-for-r/</link>
+      <link>/2019/04/alpaca-for-r/</link>
       <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/04/alpaca-for-r/</guid>
+      <guid>/2019/04/alpaca-for-r/</guid>
       <description>AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
 After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.</description>
     </item>
     
     <item>
       <title>Scaling a Simple Earnings Strategy to the NASDAQ Exchange</title>
-      <link>https://jagg19.github.io/2019/03/backtest-simple-earnings/</link>
+      <link>/2019/03/backtest-simple-earnings/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/03/backtest-simple-earnings/</guid>
+      <guid>/2019/03/backtest-simple-earnings/</guid>
       <description>Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
 You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.</description>
     </item>
     
     <item>
       <title>Lyft IPO &#43; Dropbox Review</title>
-      <link>https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/</link>
+      <link>/2019/03/ipo-estimates-lyftdbx/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/</guid>
+      <guid>/2019/03/ipo-estimates-lyftdbx/</guid>
       <description>IPO Estimate &amp;amp; Review  Taking a look at LYFT financials for the first time Review of Dropbox IPO and stock performance  
  Can the slow IPO market get a lift from LYFT? Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31.</description>
     </item>
     
     <item>
       <title>Salesforce Q3 Update</title>
-      <link>https://jagg19.github.io/2019/01/salesforce-q3-update/</link>
+      <link>/2019/01/salesforce-q3-update/</link>
       <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/01/salesforce-q3-update/</guid>
+      <guid>/2019/01/salesforce-q3-update/</guid>
       <description>Salesforce Q3 Update  Updated model from previous post, click here to read previous Salesforce post Management raised top and bottom line forecasts for FY19 guidance Management gave more details on FY20 &amp;amp; FY22 goals and confirmed forecasts Near bulletproof business model during economic slowdown Key risks to management goals Recommendation and price targets  
 Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results.</description>
     </item>
     
     <item>
       <title>Yield Curve Inversion - Marks End to Bull Market?</title>
-      <link>https://jagg19.github.io/2018/12/yield-curve-fun/</link>
+      <link>/2018/12/yield-curve-fun/</link>
       <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2018/12/yield-curve-fun/</guid>
+      <guid>/2018/12/yield-curve-fun/</guid>
       <description>Going, Going, Inverted!  Yield Curve inversions are typically a leading indicator for a recession Historic analysis on inversions for specific yields since 1990 Yield Curve over 5 different time frames since the start of 2018 Takeaway from recent inversions   Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations.</description>
     </item>
     
     <item>
       <title>Salesforce, Inc. - Are Expanding Margins Enough to Buy?</title>
-      <link>https://jagg19.github.io/2018/11/salesforce-enough-to-buy/</link>
+      <link>/2018/11/salesforce-enough-to-buy/</link>
       <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2018/11/salesforce-enough-to-buy/</guid>
+      <guid>/2018/11/salesforce-enough-to-buy/</guid>
       <description>Salesforce, Inc.  Leader in the growing CRM market Modestly expanding margins Monetizing existing customer base  
 Customer Relationship Management Pioneer Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig in to Salesforce specifically, let’s explore what exactly CRM is and the growth prospects.</description>
     </item>
     
     <item>
       <title>Teaching a Machine to Learn NYC Airbnb Prices</title>
-      <link>https://jagg19.github.io/2018/11/ml-airbnb-prices/</link>
+      <link>/2018/11/ml-airbnb-prices/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2018/11/ml-airbnb-prices/</guid>
+      <guid>/2018/11/ml-airbnb-prices/</guid>
       <description>Using Airbnb By now, most Gen Z and millenials have heard of or used Airbnb for a range of many reasons, such as looking for a place to crash or taking a vacation. I believe what won the consumer’s attention over hotels was the fact that you are getting the “homey” setting and privacy while away on vacation instead of a hotel environment. I realize not everyone wants to part ways with room service, benefits of a having full-service bar in the lobby, pool &amp;amp; spas, sometimes a gym, and the 100+ channels, but when comparing the prices and the extra sq.</description>
     </item>
     

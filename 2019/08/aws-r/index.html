@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.51 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Jagger Villalobos">
+<meta name="keywords" content="">
+<meta name="description" content="Amazon Web Services with R  Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database, I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.">
+
+
+<meta property="og:description" content="Amazon Web Services with R  Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database, I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Running R on AWS EC2 and Logging into Rstudio from Anywhere">
+<meta name="twitter:title" content="Running R on AWS EC2 and Logging into Rstudio from Anywhere">
+<meta property="og:url" content="/2019/08/aws-r/">
+<meta property="twitter:url" content="/2019/08/aws-r/">
+<meta property="og:site_name" content="Running on R">
+<meta property="og:description" content="Amazon Web Services with R  Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database, I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.">
+<meta name="twitter:description" content="Amazon Web Services with R  Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database, I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-08-06T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-08-06T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="AWS">
+    
+      <meta property="article:section" content="R">
+    
+      <meta property="article:section" content="MySQL">
+    
+      <meta property="article:section" content="Programming">
+    
+  
+  
+    
+      <meta property="article:tag" content="EC2">
+    
+      <meta property="article:tag" content="Cloud">
+    
+      <meta property="article:tag" content="RStudio">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1563205259/ec2-rstudio.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1563205259/ec2-rstudio.png">
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+
+
+    <title>Running R on AWS EC2 and Logging into Rstudio from Anywhere</title>
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="/2019/08/aws-r/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-134862415-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Running on R</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
+        
+          <h5 class="sidebar-profile-bio">Bottom-Up Analysis | Equity Research</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/jagg19">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              post-header-cover--partial"
+       style="background-image:url('https://res.cloudinary.com/dyackvnwm/image/upload/v1563205259/ec2-rstudio.png')"
+       data-behavior="4">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Running R on AWS EC2 and Logging into Rstudio from Anywhere
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-08-06T00:00:00Z">
+        
+  August 6, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/aws">AWS</a>, 
+    
+      <a class="category-link" href="/categories/r">R</a>, 
+    
+      <a class="category-link" href="/categories/mysql">MySQL</a>, 
+    
+      <a class="category-link" href="/categories/programming">Programming</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="4"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+
+<div id="amazon-web-services-with-r" class="section level1">
+<h1>Amazon Web Services with R</h1>
+<ul>
+<li>Advantages of using Amazon’s EC2 service with R</li>
+<li><a href="#short-easy">Short and Easy Installation</a></li>
+<li><a href="#long_way">Detailed, longer yet more flexible installation</a></li>
+<li><a href="#rstudio_anywhere">Logging in to your RStudio from anywhere</a></li>
+<li><a href="#optional_steps">Using RStudio’s system terminal to install MySQL</a></li>
+<li>Wrapping it all up</li>
+</ul>
+<p>In my previous post <a href="https://jagg19.github.io/2019/07/aws-rds-mysql/">Databases in the Cloud: Amazon Relational Database</a>, I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon. Simply speaking, EC2 is a virtual server that offers different software stacks and computational power.</p>
+<p>EC2 allows users to build apps, automate scaling according to changing needs and peak periods, deploy computational intensive models, streamline development processes, and create virtual servers lessening the need to invest in infrastructure.</p>
+<p><br></p>
+</div>
+<div id="advantages" class="section level1">
+<h1>Advantages</h1>
+<p>Two major advantages of using EC2 is that you’re not locked into one operating system or one configuration setup. You can go from a standard operating system running 1GB ram to a GPU equipped OS with 60+ GB ram that can handle a wide range of tasks. You can easily change your instance type in minutes; just stop your instance, modify the instance type, and start the instance again to run more/less power than before. This goes hand in hand with R and RStudio due to R’s in-memory architecture.</p>
+<p><br></p>
+</div>
+<div id="benefits-to-r" class="section level1">
+<h1>Benefits to R</h1>
+<p>Memory, memory, and more memory. If you ever cross a dataset that just eats your computers RAM away, you can easily pay &lt;$0.80 hour to use a $10,000 GPU that will cut right through any compute-intensive operations. It can get up to 60-90% cheaper when using a “spot instance” compared to an “on-demand instance”. See this post <a href="https://blog.boltops.com/2018/07/13/on-demand-vs-reserved-vs-spot-aws-ec2-pricing-comparison">On-Demand vs Reserved vs Spot AWS EC2 Pricing Comparison</a> to learn the differences between a spot, on-demand, and reserved instance.</p>
+<p><br></p>
+</div>
+<div id="two-ways-to-install-run-rstudio-on-an-ec2" class="section level1">
+<h1>Two Ways to Install / Run RStudio on an EC2</h1>
+<p>There are two ways that we can create an EC2 and install R &amp; Rstudio. The first way is the “Short and Easy Way” which will get RStudio up and running quickly, and you will get easy access to dropbox. The second way is the “Detailed and Longer Way” which has a more flexible configuration setup.</p>
+<p>TThe first way is “Short and Easy” but only because of the hard work that Louis Aslett put into creating/maintaining this <a href="http://www.louisaslett.com/RStudio_AMI/">Rstudio AMI</a>. An AMI (Amazon Machine Image) is a template for your systems software configuration for your instance. AMI defines things like which operating system is installed on your EC2 instance and which software is included. Louis was kind enough to do all of the dirty work needed (plus more) to create an instance that will allow us to run Rstudio on AWS. His AMI allows you to get up and running with RStudio and a seamless Dropbox integration in under 10 minutes, so I appreciate his time for maintaining this AMI!</p>
+<p>To truly appreciate what he has done, you must go through the next option. The second way is starting from scratch and configure everything yourself. For those who want to get their hands dirty and start from scratch, then <a href="#long_way">jump here to the detailed, long way</a>. You will have a lot more flexibility (and possibly learn more along the way) which is great if you plan on using other applications other than Rstudio. If your looking to create an instance and have Rstudio running all within 5 minutes, then please continue along!</p>
+<p><br></p>
+<p><a id="short-easy"></a></p>
+</div>
+<div id="short-and-easy" class="section level1">
+<h1>Short and Easy</h1>
+<p>You have to go through the “long way” to really appreciate how much time your saving by doing it this way. If you just need to quickly create an AWS instance to run RStudio on, then this is your best bet.</p>
+<div id="step-1" class="section level2">
+<h2>Step 1</h2>
+<p>Click the link for <a href="http://www.louisaslett.com/RStudio_AMI/">Louis Aslett’s RStudio AMI</a> and view the most recent AMI specs on the right side of the screen. Click the region nearest to you, and a new instance will automatically be created using this AMI, taking you to step 2 of the process.</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_RstudioAMI_hmpg.png" />
+
+</div>
+<div class="figure">
+<img src="/img/AWS-R/easy_step1.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-2" class="section level2">
+<h2>Step 2</h2>
+<p>To stay within the free tier, we will select the “General Purpose t2.micro” instance type. Click “Next: Configure Instance Details”</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_step2.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-3" class="section level2">
+<h2>Step 3</h2>
+<p>Leave all settings to default unless you know which more advanced configuration settings you’d like to set. Click “Next: Add Storage”. You will also leave these settings default unless you believe you may need more storage but make sure to not go above the free tier limit (8GB should be enough). Click “Next: Add Tags”</p>
+<p>To help you manage your instances, images, and other Amazon EC2 resources, you can optionally assign your metadata to each resource in the form of tags. Each tag consists of a key and an optional value, both of which you define. Click “Next: Configure Security Group”</p>
+<p><br></p>
+</div>
+<div id="step-4" class="section level2">
+<h2>Step 4</h2>
+<p>Set your secuirty group name, in this case I will name it “Rstudio” and I will add “rstudio-ami” to the description.</p>
+<p>To give access to port 80 (HTTP) for our RStudio instance, we need to select HTTP under the “Type” drop-down and set the source to “Anywhere”. Click “Review and Launch”.</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_step4.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-5" class="section level2">
+<h2>Step 5</h2>
+<p>Click Launch and wait for the “Select an existing key pair or create a new key pair” tab to open. We will select “Proceed without a key pair” under the first drop-down and click the checkbox that states “I acknowledge that I will not be able to connect to this instance unless I already know the password built into this AMI”. Finally, click Launch Instances!</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_step7.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-6" class="section level2">
+<h2>Step 6</h2>
+<p>Once your instance State reads “running”, select the instance and copy the “Public DNS” to then paste into your browser url.</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_cpypubDNS.png" />
+
+</div>
+<p><br></p>
+<div class="figure">
+<img src="/img/AWS-R/easy_urlpaste.png" />
+
+</div>
+<p><br></p>
+<div id="logging-in-to-rstudio" class="section level5">
+<h5>Logging in to RStudio</h5>
+<p>Once your browser connects to the instance, you’ll see an RStudio login screen. The AMI’s username is “rstudio” and the password is your instance’s ID (to the left of Public DNS). It is highly recommended to change your password as soon as you log in. See below.</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_rstu_login.png" />
+
+</div>
+</div>
+</div>
+<div id="step-7" class="section level2">
+<h2>Step 7</h2>
+<p>Success! I highly recommended reading everything in green that Luis Albert wrote, as it explains how to change your password and link to your dropbox. Luckily, it is very easy.</p>
+<div id="quickly-change-your-password" class="section level5">
+<h5>Quickly change your password</h5>
+<p>To change the password, load the “RStudioAMI” package by running <code>library(&quot;RStudioAMI&quot;)</code>. Then run <code>passwd()</code> which you’ll be prompted to enter the current password and your new password.</p>
+</div>
+<div id="quickly-link-your-dropbox" class="section level5">
+<h5>Quickly link your dropbox</h5>
+<p>Optionally, you can run <code>linkDropbox()</code> to link your dropbox account by entering the link the function outputs into your browser.</p>
+<p>See the Console output below after running the above.</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_welcome_post.png" />
+
+</div>
+<p><br></p>
+<p><br></p>
+<p><a id="long_way"></a></p>
+</div>
+</div>
+</div>
+<div id="detailed-longer-way" class="section level1">
+<h1>Detailed, Longer Way</h1>
+<div id="step-1-choosing-an-ami" class="section level2">
+<h2>Step 1: Choosing an AMI</h2>
+<p>You can choose the Amazon Linux AMI, which is provided at no additional cost and has a stable version of R in the repository. This AMI is maintained by AWS and includes packages and configurations that provide native integration with AWS and other software.</p>
+<p>To go through the entire process, we will use the Ubuntu Server (18.04) AMI and download all the necessary software.</p>
+<p><br></p>
+<div class="figure">
+<img src="/img/AWS-R/long_step1.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-2-choosing-an-instance-type" class="section level2">
+<h2>Step 2: Choosing an Instance Type</h2>
+<p>Choose an EC2 instance type that matches the data size and processing that your analysis requires. By default, R runs only on one core node and, in many cases, requires a lot of memory. For programming and development, the general-purpose T2 instance types are sufficient and cheap, and t2.micro is available through the AWS Free Tier.</p>
+<p>For our purpose, we will select the “General Purpose T2.Micro” Instance. See the following link for more details on <a href="https://aws.amazon.com/ec2/instance-types/">AWS EC2 Instance Types</a>.</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_step2.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-3-configuring-instance-details" class="section level2">
+<h2>Step 3: Configuring Instance Details</h2>
+<p>We will leave these settings to default, but you can expand “Advanced Details” to add scripts like <code>sudo apt update</code> to run on instance start up. Click “Next: Add Storage” to continue.</p>
+</div>
+<div id="step-4-add-storage" class="section level2">
+<h2>Step 4: Add Storage</h2>
+<p>Here we can set the EBS volume size which defaults to 8GB. Usually, this will be enough, but let’s change it to 16GB to play it safe (free tier gets up to 30GB). Click “Next: Add Tags” to optionally add tags, then click “Next: Configure Security Group”.</p>
+</div>
+<div id="step-5-configuring-the-security-group" class="section level2">
+<h2>Step 5: Configuring the Security Group</h2>
+<p>In the EC2 launch wizard, you define a security group, which acts as a virtual firewall that controls the traffic for one or more instances. For this R-based analysis environment, we want to access RStudio from the browser so select HTTP from the Type dropdown, and set the Source settings to “Anywhere”.</p>
+<p>We will add an additional rule to allow SSH logins to our instance directly. Select SSH under type, leave the port at 22, and set Source to “Anywhere”.</p>
+<p>Last, we will add a rule for Type “MySQL/Aurora” with TCP protocol and port 3306 with source settings to “Anywhere” for our MySQL server. After you finish your security group configuration, choose “Review and Launch”.</p>
+<div class="figure">
+<img src="/img/AWS-R/long_step6.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-6-launch-key-pair-management" class="section level2">
+<h2>Step 6: Launch &amp; Key Pair Management</h2>
+<p>Review your instance information and click “Launch”. You’ll be prompted to “Select or Create Key Pair” and choose “Create a new key pair” and name it to your choosing. Launch your instance and let’s change some permissions to the key-pair while it launches. Open your terminal and copy / paste the below.</p>
+<p><code>mv &lt;path-to-pem-file&gt; ~/.ssh</code></p>
+<p><code>chmod 600 &lt;new-path-to-pem-file&gt;</code></p>
+<p>Once the instance status is “running”, we can now login via SSH.</p>
+<p><br></p>
+</div>
+<div id="step-7-ssh-login-to-our-ec2-to-begin-downloading-software" class="section level2">
+<h2>Step 7: SSH login to our EC2 to begin downloading software</h2>
+<p>We will connect to the EC2 instance via SSH on the terminal. Please open your terminal and copy/paste the below, and replace the content inside &lt; &gt; with your instance info.</p>
+<p><code>ssh -i &lt;path-to-pem-file&gt; ubuntu@&lt;PublicDNS&gt;</code></p>
+<p>When your prompted, type yes.</p>
+<div class="figure">
+<img src="/img/AWS-R/ssh_login_suc.png" />
+
+</div>
+<p><br></p>
+<p>Success! We are finally logged into our AWS EC2 instance. Before I get into the script of downloading the necessary software, I want to show how to create swap memory to stay within free tier instances.</p>
+</div>
+<div id="step-8-creating-swap-memory-and-why-its-necessary" class="section level2">
+<h2>Step 8: Creating Swap Memory and Why Its Necessary</h2>
+<p>Due to the limited RAM in the free tier T2.Nano instance, we need to enable and create swap memory to successfully download certain packages without clogging the RAM (and to avoid having to select a larger instance outside of free-tier). If you plan on using instances above t2.medium, then you do not need to do this and skip to step 9.</p>
+<p>Some R packages like Tidyverse require memory larger than 1GB to successfully download, so that’s when Swap memory will allow us to get the extra memory needed. In simple terms, Swap memory “borrows” some memory from the disk when the RAM is fully utilized and clogged. Please copy and paste the below to set 2GB of swap memory (do not set swap &gt; 2x larger than RAM).</p>
+<pre class="r"><code>#Create Swap file memory to avoid using bigger instance
+`sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=2048`
+`sudo /sbin/mkswap /var/swap.1`
+`sudo /sbin/swapon /var/swap.1`
+`sudo sh -c &#39;echo &quot;/var/swap.1 swap swap defaults 0 0 &quot; &gt;&gt; /etc/fstab&#39;`</code></pre>
+<p><br></p>
+</div>
+<div id="step-9-downloading-r-rstudio-and-system-dependencies" class="section level2">
+<h2>Step 9: Downloading R, RStudio, and System Dependencies</h2>
+<p>Now it is time to download all of the necessary software, libraries, packages, etc. It is important to select the most recent versions of RStudio where you can find <a href="https://www.rstudio.com/products/rstudio/download-server/">here</a>. Modify the script to install the most recent version if the one used below is outdated. Copy / paste the below in your terminal.</p>
+<pre class="r"><code># The Ubuntu repos contain an outdated version of R so lets add the updated repo to avoid errors
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+
+sudo add-apt-repository &#39;deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/&#39;
+
+# Update ubuntu package repo, to get latest R
+sudo apt update
+
+# Install R
+sudo apt -y install r-base r-base-dev
+
+# Install shiny before shiny-server
+sudo R -e &quot;install.packages(&#39;shiny&#39;)&quot;
+
+# Install debian package manager, gdebi
+sudo apt install gdebi-core
+
+
+# Install Shiny Server 
+wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.9.923-amd64.deb
+sudo gdebi -n shiny-server-1.5.9.923-amd64.deb
+sudo rm shiny-server-1.5.9.923-amd64.deb
+
+# Dependencies for R packages like RMariaDB, devtools, tidyverse, sparklyr
+sudo apt -y install libcurl4-openssl-dev libssl-dev libxml2-dev libmariadbclient-dev build-essential libcurl4-gnutls-dev
+
+
+# Install Rstudio
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.2.1335-amd64.deb
+sudo gdebi -n rstudio-server-1.2.1335-amd64.deb
+sudo rm rstudio-server-1.2.1335-amd64.deb
+
+
+# Add user info to login RStudio
+sudo adduser rstudio
+
+#Add rstudio to sudo group
+sudo usermod -aG sudo rstudio
+
+# Install Java and reconfigure in R for RStudio use
+sudo apt -y install default-jdk
+sudo R CMD javareconf
+
+
+#sudo apt-get install r-cran-rjava
+
+
+# Change permissions for R / Rstudio library config files
+sudo chmod 777 -R /usr/local/lib/R/site-library
+sudo chmod 777 -R /etc/rstudio/rserver.conf
+
+
+# Set port=80 in RStudio config file for browser access to RStudio and restart RStudio server
+
+# ****VERY IMPORTANT***
+#If you plan on running a shiny app on port 80, then you need to set a reverse proxy to use one port for both. 
+sudo echo &quot;www-port=80&quot; &gt;&gt; /etc/rstudio/rserver.conf
+sudo rstudio-server restart
+
+
+# Install some useful R Packages
+sudo R -e &quot;install.packages(&#39;RCurl&#39;, repos=&#39;http://cran.rstudio.com&#39;)&quot;
+sudo R -e &quot;install.packages(&#39;devtools&#39;, repos=&#39;http://cran.rstudio.com&#39;)&quot;
+sudo R -e &quot;install.packages(&#39;tidyverse&#39;)&quot;
+sudo R -e &quot;install.packages(&#39;RMariaDB&#39;)&quot;
+
+
+# Delete and free some room up. This is emptied on system reboot so its optional.
+rm -rf /tmp/downloaded_packages/ /tmp/*.rd</code></pre>
+<p>Great, so everything is now downloaded onto our EC2 that is required to login to RStudio from our browser. For those of you who did the short way first, I am sure you now understand why I called this the “Detailed, longer way” and if you haven’t then go ahead and try the <a href="#short-easy">short and easy way</a>.</p>
+<p><a id="rstudio_anywhere"></a></p>
+</div>
+<div id="step-10-logging-into-rstudio" class="section level2">
+<h2>Step 10: Logging into RStudio</h2>
+<p>Open a web browser and enter your Public DNS(IPv4) as part of the URL to login to RStudio Server. If you kept RStudio on port 8787, then add <code>:8787</code> to the end of your url like below.</p>
+<p><br></p>
+<div class="figure">
+<img src="/img/AWS-R/rstu_url.png" />
+
+</div>
+<p>For login credentials, use the newly created credentials for the user rstudio.</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_rstu_login.png" />
+
+</div>
+<p>Now we can do our data analysis on any browser, anywhere, at any scale. AWS brings us a new beneficial way to use Rstudio.</p>
+<p><br></p>
+</div>
+</div>
+<div id="optional-steps" class="section level1">
+<h1>Optional Steps</h1>
+<p><a id="optional_steps"></a></p>
+<div id="step-11-installing-and-using-mysql-in-rstudios-terminal" class="section level2">
+<h2>Step 11: Installing and Using MySQL in RStudio’s Terminal</h2>
+<p>One of my favorite things in RStudio is the built-in system terminal that allows us to install/use MySQL without ever leaving RStudio. We can access/create databases, tables, etc all within our RStudio session from anywhere. Click the terminal tab and copy/paste the below to install/use MySQL in RStudio:</p>
+<pre class="r"><code># Install MySQL
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.12-1_all.deb
+sudo gdebi -n mysql-apt-config_0.8.12-1_all.deb
+
+#To be sure everything is up to date
+sudo apt update
+sudo apt upgrade</code></pre>
+<div class="figure">
+<img src="/img/AWS-R/mysql_terminal_rstu1.png" />
+
+</div>
+<p>I included the update/upgrade script in the above to ensure your installing the most up-to-date version of mysql, but this is optional.</p>
+<p>Now install mysql-server and when prompted for a password, please create one and remember it for when you login to your mysql-server.</p>
+<pre class="r"><code># Create your password
+sudo apt install mysql-server mysql-client
+sudo rm mysql-apt-config_0.8.12-1_all.deb</code></pre>
+<div class="figure">
+<img src="/img/AWS-R/mysql_terminal_rstu2.png" />
+
+</div>
+<p>Now login with the password we created to see that everything went well!</p>
+<pre class="r"><code># Login to MySQL inside RStudi Terminal 
+sudo mysql -p
+
+#It works!
+exit;</code></pre>
+<div class="figure">
+<img src="/img/AWS-R/mysql_terminal_rstu3.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-12-checking-if-an-installed-package-works" class="section level2">
+<h2>Step 12: Checking if an installed package works?</h2>
+<p>RStudio and MySQL are working well, so lets see if those useful packages we installed earlier are also working. We should see a datatable if everything went as planned.</p>
+<pre class="r"><code>library(RCurl) 
+data &lt;- read.table(textConnection(getURL(&quot;https://cgiardata.s3-us-west-2.amazonaws.com/ccafs/amzn.csv&quot;)), sep=&quot;,&quot;, header=FALSE)
+head(data)</code></pre>
+<pre><code>##          V1     V2      V3     V4      V5      V6
+## 1 1/15/2014 395.87 2677150 398.94 399.310 392.534
+## 2 1/14/2014 397.54 2339458 392.13 398.630 391.290
+## 3 1/13/2014 390.98 2843810 397.98 399.780 388.450
+## 4 1/10/2014 397.66 2678085 402.53 403.764 393.800
+## 5  1/9/2014 401.01 2103029 403.71 406.890 398.440
+## 6  1/8/2014 401.92 2316220 398.47 403.000 396.040</code></pre>
+<p>Perfect! I love it when things go well :)</p>
+<p><br></p>
+</div>
+</div>
+<div id="wrapping-it-up" class="section level1">
+<h1>Wrapping it up</h1>
+<p>As I mentioned earlier, we can now do our data analysis (and access MySQL in RStudio if you did the optional steps) on any browser, anywhere and at any scale. This post was a lot to take in especially if you decided to try both the short and easy + detailed long way. I’ve decided to save some content for a separate post, such as setting up additional ports on your EC2 to deploy and access shiny apps from anywhere.</p>
+<p>Thanks for reading if you made it this far, and I hope you can now deploy AWS EC2 instances with R, Rstudio, and optionally MySQL for free!</p>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/ec2/">EC2</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/cloud/">Cloud</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/rstudio/">RStudio</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/aws-rds-mysql/" data-tooltip="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/08/aws-r/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/08/aws-r/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/08/aws-r/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Jagger Villalobos. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/aws-rds-mysql/" data-tooltip="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/08/aws-r/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/08/aws-r/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/08/aws-r/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F08%2Faws-r%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F08%2Faws-r%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F08%2Faws-r%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jagger Villalobos</h4>
+    
+      <div id="about-card-bio">Bottom-Up Analysis | Equity Research</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Seeking Analyst Position
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        New York, New York
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/08/aws-r/">
+                <h3 class="media-heading">Running R on AWS EC2 and Logging into Rstudio from Anywhere</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Amazon Web Services with R  Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database, I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/07/aws-rds-mysql/">
+                <h3 class="media-heading">Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Amazon Web Services RDS with MySQL &amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal + MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/05/mysql-r/">
+                <h3 class="media-heading">Using MySQL with R</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading + writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB+. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/sentiment-analysis-conf-call/">
+                <h3 class="media-heading">Sentiment Analysis on Earnings Call</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/alpaca-for-r/">
+                <h3 class="media-heading">AlpacaforR</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
+                <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
+                <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">IPO Estimate &amp; Review  Taking a look at LYFT financials for the first time Review of Dropbox IPO and stock performance  
+ Can the slow IPO market get a lift from LYFT? Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
+                <h3 class="media-heading">Salesforce Q3 Update</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Salesforce Q3 Update  Updated model from previous post, click here to read previous Salesforce post Management raised top and bottom line forecasts for FY19 guidance Management gave more details on FY20 &amp; FY22 goals and confirmed forecasts Near bulletproof business model during economic slowdown Key risks to management goals Recommendation and price targets  
+Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/12/yield-curve-fun/">
+                <h3 class="media-heading">Yield Curve Inversion - Marks End to Bull Market?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Going, Going, Inverted!  Yield Curve inversions are typically a leading indicator for a recession Historic analysis on inversions for specific yields since 1990 Yield Curve over 5 different time frames since the start of 2018 Takeaway from recent inversions   Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/11/salesforce-enough-to-buy/">
+                <h3 class="media-heading">Salesforce, Inc. - Are Expanding Margins Enough to Buy?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Salesforce, Inc.  Leader in the growing CRM market Modestly expanding margins Monetizing existing customer base  
+Customer Relationship Management Pioneer Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig in to Salesforce specifically, let’s explore what exactly CRM is and the growth prospects.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         11 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2019\/08\/aws-r\/';
+          
+            this.page.identifier = '\/2019\/08\/aws-r\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

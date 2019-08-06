@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Relational Database on Running on R</title>
-    <link>https://jagg19.github.io/categories/relational-database/</link>
+    <link>/categories/relational-database/</link>
     <description>Recent content in Relational Database on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 14 May 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jagg19.github.io/categories/relational-database/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/relational-database/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Using MySQL with R</title>
-      <link>https://jagg19.github.io/2019/05/mysql-r/</link>
+      <link>/2019/05/mysql-r/</link>
       <pubDate>Tue, 14 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/05/mysql-r/</guid>
+      <guid>/2019/05/mysql-r/</guid>
       <description>Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading + writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB+. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.</description>
     </item>
     

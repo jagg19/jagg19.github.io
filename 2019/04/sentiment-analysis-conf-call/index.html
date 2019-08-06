@@ -15,8 +15,8 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sentiment Analysis on Earnings Call">
 <meta name="twitter:title" content="Sentiment Analysis on Earnings Call">
-<meta property="og:url" content="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
-<meta property="twitter:url" content="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
+<meta property="og:url" content="/2019/04/sentiment-analysis-conf-call/">
+<meta property="twitter:url" content="/2019/04/sentiment-analysis-conf-call/">
 <meta property="og:site_name" content="Running on R">
 <meta property="og:description" content="Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?">
 <meta name="twitter:description" content="Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?">
@@ -76,12 +76,12 @@
 
     <title>Sentiment Analysis on Earnings Call</title>
 
-    <link rel="icon" href="https://jagg19.github.io/favicon.png">
+    <link rel="icon" href="/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
+    <link rel="canonical" href="/2019/04/sentiment-analysis-conf-call/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -89,7 +89,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="https://jagg19.github.io/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
     
     
 
@@ -117,12 +117,12 @@ if (!doNotTrack) {
       <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="https://jagg19.github.io/">Running on R</a>
+    <a class="header-title-link" href="/">Running on R</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="https://jagg19.github.io/#about">
+         href="/#about">
     
     
     
@@ -138,7 +138,7 @@ if (!doNotTrack) {
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="https://jagg19.github.io/#about">
+        <a href="/#about">
           <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
         </a>
         <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
@@ -151,7 +151,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/">
+      <a class="sidebar-button-link " href="/">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -161,7 +161,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/#about">
+      <a class="sidebar-button-link " href="/#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -171,7 +171,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/categories">
+      <a class="sidebar-button-link " href="/categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -181,7 +181,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/tags">
+      <a class="sidebar-button-link " href="/tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -191,7 +191,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/archives">
+      <a class="sidebar-button-link " href="/archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -205,7 +205,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/jagg19" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://github.com/jagg19">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -215,7 +215,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -259,15 +259,15 @@ if (!doNotTrack) {
   
     <span>in</span>
     
-      <a class="category-link" href="https://jagg19.github.io/categories/r">R</a>, 
+      <a class="category-link" href="/categories/r">R</a>, 
     
-      <a class="category-link" href="https://jagg19.github.io/categories/r-markdown">R Markdown</a>, 
+      <a class="category-link" href="/categories/r-markdown">R Markdown</a>, 
     
-      <a class="category-link" href="https://jagg19.github.io/categories/investment">Investment</a>, 
+      <a class="category-link" href="/categories/investment">Investment</a>, 
     
-      <a class="category-link" href="https://jagg19.github.io/categories/text-mining">Text Mining</a>, 
+      <a class="category-link" href="/categories/text-mining">Text Mining</a>, 
     
-      <a class="category-link" href="https://jagg19.github.io/categories/earnings">Earnings</a>
+      <a class="category-link" href="/categories/earnings">Earnings</a>
     
   
 
@@ -288,10 +288,10 @@ if (!doNotTrack) {
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               
-<script src="https://jagg19.github.io/rmarkdown-libs/kePrint/kePrint.js"></script>
-<script src="https://jagg19.github.io/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
-<script src="https://jagg19.github.io/rmarkdown-libs/chart.js/./dist/Chart.min.js"></script>
-<script src="https://jagg19.github.io/rmarkdown-libs/chartJSRadar-binding/chartJSRadar.js"></script>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/chart.js/./dist/Chart.min.js"></script>
+<script src="/rmarkdown-libs/chartJSRadar-binding/chartJSRadar.js"></script>
 
 
 <div id="conference-call-text-mining-and-sentiment-analysis" class="section level1">
@@ -527,15 +527,15 @@ word_freq &lt;- sort(word_freq, decreasing = TRUE)
 
 #The plots below show both quarters
 barplot(word_freq[1:20], col = &quot;tan&quot;, las = 2, main = &quot;Top 20 Frequent Words Q1-19&quot;)</code></pre>
-<p><img src="https://jagg19.github.io/img/sentiment/Top20_frqnt_q119.png" /> <img src="https://jagg19.github.io/img/sentiment/Top20_frqnt_q419.png" /></p>
+<p><img src="/img/sentiment/Top20_frqnt_q119.png" /> <img src="/img/sentiment/Top20_frqnt_q419.png" /></p>
 <p>It looks like there is a common narrative associated with business operations such as “customers” cloud&quot; and “one”. I will drop these words out of the text as they don’t uncover much. On the bright side, it’s a good thing to see that “growth” ranked #14 in the top 20 list for Q4-19. I want to possibly find any associations with specific keywords. Being that “growth” was ranked #14 in our list, I will choose this word to find associations/correlations with. The “tm” package also offers a function called ‘findAssocs’ that returns a vector that holds matching terms from x and their rounded correlations satisfying the inclusive lower correlation limit of corlimit. See below for the word associations using this function for the word “growth” in both Q1-19 and Q4-19 earnings transcripts.</p>
 <p><br></p>
 <div class="figure">
-<img src="https://jagg19.github.io/img/sentiment/wrd_growth_cor_q119.png" />
+<img src="/img/sentiment/wrd_growth_cor_q119.png" />
 
 </div>
 <div class="figure">
-<img src="https://jagg19.github.io/img/sentiment/wrd_growth_cor_q419.png" />
+<img src="/img/sentiment/wrd_growth_cor_q419.png" />
 
 </div>
 <p><br></p>
@@ -597,7 +597,7 @@ head(text_tidy_bing %&gt;% count(word, sentiment, sort = TRUE),10)</code></pre>
 <div id="adjusting-the-database" class="section level1">
 <h1>Adjusting the Database</h1>
 <p>This can distort the sentiment outlook so I must be careful and look at words that are impacting the score the most. It is worth noting that this dictionary and others, will not always best fit our style of text as we can see. You should always analyze if whether or not it is in the dictionary your most frequent terms are in the dictionary and decide if it needs to be adjusted fit the industry and company that is under analysis. After quickly glancing through the top 50 frequent terms in the transcript, I noticed the term “headwinds” used in various quarters. In finance, headwinds are viewed as a negative term and will need to be adjusted the bing dictionary to score this negative term. We get can a cleaner view of positive vs negative terms once this is done. See below for a plot of the most frequent pos / neg terms used in Q1 &amp; Q4.</p>
-<p><img src="https://jagg19.github.io/img/sentiment/frqnt_pos_neg_bing_q119.png" /> <img src="https://jagg19.github.io/img/sentiment/frqnt_pos_neg_bing_q419.png" /></p>
+<p><img src="/img/sentiment/frqnt_pos_neg_bing_q119.png" /> <img src="/img/sentiment/frqnt_pos_neg_bing_q419.png" /></p>
 </div>
 <div id="analysts-vs-management-bing" class="section level1">
 <h1>Analysts vs Management: Bing</h1>
@@ -610,7 +610,7 @@ bingplot_q1 &lt;- ggplot(author_sentiment_bing, aes(author, percent, fill = sent
 
 gridExtra::grid.arrange(bingplot_q1,bingplot_q4,nrow=1)</code></pre>
 <div class="figure">
-<img src="https://jagg19.github.io/img/sentiment/mkeup_posneg_bing_q1q419.png" />
+<img src="/img/sentiment/mkeup_posneg_bing_q1q419.png" />
 
 </div>
 </div>
@@ -618,7 +618,7 @@ gridExtra::grid.arrange(bingplot_q1,bingplot_q4,nrow=1)</code></pre>
 <h1>Sentiment Throughout Earnings Call</h1>
 <p>Now, I would love to see the sentiment throughout the conference call to see if there are any noticeable dips at any point. This could signal bad news or something that should be looked into further.</p>
 <p>Sentiment or polarity is calculated by taking the positive-negative terms and dividing by the total # of positive/negative terms. Earning calls usually start off great due to management boasting any recent achievements, but once analysts begin to ask about future guidance or for more detail, you can see an initial slowdown in sentiment. We can see this below through the different plots of polarity over the course of the call.</p>
-<p><img src="https://jagg19.github.io/img/sentiment/confcall_polarity_full_q119.png" /> <img src="https://jagg19.github.io/img/sentiment/confcall_polarity_full_q419.png" /> <img src="https://jagg19.github.io/img/sentiment/confcall_polarity_full_split_q119.png" /> <img src="https://jagg19.github.io/img/sentiment/confcall_polarity_full_split_q419.png" /></p>
+<p><img src="/img/sentiment/confcall_polarity_full_q119.png" /> <img src="/img/sentiment/confcall_polarity_full_q419.png" /> <img src="/img/sentiment/confcall_polarity_full_split_q119.png" /> <img src="/img/sentiment/confcall_polarity_full_split_q419.png" /></p>
 <p>The above graphs are evidence for a conference call that had a positive sentiment. Later, I will check to see if this is true or not. In some cases, you will see a large dip in the score which could signal a very negative announcement that resulted in bad sentiment.</p>
 <p><br></p>
 </div>
@@ -659,7 +659,7 @@ afinn_scores &lt;- text_tidy_finn %&gt;% count(line_number,word,score) %&gt;% gr
 
 #Plot the overall polarity over the entire lentgth call
 ggplot(afinn_scores, aes(line_number, polarity)) + geom_smooth(span = 0.2) + labs(x = &quot;Line Number&quot;, y = &quot;Polarity Score&quot;,title = &quot;Conference Call Chronological Polarity Q4-19&quot;,subtitle=&quot;AFINN&quot;)  + theme_gdocs() </code></pre>
-<p><img src="https://jagg19.github.io/img/sentiment/Confcall_polarity_full_afinn_q119.png" /> <img src="https://jagg19.github.io/img/sentiment/Confcall_polarity_full_afinn_q419.png" /></p>
+<p><img src="/img/sentiment/Confcall_polarity_full_afinn_q119.png" /> <img src="/img/sentiment/Confcall_polarity_full_afinn_q419.png" /></p>
 <p>When the score is plotted over the entire length of the conference call, the trend shows the same characteristics as the Bing visualization. Just like in the Bing Sentiment chart, the overall sentiment score begins to increase from the start and continues into the end of the earnings call.</p>
 </div>
 <div id="analysts-vs-management-afinn" class="section level1">
@@ -678,7 +678,7 @@ gridExtra::grid.arrange(afinnplot_q1, afinnplot_q4, nrow = 1)</code></pre>
 <div id="afinn-frequency-stacked-barplot" class="section level4">
 <h4>Afinn Frequency Stacked Barplot</h4>
 <div class="figure">
-<img src="https://jagg19.github.io/img/sentiment/Confcall_polarity_full_split_afinn_q1q419.png" />
+<img src="/img/sentiment/Confcall_polarity_full_split_afinn_q1q419.png" />
 
 </div>
 <p>This also gives a similar view as the Bing database, but only because we plotted the frequency percentage of pos/neg key terms. I did not take into account the scores for each key term, so when comparing the new sentiment score vs the frequency of each positive/negative term we can see it shows a slightly different story.</p>
@@ -696,7 +696,7 @@ gridExtra::grid.arrange(afinnplot_scored_q1, afinnplot_scored_q4, nrow = 1)</cod
 <div id="afinn-scored-stacked-barplot" class="section level4">
 <h4>Afinn Scored Stacked Barplot</h4>
 <div class="figure">
-<img src="https://jagg19.github.io/img/sentiment/Afinn_scored_q1q4.png" />
+<img src="/img/sentiment/Afinn_scored_q1q4.png" />
 
 </div>
 <p>Using the new total sentiment score, it shows a slightly different narrative than the frequency graph above. In Q1, the analysts were <em>slightly</em> more positive than the management while the scored graph showed a wider difference. In Q4, the analysts were a little more positive than the management but the scored graph shows management having more positive tone in sentiment. This shows that the -5 to 5 scoring scale is effective in scoring some words with a higher weight than others.</p>
@@ -739,7 +739,7 @@ radarchart::chartJSRadar(nrc_scores_group_radar_q4, main = &quot;Wheel of Emotio
 <script type="application/json" data-for="htmlwidget-2">{"x":{"data":{"labels":["anger","anticipation","disgust","fear","joy","sadness","surprise","trust"],"datasets":[{"label":"analyst","data":[1.09861228866811,2.77258872223978,0.693147180559945,1.79175946922805,2.30258509299405,null,1.09861228866811,2.99573227355399],"backgroundColor":"rgba(255,0,0,0.2)","borderColor":"rgba(255,0,0,0.8)","pointBackgroundColor":"rgba(255,0,0,0.8)","pointBorderColor":"#fff","pointHoverBackgroundColor":"#fff","pointHoverBorderColor":"rgba(255,0,0,0.8)"},{"label":"management","data":[3.61091791264422,5.11198778835654,2.56494935746154,3.76120011569356,4.69134788222914,3.13549421592915,3.85014760171006,5.35658627467201],"backgroundColor":"rgba(0,255,0,0.2)","borderColor":"rgba(0,255,0,0.8)","pointBackgroundColor":"rgba(0,255,0,0.8)","pointBorderColor":"#fff","pointHoverBackgroundColor":"#fff","pointHoverBorderColor":"rgba(0,255,0,0.8)"}]},"options":{"responsive":true,"title":{"display":true,"text":"Wheel of Emotions Q4-19"},"scale":{"ticks":{"min":0},"pointLabels":{"fontSize":18}},"tooltips":{"enabled":true,"mode":"label"},"legend":{"display":true}}},"evals":[],"jsHooks":[]}</script>
 <p><br></p>
 <div class="figure">
-<img src="https://jagg19.github.io/img/sentiment/Emotional_q1q419.png" />
+<img src="/img/sentiment/Emotional_q1q419.png" />
 
 </div>
 <p>It looks like <strong>NONE</strong> of the analysts sounded sad in Q1 or Q4! The management had the highest tone of Joy throughout the conference call. Overall, I would say that anticipation and trust seemed to be the overall emotion for the length of the call. I am not a big fan of this lexicon, as the emotions of the analysts or management at the time of call doesn’t tell much regarding the long term future of the company.</p>
@@ -773,15 +773,15 @@ head(text_tidy_hash_sentiment_loughran_mcdonald %&gt;% count(word, y, sort = TRU
 ## 10 achieve        1     4</code></pre>
 <p>Great! These type of keywords are more business oriented which is a great fit for conference call analysis. One thing that is not a great fit is the negative score placed on the word “question” which I will need to adjust.</p>
 <p>After adjusting, I want to illustrate the top positive/negative scored terms.</p>
-<p><img src="https://jagg19.github.io/img/sentiment/Front_topbtm_loughran_q119.png" /> <img src="https://jagg19.github.io/img/sentiment/Front_topbtm_loughran_q419.png" /></p>
+<p><img src="/img/sentiment/Front_topbtm_loughran_q119.png" /> <img src="/img/sentiment/Front_topbtm_loughran_q419.png" /></p>
 <p>It looks like this dictionary scores the word “ill” as a negative term which makes sense. During my text cleanup, I changed all of “I’ll” to “ill” which is being scored as a negative. You must always pay attention to detail even after you’ve cleaned your text! I will adjust for this as well and illustrate the polarity score throughout the conference call below.</p>
 <p><br></p>
 <div class="figure">
-<img src="https://jagg19.github.io/img/sentiment/confcall_polarity_full_loughran_q119.png" />
+<img src="/img/sentiment/confcall_polarity_full_loughran_q119.png" />
 
 </div>
 <div class="figure">
-<img src="https://jagg19.github.io/img/sentiment/confcall_polarity_full_loughran_q419.png" />
+<img src="/img/sentiment/confcall_polarity_full_loughran_q419.png" />
 
 </div>
 <p><br></p>
@@ -833,7 +833,7 @@ head(text_tidy_hash_sentiment_loughran_mcdonald %&gt;% count(word, y, sort = TRU
 <div id="bi-gram" class="section level2">
 <h2>Bi-gram</h2>
 <p>I can increase the amount of “tokens” or words that we use when building our n-grams which would result in bi-gram, or a tri-gram for three-word phrases. Also, I can check for any negation words that may arrive before any of the highest positive words to see if anything needs to be adjusted. This is a bit more sophisticated than a single word analysis. If growth occurs 20x in a text, can I say that it is positive? Not exactly, because what if “slow growth” occurred 15 out of those 20 times. At the end of creating the bi-gram, I can check for any negation words that occur before any of our scored keywords.</p>
-<p><img src="https://jagg19.github.io/img/sentiment/Bigram_freq_split_q119.png" /> <img src="https://jagg19.github.io/img/sentiment/Bigram_freq_split_q419.png" /></p>
+<p><img src="/img/sentiment/Bigram_freq_split_q119.png" /> <img src="/img/sentiment/Bigram_freq_split_q419.png" /></p>
 <p><br></p>
 <div id="most-frequent-bi-grams-with-growth" class="section level4">
 <h4>Most frequent bi-grams with “growth”</h4>
@@ -905,7 +905,7 @@ tri_words %&gt;% count(trigram, sort = TRUE) %&gt;% head(10)</code></pre>
 ##  8 2 billion predictions             3
 ##  9 accounting standards asc          3
 ## 10 current remaining transaction     3</code></pre>
-<p><img src="https://jagg19.github.io/img/sentiment/Trigram_freq_split_q119.png" /> <img src="https://jagg19.github.io/img/sentiment/Trigram_freq_split_q419.png" /></p>
+<p><img src="/img/sentiment/Trigram_freq_split_q119.png" /> <img src="/img/sentiment/Trigram_freq_split_q419.png" /></p>
 <p>These charts look similar to each other from Q1 to Q4, but after taking a closer look you can see the tri-gram phrases differ. It seems like the management switched focus from covering the mulesoft acquisition “remaining transction price” in Q1 to now focusing on creating an all-in-one or “customer 360” platform in the most recent Q4 call.</p>
 <p><br></p>
 <div id="checking-for-negation-words-1" class="section level4">
@@ -938,23 +938,23 @@ text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;
 </div>
 <div id="network-graphs" class="section level1">
 <h1>Network graphs</h1>
-<p><img src="https://jagg19.github.io/img/sentiment/Bi-gram_network.png" /> <img src="https://jagg19.github.io/img/sentiment/Bi-gram_network_q4.png" /></p>
+<p><img src="/img/sentiment/Bi-gram_network.png" /> <img src="/img/sentiment/Bi-gram_network_q4.png" /></p>
 <p><br></p>
 </div>
 <div id="dendrograms" class="section level1">
 <h1>Dendrograms</h1>
-<p><img src="https://jagg19.github.io/img/sentiment/Dendropgram_q119.png" /> <img src="https://jagg19.github.io/img/sentiment/Dendropgram_q419.png" /></p>
+<p><img src="/img/sentiment/Dendropgram_q119.png" /> <img src="/img/sentiment/Dendropgram_q419.png" /></p>
 <div id="correlation-with-the-word-growth-q1-19" class="section level2">
 <h2>Correlation with the word “Growth” Q1-19</h2>
 <div class="figure">
-<img src="https://jagg19.github.io/img/sentiment/Growth_rev_corr_graph_q119.png" />
+<img src="/img/sentiment/Growth_rev_corr_graph_q119.png" />
 
 </div>
 </div>
 <div id="correlation-with-the-word-growth-q4-19" class="section level2">
 <h2>Correlation with the word “Growth” Q4-19</h2>
 <div class="figure">
-<img src="https://jagg19.github.io/img/sentiment/Growth_rev_corr_graph_q419.png" />
+<img src="/img/sentiment/Growth_rev_corr_graph_q419.png" />
 
 </div>
 <p>Remember how we saw the word “headwind” appear in our text but not in the scoring lexicons? Well, these visualizations exploit the cause of these “headwinds” which was FX as seen in the Q4 network graph. I can also see relationships such as “grew revenue”, “durable growth” and “incredible innovation”. These can be extremely powerful, especially in situations where I have a set of words that I want to find any relationships for or correlations within the text. I would highly suggest those who are interested in these charts to read more details on how these relationships are found.</p>
@@ -978,13 +978,13 @@ text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/crm/">CRM</a>
+  <a class="tag tag--primary tag--small" href="/tags/crm/">CRM</a>
 
-  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/cloud/">Cloud</a>
+  <a class="tag tag--primary tag--small" href="/tags/cloud/">Cloud</a>
 
-  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/sentiment-analysis/">Sentiment Analysis</a>
+  <a class="tag tag--primary tag--small" href="/tags/sentiment-analysis/">Sentiment Analysis</a>
 
-  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/conference-call/">Conference Call</a>
+  <a class="tag tag--primary tag--small" href="/tags/conference-call/">Conference Call</a>
 
                   </div>
                 
@@ -997,7 +997,7 @@ text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/05/mysql-r/" data-tooltip="Using MySQL with R">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/mysql-r/" data-tooltip="Using MySQL with R">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -1005,7 +1005,7 @@ text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/04/alpaca-for-r/" data-tooltip="AlpacaforR">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/alpaca-for-r/" data-tooltip="AlpacaforR">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -1023,19 +1023,19 @@ text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/04/sentiment-analysis-conf-call/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/04/sentiment-analysis-conf-call/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/04/sentiment-analysis-conf-call/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -1083,7 +1083,7 @@ text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/05/mysql-r/" data-tooltip="Using MySQL with R">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/mysql-r/" data-tooltip="Using MySQL with R">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -1091,7 +1091,7 @@ text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/04/alpaca-for-r/" data-tooltip="AlpacaforR">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/alpaca-for-r/" data-tooltip="AlpacaforR">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -1109,19 +1109,19 @@ text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/04/sentiment-analysis-conf-call/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/04/sentiment-analysis-conf-call/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/04/sentiment-analysis-conf-call/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -1151,19 +1151,19 @@ text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F04%2Fsentiment-analysis-conf-call%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F04%2Fsentiment-analysis-conf-call%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fjagg19.github.io%2F2019%2F04%2Fsentiment-analysis-conf-call%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F04%2Fsentiment-analysis-conf-call%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F04%2Fsentiment-analysis-conf-call%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F04%2Fsentiment-analysis-conf-call%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -1224,7 +1224,24 @@ text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/07/aws-rds-mysql/">
+              <a class="link-unstyled" href="/2019/08/aws-r/">
+                <h3 class="media-heading">Running R on AWS EC2 and Logging into Rstudio from Anywhere</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Amazon Web Services with R  Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database, I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/07/aws-rds-mysql/">
                 <h3 class="media-heading">Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</h3>
               </a>
               <span class="media-meta">
@@ -1241,7 +1258,7 @@ text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/05/mysql-r/">
+              <a class="link-unstyled" href="/2019/05/mysql-r/">
                 <h3 class="media-heading">Using MySQL with R</h3>
               </a>
               <span class="media-meta">
@@ -1258,7 +1275,7 @@ text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
+              <a class="link-unstyled" href="/2019/04/sentiment-analysis-conf-call/">
                 <h3 class="media-heading">Sentiment Analysis on Earnings Call</h3>
               </a>
               <span class="media-meta">
@@ -1275,7 +1292,7 @@ text_tidy_tri_q4 %&gt;% separate(trigram, c(&quot;word1&quot;, &quot;word2&quot;
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/alpaca-for-r/">
+              <a class="link-unstyled" href="/2019/04/alpaca-for-r/">
                 <h3 class="media-heading">AlpacaforR</h3>
               </a>
               <span class="media-meta">
@@ -1293,7 +1310,7 @@ After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Ex
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/backtest-simple-earnings/">
+              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
                 <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
               </a>
               <span class="media-meta">
@@ -1311,7 +1328,7 @@ You often hear two things when watching or reading financial news. One is earnin
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/">
+              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
                 <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
               </a>
               <span class="media-meta">
@@ -1329,7 +1346,7 @@ You often hear two things when watching or reading financial news. One is earnin
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/01/salesforce-q3-update/">
+              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
                 <h3 class="media-heading">Salesforce Q3 Update</h3>
               </a>
               <span class="media-meta">
@@ -1347,7 +1364,7 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2018/12/yield-curve-fun/">
+              <a class="link-unstyled" href="/2018/12/yield-curve-fun/">
                 <h3 class="media-heading">Yield Curve Inversion - Marks End to Bull Market?</h3>
               </a>
               <span class="media-meta">
@@ -1364,7 +1381,7 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2018/11/salesforce-enough-to-buy/">
+              <a class="link-unstyled" href="/2018/11/salesforce-enough-to-buy/">
                 <h3 class="media-heading">Salesforce, Inc. - Are Expanding Margins Enough to Buy?</h3>
               </a>
               <span class="media-meta">
@@ -1379,23 +1396,6 @@ Customer Relationship Management Pioneer Whenever Customer Relationship Manageme
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2018/11/ml-airbnb-prices/">
-                <h3 class="media-heading">Teaching a Machine to Learn NYC Airbnb Prices</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Nov 11, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Using Airbnb By now, most Gen Z and millenials have heard of or used Airbnb for a range of many reasons, such as looking for a place to crash or taking a vacation. I believe what won the consumer’s attention over hotels was the fact that you are getting the “homey” setting and privacy while away on vacation instead of a hotel environment. I realize not everyone wants to part ways with room service, benefits of a having full-service bar in the lobby, pool &amp; spas, sometimes a gym, and the 100+ channels, but when comparing the prices and the extra sq.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1403,7 +1403,7 @@ Customer Relationship Management Pioneer Whenever Customer Relationship Manageme
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         10 posts found
+         11 posts found
       </p>
     </div>
   </div>
@@ -1411,7 +1411,7 @@ Customer Relationship Management Pioneer Whenever Customer Relationship Manageme
     
   
     
-    <div id="cover" style="background-image:url('https://jagg19.github.io/images/cover.jpg');"></div>
+    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
   
 
 
@@ -1423,7 +1423,7 @@ Customer Relationship Management Pioneer Whenever Customer Relationship Manageme
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://jagg19.github.io/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
 
 
 <script lang="javascript">
@@ -1458,7 +1458,7 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/jagg19.github.io\/2019\/04\/sentiment-analysis-conf-call\/';
+          this.page.url = '\/2019\/04\/sentiment-analysis-conf-call\/';
           
             this.page.identifier = '\/2019\/04\/sentiment-analysis-conf-call\/'
           

@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.51 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Jagger Villalobos">
+<meta name="keywords" content="">
+<meta name="description" content="Amazon Web Services with R I went over a bit about AWS in my previous post TK and how benefitial it is. Amazon EC2 is just another great service offered by Amazon. EC2 is basiacally a virtual machine that offers an variety of operating systems and computational power.
+EC2 allows users to build apps, automate scaling according to changing needs and peak periods, deploy computational intensive models, streamline development processes, and create virtual servers to manage storage, lessening the need to invest in infrastructure.">
+
+
+<meta property="og:description" content="Amazon Web Services with R I went over a bit about AWS in my previous post TK and how benefitial it is. Amazon EC2 is just another great service offered by Amazon. EC2 is basiacally a virtual machine that offers an variety of operating systems and computational power.
+EC2 allows users to build apps, automate scaling according to changing needs and peak periods, deploy computational intensive models, streamline development processes, and create virtual servers to manage storage, lessening the need to invest in infrastructure.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Running R on an AWS Enstance">
+<meta name="twitter:title" content="Running R on an AWS Enstance">
+<meta property="og:url" content="/2019/07/aws-r/">
+<meta property="twitter:url" content="/2019/07/aws-r/">
+<meta property="og:site_name" content="Running on R">
+<meta property="og:description" content="Amazon Web Services with R I went over a bit about AWS in my previous post TK and how benefitial it is. Amazon EC2 is just another great service offered by Amazon. EC2 is basiacally a virtual machine that offers an variety of operating systems and computational power.
+EC2 allows users to build apps, automate scaling according to changing needs and peak periods, deploy computational intensive models, streamline development processes, and create virtual servers to manage storage, lessening the need to invest in infrastructure.">
+<meta name="twitter:description" content="Amazon Web Services with R I went over a bit about AWS in my previous post TK and how benefitial it is. Amazon EC2 is just another great service offered by Amazon. EC2 is basiacally a virtual machine that offers an variety of operating systems and computational power.
+EC2 allows users to build apps, automate scaling according to changing needs and peak periods, deploy computational intensive models, streamline development processes, and create virtual servers to manage storage, lessening the need to invest in infrastructure.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-07-09T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-07-09T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="AWS">
+    
+      <meta property="article:section" content="R">
+    
+      <meta property="article:section" content="MySQL">
+    
+      <meta property="article:section" content="Programming">
+    
+  
+  
+    
+      <meta property="article:tag" content="EC">
+    
+      <meta property="article:tag" content="Cloud">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1563205259/ec2-rstudio.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1563205259/ec2-rstudio.png">
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+
+
+    <title>Running R on an AWS Enstance</title>
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="/2019/07/aws-r/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-134862415-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Running on R</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
+        
+          <h5 class="sidebar-profile-bio">Bottom-Up Analysis | Equity Research</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/jagg19">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              post-header-cover--partial"
+       style="background-image:url('https://res.cloudinary.com/dyackvnwm/image/upload/v1563205259/ec2-rstudio.png')"
+       data-behavior="4">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Running R on an AWS Enstance
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-07-09T00:00:00Z">
+        
+  July 9, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/aws">AWS</a>, 
+    
+      <a class="category-link" href="/categories/r">R</a>, 
+    
+      <a class="category-link" href="/categories/mysql">MySQL</a>, 
+    
+      <a class="category-link" href="/categories/programming">Programming</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="4"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+
+<div id="amazon-web-services-with-r" class="section level1">
+<h1>Amazon Web Services with R</h1>
+<p>I went over a bit about AWS in my previous post <a href="tktktk.com">TK</a> and how benefitial it is. Amazon EC2 is just another great service offered by Amazon. EC2 is basiacally a virtual machine that offers an variety of operating systems and computational power.</p>
+<p>EC2 allows users to build apps, automate scaling according to changing needs and peak periods, deploy computational intensive models, streamline development processes, and create virtual servers to manage storage, lessening the need to invest in infrastructure.</p>
+<p>Two major advantages of using EC2 is that you aren’t locked into one operating system or one configuration setup. You can go from a standard operating system runninng 1GB ram, to an GPU equipped OS with 100+ GB ram that can handle a wide variety of tasks. You can easily change your instance type in minutes: just stop your instance, change the instance type, and start the instance again to run either more/less power than before. This goes hand in hand with R and RStudio due to it in-memory architecture.</p>
+<p><br></p>
+</div>
+<div id="benefits-to-r" class="section level1">
+<h1>Benefits to R</h1>
+<p>Memory, memory, and more memory. If you ever cross a dataset thats too large or makes your computer too slow, you can easily pay &lt;$0.80 hour to use an $10,000 GPU that will cut right through whatever dataset your computer was struggling with. Rstudio is in-memory, we can configure the EC to have higher GB for certain uses. There are two ways that we can create an EC2 and install R &amp; Rstudio. The first way is what I will call the easy way, but it is only easy because of the hard work that Louis Aslett put into creating this <a href="http://www.louisaslett.com/RStudio_AMI/">Rstudio AMI</a>. Louis was kind enough to do all of the dirty work needed (plus more) to create an insntance that will allow us to run Rstudio on AWS. His AMI allows you to get up and running with RStudio and a seamless Dropbox integration in under 5 minutes, so I really appreciate his time for maintaining this AMI!</p>
+<p>In order to truely appreciate what he has done, you must go through the next option. The second way is starting from scratch once you create your EC instance. For those who want to get their hands dirty and start from scratch before getting to appreciete the easy way, then <a href="#long_way">jump here</a>. You will have alot more flexibility (and possibly learn more along the way) which is great if you plan on using other applications other than Rstudio. If your looking to create an instance and have Rstudio running all within 5 minutes, then please continue along!</p>
+<p><br></p>
+</div>
+<div id="short-and-easy" class="section level1">
+<h1>Short and Easy</h1>
+<p>You have to go through the “long way” to really appreciate how much time your saving by doing it this way. If you just need to quickly create an AWS instance to run RStudio on, then this is the best bet.</p>
+<div id="step-1" class="section level3">
+<h3>Step 1</h3>
+<p>Click the link for <a href="http://www.louisaslett.com/RStudio_AMI/">Louis Aslett’s RStudio AMI</a> and view the most recent AMI specs on the right side of the screen. Click the region nearest to you, and a new instance will automatically be created using this AMI, taking you to step 2 of the process.</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_RstudioAMI_hmpg.png" />
+
+</div>
+<div class="figure">
+<img src="/img/AWS-R/easy_step1.png" />
+
+</div>
+</div>
+<div id="step-2" class="section level3">
+<h3>Step 2</h3>
+<p>Assuming you are using the free tier, we will select the “General Purpose t2.micro” instance type. Click “Next: Configure Instance Details”</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_step2.png" />
+
+</div>
+</div>
+<div id="step-3" class="section level3">
+<h3>Step 3</h3>
+<p>Leave all settings to default unless you know which more advanced configuration settings you’d like to set. Click “Next: Add Storage”. You will also leave these settings default unless you believe you may need more storage but make sure to not go above the free tier limit (8GB should be enough). Click “Next: Add Tags”</p>
+<p>To help you manage your instances, images, and other Amazon EC2 resources, you can optionally assign your own metadata to each resource in the form of tags. Each tag consists of a key and an optional value, both of which you define. We do not need to set any tags. Click “Next: Configure Security Group”</p>
+</div>
+<div id="step-4" class="section level3">
+<h3>Step 4</h3>
+<p>Set your secuirty group name, in this case I will name it “Rstudio” and I will add “rstudio-ami” to the description. Since we need to allow internet traffic to access our RStudio instance, we need to select HTTP under the “Type” drop-down and set the source to custom and enter “0.0.0.0/0, ::/0”. Click “Review and Launch”.</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_step4.png" />
+
+</div>
+</div>
+<div id="step-5" class="section level3">
+<h3>Step 5</h3>
+<p>Click Launch and wait for the “Select an existing key pair or create a new key pair” tab to open. We will select “Proceed without a key pair” under the first drop-down and click the checkbox that states “I acknowledge that I will not be able to connect to this instance unless I already know the password built into this AMI”. Finally, click Launch Instances!</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_step7.png" />
+
+</div>
+</div>
+<div id="step-6" class="section level3">
+<h3>Step 6</h3>
+<p>Once your Instance State changes from “Pending” to “running”, select the instance and copy the “Public DNS” and paste it into your browser.</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_cpypubDNS.png" />
+
+</div>
+<div class="figure">
+<img src="/img/AWS-R/easy_urlpaste.png" />
+
+</div>
+<p>Once your browser connects to the instance, you’ll see a RStudio login screen. The ami’s username is “rstudio” and the password is your instance’s ID. It is highly reccommended to change your password as soon as you login. See below.</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_rstu_login.png" />
+
+</div>
+</div>
+<div id="step-7" class="section level3">
+<h3>Step 7</h3>
+<p>Now that we are succesfully logged in, let’s change the password. I highly reccomended reading everything in green that Luis Albert wrote, as it explains how to change your password and link to your dropbox. Luckily, it is very easy. First, load the “RStudioAMI” package by running <code>library(&quot;RStudioAMI&quot;)</code> and then run <code>passwd()</code> which you’ll be prompted to enter the current password, then your new password. After, you can run <code>linkDropbox()</code> to quickly link your dropbox account by entering the link the function outputs into your browser. See below for the Console output after running the above.</p>
+<div class="figure">
+<img src="/img/AWS-R/easy_welcome_post.png" />
+
+</div>
+<p><a id="long_way"></a></p>
+</div>
+</div>
+<div id="detailed-longer-way" class="section level1">
+<h1>Detailed, Longer Way</h1>
+<div id="step-1-choosing-an-ami" class="section level3">
+<h3>Step 1: Choosing an AMI</h3>
+<p>When launching an EC2 instance, you must choose an Amazon Machine Image (AMI), which contains all information required to start an instance. For example, an AMI defines which operating system is installed on your EC2 instance and which software is included.</p>
+<p>You can choose the Amazon Linux AMI, which is provided at no additional cost and has a stable version of R in the repository. This AMI is maintained by AWS and includes packages and configurations that provide native integration with AWS and other software. We will use the Ubuntu Server (18.04) AMI to go through the motion of downloading everything from scratch.</p>
+<div class="figure">
+<img src="/img/AWS-R/long_step1.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-2-choosing-an-instance-type" class="section level3">
+<h3>Step 2: Choosing an Instance Type</h3>
+<p>Choose an EC2 instance type that matches the data size and processing that your analysis requires. By default, R runs only on one core node and, in many cases, requires a lot of memory. For programming and development, the general-purpose T2 instance types are sufficient and cheap, and t2.micro is available through the AWS Free Tier. For our purpose, we will select the “General Purpose T2.Micro” Instance. See the following link for more details on <a href="https://aws.amazon.com/ec2/instance-types/">AWS EC2 Instance Types</a>.</p>
+<p><img src="/img/AWS-R/easy_step2.png" /> <br></p>
+</div>
+<div id="step-3-configuring-instance-details" class="section level3">
+<h3>Step 3: Configuring Instance Details</h3>
+<p>This is the bread and butter for setting up similar instances each time you run a new instance. We will leave most settings to default, but we want to expand “Advanced Details” to add scripts for installation after the instance starts. Here is where we can add the script to install necessary linux packages, R, and RStudio Server. Please visit <a href="https://www.rstudio.com/products/rstudio/download-server/"></a> to check for the latest versions of RStudio Server and modify the script to install most recent version. Here we will also add the password information for later use when logging into RStudio.</p>
+</div>
+</div>
+<div id="add-newer-script-to-text-start-up" class="section level1">
+<h1>Add newer script to text start up</h1>
+<p>~<a href="/Users/jagvill/Desktop/postaganza/long_step3.png"></a></p>
+</div>
+<div id="change-to-25-30-gb" class="section level1">
+<h1>Change to 25-30 GB</h1>
+<p>/Users/jagvill/Desktop/postaganza/long_step4.png</p>
+<blockquote>
+<p>NOTE: if you do not add the CRAN Debian or Ubuntu repository as described above this command will install the version of R corresponding to your current system version. Since this version of R may be a year or two old it is strongly recommended that you add the CRAN repositories so you can run the most up to date version of R</p>
+</blockquote>
+<p><br></p>
+<div id="step-4-configuring-the-security-group" class="section level3">
+<h3>Step 4: Configuring the Security Group</h3>
+<p>In the EC2 launch wizard, you define a security group, which acts as a virtual firewall that controls the traffic for one or more instances. For your R-based analysis environment, you will select HTTP from the type dropdown, and keep the port at 80 for more user friendly capability (Rstudio Server is usually at port 8787). We will set the Source settings to custom with a value of “0.0.0.0/0, ::/0”. We will add an additional rule to allow use to use SSH to login to our instance directly. Select SSH under type, leave the port at 22, and add “0.0.0.0/0” to the source settings. Last, we will add a rule for custom type TCP and add port 3306 with source settings to Anywhere for our MySQL server. After you finish your security group configuration, choose Review and Launch.</p>
+<div class="figure">
+<img src="/img/AWS-R/long_step6.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-5-logging-into-rstudio" class="section level3">
+<h3>Step 5: Logging into RStudio</h3>
+<p>After your EC2 instance is running, you can connect using a web browser to RStudio Server and R. For login credentials, use the newly created user and password. The URL looks like the following: “<a href="http://ec2-YOUR-IP.compute-1.amazonaws.com:8787" class="uri">http://ec2-YOUR-IP.compute-1.amazonaws.com:8787</a>”</p>
+</div>
+</div>
+<div id="screenshot" class="section level1">
+<h1>ScreenSHOT!</h1>
+<p><br></p>
+<div id="step-6-logging-into-mysql" class="section level3">
+<h3>Step 6: Logging into MySQL</h3>
+<p>For this next step, we will connect to the EC2 instance via SSH through the terminal inside Rstudio. We can reset the root password and create databases, tables, etc. Execute the following commands under the terminal tab:</p>
+<p><code>mv &lt;path-to-pem-file&gt; ~/.ssh</code></p>
+<p><code>chmod 600 &lt;new-path-to-pem-file&gt;</code></p>
+<p><code>ssh -i &lt;path-to-pem-file&gt; ubuntu@&lt;PublicDNS&gt;</code></p>
+<p>Select Yes</p>
+</div>
+</div>
+<div id="install-mysql-from-code-below" class="section level1">
+<h1>Install mysql from code below</h1>
+<p><code>installation code here</code></p>
+<p><code>sudo mysql</code></p>
+<p><code>FLUSH PRIVILEGES;</code></p>
+<p>`ALTER USER ‘<a href="mailto:root&#39;@&#39;localhot">root'@'localhot</a>’ IDENTIFIED BY ‘<new-password>;’</p>
+<p><code>exit</code></p>
+</div>
+<div id="screenshot-1" class="section level1">
+<h1>ScreenSHOT!</h1>
+<p>Enter screenshots of connecting to the EC2 via SSH and logging into mysql within Rstudio.</p>
+<p><br></p>
+<div id="step-7-checking-if-an-installed-package-works" class="section level3">
+<h3>Step 7: Checking if an installed package works?</h3>
+<p>Now we will check to see if we can install and use the RCurl package in our Instance by running the below code in RStudio.</p>
+<p><br></p>
+</div>
+</div>
+<div id="setting-swap-file" class="section level1">
+<h1>Setting Swap File</h1>
+<p>Since we are using the free AWS tier which only gives us 1GB of RAM, plentiful in most cases, but some R packages at the moment require a little more RAM than 1GB (TidyVerse). I struggled with this for a little, watching as the computer slowly grinded, before deciding to just bump up the throttle and change my instance to t2.medium from t2.micro. The packages downloaded as I imagined, but I wanted to figure out how to do this without having to leave the free tier. I was using the “top” command when I noticed the EC2 instance was not using any swap memory. As soon as I added 2GB of swap memory to the free tier 1GB t2.micro, all of the packages downloaded without error. If you plan on using instances above t2.medium, then you do not need to do this. Otherwise, see below on how to download packages that require more than 1GB ram on a EC t2.micro instance.</p>
+</div>
+<div id="screenshot-2" class="section level1">
+<h1>ScreenSHOT!</h1>
+<p><code>sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=2048</code> <code>sudo /sbin/mkswap /var/swap.1</code> <code>sudo /sbin/swapon /var/swap.1</code> <code>sudo sh -c 'echo &quot;/var/swap.1 swap swap defaults 0 0 &quot; &gt;&gt; /etc/fstab</code></p>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/ec/">EC</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/cloud/">Cloud</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/aws-rds-mysql/" data-tooltip="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/mysql-r/" data-tooltip="Using MySQL with R">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/07/aws-r/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/07/aws-r/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/07/aws-r/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Jagger Villalobos. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/aws-rds-mysql/" data-tooltip="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/mysql-r/" data-tooltip="Using MySQL with R">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/07/aws-r/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/07/aws-r/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/07/aws-r/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F07%2Faws-r%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F07%2Faws-r%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F07%2Faws-r%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jagger Villalobos</h4>
+    
+      <div id="about-card-bio">Bottom-Up Analysis | Equity Research</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Seeking Analyst Position
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        New York, New York
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/07/aws-rds-mysql/">
+                <h3 class="media-heading">Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Amazon Web Services RDS with MySQL &amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal + MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/07/aws-r/">
+                <h3 class="media-heading">Running R on an AWS Enstance</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Amazon Web Services with R I went over a bit about AWS in my previous post TK and how benefitial it is. Amazon EC2 is just another great service offered by Amazon. EC2 is basiacally a virtual machine that offers an variety of operating systems and computational power.
+EC2 allows users to build apps, automate scaling according to changing needs and peak periods, deploy computational intensive models, streamline development processes, and create virtual servers to manage storage, lessening the need to invest in infrastructure.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/05/mysql-r/">
+                <h3 class="media-heading">Using MySQL with R</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading + writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB+. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/sentiment-analysis-conf-call/">
+                <h3 class="media-heading">Sentiment Analysis on Earnings Call</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/alpaca-for-r/">
+                <h3 class="media-heading">AlpacaforR</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
+                <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
+                <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">IPO Estimate &amp; Review  Taking a look at LYFT financials for the first time Review of Dropbox IPO and stock performance  
+ Can the slow IPO market get a lift from LYFT? Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
+                <h3 class="media-heading">Salesforce Q3 Update</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Salesforce Q3 Update  Updated model from previous post, click here to read previous Salesforce post Management raised top and bottom line forecasts for FY19 guidance Management gave more details on FY20 &amp; FY22 goals and confirmed forecasts Near bulletproof business model during economic slowdown Key risks to management goals Recommendation and price targets  
+Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/12/yield-curve-fun/">
+                <h3 class="media-heading">Yield Curve Inversion - Marks End to Bull Market?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Going, Going, Inverted!  Yield Curve inversions are typically a leading indicator for a recession Historic analysis on inversions for specific yields since 1990 Yield Curve over 5 different time frames since the start of 2018 Takeaway from recent inversions   Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/11/salesforce-enough-to-buy/">
+                <h3 class="media-heading">Salesforce, Inc. - Are Expanding Margins Enough to Buy?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Salesforce, Inc.  Leader in the growing CRM market Modestly expanding margins Monetizing existing customer base  
+Customer Relationship Management Pioneer Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig in to Salesforce specifically, let’s explore what exactly CRM is and the growth prospects.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         11 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2019\/07\/aws-r\/';
+          
+            this.page.identifier = '\/2019\/07\/aws-r\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

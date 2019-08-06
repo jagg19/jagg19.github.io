@@ -3,380 +3,397 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jagg19.github.io/2019/07/aws-rds-mysql/</loc>
+    <loc>/2019/08/aws-r/</loc>
+    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2019/07/aws-rds-mysql/</loc>
     <lastmod>2019-07-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/2019/05/mysql-r/</loc>
+    <loc>/2019/05/mysql-r/</loc>
     <lastmod>2019-05-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/</loc>
+    <loc>/2019/04/sentiment-analysis-conf-call/</loc>
     <lastmod>2019-04-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/2019/04/alpaca-for-r/</loc>
+    <loc>/2019/04/alpaca-for-r/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/2019/03/backtest-simple-earnings/</loc>
+    <loc>/2019/03/backtest-simple-earnings/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/</loc>
+    <loc>/2019/03/ipo-estimates-lyftdbx/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/2019/01/salesforce-q3-update/</loc>
+    <loc>/2019/01/salesforce-q3-update/</loc>
     <lastmod>2019-01-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/2018/12/yield-curve-fun/</loc>
+    <loc>/2018/12/yield-curve-fun/</loc>
     <lastmod>2018-12-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/2018/11/salesforce-enough-to-buy/</loc>
+    <loc>/2018/11/salesforce-enough-to-buy/</loc>
     <lastmod>2018-11-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/2018/11/ml-airbnb-prices/</loc>
+    <loc>/2018/11/ml-airbnb-prices/</loc>
     <lastmod>2018-11-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/airbnb/</loc>
+    <loc>/tags/airbnb/</loc>
     <lastmod>2018-11-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/algo/</loc>
+    <loc>/tags/algo/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/alpaca/</loc>
+    <loc>/tags/alpaca/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/archives/</loc>
+    <loc>/archives/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/aws/</loc>
-    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
+    <loc>/categories/aws/</loc>
+    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/backtest/</loc>
+    <loc>/categories/backtest/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/banks/</loc>
+    <loc>/tags/banks/</loc>
     <lastmod>2018-12-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/beautiful-plots/</loc>
+    <loc>/tags/beautiful-plots/</loc>
     <lastmod>2019-05-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/</loc>
-    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
+    <loc>/categories/</loc>
+    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/cloud/</loc>
-    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
+    <loc>/tags/cloud/</loc>
+    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/comparable-analysis/</loc>
+    <loc>/tags/comparable-analysis/</loc>
     <lastmod>2018-11-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/conference-call/</loc>
+    <loc>/tags/conference-call/</loc>
     <lastmod>2019-04-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/crm/</loc>
+    <loc>/tags/crm/</loc>
     <lastmod>2019-04-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/data-analysis/</loc>
+    <loc>/categories/data-analysis/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/database/</loc>
+    <loc>/tags/database/</loc>
     <lastmod>2019-05-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/dbx/</loc>
+    <loc>/tags/dbx/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/dcf/</loc>
+    <loc>/tags/dcf/</loc>
     <lastmod>2019-01-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/earnings/</loc>
+    <loc>/categories/earnings/</loc>
     <lastmod>2019-04-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/equity-valuation/</loc>
+    <loc>/tags/ec2/</loc>
+    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/equity-valuation/</loc>
     <lastmod>2019-01-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/forecasting/</loc>
+    <loc>/categories/forecasting/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/interest-rates/</loc>
+    <loc>/tags/interest-rates/</loc>
     <lastmod>2018-12-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/inverted-yield-curve/</loc>
+    <loc>/tags/inverted-yield-curve/</loc>
     <lastmod>2018-12-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/investment/</loc>
+    <loc>/categories/investment/</loc>
     <lastmod>2019-04-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/ipo/</loc>
+    <loc>/categories/ipo/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/large-datasets/</loc>
+    <loc>/categories/large-datasets/</loc>
     <lastmod>2019-05-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/lyft/</loc>
+    <loc>/tags/lyft/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/machine-learning/</loc>
+    <loc>/tags/machine-learning/</loc>
     <lastmod>2018-11-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/market/</loc>
+    <loc>/categories/market/</loc>
     <lastmod>2018-12-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/mysql/</loc>
+    <loc>/tags/mysql/</loc>
     <lastmod>2019-05-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/mysql/</loc>
-    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
+    <loc>/categories/mysql/</loc>
+    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/nasdaq/</loc>
+    <loc>/tags/nasdaq/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/nyse/</loc>
+    <loc>/tags/nyse/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/opinion/</loc>
+    <loc>/categories/opinion/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/post/</loc>
-    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
+    <loc>/post/</loc>
+    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/predictions/</loc>
+    <loc>/categories/predictions/</loc>
     <lastmod>2018-11-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/price-predictions/</loc>
+    <loc>/tags/price-predictions/</loc>
     <lastmod>2018-11-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/programming/</loc>
+    <loc>/tags/programming/</loc>
     <lastmod>2019-05-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/programming/</loc>
-    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
+    <loc>/categories/programming/</loc>
+    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/project/</loc>
+    <loc>/tags/project/</loc>
     <lastmod>2018-11-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/quarterly-results/</loc>
+    <loc>/tags/quarterly-results/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/r/</loc>
-    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
+    <loc>/categories/r/</loc>
+    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/r-markdown/</loc>
+    <loc>/categories/r-markdown/</loc>
     <lastmod>2019-04-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/r-package/</loc>
+    <loc>/categories/r-package/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/rds/</loc>
+    <loc>/tags/rds/</loc>
     <lastmod>2019-07-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/recommendations/</loc>
+    <loc>/tags/recommendations/</loc>
     <lastmod>2019-01-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/relational-database/</loc>
+    <loc>/categories/relational-database/</loc>
     <lastmod>2019-05-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/review/</loc>
+    <loc>/categories/review/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/</loc>
-    <lastmod>2019-07-15T00:00:00+00:00</lastmod>
+    <loc>/tags/rstudio/</loc>
+    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/sentiment-analysis/</loc>
+    <loc>/</loc>
+    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/sentiment-analysis/</loc>
     <lastmod>2019-04-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/</loc>
+    <loc>/tags/</loc>
     <lastmod>2018-11-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/text-mining/</loc>
+    <loc>/categories/text-mining/</loc>
     <lastmod>2019-04-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/trading/</loc>
+    <loc>/categories/trading/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/valuations/</loc>
+    <loc>/categories/valuations/</loc>
     <lastmod>2019-01-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/tags/wacc/</loc>
+    <loc>/tags/wacc/</loc>
     <lastmod>2018-11-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jagg19.github.io/categories/yield-curve/</loc>
+    <loc>/categories/yield-curve/</loc>
     <lastmod>2018-12-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

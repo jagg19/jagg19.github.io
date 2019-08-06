@@ -2,23 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ec on Running on R</title>
-    <link>https://jagg19.github.io/tags/ec/</link>
+    <link>/tags/ec/</link>
     <description>Recent content in Ec on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Aug 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jagg19.github.io/tags/ec/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/ec/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Running R on an AWS Enstance</title>
-      <link>https://jagg19.github.io/2019/07/aws-r/</link>
-      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
+      <link>/2019/08/aws-r/</link>
+      <pubDate>Mon, 05 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/07/aws-r/</guid>
-      <description>Amazon Web Services with R I went over a bit about AWS in my previous post TK and how benefitial it is. Amazon EC2 is just another great service offered by Amazon. EC2 is basiacally a virtual machine that offers an variety of operating systems and computational power.
-EC2 allows users to build apps, automate scaling according to changing needs and peak periods, deploy computational intensive models, streamline development processes, and create virtual servers to manage storage, lessening the need to invest in infrastructure.</description>
+      <guid>/2019/08/aws-r/</guid>
+      <description>Benefits of using Amazon’s EC2 service with R Launching an EC2 Instance Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  Amazon Web Services with R In my previous post Databases in the Cloud, I went over some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.</description>
     </item>
     
   </channel>

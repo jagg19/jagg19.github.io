@@ -2,41 +2,41 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Forecasting on Running on R</title>
-    <link>https://jagg19.github.io/categories/forecasting/</link>
+    <link>/categories/forecasting/</link>
     <description>Recent content in Forecasting on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jagg19.github.io/categories/forecasting/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/forecasting/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lyft IPO &#43; Dropbox Review</title>
-      <link>https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/</link>
+      <link>/2019/03/ipo-estimates-lyftdbx/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/</guid>
+      <guid>/2019/03/ipo-estimates-lyftdbx/</guid>
       <description>IPO Estimate &amp;amp; Review  Taking a look at LYFT financials for the first time Review of Dropbox IPO and stock performance  
  Can the slow IPO market get a lift from LYFT? Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31.</description>
     </item>
     
     <item>
       <title>Salesforce Q3 Update</title>
-      <link>https://jagg19.github.io/2019/01/salesforce-q3-update/</link>
+      <link>/2019/01/salesforce-q3-update/</link>
       <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/01/salesforce-q3-update/</guid>
+      <guid>/2019/01/salesforce-q3-update/</guid>
       <description>Salesforce Q3 Update  Updated model from previous post, click here to read previous Salesforce post Management raised top and bottom line forecasts for FY19 guidance Management gave more details on FY20 &amp;amp; FY22 goals and confirmed forecasts Near bulletproof business model during economic slowdown Key risks to management goals Recommendation and price targets  
 Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results.</description>
     </item>
     
     <item>
       <title>Salesforce, Inc. - Are Expanding Margins Enough to Buy?</title>
-      <link>https://jagg19.github.io/2018/11/salesforce-enough-to-buy/</link>
+      <link>/2018/11/salesforce-enough-to-buy/</link>
       <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2018/11/salesforce-enough-to-buy/</guid>
+      <guid>/2018/11/salesforce-enough-to-buy/</guid>
       <description>Salesforce, Inc.  Leader in the growing CRM market Modestly expanding margins Monetizing existing customer base  
 Customer Relationship Management Pioneer Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig in to Salesforce specifically, let’s explore what exactly CRM is and the growth prospects.</description>
     </item>
