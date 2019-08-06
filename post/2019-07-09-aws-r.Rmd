@@ -29,7 +29,7 @@ categories:
 - Wrapping it all up
 
 
-In my previous post [Databases in the Cloud: Amazon Relational Database](https://jagg19.github.io/2019/07/aws-rds-mysql/), I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon. Simply speaking, EC2 is a virtual server that offers different software stacks and computational power.
+In my previous post [Databases in the Cloud: Amazon Relational Database](https://jagg19.github.io/2019/07/aws-rds-mysql/){target="_blank"} , I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon. Simply speaking, EC2 is a virtual server that offers different software stacks and computational power.
 
 EC2 allows users to build apps, automate scaling according to changing needs and peak periods, deploy computational intensive models, streamline development processes, and create virtual servers lessening the need to invest in infrastructure.
 
@@ -43,7 +43,7 @@ Two major advantages of using EC2 is that you're not locked into one operating s
 
 # Benefits to R
 
-Memory, memory, and more memory. If you ever cross a dataset that just eats your computers RAM away, you can easily pay <$0.80 hour to use a \$10,000 GPU that will cut right through any compute-intensive operations. It can get up to 60-90% cheaper when using a "spot instance" compared to an "on-demand instance". See this post [On-Demand vs Reserved vs Spot AWS EC2 Pricing Comparison](https://blog.boltops.com/2018/07/13/on-demand-vs-reserved-vs-spot-aws-ec2-pricing-comparison) to learn the differences between a spot, on-demand, and reserved instance. 
+Memory, memory, and more memory. If you ever cross a dataset that just eats your computers RAM away, you can easily pay <$0.80 hour to use a \$10,000 GPU that will cut right through any compute-intensive operations. It can get up to 60-90% cheaper when using a "spot instance" compared to an "on-demand instance". See this post [On-Demand vs Reserved vs Spot AWS EC2 Pricing Comparison](https://blog.boltops.com/2018/07/13/on-demand-vs-reserved-vs-spot-aws-ec2-pricing-comparison){target="_blank"} to learn the differences between a spot, on-demand, and reserved instance. 
 
 <br>
 
@@ -51,7 +51,7 @@ Memory, memory, and more memory. If you ever cross a dataset that just eats your
 
 There are two ways that we can create an EC2 and install R & Rstudio. The first way is the "Short and Easy Way" which will get RStudio up and running quickly, and you will get easy access to dropbox. The second way is the "Detailed and Longer Way" which has a more flexible configuration setup. 
 
-TThe first way is "Short and Easy" but only because of the hard work that Louis Aslett put into creating/maintaining this [Rstudio AMI](http://www.louisaslett.com/RStudio_AMI/). An AMI (Amazon Machine Image) is a template for your systems software configuration for your instance. AMI defines things like which operating system is installed on your EC2 instance and which software is included. Louis was kind enough to do all of the dirty work needed (plus more) to create an instance that will allow us to run Rstudio on AWS. His AMI allows you to get up and running with RStudio and a seamless Dropbox integration in under 10 minutes, so I appreciate his time for maintaining this AMI! 
+The first way is "Short and Easy" but only because of the hard work that Louis Aslett put into creating/maintaining this [Rstudio AMI](http://www.louisaslett.com/RStudio_AMI/){target="_blank"}. An AMI (Amazon Machine Image) is a template for your systems software configuration for your instance. AMI defines things like which operating system is installed on your EC2 instance and which software is included. Louis was kind enough to do all of the dirty work needed (plus more) to create an instance that will allow us to run Rstudio on AWS. His AMI allows you to get up and running with RStudio and a seamless Dropbox integration in under 10 minutes, so I appreciate his time for maintaining this AMI! 
 
 To truly appreciate what he has done, you must go through the next option. The second way is starting from scratch and configure everything yourself. For those who want to get their hands dirty and start from scratch, then [jump here to the detailed, long way](#long_way). You will have a lot more flexibility (and possibly learn more along the way) which is great if you plan on using other applications other than Rstudio. If your looking to create an instance and have Rstudio running all within 5 minutes, then please continue along!
 
@@ -66,7 +66,7 @@ You have to go through the "long way" to really appreciate how much time your sa
 
 ## Step 1
 
-Click the link for [Louis Aslett's RStudio AMI](http://www.louisaslett.com/RStudio_AMI/) and view the most recent AMI specs on the right side of the screen. Click the region nearest to you, and a new instance will automatically be created using this AMI, taking you to step 2 of the process. 
+Click the link for [Louis Aslett's RStudio AMI](http://www.louisaslett.com/RStudio_AMI/){target="_blank"} and view the most recent AMI specs on the right side of the screen. Click the region nearest to you, and a new instance will automatically be created using this AMI, taking you to step 2 of the process. 
 
 ![](/img/AWS-R/easy_RstudioAMI_hmpg.png)
 
@@ -175,7 +175,7 @@ To go through the entire process, we will use the Ubuntu Server (18.04) AMI and 
 
 Choose an EC2 instance type that matches the data size and processing that your analysis requires. By default, R runs only on one core node and, in many cases, requires a lot of memory. For programming and development, the general-purpose T2 instance types are sufficient and cheap, and t2.micro is available through the AWS Free Tier. 
 
-For our purpose, we will select the "General Purpose T2.Micro" Instance. See the following link for more details on [ AWS EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/).
+For our purpose, we will select the "General Purpose T2.Micro" Instance. See the following link for more details on [ AWS EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/){target="_blank"}.
 
 ![](/img/AWS-R/easy_step2.png)
 
@@ -251,7 +251,8 @@ Some R packages like Tidyverse require memory larger than 1GB to successfully do
 <br> 
 
 ##Step 9: Downloading R, RStudio, and System Dependencies
-Now it is time to download all of the necessary software, libraries, packages, etc. It is important to select the most recent versions of RStudio where you can find [here](https://www.rstudio.com/products/rstudio/download-server/). Modify the script to install the most recent version if the one used below is outdated. Copy / paste the below in your terminal.
+
+Now it is time to download all of the necessary software, libraries, packages, etc. It is important to select the most recent versions of RStudio where you can find [here](https://www.rstudio.com/products/rstudio/download-server/){target="_blank"}. Modify the script to install the most recent version if the one used below is outdated. Copy / paste the below in your terminal.
 
 
 
@@ -316,15 +317,11 @@ sudo echo "www-port=80" >> /etc/rstudio/rserver.conf
 sudo rstudio-server restart
 
 
-# Install some useful R Packages
+# Install some useful R Packages (be a little patient here)
 sudo R -e "install.packages('RCurl', repos='http://cran.rstudio.com')"
 sudo R -e "install.packages('devtools', repos='http://cran.rstudio.com')"
 sudo R -e "install.packages('tidyverse')"
 sudo R -e "install.packages('RMariaDB')"
-
-
-# Delete and free some room up. This is emptied on system reboot so its optional.
-rm -rf /tmp/downloaded_packages/ /tmp/*.rd
 
 ```
 
@@ -416,7 +413,7 @@ data <- read.table(textConnection(getURL("https://cgiardata.s3-us-west-2.amazona
 head(data)
 ```
 
-Perfect! I love it when things go well :)
+Perfect! The "RCurl" package installed correctly or else we would have gotten an error here. You can continue to play around here to see that everything else installed correctly. 
 
 <br>
 
