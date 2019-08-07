@@ -585,7 +585,7 @@ summary(model3)</code></pre>
 <div id="next-we-want-to-check-if-our-final-full-model-suffers-from-autocorrelation-or-not-using-the-durbin-watson-test." class="section level4">
 <h4>Next, we want to check if our final full model suffers from autocorrelation or not using the Durbin Watson Test.</h4>
 <pre><code>##  lag Autocorrelation D-W Statistic p-value
-##    1      0.01476564      1.970464   0.036
+##    1      0.01476564      1.970464   0.064
 ##  Alternative hypothesis: rho != 0</code></pre>
 <ul>
 <li>Using the D-W Significance table, we can reject the null and there is no correlation among the residuals. Having a total of 16 independent variables, or k, and WELL over 200 observations, or n in our sample, the DL @ 5% significance is 1.599 and Du is 1.943 which our D-W Statistic of 1.9704635 is above the upper limit indicating no autocorrelation exists. It is also significant at the 1% with DL at 1.507 and Du at 1.847.</li>
@@ -927,7 +927,7 @@ head(dollar_predictTest)</code></pre>
             
             <div class="media-body">
               <a class="link-unstyled" href="/2019/08/aws-r/">
-                <h3 class="media-heading">Running R on AWS EC2 and Logging into Rstudio from Anywhere</h3>
+                <h3 class="media-heading">Running R on AWS EC2 and Logging into RStudio from Anywhere</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
