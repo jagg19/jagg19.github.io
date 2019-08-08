@@ -15,8 +15,8 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Running R on AWS EC2 and Logging into RStudio from Anywhere">
 <meta name="twitter:title" content="Running R on AWS EC2 and Logging into RStudio from Anywhere">
-<meta property="og:url" content="/2019/08/aws-r/">
-<meta property="twitter:url" content="/2019/08/aws-r/">
+<meta property="og:url" content="https://jagg19.github.io/2019/08/aws-r/">
+<meta property="twitter:url" content="https://jagg19.github.io/2019/08/aws-r/">
 <meta property="og:site_name" content="Running on R">
 <meta property="og:description" content="Amazon Web Services with R  Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database , I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.">
 <meta name="twitter:description" content="Amazon Web Services with R  Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database , I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.">
@@ -72,12 +72,12 @@
 
     <title>Running R on AWS EC2 and Logging into RStudio from Anywhere</title>
 
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="https://jagg19.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="/2019/08/aws-r/">
+    <link rel="canonical" href="https://jagg19.github.io/2019/08/aws-r/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -85,7 +85,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    <link rel="stylesheet" href="https://jagg19.github.io/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
     
     
 
@@ -113,12 +113,12 @@ if (!doNotTrack) {
       <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="/">Running on R</a>
+    <a class="header-title-link" href="https://jagg19.github.io/">Running on R</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="/#about">
+         href="https://jagg19.github.io/#about">
     
     
     
@@ -134,7 +134,7 @@ if (!doNotTrack) {
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="/#about">
+        <a href="https://jagg19.github.io/#about">
           <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
         </a>
         <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
@@ -147,7 +147,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -157,7 +157,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/#about">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -167,7 +167,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/categories">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -177,7 +177,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/tags">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -187,7 +187,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/archives">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -201,7 +201,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/jagg19">
+      <a class="sidebar-button-link " href="https://github.com/jagg19" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -211,7 +211,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -255,13 +255,13 @@ if (!doNotTrack) {
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/aws">AWS</a>, 
+      <a class="category-link" href="https://jagg19.github.io/categories/aws">AWS</a>, 
     
-      <a class="category-link" href="/categories/r">R</a>, 
+      <a class="category-link" href="https://jagg19.github.io/categories/r">R</a>, 
     
-      <a class="category-link" href="/categories/mysql">MySQL</a>, 
+      <a class="category-link" href="https://jagg19.github.io/categories/mysql">MySQL</a>, 
     
-      <a class="category-link" href="/categories/programming">Programming</a>
+      <a class="category-link" href="https://jagg19.github.io/categories/programming">Programming</a>
     
   
 
@@ -323,11 +323,11 @@ if (!doNotTrack) {
 <h2>Step 1: Choosing AMI</h2>
 <p>Click the link for <a href="http://www.louisaslett.com/RStudio_AMI/" target="_blank">Louis Aslett’s RStudio AMI</a> and view the most recent AMI specs on the right side of the screen. Click the region nearest to you, and a new instance will automatically be created using this AMI, taking you to step 2 of the process.</p>
 <div class="figure">
-<img src="/img/AWS-R/easy_RstudioAMI_hmpg.png" />
+<img src="https://jagg19.github.io/img/AWS-R/easy_RstudioAMI_hmpg.png" />
 
 </div>
 <div class="figure">
-<img src="/img/AWS-R/easy_step1.png" />
+<img src="https://jagg19.github.io/img/AWS-R/easy_step1.png" />
 
 </div>
 <p><br></p>
@@ -336,7 +336,7 @@ if (!doNotTrack) {
 <h2>Step 2: Selecting Instance</h2>
 <p>To stay within the free tier, we will select the “General Purpose t2.micro” instance type. Click “Next: Configure Instance Details”</p>
 <div class="figure">
-<img src="/img/AWS-R/easy_step2.png" />
+<img src="https://jagg19.github.io/img/AWS-R/easy_step2.png" />
 
 </div>
 <p><br></p>
@@ -365,7 +365,7 @@ if (!doNotTrack) {
 <p>Warning: Setting your source to “Anywhere” opens your instance up to the world. Even though your instance is protected with SSH keys, it is susceptible to dictionary password attacks during boot. You can manage IP addresses within the Security Group, but that can become a handful if your continuously accessing your instance from different IP’s. Setting a reverse proxy for RStudio to reroute to port 443 on HTTPS is a better solution. Stay tuned for the next post on how to do this.</p>
 </blockquote>
 <div class="figure">
-<img src="/img/AWS-R/easy_step4.png" />
+<img src="https://jagg19.github.io/img/AWS-R/easy_step4.png" />
 
 </div>
 <p><br></p>
@@ -374,7 +374,7 @@ if (!doNotTrack) {
 <h2>Step 5: Launching &amp; Key-Pair</h2>
 <p>Click Launch and wait for the “Select an existing key pair or create a new key pair” tab to open. We will select “Proceed without a key pair” under the first drop-down and click the checkbox that states “I acknowledge that I will not be able to connect to this instance unless I already know the password built into this AMI”. Finally, click Launch Instances!</p>
 <div class="figure">
-<img src="/img/AWS-R/easy_step7.png" />
+<img src="https://jagg19.github.io/img/AWS-R/easy_step7.png" />
 
 </div>
 <p><br></p>
@@ -383,12 +383,12 @@ if (!doNotTrack) {
 <h2>Step 6: Getting Public URL (DNS)</h2>
 <p>Once your instance State reads “running”, select the instance and copy the “Public DNS” to then paste into your browser url.</p>
 <div class="figure">
-<img src="/img/AWS-R/easy_cpypubDNS.png" />
+<img src="https://jagg19.github.io/img/AWS-R/easy_cpypubDNS.png" />
 
 </div>
 <p><br></p>
 <div class="figure">
-<img src="/img/AWS-R/easy_urlpaste.png" />
+<img src="https://jagg19.github.io/img/AWS-R/easy_urlpaste.png" />
 
 </div>
 <p><br></p>
@@ -396,7 +396,7 @@ if (!doNotTrack) {
 <h5>Logging in to RStudio</h5>
 <p>Once your browser connects to the instance, you’ll see an RStudio login screen. The AMI’s username is “rstudio” and the password is your instance’s ID (to the left of Public DNS).</p>
 <div class="figure">
-<img src="/img/AWS-R/easy_rstu_login.png" />
+<img src="https://jagg19.github.io/img/AWS-R/easy_rstu_login.png" />
 
 </div>
 <p><br></p>
@@ -415,7 +415,7 @@ if (!doNotTrack) {
 <p>Optionally, you can run <code>linkDropbox()</code> to link your dropbox account by entering the link the function outputs into your browser.</p>
 <p>See the Console output below after running the above.</p>
 <div class="figure">
-<img src="/img/AWS-R/easy_welcome_post.png" />
+<img src="https://jagg19.github.io/img/AWS-R/easy_welcome_post.png" />
 
 </div>
 <p><br></p>
@@ -432,7 +432,7 @@ if (!doNotTrack) {
 <p>To go through the entire process, we will use the Ubuntu Server (18.04) AMI and download all the necessary software.</p>
 <p><br></p>
 <div class="figure">
-<img src="/img/AWS-R/long_step1.png" />
+<img src="https://jagg19.github.io/img/AWS-R/long_step1.png" />
 
 </div>
 <p><br></p>
@@ -442,7 +442,7 @@ if (!doNotTrack) {
 <p>Choose an EC2 instance type that matches the data size and processing that your analysis requires. By default, R runs only on one core node and, in many cases, requires a lot of memory. For programming and development, the general-purpose T2 instance types are sufficient and cheap, and t2.micro is available through the AWS Free Tier.</p>
 <p>For our purpose, we will select the “General Purpose T2.Micro” Instance. See the following link for more details on <a href="https://aws.amazon.com/ec2/instance-types/" target="_blank">AWS EC2 Instance Types</a>.</p>
 <div class="figure">
-<img src="/img/AWS-R/easy_step2.png" />
+<img src="https://jagg19.github.io/img/AWS-R/easy_step2.png" />
 
 </div>
 <p><br></p>
@@ -471,7 +471,7 @@ if (!doNotTrack) {
 </blockquote>
 <p><br></p>
 <div class="figure">
-<img src="/img/AWS-R/long_step6.png" />
+<img src="https://jagg19.github.io/img/AWS-R/long_step6.png" />
 
 </div>
 <p>After you finish your security group configuration, choose “Review and Launch”.</p>
@@ -491,7 +491,7 @@ if (!doNotTrack) {
 <p><code>ssh -i &lt;path-to-pem-file&gt; ubuntu@&lt;PublicDNS&gt;</code></p>
 <p>When your prompted, type yes.</p>
 <div class="figure">
-<img src="/img/AWS-R/ssh_login_suc.png" />
+<img src="https://jagg19.github.io/img/AWS-R/ssh_login_suc.png" />
 
 </div>
 <p>Success! We are finally logged into our AWS EC2 instance. Before I get into the script of downloading the necessary software, I want to show how to create swap memory to stay within free tier instances.</p>
@@ -499,7 +499,7 @@ if (!doNotTrack) {
 </div>
 <div id="step-8-creating-swap-memory-and-why-its-necessary" class="section level2">
 <h2>Step 8: Creating Swap Memory and Why Its Necessary</h2>
-<p>Due to the limited RAM in the free tier T2.Nano instance, we need to enable and create swap memory to successfully download certain packages without clogging the RAM (and to avoid having to select a larger instance outside of free-tier). If you plan on using instances above t2.medium, then you do not need to do this and skip to step 9.</p>
+<p>Due to the limited RAM in the free tier T2.micro instance, we need to enable and create swap memory to successfully download certain packages without clogging the RAM (and to avoid having to select a larger instance outside of free-tier). If you plan on using instances above t2.medium, then you do not need to do this and skip to step 9.</p>
 <p>Some R packages like Tidyverse require memory larger than 1GB to successfully download, so that’s when Swap memory will allow us to get the extra memory needed. In simple terms, Swap memory “borrows” some memory from the disk when the RAM is fully utilized and clogged. Please copy and paste the below to set 2GB of swap memory (do not set swap &gt; 2x larger than RAM).</p>
 <pre class="r"><code>#Create Swap file memory to avoid using bigger instance
 `sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=2048`
@@ -598,15 +598,15 @@ sudo rstudio-server restart</code></pre>
 <h5>RStudio</h5>
 <p>For login credentials, use the newly created credentials for the user rstudio.</p>
 <div class="figure">
-<img src="/img/AWS-R/rstu_url.png" />
+<img src="https://jagg19.github.io/img/AWS-R/rstu_url.png" />
 
 </div>
 <div class="figure">
-<img src="/img/AWS-R/easy_rstu_login.png" />
+<img src="https://jagg19.github.io/img/AWS-R/easy_rstu_login.png" />
 
 </div>
 <div class="figure">
-<img src="/img/AWS-R/rstu_home.png" />
+<img src="https://jagg19.github.io/img/AWS-R/rstu_home.png" />
 
 </div>
 <p>RStudio seems to be happy at home! How about Shiny?</p>
@@ -614,11 +614,11 @@ sudo rstudio-server restart</code></pre>
 <div id="shiny" class="section level5">
 <h5>Shiny</h5>
 <div class="figure">
-<img src="/img/AWS-R/shiny_url.png" />
+<img src="https://jagg19.github.io/img/AWS-R/shiny_url.png" />
 
 </div>
 <div class="figure">
-<img src="/img/AWS-R/shiny_shot.png" />
+<img src="https://jagg19.github.io/img/AWS-R/shiny_shot.png" />
 
 </div>
 <p>Both RStudio and Shiny are deployed to their default ports! In an upcoming post, I will show how we can host both RStudio &amp; Shiny on port 80 using nginx. Now we can do our data analysis on any browser, anywhere, at any scale. AWS brings us a new beneficial way to use RStudio!</p>
@@ -640,7 +640,7 @@ sudo gdebi -n mysql-apt-config_0.8.12-1_all.deb
 sudo apt update
 sudo apt upgrade</code></pre>
 <div class="figure">
-<img src="/img/AWS-R/mysql_terminal_rstu1.png" />
+<img src="https://jagg19.github.io/img/AWS-R/mysql_terminal_rstu1.png" />
 
 </div>
 <p>I included the update/upgrade script in the above to ensure your installing the most up-to-date version of mysql, but this is optional.</p>
@@ -649,7 +649,7 @@ sudo apt upgrade</code></pre>
 sudo apt install mysql-server mysql-client
 sudo rm mysql-apt-config_0.8.12-1_all.deb</code></pre>
 <div class="figure">
-<img src="/img/AWS-R/mysql_terminal_rstu2.png" />
+<img src="https://jagg19.github.io/img/AWS-R/mysql_terminal_rstu2.png" />
 
 </div>
 <p>Now login with the password we created to see that everything went well!</p>
@@ -659,7 +659,7 @@ sudo mysql -p
 #It works!
 exit;</code></pre>
 <div class="figure">
-<img src="/img/AWS-R/mysql_terminal_rstu3.png" />
+<img src="https://jagg19.github.io/img/AWS-R/mysql_terminal_rstu3.png" />
 
 </div>
 <p><br></p>
@@ -698,11 +698,11 @@ head(data)</code></pre>
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="/tags/ec2/">EC2</a>
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/ec2/">EC2</a>
 
-  <a class="tag tag--primary tag--small" href="/tags/cloud/">Cloud</a>
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/cloud/">Cloud</a>
 
-  <a class="tag tag--primary tag--small" href="/tags/rstudio/">RStudio</a>
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/rstudio/">RStudio</a>
 
                   </div>
                 
@@ -723,7 +723,7 @@ head(data)</code></pre>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/aws-rds-mysql/" data-tooltip="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/07/aws-rds-mysql/" data-tooltip="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -741,19 +741,19 @@ head(data)</code></pre>
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/08/aws-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/08/aws-r/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/08/aws-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/08/aws-r/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/08/aws-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/08/aws-r/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -809,7 +809,7 @@ head(data)</code></pre>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/aws-rds-mysql/" data-tooltip="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/07/aws-rds-mysql/" data-tooltip="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -827,19 +827,19 @@ head(data)</code></pre>
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/08/aws-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/08/aws-r/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/08/aws-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/08/aws-r/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/08/aws-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/08/aws-r/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -869,19 +869,19 @@ head(data)</code></pre>
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F08%2Faws-r%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F08%2Faws-r%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F08%2Faws-r%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fjagg19.github.io%2F2019%2F08%2Faws-r%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F08%2Faws-r%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F08%2Faws-r%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -942,7 +942,7 @@ head(data)</code></pre>
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/08/aws-r/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/08/aws-r/">
                 <h3 class="media-heading">Running R on AWS EC2 and Logging into RStudio from Anywhere</h3>
               </a>
               <span class="media-meta">
@@ -959,7 +959,7 @@ head(data)</code></pre>
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/07/aws-rds-mysql/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/07/aws-rds-mysql/">
                 <h3 class="media-heading">Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</h3>
               </a>
               <span class="media-meta">
@@ -976,7 +976,7 @@ head(data)</code></pre>
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/05/mysql-r/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/05/mysql-r/">
                 <h3 class="media-heading">Using MySQL with R</h3>
               </a>
               <span class="media-meta">
@@ -993,7 +993,7 @@ head(data)</code></pre>
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/04/sentiment-analysis-conf-call/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
                 <h3 class="media-heading">Sentiment Analysis on Earnings Call</h3>
               </a>
               <span class="media-meta">
@@ -1010,7 +1010,7 @@ head(data)</code></pre>
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/04/alpaca-for-r/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/alpaca-for-r/">
                 <h3 class="media-heading">AlpacaforR</h3>
               </a>
               <span class="media-meta">
@@ -1028,7 +1028,7 @@ After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Ex
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/backtest-simple-earnings/">
                 <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
               </a>
               <span class="media-meta">
@@ -1046,7 +1046,7 @@ You often hear two things when watching or reading financial news. One is earnin
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/">
                 <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
               </a>
               <span class="media-meta">
@@ -1064,7 +1064,7 @@ You often hear two things when watching or reading financial news. One is earnin
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/01/salesforce-q3-update/">
                 <h3 class="media-heading">Salesforce Q3 Update</h3>
               </a>
               <span class="media-meta">
@@ -1082,7 +1082,7 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/12/yield-curve-fun/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2018/12/yield-curve-fun/">
                 <h3 class="media-heading">Yield Curve Inversion - Marks End to Bull Market?</h3>
               </a>
               <span class="media-meta">
@@ -1099,7 +1099,7 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/11/salesforce-enough-to-buy/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2018/11/salesforce-enough-to-buy/">
                 <h3 class="media-heading">Salesforce, Inc. - Are Expanding Margins Enough to Buy?</h3>
               </a>
               <span class="media-meta">
@@ -1129,7 +1129,7 @@ Customer Relationship Management Pioneer Whenever Customer Relationship Manageme
     
   
     
-    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
+    <div id="cover" style="background-image:url('https://jagg19.github.io/images/cover.jpg');"></div>
   
 
 
@@ -1141,7 +1141,7 @@ Customer Relationship Management Pioneer Whenever Customer Relationship Manageme
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="https://jagg19.github.io/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
 
 
 <script lang="javascript">
@@ -1176,7 +1176,7 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = '\/2019\/08\/aws-r\/';
+          this.page.url = 'https:\/\/jagg19.github.io\/2019\/08\/aws-r\/';
           
             this.page.identifier = '\/2019\/08\/aws-r\/'
           

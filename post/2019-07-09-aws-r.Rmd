@@ -259,7 +259,7 @@ Success! We are finally logged into our AWS EC2 instance. Before I get into the 
 
 ## Step 8: Creating Swap Memory and Why Its Necessary
 
-Due to the limited RAM in the free tier T2.Nano instance, we need to enable and create swap memory to successfully download certain packages without clogging the RAM (and to avoid having to select a larger instance outside of free-tier). If you plan on using instances above t2.medium, then you do not need to do this and skip to step 9.
+Due to the limited RAM in the free tier T2.micro instance, we need to enable and create swap memory to successfully download certain packages without clogging the RAM (and to avoid having to select a larger instance outside of free-tier). If you plan on using instances above t2.medium, then you do not need to do this and skip to step 9.
 
 Some R packages like Tidyverse require memory larger than 1GB to successfully download, so that's when Swap memory will allow us to get the extra memory needed. In simple terms, Swap memory "borrows" some memory from the disk when the RAM is fully utilized and clogged. Please copy and paste the below to set 2GB of swap memory (do not set swap > 2x larger than RAM). 
 
