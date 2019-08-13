@@ -22,7 +22,7 @@ categories:
 - Deploying Website / Apps
 ---
 
-# HTTPS to Secure Your R Work Environment
+# HTTPS to Secure Your RStudio + Shiny Work Environment
 
 Click any link in list below to jump to topic
 
@@ -438,6 +438,7 @@ Finally, restart the nginx service. When you alter .conf files, you have to rest
 
 <br>
 
+### Secured New Domain: Success
 
 When we visit any of our subdomains, we should be directed to the correct server! Also, all HTTP request will convert to HTTPS (thanks to the rule we set in our Load Balancer) to stay secured. Try "http://subdomain.yourwebsite.com" and see if it converts to HTTPS. You should see that it does and you'll always notice the little lock to the left of the URL! 
 

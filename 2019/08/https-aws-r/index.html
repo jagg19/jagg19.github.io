@@ -8,11 +8,11 @@
 <meta name="generator" content="Hugo 0.51 with theme Tranquilpeak 0.4.3-SNAPSHOT">
 <meta name="author" content="Jagger Villalobos">
 <meta name="keywords" content="">
-<meta name="description" content="HTTPS to Secure Your R Work Environment Click any link in list below to jump to topic
+<meta name="description" content="HTTPS to Secure Your RStudio &#43; Shiny Work Environment Click any link in list below to jump to topic
  Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.">
 
 
-<meta property="og:description" content="HTTPS to Secure Your R Work Environment Click any link in list below to jump to topic
+<meta property="og:description" content="HTTPS to Secure Your RStudio &#43; Shiny Work Environment Click any link in list below to jump to topic
  Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTPS to Secure Your RStudio &#43; Shiny Work Environment">
@@ -20,9 +20,9 @@
 <meta property="og:url" content="/2019/08/https-aws-r/">
 <meta property="twitter:url" content="/2019/08/https-aws-r/">
 <meta property="og:site_name" content="Running on R">
-<meta property="og:description" content="HTTPS to Secure Your R Work Environment Click any link in list below to jump to topic
+<meta property="og:description" content="HTTPS to Secure Your RStudio &#43; Shiny Work Environment Click any link in list below to jump to topic
  Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.">
-<meta name="twitter:description" content="HTTPS to Secure Your R Work Environment Click any link in list below to jump to topic
+<meta name="twitter:description" content="HTTPS to Secure Your RStudio &#43; Shiny Work Environment Click any link in list below to jump to topic
  Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.">
 <meta property="og:locale" content="en-us">
 
@@ -296,8 +296,8 @@ if (!doNotTrack) {
               
 
 
-<div id="https-to-secure-your-r-work-environment" class="section level1">
-<h1>HTTPS to Secure Your R Work Environment</h1>
+<div id="https-to-secure-your-rstudio-shiny-work-environment" class="section level1">
+<h1>HTTPS to Secure Your RStudio + Shiny Work Environment</h1>
 <p>Click any link in list below to jump to topic</p>
 <ul>
 <li><a href="#freenom">Creating a Friendly URL</a></li>
@@ -569,6 +569,9 @@ if (!doNotTrack) {
 <p>Finally, restart the nginx service. When you alter .conf files, you have to restart the service to implement your new changes.</p>
 <p><code>sudo systemctl restart nginx</code></p>
 <p><br></p>
+</div>
+<div id="secured-new-domain-success" class="section level3">
+<h3>Secured New Domain: Success</h3>
 <p>When we visit any of our subdomains, we should be directed to the correct server! Also, all HTTP request will convert to HTTPS (thanks to the rule we set in our Load Balancer) to stay secured. Try “<a href="http://subdomain.yourwebsite.com" class="uri">http://subdomain.yourwebsite.com</a>” and see if it converts to HTTPS. You should see that it does and you’ll always notice the little lock to the left of the URL!</p>
 <p><img src="/img/HTTPS/subdomain-success.png" /></p>
 <p><br></p>
@@ -852,7 +855,7 @@ if (!doNotTrack) {
                   Aug 8, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">HTTPS to Secure Your R Work Environment Click any link in list below to jump to topic
+              <div class="media-content hide-xs font-merryweather">HTTPS to Secure Your RStudio + Shiny Work Environment Click any link in list below to jump to topic
  Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.</div>
             </div>
             <div style="clear:both;"></div>
