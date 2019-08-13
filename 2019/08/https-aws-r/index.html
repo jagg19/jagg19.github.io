@@ -306,18 +306,18 @@ if (!doNotTrack) {
 <li><a href="#elb">AWS Elastic Load Balancers: HTTPS Redirection</a></li>
 <li><a href="#nginx-install">Installing Nginx &amp; Creating Configuration Files</a></li>
 </ul>
-<p>I wanted to create this post as an addition to my previous post <a href="https://jagg19.github.io/2019/08/aws-r/" target="_blank">Running R on AWS EC2 and Logging into RStudio from Anywhere</a> to show how to secure your AWS environment. Hopefully these articles can help others save time and learn to avoid hours spent reading documentation guides. My purpose for learning about the AWS environment is to securely create and ship shiny apps to share my analysis projects in a better fashion. Setting up the security group of your instance is dependent on the use case for your instances. After looking through some of the <strong>basic</strong> ways hackers can get into your EC2, most of the vulnerabilities came from storing private keys in the wrong places, and open port scans.</p>
+<p>I wanted to create this post as an addition to my previous post <a href="https://jagg19.github.io/2019/08/aws-r/" target="_blank">Running R on AWS EC2 and Logging into RStudio from Anywhere</a> to show how to secure your AWS environment. Hopefully, these articles can help others save time and learn to avoid hours spent reading documentation guides. My purpose for learning about the AWS environment is to securely create and ship shiny apps to share my analysis projects in a better fashion. Setting up the security group of your instance is dependent on the use case for your instances. After looking through some of the <strong>basic</strong> ways hackers can get into your EC2, most of the vulnerabilities came from storing private keys in the wrong places, and open port scans.</p>
 <p><br></p>
 </div>
 <div id="open-ports" class="section level1">
 <h1>Open Ports</h1>
 <p>After sharing my previous post to various outlets, a Reddit user suggested to whitelist IP address to limit access to your web applications instead of keeping it open to the world. After reading about <a href="https://blog.ipswitch.com/port-scanning-101-what-it-is-what-it-does" target="_blank">port scans</a>, database takeover tools <a href="http://sqlmap.org" target="_blank">sqlmap</a>, and brute force tools like <a href="https://github.com/OJ/gobuster" target="_blank">gobuster</a>, I quickly realized why keeping port 22 closed is so important.</p>
-<p>The end result was I ended up whitelisting port 22 (used for ssh) to only my IP address rather than leaving it open to the world.</p>
+<p>The result was I ended up whitelisting port 22 (used for ssh) to only my IP address rather than leaving it open to the world.</p>
 <p><br></p>
 </div>
 <div id="http-https" class="section level1">
 <h1>HTTP &amp; HTTP(S)</h1>
-<p>Another thing was that I needed to secure my website through HTTPS if I wanted to deploy it live and avoid allowing HTTP traffic. Most of this was new to me so I spent a lot of time learning the basics to understand why all of this was necessary. HTTPS stands for “HTTP Secure”, or Hyper(t)ext Transfer Protocol Secure. The “Secure” part of the name comes from the encryption added to the requests sent and received by the browser. HTTPS also lets the browser check that it has opened the correct website and hasn’t been redirected to a malicious site. Currently, most browsers use the TLS protocol to provide encryption; TLS is sometimes referred to as SSL.</p>
+<p>Another thing was that I needed to secure my website through HTTPS if I wanted to deploy it live and avoid allowing HTTP traffic. Most of this was new to me, so I spent a lot of time learning the basics to understand why all of this was necessary. HTTPS stands for “HTTP Secure”, or Hyper(t)ext Transfer Protocol Secure. The “Secure” part of the name comes from the encryption added to the requests sent and received by the browser. HTTPS also lets the browser check that it has opened the correct website and hasn’t been redirected to a malicious site. Currently, most browsers use the TLS protocol to provide encryption; TLS is sometimes referred to as SSL.</p>
 <p>Details of HTTPS, TLS, and SSL are beyond the scope of this article, but if you want to learn more, the below resources are a good place to start.</p>
 <p><br></p>
 <ul>
@@ -330,26 +330,26 @@ if (!doNotTrack) {
 </div>
 <div id="many-services-one-open-port" class="section level1">
 <h1>Many Services, One Open Port</h1>
-<p>I also need to make sure that both of my servers running on different ports (rstudio 8787 and shiny 3838) all end up on port 80. The issue is that only one service can run on a single port, so this is when I was introduced to <a href="https://www.nginx.com" target="_blank">Nginx.</a> Nginx is a web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache.</p>
+<p>I also need to make sure that both of my servers running on different ports (rstudio 8787 and shiny 3838) all end up on port 80. The issue is that only one service can run on a single port, so this is when I was introduced to <a href="https://www.nginx.com" target="_blank">Nginx.</a> Nginx is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache.</p>
 <p>My purpose for nginx will be to utilize it as a reverse proxy. This is important because it also allows us to <strong>redirect everything to port 80 (where HTTP lives) where we can set a rule to convert everything on port 80 to the secure port 443 (HTTPS) using amazons load balancer</strong>. I plan on using subdomains to host my servers (that will be our next step), so when I type “app.website.com” the nginx redirects shiny port 3838 to port 80. Below is an example of what nginx does when utilized as a reverse proxy.</p>
 <p><img src="/img/HTTPS/nginx-diagram.png" /></p>
 </div>
 <div id="getting-started" class="section level1">
 <h1>Getting Started</h1>
 <p>If you already have an EC2 instance with a shiny server and rstudio server running, then your first step would be to find a free domain name (unless you would like to pay for one) from freenom.com by <a href="https://www.freenom.com/en/index.html?lang=en" target="_blank">clicking here</a>. If not, then please launch an EC2 instance similar to the one from my <a href="https://jagg19.github.io/2019/08/aws-r/" target="_blank">my previous post</a> and continue here.</p>
-<p>I selected freenom because its very easy to use and free. Once you have your domain selected, then <a href="#route53">you can host it on Route 53</a> from AWS (not free but only costs 50 cents a month for 1 host zone). After, we can finally <a href="#nginx-install">install nginx and begin configuring our reverse proxy</a>.</p>
+<p>I selected freenom because it’s very easy to use and free. Once you have your domain selected, then <a href="#route53">you can host it on Route 53</a> from AWS (not free but only costs 50 cents a month for 1 host zone). After, we can finally <a href="#nginx-install">install nginx and begin configuring our reverse proxy</a>.</p>
 <p><br></p>
 <p><a id = "freenom"></a></p>
 </div>
 <div id="how-to-create-a-friendlier-url---freenom" class="section level1">
 <h1>How to Create a Friendlier URL - Freenom</h1>
-<p>Right now, using the public dns that amazon gives us does not look so pretty. If we want the URL to look like “www.coolname.com” then we need to get a domain name and use another AWS service called <a href="https://aws.amazon.com/route53/" target="_blank">Route 53</a>.</p>
-<p>As much as I tried staying within the free tier for AWS, creating a hosted zone in Route 53 will cost $0.50/month which is worth the ease of use in my opinion. Also, let’s use <a href="https://www.freenom.com/en/index.html?lang=en" target="_blank">freenom.com</a> and choose a free 12-month domain. You won’t find a free “.com” domain but you can still find something cool like “.ml”.</p>
+<p>Right now, using the public DNS that amazon provides does not look so pretty. If we want the URL to look like “www.coolname.com”, then we need to get a domain name and use another AWS service called <a href="https://aws.amazon.com/route53/" target="_blank">Route 53</a>.</p>
+<p>As much as I tried staying within the free tier for AWS, creating a hosted zone in Route 53 will cost $0.50/month, which is worth the ease of use in my opinion. Also, let’s use <a href="https://www.freenom.com/en/index.html?lang=en" target="_blank">freenom.com</a> and choose a free 12-month domain. You won’t find a free “.com” domain, but you can still find something cool like “.ml”.</p>
 <p>First, we will choose our domain from freenom, then create a Route 53 host zone, quickly create and copy an Elastic IP and paste it into your Route 53 record set.</p>
 <p><br></p>
 <div id="search-for-domain-name" class="section level3">
 <h3>Search for Domain Name</h3>
-<p>Once your on freenom.com, select the services dropdown and select “Register a New Domain”.</p>
+<p>Once you’re on freenom.com, select the services dropdown and select “Register a New Domain”.</p>
 <p><img src="/img/HTTPS/freenom.png" /></p>
 <p><br></p>
 </div>
@@ -359,7 +359,7 @@ if (!doNotTrack) {
 <p><img src="/img/HTTPS/freenom-select-domain.png" /></p>
 <p><br></p>
 <p><img src="/img/HTTPS/freenom-select-period.png" /></p>
-<p>Click My Domains under the Services tab and click Manage domain. We will now <strong>open a new seperate tab</strong> and go into AWS Route 53 to create a host zone and get our nameservers.</p>
+<p>Click My Domains under the Services tab and click Manage domain. We will now <strong>open a new separate tab</strong> and go into AWS Route 53 to create a host zone and get our nameservers.</p>
 <p><br></p>
 <p><a id ="route53"></a></p>
 </div>
@@ -368,7 +368,7 @@ if (!doNotTrack) {
 <h1>Route 53</h1>
 <div id="create-your-hosted-zone" class="section level3">
 <h3>Create your hosted zone</h3>
-<p>I know in the above screenshots I have selected “nothotdog.ga” and in the below screenshots you will see “nothotdog.ml”. This is because I tried to replicate the domain selection process as closely as I could (I already selected .ml prior to this write up).</p>
+<p>I know in the above screenshots I have selected “nothotdog.ga” and in the below screenshots, you will see “nothotdog.ml”. This is because I tried to replicate the domain selection process as closely as I could (I already selected .ml before this write up).</p>
 <p><img src="/img/HTTPS/route53-openzone.png" /></p>
 <p><br></p>
 </div>
@@ -390,7 +390,7 @@ if (!doNotTrack) {
 </div>
 <div id="elastic-ip" class="section level1">
 <h1>Elastic IP</h1>
-<p>I highly suggest creating an Elastic IP before we continue so our IPv4 address doesnt change each time we reboot our instance. Elastic IP’s are free when attached to a <strong>running</strong> instance (charges will incur if you stop your instance, so just release the IP if you don’t want to incur charges). If you already have one then please associate it with your EC2 instance. If you do not have one, see below on how to create one.</p>
+<p>I highly suggest creating an Elastic IP before we continue, so our IPv4 address doesn’t change each time we reboot our instance. Elastic IP’s are free when attached to a <strong>running</strong> instance (charges will incur if you stop your instance, so just release the IP if you don’t want to incur charges). If you already have one, then please associate it with your EC2 instance. If you do not have one, see below on how to create one.</p>
 <p><br></p>
 <ul>
 <li>In the EC2 services tab, go to the left nav bar and under Network &amp; Security select Elastic IP. Then, choose Allocate new address on the top left, and select Amazon Pool and click “Allocate”.</li>
@@ -402,14 +402,14 @@ if (!doNotTrack) {
 </div>
 <div id="aws-certificate-manager-for-https-ssl" class="section level1">
 <h1>AWS Certificate Manager for HTTPS / SSL</h1>
-<p>I went over a little about how HTTPS is secured but how? SSL certificates are small data files that digitally bind a cryptographic key to an organizations details. When you install these keys and register it to your domain, it activates the padlock (little lock next to URL) and the https protocol that allows secure connections from a server to a browser.</p>
-<p>We can self-sign these keys to ourselves in non-production environments (for practice purposes) by running a command like <code>sudo openssl ...</code> but you would still recieve a pretty nasty warning from your browser asking if you’d like to trust.</p>
-<p>The preferred option is to buy the certificate, or we can use another AWS service called <a href="https://aws.amazon.com/certificate-manager/" target="_blank">Amazon Certificate Manger</a> to register public certifcates that are verified by Amazon for <strong>free</strong> (Private certificates are not free). This is the preferred way since we will most likely be using a live-production environment. See below on how to get verified public certificates from AWS Certifcate Manager.</p>
-<p>Under the services tab, search for “Certifcate Manager” then click “Request a certifcate” to request your <strong>Public</strong> certifcate which you will then complete the four following steps.</p>
+<p>I went over a little about how HTTPS is secured but how? SSL certificates are small data files that digitally bind a cryptographic key to an organization’s details. When you install these keys and register it to your domain, it activates the padlock (little lock next to URL) and the https protocol that allows secure connections from a server to a browser.</p>
+<p>We can self-sign these keys to ourselves in non-production environments (for practice purposes) by running a command like <code>sudo openssl ...</code> but you would still receive a pretty nasty warning from your browser asking if you’d like to trust.</p>
+<p>The preferred option is to buy the certificate, or we can use another AWS service called <a href="https://aws.amazon.com/certificate-manager/" target="_blank">Amazon Certificate Manager</a> to register public certificates that are verified by Amazon for <strong>free</strong> (Private certificates are not free). This is the preferred way since we will most likely be using a live-production environment. See below on how to get verified public certificates from AWS Certificate Manager.</p>
+<p>Under the services tab, search for “Certificate Manager” then click “Request a certificate” to request your <strong>Public</strong> certificate which you will then complete the four following steps.</p>
 <p><br></p>
 <div id="adding-our-domains" class="section level5">
 <h5>Adding our domains</h5>
-<p>Since I will be using subdomains, I will add the wildcard chartacter <code>*</code> before my domain to represent any subdomains. First, I will add <code>nothotdog.ml</code> and then another with the wildcard <code>*.nothotdog.ml</code> so I can use the “rstudio” and “app” subdomains. Once you’ve added your domains, click Next.</p>
+<p>Since I will be using subdomains, I will add the wildcard character <code>*</code> before my domain to represent any subdomains. First, I will add <code>nothotdog.ml</code> and then another with the wildcard <code>*.nothotdog.ml</code> so I can use the “rstudio” and “app” subdomains. Once you’ve added your domains, click Next.</p>
 <p><img src="/img/HTTPS/cert-req.png" /></p>
 </div>
 <div id="selecting-validation-method" class="section level5">
@@ -423,7 +423,7 @@ if (!doNotTrack) {
 <p><img src="/img/HTTPS/cert-req4.png" /></p>
 <p><img src="/img/HTTPS/cert-crt-rec.png" /></p>
 <p><br></p>
-<p>You should see “Success” for each domain set once it is complete. Also, you’ll notice the status of your certifacte now reads “Issued” in green.</p>
+<p>You should see “Success” for each domain set once it is complete. Also, you’ll notice the status of your certificate now reads “Issued” in green.</p>
 <p><img src="/img/HTTPS/cert-crt-rec-success.png" /></p>
 <p><br></p>
 <p><a id = "elb"></a></p>
@@ -431,22 +431,22 @@ if (!doNotTrack) {
 </div>
 <div id="elastic-load-balancer-redirect-all-http-to-https" class="section level1">
 <h1>Elastic Load Balancer: Redirect All HTTP to HTTPS</h1>
-<p>Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. I’ll save the details for a future post, but we will utilize a load balancer to set a rule of redirecting all HTTP traffic to HTTPS. In the future, we will use this load balancer to help distrubute the workloads among multiple EC2 instances.</p>
+<p>Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. I’ll save the details for a future post, but we will utilize a load balancer to set a rule of redirecting all HTTP traffic to HTTPS. In the future, we will use this load balancer to help distribute the workloads among multiple EC2 instances.</p>
 <p>Under the EC2 services tab, navigate to Load Balancing and select “Load Balancers”. Click “Create Create Load Balancer” and select Application Load Balancer.</p>
 <blockquote>
 <p>If you’d like to learn the difference between the types of load balancers, then visit <a href="https://docs.aws.amazon.com/elasticloadbalancing/index.html" target="_blank">the aws documentation here</a> as it is better explained there.</p>
 </blockquote>
-<p>Here we would like to name our Load Balancer as well as add HTTPS on port 443 as one of our listeners. We need to also select two availablity zones. Click next once your screen looks similar to the below.</p>
+<p>Here we would like to name our Load Balancer as well as add HTTPS on port 443 as one of our listeners. We need to also select two availability zones. Click next once your screen looks similar to the below.</p>
 <p><img src="/img/HTTPS/elb-config.png" />
 <img src="/img/HTTPS/elb-config2.png" /></p>
 <p><br></p>
-<p>Now for this step, we want to use the Certificates that we created in the AWS Certifcate Manager. Select “Choose a certificate from ACM” and then select your Certificate from the dropdown. Set your Secuirty policy to the newest TLS policy which in my case was “ELBSecurityPolicy-TLS-1-2-2017-01” and click Next.</p>
+<p>Now for this step, we want to use the certificates that we created in the AWS Certificate Manager. Select “Choose a certificate from ACM” and then select your certificate from the dropdown. Set your security policy to the newest TLS policy, which in my case was “ELBSecurityPolicy-TLS-1-2-2017-01” and click Next.</p>
 <p><img src="/img/HTTPS/elb-security.png" /></p>
-<p><strong>Select the Secuity Group you set for your EC2 Instance for step 3 and move on to step 4 seen below.</strong></p>
+<p><strong>Select the Security Group you set for your EC2 Instance for step 3 and move on to step 4 seen below.</strong></p>
 <p>Name your target group and click next. We will come back to this later.</p>
 <p><img src="/img/HTTPS/elb-routing.png" /></p>
 <p><br></p>
-<p>Now add your target or instances that will be registed to the ELB. Click Review and launch your Load Balancer.</p>
+<p>Now add your target or instances that will be registered to the ELB. Click Review and launch your Load Balancer.</p>
 <p><img src="/img/HTTPS/elb-register-targets.png" /></p>
 <p>Before moving on, we need to add a rule to our load balancer that redirects all HTTP traffic on port 80 to HTTPS on port 443.</p>
 <p><br></p>
@@ -461,7 +461,7 @@ if (!doNotTrack) {
 </div>
 <div id="going-back-to-route-53" class="section level3">
 <h3>Going back to Route 53</h3>
-<p>First, copy your Elastic IP and your new ELB DNS as we will now enter it into a new Route 53 record sets. Click your new host zone and select “Create new record set”. Select type A, and enter the Elastic IP as a refernce then click create. Create two more record sets, one for each of our subdomains (rstudio + app), enter your subdomain names and select the type as CNAME referncing to your load balacner DNS.</p>
+<p>First, copy your Elastic IP and your new ELB DNS as we will now enter it into a new Route 53 record sets. Click your new host zone and select “Create new record set”. Select type A, and enter the Elastic IP as a reference then click create. Create two more record sets, one for each of our subdomains (rstudio + app), enter your subdomain names and select the type as CNAME referencing to your load balancer DNS.</p>
 <p><img src="/img/HTTPS/route53-createrecord.png" /></p>
 <p><br></p>
 </div>
@@ -469,7 +469,7 @@ if (!doNotTrack) {
 <h3>Testing the Friendlier URL</h3>
 <p>Now let’s open a browser and see if yourwebsite.ml:port is available to the public internet. You should see your shiny app or rstudio server running on your friendly URL!</p>
 <p><img src="/img/HTTPS/new-domain-success.png" /></p>
-<p>Although, if you tried to navigate to a subdomain URL, you would recieve an error since we have not installed our reverse proxy yet.</p>
+<p>Although, if you tried to navigate to a subdomain URL, you would receive an error since we have not installed our reverse proxy yet.</p>
 <p><img src="/img/HTTPS/subdomain-error.png" /></p>
 <p>Lets install nginx to fix this and configure our reverse proxy correctly.</p>
 <p><br></p>
@@ -487,7 +487,7 @@ if (!doNotTrack) {
 <h1>Creating your config files</h1>
 <div id="rstudio-sign-in-sign-out-errors" class="section level5">
 <h5>RStudio sign-in / sign-out errors</h5>
-<p>I had everything running pretty quickly but ran into some trouble with the rstudio subdomain. Every time I entered my user credentials, I would always be redirected to the localhost of the server, which did not exist under the HTTPS url. After plenty of time searching around, it turned out the error was coming from the HTTP to HTTPS header conversion. I was finally able to patch together a config file that worked perfectly for RStudio without any errors. This also works for the shiny .conf file that we’ll be creating as well. See below on how to create your .conf files for the nginx, shiny and rstudio server combination.</p>
+<p>I had everything running pretty quickly but ran into some trouble with the rstudio subdomain. Every time I entered my user credentials, I would always be redirected to the localhost of the server, which did not exist under the HTTPS URL. After plenty of time searching around, it turned out the error was coming from the HTTP to HTTPS header conversion. I was finally able to patch together a config file that worked perfectly for RStudio without any errors. This also works for the shiny .conf file that we’ll be creating as well. See below on how to create your .conf files for the nginx, shiny, and rstudio server combination.</p>
 <p>Navigate to the sites-available folder inside nginx where you will find a default file. This is where we will create our rstudio and shiny .conf files so it’s safe to remove the default file before we create ours.</p>
 <p><code>cd /etc/nginx/sites-available</code></p>
 <p><code>sudo rm default</code></p>
@@ -550,7 +550,7 @@ if (!doNotTrack) {
 </div>
 <div id="add-to-nginx-.conf" class="section level3">
 <h3>Add to nginx .conf</h3>
-<p>You have to add this into your nginx .conf file or you will have errors with the headers in your rstudio &amp; shiny .conf files.</p>
+<p>You have to add this into your nginx .conf file, or you will have errors with the headers in your rstudio &amp; shiny .conf files.</p>
 <p><code>sudo nano ../nginx.conf</code></p>
 <pre class="r"><code>http {
        # All you other settings up here... 
@@ -562,22 +562,23 @@ if (!doNotTrack) {
               &#39;&#39;      close;
                   }
 }</code></pre>
-<p>Now lets go into the sites-enabled directory which is where nginx reads from in production. Make a soft copy of the .conf files we made in the sites-available directory.</p>
+<p>Now let’s go into the sites-enabled directory which is where nginx reads from in production. Make a soft copy of the .conf files we made in the sites-available directory.</p>
 <p><code>cd /etc/nginx/sites-enabled</code></p>
 <p><code>sudo ln -s /etc/nginx/sites-available/rstudio.conf /etc/nginx/sites-enabled/rstudio.conf</code></p>
 <p><code>sudo ln -s /etc/nginx/sites-available/shiny.conf /etc/nginx/sites-enabled/shiny.conf</code></p>
 <p>Finally, restart the nginx service. When you alter .conf files, you have to restart the service to implement your new changes.</p>
 <p><code>sudo systemctl restart nginx</code></p>
 <p><br></p>
-<p>When we visit any of our subdomains, we should be directed to the correct server! Also, all HTTP request will convert to HTTPS (thanks to the rule we set in our Load Balancer) to stay secured. Try “<a href="http://subdomain.yourwebsite.com" class="uri">http://subdomain.yourwebsite.com</a>” and see if it converts to HTTPS. You should see that it does and you’ll always notice the little lock to The left of the URL!</p>
+<p>When we visit any of our subdomains, we should be directed to the correct server! Also, all HTTP request will convert to HTTPS (thanks to the rule we set in our Load Balancer) to stay secured. Try “<a href="http://subdomain.yourwebsite.com" class="uri">http://subdomain.yourwebsite.com</a>” and see if it converts to HTTPS. You should see that it does and you’ll always notice the little lock to the left of the URL!</p>
 <p><img src="/img/HTTPS/subdomain-success.png" /></p>
 <p><br></p>
 </div>
 </div>
 <div id="wrapping-it-up-and-staying-safe" class="section level1">
 <h1>Wrapping it up and staying safe</h1>
-<p>Perfect! Now we can worry a little less about our app being hacked, altered to a bitcoin mining rig, or even destroyed. Since I want to be able to share my analysis with anyone, I want to make sure that I don’t leave any backdoor entries open for hackers to gain control of my AWS resources. I don’t plan on brining in a high amount of user traffic, so this all should remain &lt;$10/ month, hopefully cheaper.</p>
-<p>Now that we know how to secure our EC2 instance and protect our app, in the next post I will show you how to integrate everything, plus more to build a robust shiny app and work environment.</p>
+<p>Perfect! Now we can worry a little less about our app being hacked, altered to a bitcoin mining rig, or even destroyed.</p>
+<p>Since I want to be able to share my analysis with anyone, I want to make sure that I don’t leave any backdoor entries open for hackers to gain control of my AWS resources. Adding HTTPS to your site and closing port 22 does not guarantee 100% hack-free instances, although it allows us to sleep a little better at night.</p>
+<p>Now that we know how to secure our EC2 instance and protect our app, in a future post I will show you how to integrate everything, plus more to build a robust shiny app and work environment.</p>
 </div>
 
               
