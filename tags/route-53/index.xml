@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Route 53 on Running on R</title>
+    <link>/tags/route-53/</link>
+    <description>Recent content in Route 53 on Running on R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 13 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/route-53/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HTTPS to Secure Your RStudio &#43; Shiny Work Environment</title>
+      <link>/2019/08/https-aws-r/</link>
+      <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/08/https-aws-r/</guid>
+      <description>HTTPS to Secure Your R Work Environment Click any link in list below to jump to topic
+ Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp;amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.</description>
+    </item>
+    
+  </channel>
+</rss>

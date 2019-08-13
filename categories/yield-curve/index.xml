@@ -2,22 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Yield Curve on Running on R</title>
-    <link>https://jagg19.github.io/categories/yield-curve/</link>
+    <link>/categories/yield-curve/</link>
     <description>Recent content in Yield Curve on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 11 Dec 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jagg19.github.io/categories/yield-curve/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/yield-curve/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Yield Curve Inversion - Marks End to Bull Market?</title>
-      <link>https://jagg19.github.io/2018/12/yield-curve-fun/</link>
+      <link>/2018/12/yield-curve-fun/</link>
       <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2018/12/yield-curve-fun/</guid>
-      <description>Going, Going, Inverted!  Yield Curve inversions are typically a leading indicator for a recession Historic analysis on inversions for specific yields since 1990 Yield Curve over 5 different time frames since the start of 2018 Takeaway from recent inversions   Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations.</description>
+      <guid>/2018/12/yield-curve-fun/</guid>
+      <description>#Going, Going, Inverted! - Yield Curve inversions are typically a leading indicator for a recession - Historic analysis on inversions for specific yields since 1990 - Yield Curve over 5 different time frames since the start of 2018 - Takeaway from recent inversions
+#Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations.</description>
     </item>
     
   </channel>

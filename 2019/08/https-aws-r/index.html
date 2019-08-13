@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.51 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Jagger Villalobos">
+<meta name="keywords" content="">
+<meta name="description" content="HTTPS to Secure Your R Work Environment Click any link in list below to jump to topic
+ Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.">
+
+
+<meta property="og:description" content="HTTPS to Secure Your R Work Environment Click any link in list below to jump to topic
+ Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTPS to Secure Your RStudio &#43; Shiny Work Environment">
+<meta name="twitter:title" content="HTTPS to Secure Your RStudio &#43; Shiny Work Environment">
+<meta property="og:url" content="/2019/08/https-aws-r/">
+<meta property="twitter:url" content="/2019/08/https-aws-r/">
+<meta property="og:site_name" content="Running on R">
+<meta property="og:description" content="HTTPS to Secure Your R Work Environment Click any link in list below to jump to topic
+ Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.">
+<meta name="twitter:description" content="HTTPS to Secure Your R Work Environment Click any link in list below to jump to topic
+ Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-08-13T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-08-13T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="AWS">
+    
+      <meta property="article:section" content="R">
+    
+      <meta property="article:section" content="Programming">
+    
+      <meta property="article:section" content="Deploying Website / Apps">
+    
+  
+  
+    
+      <meta property="article:tag" content="EC2">
+    
+      <meta property="article:tag" content="Cloud">
+    
+      <meta property="article:tag" content="RStudio">
+    
+      <meta property="article:tag" content="Shiny">
+    
+      <meta property="article:tag" content="Nginx">
+    
+      <meta property="article:tag" content="Route 53">
+    
+      <meta property="article:tag" content="Elastic Load Balancer">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1565671153/https.jpg">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1565671153/https.jpg">
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+
+
+    <title>HTTPS to Secure Your RStudio &#43; Shiny Work Environment</title>
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="/2019/08/https-aws-r/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-134862415-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Running on R</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
+        
+          <h5 class="sidebar-profile-bio">Bottom-Up Analysis | Equity Research</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/jagg19">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              post-header-cover--partial"
+       style="background-image:url('https://res.cloudinary.com/dyackvnwm/image/upload/v1565671153/https.jpg')"
+       data-behavior="4">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      HTTPS to Secure Your RStudio &#43; Shiny Work Environment
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-08-13T00:00:00Z">
+        
+  August 13, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/aws">AWS</a>, 
+    
+      <a class="category-link" href="/categories/r">R</a>, 
+    
+      <a class="category-link" href="/categories/programming">Programming</a>, 
+    
+      <a class="category-link" href="/categories/deploying-website-/-apps">Deploying Website / Apps</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="4"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+
+<div id="https-to-secure-your-r-work-environment" class="section level1">
+<h1>HTTPS to Secure Your R Work Environment</h1>
+<p>Click any link in list below to jump to topic</p>
+<ul>
+<li><a href="#freenom">Creating a Friendly URL</a></li>
+<li><a href="#route53">Route 53 to Host Domain and Create Subdomains</a></li>
+<li><a href="#certman">AWS Certificate Manager for SSL keys</a></li>
+<li><a href="#elb">AWS Elastic Load Balancers: HTTPS Redirection</a></li>
+<li><a href="#nginx-install">Installing Nginx &amp; Creating Configuration Files</a></li>
+</ul>
+<p>I wanted to create this post as an addition to my previous post <a href="https://jagg19.github.io/2019/08/aws-r/" target="_blank">Running R on AWS EC2 and Logging into RStudio from Anywhere</a> to show how to secure your AWS environment. Hopefully these articles can help others save time and learn to avoid hours spent reading documentation guides. My purpose for learning about the AWS environment is to securely create and ship shiny apps to share my analysis projects in a better fashion. Setting up the security group of your instance is dependent on the use case for your instances. After looking through some of the <strong>basic</strong> ways hackers can get into your EC2, most of the vulnerabilities came from storing private keys in the wrong places, and open port scans.</p>
+<p><br></p>
+</div>
+<div id="open-ports" class="section level1">
+<h1>Open Ports</h1>
+<p>After sharing my previous post to various outlets, a Reddit user suggested to whitelist IP address to limit access to your web applications instead of keeping it open to the world. After reading about <a href="https://blog.ipswitch.com/port-scanning-101-what-it-is-what-it-does" target="_blank">port scans</a>, database takeover tools <a href="http://sqlmap.org" target="_blank">sqlmap</a>, and brute force tools like <a href="https://github.com/OJ/gobuster" target="_blank">gobuster</a>, I quickly realized why keeping port 22 closed is so important.</p>
+<p>The end result was I ended up whitelisting port 22 (used for ssh) to only my IP address rather than leaving it open to the world.</p>
+<p><br></p>
+</div>
+<div id="http-https" class="section level1">
+<h1>HTTP &amp; HTTP(S)</h1>
+<p>Another thing was that I needed to secure my website through HTTPS if I wanted to deploy it live and avoid allowing HTTP traffic. Most of this was new to me so I spent a lot of time learning the basics to understand why all of this was necessary. HTTPS stands for “HTTP Secure”, or Hyper(t)ext Transfer Protocol Secure. The “Secure” part of the name comes from the encryption added to the requests sent and received by the browser. HTTPS also lets the browser check that it has opened the correct website and hasn’t been redirected to a malicious site. Currently, most browsers use the TLS protocol to provide encryption; TLS is sometimes referred to as SSL.</p>
+<p>Details of HTTPS, TLS, and SSL are beyond the scope of this article, but if you want to learn more, the below resources are a good place to start.</p>
+<p><br></p>
+<ul>
+<li>Wikipedia HTTPS - <a href="https://en.wikipedia.org/wiki/HTTPS" class="uri">https://en.wikipedia.org/wiki/HTTPS</a></li>
+<li>Wikipedia TLS - <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security" class="uri">https://en.wikipedia.org/wiki/Transport_Layer_Security</a></li>
+<li>Khan Academy Cryptography course - <a href="https://www.khanacademy.org/computing/computer-science/cryptography" class="uri">https://www.khanacademy.org/computing/computer-science/cryptography</a></li>
+<li>TLS chapter in High Performance Browser Networking by Ilya Grigorik - <a href="https://hpbn.co/transport-layer-security-tls/" class="uri">https://hpbn.co/transport-layer-security-tls/</a></li>
+</ul>
+<p><br></p>
+</div>
+<div id="many-services-one-open-port" class="section level1">
+<h1>Many Services, One Open Port</h1>
+<p>I also need to make sure that both of my servers running on different ports (rstudio 8787 and shiny 3838) all end up on port 80. The issue is that only one service can run on a single port, so this is when I was introduced to <a href="https://www.nginx.com" target="_blank">Nginx.</a> Nginx is a web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache.</p>
+<p>My purpose for nginx will be to utilize it as a reverse proxy. This is important because it also allows us to <strong>redirect everything to port 80 (where HTTP lives) where we can set a rule to convert everything on port 80 to the secure port 443 (HTTPS) using amazons load balancer</strong>. I plan on using subdomains to host my servers (that will be our next step), so when I type “app.website.com” the nginx redirects shiny port 3838 to port 80. Below is an example of what nginx does when utilized as a reverse proxy.</p>
+<p><img src="/img/HTTPS/nginx-diagram.png" /></p>
+</div>
+<div id="getting-started" class="section level1">
+<h1>Getting Started</h1>
+<p>If you already have an EC2 instance with a shiny server and rstudio server running, then your first step would be to find a free domain name (unless you would like to pay for one) from freenom.com by <a href="https://www.freenom.com/en/index.html?lang=en" target="_blank">clicking here</a>. If not, then please launch an EC2 instance similar to the one from my <a href="https://jagg19.github.io/2019/08/aws-r/" target="_blank">my previous post</a> and continue here.</p>
+<p>I selected freenom because its very easy to use and free. Once you have your domain selected, then <a href="#route53">you can host it on Route 53</a> from AWS (not free but only costs 50 cents a month for 1 host zone). After, we can finally <a href="#nginx-install">install nginx and begin configuring our reverse proxy</a>.</p>
+<p><br></p>
+<p><a id = "freenom"></a></p>
+</div>
+<div id="how-to-create-a-friendlier-url---freenom" class="section level1">
+<h1>How to Create a Friendlier URL - Freenom</h1>
+<p>Right now, using the public dns that amazon gives us does not look so pretty. If we want the URL to look like “www.coolname.com” then we need to get a domain name and use another AWS service called <a href="https://aws.amazon.com/route53/" target="_blank">Route 53</a>.</p>
+<p>As much as I tried staying within the free tier for AWS, creating a hosted zone in Route 53 will cost $0.50/month which is worth the ease of use in my opinion. Also, let’s use <a href="https://www.freenom.com/en/index.html?lang=en" target="_blank">freenom.com</a> and choose a free 12-month domain. You won’t find a free “.com” domain but you can still find something cool like “.ml”.</p>
+<p>First, we will choose our domain from freenom, then create a Route 53 host zone, quickly create and copy an Elastic IP and paste it into your Route 53 record set.</p>
+<p><br></p>
+<div id="search-for-domain-name" class="section level3">
+<h3>Search for Domain Name</h3>
+<p>Once your on freenom.com, select the services dropdown and select “Register a New Domain”.</p>
+<p><img src="/img/HTTPS/freenom.png" /></p>
+<p><br></p>
+</div>
+<div id="searched-results" class="section level3">
+<h3>Searched Results</h3>
+<p>Then, search for a domain name you’d like. Since it is free, I will choose some random name to use as practice.</p>
+<p><img src="/img/HTTPS/freenom-select-domain.png" /></p>
+<p><br></p>
+<p><img src="/img/HTTPS/freenom-select-period.png" /></p>
+<p>Click My Domains under the Services tab and click Manage domain. We will now <strong>open a new seperate tab</strong> and go into AWS Route 53 to create a host zone and get our nameservers.</p>
+<p><br></p>
+<p><a id ="route53"></a></p>
+</div>
+</div>
+<div id="route-53" class="section level1">
+<h1>Route 53</h1>
+<div id="create-your-hosted-zone" class="section level3">
+<h3>Create your hosted zone</h3>
+<p>I know in the above screenshots I have selected “nothotdog.ga” and in the below screenshots you will see “nothotdog.ml”. This is because I tried to replicate the domain selection process as closely as I could (I already selected .ml prior to this write up).</p>
+<p><img src="/img/HTTPS/route53-openzone.png" /></p>
+<p><br></p>
+</div>
+<div id="copy-the-4-nameservers" class="section level3">
+<h3>Copy the 4 nameservers</h3>
+<p><img src="/img/HTTPS/route43-foursrvr.png" /></p>
+<blockquote>
+<p>Sorry for nasty censorship, wasn’t too sure what is sensitive and what isnt as far as the hosted zones.</p>
+</blockquote>
+<p><br></p>
+</div>
+<div id="paste-the-4-nameservers-into-freenom." class="section level3">
+<h3>Paste the 4 nameservers into freenom.</h3>
+<p><img src="/img/HTTPS/freenom-copypaste-namesrvr.png" /></p>
+<p><br></p>
+<p>Your domain is now all set on freenom! Let’s make an Elastic IP so we can have the same IP when our instances stop and start.</p>
+<p><br></p>
+</div>
+</div>
+<div id="elastic-ip" class="section level1">
+<h1>Elastic IP</h1>
+<p>I highly suggest creating an Elastic IP before we continue so our IPv4 address doesnt change each time we reboot our instance. Elastic IP’s are free when attached to a <strong>running</strong> instance (charges will incur if you stop your instance, so just release the IP if you don’t want to incur charges). If you already have one then please associate it with your EC2 instance. If you do not have one, see below on how to create one.</p>
+<p><br></p>
+<ul>
+<li>In the EC2 services tab, go to the left nav bar and under Network &amp; Security select Elastic IP. Then, choose Allocate new address on the top left, and select Amazon Pool and click “Allocate”.</li>
+<li>After, select the Elastic IP and click “Actions” and choose Associate Addresses. On the Instances dropdown, select the instance that is hosting your apps and click “Associate”.</li>
+</ul>
+<p><img src="/img/HTTPS/elasticip-associate.png" /></p>
+<p><br></p>
+<p><a id = "certman"></a></p>
+</div>
+<div id="aws-certificate-manager-for-https-ssl" class="section level1">
+<h1>AWS Certificate Manager for HTTPS / SSL</h1>
+<p>I went over a little about how HTTPS is secured but how? SSL certificates are small data files that digitally bind a cryptographic key to an organizations details. When you install these keys and register it to your domain, it activates the padlock (little lock next to URL) and the https protocol that allows secure connections from a server to a browser.</p>
+<p>We can self-sign these keys to ourselves in non-production environments (for practice purposes) by running a command like <code>sudo openssl ...</code> but you would still recieve a pretty nasty warning from your browser asking if you’d like to trust.</p>
+<p>The preferred option is to buy the certificate, or we can use another AWS service called <a href="https://aws.amazon.com/certificate-manager/" target="_blank">Amazon Certificate Manger</a> to register public certifcates that are verified by Amazon for <strong>free</strong> (Private certificates are not free). This is the preferred way since we will most likely be using a live-production environment. See below on how to get verified public certificates from AWS Certifcate Manager.</p>
+<p>Under the services tab, search for “Certifcate Manager” then click “Request a certifcate” to request your <strong>Public</strong> certifcate which you will then complete the four following steps.</p>
+<p><br></p>
+<div id="adding-our-domains" class="section level5">
+<h5>Adding our domains</h5>
+<p>Since I will be using subdomains, I will add the wildcard chartacter <code>*</code> before my domain to represent any subdomains. First, I will add <code>nothotdog.ml</code> and then another with the wildcard <code>*.nothotdog.ml</code> so I can use the “rstudio” and “app” subdomains. Once you’ve added your domains, click Next.</p>
+<p><img src="/img/HTTPS/cert-req.png" /></p>
+</div>
+<div id="selecting-validation-method" class="section level5">
+<h5>Selecting Validation Method</h5>
+<p>Select DNS Validation and then click Review. Move forward to step 4.</p>
+<p><img src="/img/HTTPS/cert-req2.png" /></p>
+</div>
+<div id="validating-domains" class="section level5">
+<h5>Validating Domains</h5>
+<p>This part is easy since we already set up the hosted zone for our domain. Select the arrow drop-downs and click “Create record in Route 53” for each domain set. Click Continue while it validates itself, usually takes just a couple minutes.</p>
+<p><img src="/img/HTTPS/cert-req4.png" /></p>
+<p><img src="/img/HTTPS/cert-crt-rec.png" /></p>
+<p><br></p>
+<p>You should see “Success” for each domain set once it is complete. Also, you’ll notice the status of your certifacte now reads “Issued” in green.</p>
+<p><img src="/img/HTTPS/cert-crt-rec-success.png" /></p>
+<p><br></p>
+<p><a id = "elb"></a></p>
+</div>
+</div>
+<div id="elastic-load-balancer-redirect-all-http-to-https" class="section level1">
+<h1>Elastic Load Balancer: Redirect All HTTP to HTTPS</h1>
+<p>Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. I’ll save the details for a future post, but we will utilize a load balancer to set a rule of redirecting all HTTP traffic to HTTPS. In the future, we will use this load balancer to help distrubute the workloads among multiple EC2 instances.</p>
+<p>Under the EC2 services tab, navigate to Load Balancing and select “Load Balancers”. Click “Create Create Load Balancer” and select Application Load Balancer.</p>
+<blockquote>
+<p>If you’d like to learn the difference between the types of load balancers, then visit <a href="https://docs.aws.amazon.com/elasticloadbalancing/index.html" target="_blank">the aws documentation here</a> as it is better explained there.</p>
+</blockquote>
+<p>Here we would like to name our Load Balancer as well as add HTTPS on port 443 as one of our listeners. We need to also select two availablity zones. Click next once your screen looks similar to the below.</p>
+<p><img src="/img/HTTPS/elb-config.png" />
+<img src="/img/HTTPS/elb-config2.png" /></p>
+<p><br></p>
+<p>Now for this step, we want to use the Certificates that we created in the AWS Certifcate Manager. Select “Choose a certificate from ACM” and then select your Certificate from the dropdown. Set your Secuirty policy to the newest TLS policy which in my case was “ELBSecurityPolicy-TLS-1-2-2017-01” and click Next.</p>
+<p><img src="/img/HTTPS/elb-security.png" /></p>
+<p><strong>Select the Secuity Group you set for your EC2 Instance for step 3 and move on to step 4 seen below.</strong></p>
+<p>Name your target group and click next. We will come back to this later.</p>
+<p><img src="/img/HTTPS/elb-routing.png" /></p>
+<p><br></p>
+<p>Now add your target or instances that will be registed to the ELB. Click Review and launch your Load Balancer.</p>
+<p><img src="/img/HTTPS/elb-register-targets.png" /></p>
+<p>Before moving on, we need to add a rule to our load balancer that redirects all HTTP traffic on port 80 to HTTPS on port 443.</p>
+<p><br></p>
+<div id="add-the-rule-to-redirect-http-to-https" class="section level3">
+<h3>Add the rule to redirect HTTP to HTTPS</h3>
+<p>Once your Load Balancer is finished launching, select it and click the “Listeners” tab. Click View/Edit rules on your HTTP : 80 listener.</p>
+<p><img src="/img/HTTPS/elb-add-rule.png" /></p>
+<p><br></p>
+<p>Click the Pencil on the top screen, then the smaller pencil next to the word “last”. Delete the current rule and add a new “redirect rule” which defaults to HTTPS and add port 443. Click the blue check and then click Update.</p>
+<p><img src="/img/HTTPS/elb-edit-rule.png" /></p>
+<p><br></p>
+</div>
+<div id="going-back-to-route-53" class="section level3">
+<h3>Going back to Route 53</h3>
+<p>First, copy your Elastic IP and your new ELB DNS as we will now enter it into a new Route 53 record sets. Click your new host zone and select “Create new record set”. Select type A, and enter the Elastic IP as a refernce then click create. Create two more record sets, one for each of our subdomains (rstudio + app), enter your subdomain names and select the type as CNAME referncing to your load balacner DNS.</p>
+<p><img src="/img/HTTPS/route53-createrecord.png" /></p>
+<p><br></p>
+</div>
+<div id="testing-the-friendlier-url" class="section level3">
+<h3>Testing the Friendlier URL</h3>
+<p>Now let’s open a browser and see if yourwebsite.ml:port is available to the public internet. You should see your shiny app or rstudio server running on your friendly URL!</p>
+<p><img src="/img/HTTPS/new-domain-success.png" /></p>
+<p>Although, if you tried to navigate to a subdomain URL, you would recieve an error since we have not installed our reverse proxy yet.</p>
+<p><img src="/img/HTTPS/subdomain-error.png" /></p>
+<p>Lets install nginx to fix this and configure our reverse proxy correctly.</p>
+<p><br></p>
+<p><a id ="nginx-install"></a></p>
+</div>
+</div>
+<div id="install-nginx" class="section level1">
+<h1>Install nginx</h1>
+<p>Let’s install nginx and begin configuring our reverse proxy server. We can do this by creating .conf files for each server, or in one big .conf file. First, install nginx.</p>
+<p><code>sudo apt update</code></p>
+<p><code>sudo apt install nginx</code></p>
+<p><br></p>
+</div>
+<div id="creating-your-config-files" class="section level1">
+<h1>Creating your config files</h1>
+<div id="rstudio-sign-in-sign-out-errors" class="section level5">
+<h5>RStudio sign-in / sign-out errors</h5>
+<p>I had everything running pretty quickly but ran into some trouble with the rstudio subdomain. Every time I entered my user credentials, I would always be redirected to the localhost of the server, which did not exist under the HTTPS url. After plenty of time searching around, it turned out the error was coming from the HTTP to HTTPS header conversion. I was finally able to patch together a config file that worked perfectly for RStudio without any errors. This also works for the shiny .conf file that we’ll be creating as well. See below on how to create your .conf files for the nginx, shiny and rstudio server combination.</p>
+<p>Navigate to the sites-available folder inside nginx where you will find a default file. This is where we will create our rstudio and shiny .conf files so it’s safe to remove the default file before we create ours.</p>
+<p><code>cd /etc/nginx/sites-available</code></p>
+<p><code>sudo rm default</code></p>
+</div>
+<div id="create-shiny.conf" class="section level3">
+<h3>Create shiny.conf</h3>
+<p><code>sudo nano shiny.conf</code></p>
+<p><br></p>
+<ul>
+<li>Copy-paste the below code as it is, but replace <HOSTNAME> with your public IP or website name like “website.com or subdomain.website.com”.</li>
+</ul>
+<pre class="r"><code>server {
+        listen 80;
+        listen [::]:80;
+
+    server_name &lt;HOSTNAME&gt;;
+
+    location / {
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection &quot;upgrade&quot;;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 90s;
+        
+        # Connect to local port
+        proxy_pass http://127.0.0.1:3838;
+    }
+}</code></pre>
+</div>
+<div id="create-rstudio.conf" class="section level3">
+<h3>Create rstudio.conf</h3>
+<p><code>sudo nano rstudio.conf</code></p>
+<p><br></p>
+<ul>
+<li>Copy-paste the below code as it is, but replace <HOSTNAME> with your public IP or website name like “website.com or subdomain.website.com”.</li>
+</ul>
+<pre class="r"><code>server {
+        listen 80;
+        listen [::]:80;
+
+    server_name &lt;HOSTNAME&gt;;
+
+    location / {
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection &quot;upgrade&quot;;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 90s;
+        
+        # Connect to local port
+        proxy_pass http://127.0.0.1:8787;
+    }
+}</code></pre>
+</div>
+<div id="add-to-nginx-.conf" class="section level3">
+<h3>Add to nginx .conf</h3>
+<p>You have to add this into your nginx .conf file or you will have errors with the headers in your rstudio &amp; shiny .conf files.</p>
+<p><code>sudo nano ../nginx.conf</code></p>
+<pre class="r"><code>http {
+       # All you other settings up here... 
+
+       server_names_hash_bucket_size 128;
+
+       map $http_upgrade $connection_upgrade {
+              default upgrade;
+              &#39;&#39;      close;
+                  }
+}</code></pre>
+<p>Now lets go into the sites-enabled directory which is where nginx reads from in production. Make a soft copy of the .conf files we made in the sites-available directory.</p>
+<p><code>cd /etc/nginx/sites-enabled</code></p>
+<p><code>sudo ln -s /etc/nginx/sites-available/rstudio.conf /etc/nginx/sites-enabled/rstudio.conf</code></p>
+<p><code>sudo ln -s /etc/nginx/sites-available/shiny.conf /etc/nginx/sites-enabled/shiny.conf</code></p>
+<p>Finally, restart the nginx service. When you alter .conf files, you have to restart the service to implement your new changes.</p>
+<p><code>sudo systemctl restart nginx</code></p>
+<p><br></p>
+<p>When we visit any of our subdomains, we should be directed to the correct server! Also, all HTTP request will convert to HTTPS (thanks to the rule we set in our Load Balancer) to stay secured. Try “<a href="http://subdomain.yourwebsite.com" class="uri">http://subdomain.yourwebsite.com</a>” and see if it converts to HTTPS. You should see that it does and you’ll always notice the little lock to The left of the URL!</p>
+<p><img src="/img/HTTPS/subdomain-success.png" /></p>
+<p><br></p>
+</div>
+</div>
+<div id="wrapping-it-up-and-staying-safe" class="section level1">
+<h1>Wrapping it up and staying safe</h1>
+<p>Perfect! Now we can worry a little less about our app being hacked, altered to a bitcoin mining rig, or even destroyed. Since I want to be able to share my analysis with anyone, I want to make sure that I don’t leave any backdoor entries open for hackers to gain control of my AWS resources. I don’t plan on brining in a high amount of user traffic, so this all should remain &lt;$10/ month, hopefully cheaper.</p>
+<p>Now that we know how to secure our EC2 instance and protect our app, in the next post I will show you how to integrate everything, plus more to build a robust shiny app and work environment.</p>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/ec2/">EC2</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/cloud/">Cloud</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/rstudio/">RStudio</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/shiny/">Shiny</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/nginx/">Nginx</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/route-53/">Route 53</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/elastic-load-balancer/">Elastic Load Balancer</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/08/aws-r/" data-tooltip="Running R on AWS EC2 and Logging into RStudio from Anywhere">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/08/https-aws-r/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/08/https-aws-r/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/08/https-aws-r/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Jagger Villalobos. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/08/aws-r/" data-tooltip="Running R on AWS EC2 and Logging into RStudio from Anywhere">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/08/https-aws-r/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/08/https-aws-r/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/08/https-aws-r/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F08%2Fhttps-aws-r%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F08%2Fhttps-aws-r%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F08%2Fhttps-aws-r%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jagger Villalobos</h4>
+    
+      <div id="about-card-bio">Bottom-Up Analysis | Equity Research</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Seeking Analyst Position
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        New York, New York
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/08/https-aws-r/">
+                <h3 class="media-heading">HTTPS to Secure Your RStudio &#43; Shiny Work Environment</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">HTTPS to Secure Your R Work Environment Click any link in list below to jump to topic
+ Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/08/aws-r/">
+                <h3 class="media-heading">Running R on AWS EC2 and Logging into RStudio from Anywhere</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database , I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/07/aws-rds-mysql/">
+                <h3 class="media-heading">Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Amazon Web Services RDS with MySQL &amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal + MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/05/mysql-r/">
+                <h3 class="media-heading">Using MySQL with R</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading + writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB+. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/sentiment-analysis-conf-call/">
+                <h3 class="media-heading">Sentiment Analysis on Earnings Call</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/alpaca-for-r/">
+                <h3 class="media-heading">AlpacaforR</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">#AlpacaforR
+ What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
+                <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">#Pure Earnings Play
+ Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
+                <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">#IPO Estimate &amp; Review - Taking a look at LYFT financials for the first time - Review of Dropbox IPO and stock performance
+
+#Can the slow IPO market get a lift from LYFT?
+Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31. As of 3/4/2019, the markets have had 11 companies raise a total of $1.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
+                <h3 class="media-heading">Salesforce Q3 Update</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">#Salesforce Q3 Update - Updated model from previous post, click here to read previous Salesforce post - Management raised top and bottom line forecasts for FY19 guidance - Management gave more details on FY20 &amp; FY22 goals and confirmed forecasts - Near bulletproof business model during economic slowdown - Key risks to management goals - Recommendation and price targets
+
+Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/12/yield-curve-fun/">
+                <h3 class="media-heading">Yield Curve Inversion - Marks End to Bull Market?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">#Going, Going, Inverted! - Yield Curve inversions are typically a leading indicator for a recession - Historic analysis on inversions for specific yields since 1990 - Yield Curve over 5 different time frames since the start of 2018 - Takeaway from recent inversions
+#Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         12 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2019\/08\/https-aws-r\/';
+          
+            this.page.identifier = '\/2019\/08\/https-aws-r\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

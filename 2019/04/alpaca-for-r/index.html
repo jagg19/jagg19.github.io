@@ -8,21 +8,25 @@
 <meta name="generator" content="Hugo 0.51 with theme Tranquilpeak 0.4.3-SNAPSHOT">
 <meta name="author" content="Jagger Villalobos">
 <meta name="keywords" content="">
-<meta name="description" content="AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+<meta name="description" content="#AlpacaforR
+ What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
 After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.">
 
 
-<meta property="og:description" content="AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+<meta property="og:description" content="#AlpacaforR
+ What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
 After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AlpacaforR">
 <meta name="twitter:title" content="AlpacaforR">
-<meta property="og:url" content="https://jagg19.github.io/2019/04/alpaca-for-r/">
-<meta property="twitter:url" content="https://jagg19.github.io/2019/04/alpaca-for-r/">
+<meta property="og:url" content="/2019/04/alpaca-for-r/">
+<meta property="twitter:url" content="/2019/04/alpaca-for-r/">
 <meta property="og:site_name" content="Running on R">
-<meta property="og:description" content="AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+<meta property="og:description" content="#AlpacaforR
+ What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
 After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.">
-<meta name="twitter:description" content="AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+<meta name="twitter:description" content="#AlpacaforR
+ What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
 After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.">
 <meta property="og:locale" content="en-us">
 
@@ -82,12 +86,12 @@ After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Ex
 
     <title>AlpacaforR</title>
 
-    <link rel="icon" href="https://jagg19.github.io/favicon.png">
+    <link rel="icon" href="/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://jagg19.github.io/2019/04/alpaca-for-r/">
+    <link rel="canonical" href="/2019/04/alpaca-for-r/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -95,7 +99,7 @@ After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Ex
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="https://jagg19.github.io/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
     
     
 
@@ -123,12 +127,12 @@ if (!doNotTrack) {
       <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="https://jagg19.github.io/">Running on R</a>
+    <a class="header-title-link" href="/">Running on R</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="https://jagg19.github.io/#about">
+         href="/#about">
     
     
     
@@ -144,7 +148,7 @@ if (!doNotTrack) {
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="https://jagg19.github.io/#about">
+        <a href="/#about">
           <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
         </a>
         <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
@@ -157,7 +161,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/">
+      <a class="sidebar-button-link " href="/">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -167,7 +171,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/#about">
+      <a class="sidebar-button-link " href="/#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -177,7 +181,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/categories">
+      <a class="sidebar-button-link " href="/categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -187,7 +191,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/tags">
+      <a class="sidebar-button-link " href="/tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -197,7 +201,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/archives">
+      <a class="sidebar-button-link " href="/archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -211,7 +215,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/jagg19" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://github.com/jagg19">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -221,7 +225,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -265,15 +269,15 @@ if (!doNotTrack) {
   
     <span>in</span>
     
-      <a class="category-link" href="https://jagg19.github.io/categories/r-package">R Package</a>, 
+      <a class="category-link" href="/categories/r-package">R Package</a>, 
     
-      <a class="category-link" href="https://jagg19.github.io/categories/earnings">Earnings</a>, 
+      <a class="category-link" href="/categories/earnings">Earnings</a>, 
     
-      <a class="category-link" href="https://jagg19.github.io/categories/backtest">Backtest</a>, 
+      <a class="category-link" href="/categories/backtest">Backtest</a>, 
     
-      <a class="category-link" href="https://jagg19.github.io/categories/programming">Programming</a>, 
+      <a class="category-link" href="/categories/programming">Programming</a>, 
     
-      <a class="category-link" href="https://jagg19.github.io/categories/trading">Trading</a>
+      <a class="category-link" href="/categories/trading">Trading</a>
     
   
 
@@ -296,8 +300,7 @@ if (!doNotTrack) {
               
 
 
-<div id="alpacaforr" class="section level1">
-<h1>AlpacaforR</h1>
+<p>#AlpacaforR</p>
 <ul>
 <li>What is Alpaca and AlpacaforR</li>
 <li>Some Example Functions</li>
@@ -343,10 +346,7 @@ get_account()
 
 #If live account:
 get_account(live = TRUE)</code></pre>
-<div class="figure">
-<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555349014/Screen_Shot_2019-04-15_at_1.21.01_PM.png" />
-
-</div>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555349014/Screen_Shot_2019-04-15_at_1.21.01_PM.png" /></p>
 <p>Awesome, it looks like I have connected my correct account (for this example I will connect to my paper account) and I can see the status of my account as ACTIVE. I could look at some of the account details like available funds for trading, but I am ready to begin! Although, I cant remember if had any open positions at the moment so I want to check if that is the case.</p>
 <p><br></p>
 </div>
@@ -375,10 +375,7 @@ get_bars(ticker = &quot;GE&quot;, timeframe = &quot;day&quot;, from = Sys.Date()
 <h4>Checking Market Calendar</h4>
 <pre class="r"><code>#Getting specific dates using date ranges
 get_calendar(from = &quot;2019-04-15&quot;, to = &quot;2019-04-20&quot;)</code></pre>
-<div class="figure">
-<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555348631/Screen_Shot_2019-04-15_at_1.17.02_PM.png" />
-
-</div>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555348631/Screen_Shot_2019-04-15_at_1.17.02_PM.png" /></p>
 <p>Hmm, anything off? I entered the dates for Monday - Friday but only four days were returned. Thankfully we checked the market calendar because it shows that the market will not be open on Friday 4/19/2019.</p>
 <p><br></p>
 </div>
@@ -393,10 +390,7 @@ submit_order(ticker = &quot;GE&quot;, qty = &quot;5&quot;, side = &quot;buy&quot
 </div>
 <div id="after-submitting-a-order-to-our-live-account.." class="section level4">
 <h4>After submitting a order to our live account..</h4>
-<div class="figure">
-<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/order_submission.png" />
-
-</div>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/order_submission.png" /></p>
 <p><br></p>
 <p>Perfect, the order went through just as planned!! I just submitted an order to my Live Alpaca brokerage account from R! Also, the market is open all next week so I can look forward to a week full of excitement! Now I think its time to implement the earnings strategy from my previous post.</p>
 </div>
@@ -407,32 +401,21 @@ submit_order(ticker = &quot;GE&quot;, qty = &quot;5&quot;, side = &quot;buy&quot
 <p>This is what it looks like on my end when it runs each day, using the AlpacaforR functions of ‘get_account’, ‘get_bars’, ‘get_positions’, ‘get_calendar’, and ‘submit_order’ to assist and execute with various functions in bringing my strategy script to Alpacas platform. I will run the R Script that contains the strategy in my terminal.</p>
 <div id="ran-on-friday-4122019-before-market-open" class="section level4">
 <h4>Ran on Friday 4/12/2019 Before Market Open</h4>
-<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555350232/Screen_Shot_2019-04-15_at_1.43.23_PM.png" /> <img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555350237/Screen_Shot_2019-04-15_at_1.43.33_PM.png" /></p>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555350232/Screen_Shot_2019-04-15_at_1.43.23_PM.png" />
+<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555350237/Screen_Shot_2019-04-15_at_1.43.33_PM.png" /></p>
 <p><br></p>
 <p>As we can see, alot of stuff is happening as far as the order flow being sent to Alpaca in R (sorry for the emoji’s inside script lol). If all worked correctly, then you should see a bunch of orders in your pipeline, waiting to trigger at the next market open.</p>
 <p><br></p>
-<div class="figure">
-<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347616/orders_pending.png" />
-
-</div>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347616/orders_pending.png" /></p>
 <p><br></p>
 <p>As we see, this was a success! This script was ran last Friday 04/12/2019 before market open. This means that all of the stocks it purchased Friday, should have reported earnings this morning. When we run our script again, the strategy should submit orders to sell those positions and open any new positions for companies that report the following day. Let’s see the result of the output below.</p>
 <p><br></p>
 </div>
 <div id="ran-on-monday-4152019-before-market-open" class="section level4">
 <h4>Ran on Monday 4/15/2019 Before Market Open</h4>
-<div class="figure">
-<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/4.15.earningsrun.png" />
-
-</div>
-<div class="figure">
-<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/4.15.earningsrun2.png" />
-
-</div>
-<div class="figure">
-<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/4.15.earningsrun3.png" />
-
-</div>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/4.15.earningsrun.png" /></p>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/4.15.earningsrun2.png" /></p>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/4.15.earningsrun3.png" /></p>
 <p><br></p>
 <p>Nice!! Our algo is doing its job while AlpacaforR is working hard behind to scenes to make it possible to effortlessly submit these orders live in R.</p>
 <p><br></p>
@@ -464,41 +447,26 @@ get_poly_agg_quote(&quot;GE&quot;, from = &quot;2015-01-01&quot;, to = &quot;201
 </div>
 <div id="daily-timespan" class="section level4">
 <h4>Daily timespan</h4>
-<div class="figure">
-<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347616/daily_poly.png" />
-
-</div>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347616/daily_poly.png" /></p>
 </div>
 <div id="minute-timespan" class="section level4">
 <h4>Minute timespan</h4>
-<div class="figure">
-<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/minute_poly.png" />
-
-</div>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/minute_poly.png" /></p>
 </div>
 <div id="quarterly-timespan" class="section level4">
 <h4>Quarterly timespan</h4>
-<div class="figure">
-<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347616/quarterly_poly.png" />
-
-</div>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347616/quarterly_poly.png" /></p>
 </div>
 <div id="yearly-timespan" class="section level4">
 <h4>Yearly timespan</h4>
-<div class="figure">
-<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/Yearly_poly.png" />
-
-</div>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347608/Yearly_poly.png" /></p>
 <p><br></p>
 </div>
 <div id="get-meta-news-endpoint" class="section level4">
 <h4>Get Meta News Endpoint</h4>
 <pre class="r"><code>#Getting the last 100 news articles for GE:
 get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;100&quot;)</code></pre>
-<div class="figure">
-<img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347458/meta_news_poly.png" />
-
-</div>
+<p><img src="https://res.cloudinary.com/dyackvnwm/image/upload/v1555347458/meta_news_poly.png" /></p>
 <div id="can-we-say-possible-news-sentiment-algo-the-opportunities-are-endless-with-alpacaforr" class="section level6">
 <h6>Can we say possible news sentiment algo? The opportunities are endless with AlpacaforR :)</h6>
 <p><br></p>
@@ -508,7 +476,6 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
 <div id="so-much-more-with-alpacaforr" class="section level3">
 <h3>So much more with AlpacaforR!</h3>
 <p>We have only scratched the surface and its just getting started with AlpacaforR! I’ve connected to our account, checked my positions, checked the prices of individual assets, looked at recent news of that asset, and even submitted orders straight to our Alpaca account. Only a few of the available AlpacaforR functions were covered in this post, but there are many more cool things that you can do interacting with Alpaca’s API. The goal of this post was to hopefully encourage you to checkout Alpaca if your looking for a brokerage account to connect and implement your strategies with, and to also checkout AlpacaforR if you are an R user that is interested in either paper trading real-time quotes or live trading using R. As a reminder, this package / SDK is in its early development stages but can still execute all of its functions in paper or live trading accounts. Feedback as well as advice is very much appreciated from anyone who is interested. If you want to see the rest of AlpacaforR functions then visit <a href="https://github.com/jagg19/AlpacaforR">AlpacaforR Github</a> page and monitor for new updates!</p>
-</div>
 </div>
 
               
@@ -522,15 +489,15 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/algo/">Algo</a>
+  <a class="tag tag--primary tag--small" href="/tags/algo/">Algo</a>
 
-  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/alpaca/">Alpaca</a>
+  <a class="tag tag--primary tag--small" href="/tags/alpaca/">Alpaca</a>
 
-  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/nasdaq/">NASDAQ</a>
+  <a class="tag tag--primary tag--small" href="/tags/nasdaq/">NASDAQ</a>
 
-  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/nyse/">NYSE</a>
+  <a class="tag tag--primary tag--small" href="/tags/nyse/">NYSE</a>
 
-  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/quarterly-results/">Quarterly Results</a>
+  <a class="tag tag--primary tag--small" href="/tags/quarterly-results/">Quarterly Results</a>
 
                   </div>
                 
@@ -543,7 +510,7 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/" data-tooltip="Sentiment Analysis on Earnings Call">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/sentiment-analysis-conf-call/" data-tooltip="Sentiment Analysis on Earnings Call">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -551,7 +518,7 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/03/backtest-simple-earnings/" data-tooltip="Scaling a Simple Earnings Strategy to the NASDAQ Exchange">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/03/backtest-simple-earnings/" data-tooltip="Scaling a Simple Earnings Strategy to the NASDAQ Exchange">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -569,19 +536,19 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/04/alpaca-for-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/04/alpaca-for-r/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/04/alpaca-for-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/04/alpaca-for-r/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/04/alpaca-for-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/04/alpaca-for-r/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -629,7 +596,7 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/" data-tooltip="Sentiment Analysis on Earnings Call">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/sentiment-analysis-conf-call/" data-tooltip="Sentiment Analysis on Earnings Call">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -637,7 +604,7 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/03/backtest-simple-earnings/" data-tooltip="Scaling a Simple Earnings Strategy to the NASDAQ Exchange">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/03/backtest-simple-earnings/" data-tooltip="Scaling a Simple Earnings Strategy to the NASDAQ Exchange">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -655,19 +622,19 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/04/alpaca-for-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/04/alpaca-for-r/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/04/alpaca-for-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/04/alpaca-for-r/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/04/alpaca-for-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/04/alpaca-for-r/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -697,19 +664,19 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F04%2Falpaca-for-r%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F04%2Falpaca-for-r%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fjagg19.github.io%2F2019%2F04%2Falpaca-for-r%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F04%2Falpaca-for-r%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F04%2Falpaca-for-r%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F04%2Falpaca-for-r%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -770,15 +737,16 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/08/aws-r/">
-                <h3 class="media-heading">Running R on AWS EC2 and Logging into RStudio from Anywhere</h3>
+              <a class="link-unstyled" href="/2019/08/https-aws-r/">
+                <h3 class="media-heading">HTTPS to Secure Your RStudio &#43; Shiny Work Environment</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
                   Aug 8, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">Amazon Web Services with R  Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database , I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.</div>
+              <div class="media-content hide-xs font-merryweather">HTTPS to Secure Your R Work Environment Click any link in list below to jump to topic
+ Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -787,7 +755,24 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/07/aws-rds-mysql/">
+              <a class="link-unstyled" href="/2019/08/aws-r/">
+                <h3 class="media-heading">Running R on AWS EC2 and Logging into RStudio from Anywhere</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database , I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/07/aws-rds-mysql/">
                 <h3 class="media-heading">Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</h3>
               </a>
               <span class="media-meta">
@@ -804,7 +789,7 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/05/mysql-r/">
+              <a class="link-unstyled" href="/2019/05/mysql-r/">
                 <h3 class="media-heading">Using MySQL with R</h3>
               </a>
               <span class="media-meta">
@@ -821,7 +806,7 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
+              <a class="link-unstyled" href="/2019/04/sentiment-analysis-conf-call/">
                 <h3 class="media-heading">Sentiment Analysis on Earnings Call</h3>
               </a>
               <span class="media-meta">
@@ -838,7 +823,7 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/alpaca-for-r/">
+              <a class="link-unstyled" href="/2019/04/alpaca-for-r/">
                 <h3 class="media-heading">AlpacaforR</h3>
               </a>
               <span class="media-meta">
@@ -846,7 +831,8 @@ get_meta(ticker = &quot;GE&quot;, endpoint = &quot;news&quot;, perpage = &quot;1
                   Apr 4, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">AlpacaforR  What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+              <div class="media-content hide-xs font-merryweather">#AlpacaforR
+ What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
 After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.</div>
             </div>
             <div style="clear:both;"></div>
@@ -856,7 +842,7 @@ After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Ex
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/backtest-simple-earnings/">
+              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
                 <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
               </a>
               <span class="media-meta">
@@ -864,7 +850,8 @@ After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Ex
                   Mar 3, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+              <div class="media-content hide-xs font-merryweather">#Pure Earnings Play
+ Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
 You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.</div>
             </div>
             <div style="clear:both;"></div>
@@ -874,7 +861,7 @@ You often hear two things when watching or reading financial news. One is earnin
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/">
+              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
                 <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
               </a>
               <span class="media-meta">
@@ -882,8 +869,10 @@ You often hear two things when watching or reading financial news. One is earnin
                   Mar 3, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">IPO Estimate &amp; Review  Taking a look at LYFT financials for the first time Review of Dropbox IPO and stock performance  
- Can the slow IPO market get a lift from LYFT? Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31.</div>
+              <div class="media-content hide-xs font-merryweather">#IPO Estimate &amp; Review - Taking a look at LYFT financials for the first time - Review of Dropbox IPO and stock performance
+
+#Can the slow IPO market get a lift from LYFT?
+Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31. As of 3/4/2019, the markets have had 11 companies raise a total of $1.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -892,7 +881,7 @@ You often hear two things when watching or reading financial news. One is earnin
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/01/salesforce-q3-update/">
+              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
                 <h3 class="media-heading">Salesforce Q3 Update</h3>
               </a>
               <span class="media-meta">
@@ -900,7 +889,8 @@ You often hear two things when watching or reading financial news. One is earnin
                   Jan 1, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">Salesforce Q3 Update  Updated model from previous post, click here to read previous Salesforce post Management raised top and bottom line forecasts for FY19 guidance Management gave more details on FY20 &amp; FY22 goals and confirmed forecasts Near bulletproof business model during economic slowdown Key risks to management goals Recommendation and price targets  
+              <div class="media-content hide-xs font-merryweather">#Salesforce Q3 Update - Updated model from previous post, click here to read previous Salesforce post - Management raised top and bottom line forecasts for FY19 guidance - Management gave more details on FY20 &amp; FY22 goals and confirmed forecasts - Near bulletproof business model during economic slowdown - Key risks to management goals - Recommendation and price targets
+
 Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results.</div>
             </div>
             <div style="clear:both;"></div>
@@ -910,7 +900,7 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2018/12/yield-curve-fun/">
+              <a class="link-unstyled" href="/2018/12/yield-curve-fun/">
                 <h3 class="media-heading">Yield Curve Inversion - Marks End to Bull Market?</h3>
               </a>
               <span class="media-meta">
@@ -918,25 +908,8 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
                   Dec 12, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">Going, Going, Inverted!  Yield Curve inversions are typically a leading indicator for a recession Historic analysis on inversions for specific yields since 1990 Yield Curve over 5 different time frames since the start of 2018 Takeaway from recent inversions   Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2018/11/salesforce-enough-to-buy/">
-                <h3 class="media-heading">Salesforce, Inc. - Are Expanding Margins Enough to Buy?</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Nov 11, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Salesforce, Inc.  Leader in the growing CRM market Modestly expanding margins Monetizing existing customer base  
-Customer Relationship Management Pioneer Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig in to Salesforce specifically, let’s explore what exactly CRM is and the growth prospects.</div>
+              <div class="media-content hide-xs font-merryweather">#Going, Going, Inverted! - Yield Curve inversions are typically a leading indicator for a recession - Historic analysis on inversions for specific yields since 1990 - Yield Curve over 5 different time frames since the start of 2018 - Takeaway from recent inversions
+#Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -949,7 +922,7 @@ Customer Relationship Management Pioneer Whenever Customer Relationship Manageme
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         11 posts found
+         12 posts found
       </p>
     </div>
   </div>
@@ -957,7 +930,7 @@ Customer Relationship Management Pioneer Whenever Customer Relationship Manageme
     
   
     
-    <div id="cover" style="background-image:url('https://jagg19.github.io/images/cover.jpg');"></div>
+    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
   
 
 
@@ -969,7 +942,7 @@ Customer Relationship Management Pioneer Whenever Customer Relationship Manageme
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://jagg19.github.io/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
 
 
 <script lang="javascript">
@@ -1004,7 +977,7 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/jagg19.github.io\/2019\/04\/alpaca-for-r\/';
+          this.page.url = '\/2019\/04\/alpaca-for-r\/';
           
             this.page.identifier = '\/2019\/04\/alpaca-for-r\/'
           

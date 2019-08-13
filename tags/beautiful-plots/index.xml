@@ -2,31 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Beautiful Plots on Running on R</title>
-    <link>https://jagg19.github.io/tags/beautiful-plots/</link>
+    <link>/tags/beautiful-plots/</link>
     <description>Recent content in Beautiful Plots on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 14 May 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jagg19.github.io/tags/beautiful-plots/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/beautiful-plots/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Using MySQL with R</title>
-      <link>https://jagg19.github.io/2019/05/mysql-r/</link>
+      <link>/2019/05/mysql-r/</link>
       <pubDate>Tue, 14 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/05/mysql-r/</guid>
+      <guid>/2019/05/mysql-r/</guid>
       <description>Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading + writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB+. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.</description>
     </item>
     
     <item>
       <title>Scaling a Simple Earnings Strategy to the NASDAQ Exchange</title>
-      <link>https://jagg19.github.io/2019/03/backtest-simple-earnings/</link>
+      <link>/2019/03/backtest-simple-earnings/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/03/backtest-simple-earnings/</guid>
-      <description>Pure Earnings Play  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+      <guid>/2019/03/backtest-simple-earnings/</guid>
+      <description>#Pure Earnings Play
+ Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
 You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.</description>
     </item>
     

@@ -2,23 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lyft on Running on R</title>
-    <link>https://jagg19.github.io/tags/lyft/</link>
+    <link>/tags/lyft/</link>
     <description>Recent content in Lyft on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jagg19.github.io/tags/lyft/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/lyft/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lyft IPO &#43; Dropbox Review</title>
-      <link>https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/</link>
+      <link>/2019/03/ipo-estimates-lyftdbx/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/</guid>
-      <description>IPO Estimate &amp;amp; Review  Taking a look at LYFT financials for the first time Review of Dropbox IPO and stock performance  
- Can the slow IPO market get a lift from LYFT? Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31.</description>
+      <guid>/2019/03/ipo-estimates-lyftdbx/</guid>
+      <description>#IPO Estimate &amp;amp; Review - Taking a look at LYFT financials for the first time - Review of Dropbox IPO and stock performance
+
+#Can the slow IPO market get a lift from LYFT?
+Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31. As of 3/4/2019, the markets have had 11 companies raise a total of $1.</description>
     </item>
     
   </channel>
