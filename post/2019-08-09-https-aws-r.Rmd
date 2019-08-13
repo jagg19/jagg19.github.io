@@ -1,5 +1,5 @@
 ---
-title: "HTTPS to Secure Your RStudio + Shiny Work Environment"
+title: "HTTPS to Secure Your RStudio + Shiny App Work Environment"
 author: "Jagger Villalobos"
 date: '2019-08-13'
 coverSize: partial
@@ -22,7 +22,7 @@ categories:
 - Deploying Website / Apps
 ---
 
-# HTTPS to Secure Your RStudio + Shiny Work Environment
+# HTTPS to Secure Your RStudio + Shiny App Work Environment
 
 Click any link in list below to jump to topic
 
