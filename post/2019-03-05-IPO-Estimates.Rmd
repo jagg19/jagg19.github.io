@@ -21,13 +21,14 @@ output:
 summary: "Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31. As of 3/4/2019, the markets have had 11 companies raise a total of $1.2 Billion which has a long way to go if it wants to beat the prior year amount. As one of the most anticipated IPO to hit the markets in 2019, LYFT filed its S-1 IPO filing on 3/1/2019 revealing its massive loss of nearly $1 Billion."
 ---
 
-#IPO Estimate & Review
+# IPO Estimate & Review
+
 - Taking a look at LYFT financials for the first time
 - Review of Dropbox IPO and stock performance
 
 <br>
 
-#Can the slow IPO market get a lift from LYFT?
+# Can the slow IPO market get a lift from LYFT?
 
 Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. \$46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31. As of 3/4/2019, the markets have had 11 companies raise a total of \$1.2 Billion which has a long way to go if it wants to beat the prior year amount. As one of the most anticipated IPO to hit the markets in 2019, LYFT filed its S-1 IPO filing on 3/1/2019 revealing its massive loss of nearly \$1 Billion. Hearing about a company lose $1 Billion will make anyone nervous, except when they realize the massive growth LYFT has seen the last couple of years and is expected to see in years to come. Below, I will go through some of the numbers and my opinion on the potential for LYFT in the public markets, and how two recent IPO’s have performed since their debuts.
 
@@ -39,7 +40,8 @@ This type of multiple is unheard of for companies that are bleeding money but qu
 
 
 
-###Below is a quick IPO review of Drop Box.
+### Below is a quick IPO review of Dropbox.
+
 I selected to review the Dropbox IPO because it’s in one of the sectors I like to cover which is cloud. Today, knowledge and daily tasks live in the cloud, and DBX one of the central places to create, store and share this across all global platforms. They raised \$756 million on March 23rd, 2018 by offering 36 million shares at \$21.00 a share which put their market cap at a \$9.2 Billion valuation.
 
 

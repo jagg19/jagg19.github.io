@@ -273,7 +273,7 @@ sudo sh -c 'echo "/var/swap.1 swap swap defaults 0 0 " >> /etc/fstab'
 
 <br> 
 
-##Step 9: Downloading R, RStudio, and System Dependencies
+## Step 9: Downloading R, RStudio, and System Dependencies
 
 Now it is time to download all of the necessary software, libraries, packages, etc. It is important to select the most recent versions of RStudio where you can find [here](https://www.rstudio.com/products/rstudio/download-server/){target="_blank"}. Modify the script to install the most recent version if the one used below is outdated. Copy / paste the below in your terminal.
 
