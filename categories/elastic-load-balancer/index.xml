@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Elastic Load Balancer on Running on R</title>
-    <link>/categories/elastic-load-balancer/</link>
+    <link>https://jagg19.github.io/categories/elastic-load-balancer/</link>
     <description>Recent content in Elastic Load Balancer on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 13 Aug 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/elastic-load-balancer/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jagg19.github.io/categories/elastic-load-balancer/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HTTPS to Secure Your RStudio &#43; Shiny App Work Environment</title>
-      <link>/2019/08/https-aws-r/</link>
+      <link>https://jagg19.github.io/2019/08/https-aws-r/</link>
       <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/08/https-aws-r/</guid>
+      <guid>https://jagg19.github.io/2019/08/https-aws-r/</guid>
       <description>HTTPS to Secure Your RStudio + Shiny App Work Environment Click any link in list below to jump to topic
  Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp;amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.</description>
     </item>

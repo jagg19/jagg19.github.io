@@ -238,7 +238,7 @@ Let's check out the names of the statement lines so we can use the correct names
 
 
 
-# Function to calculate shares outstanding
+# Function to calculate shares outstanding as of report date
 #++++++++++++++++++++++++++++++++++++
 shares_out <- function(statements){
 ni <- filter(statements[["income_statement"]], For.the.Fiscal.Period.Ending. == "Net Income (Loss)")[,-1]  
@@ -250,9 +250,14 @@ rownames(shares) <- "Shares Outstanding"
 return(shares)
 }
 
+shares_out(qtr_dbx)
+```
 
 
-# Function to calculate book value per share
+As of the most recent quarter, the shares outstanding were 428m. As of 09/09/2019 on S&P Capital IQ, it shows shares outstanding as 413.4m which we will use for this valuation. 
+
+```{r warning=FALSE}
+# Function to calculate book value per share as of report date
 #++++++++++++++++++++++++++++++++++++
 bk.val <- function(statements) {
   
@@ -275,18 +280,14 @@ bk.val(qtr_dbx)
 
 
 
-# Function to calculate price to book ratio
+# Function to calculate price to book ratio as of report date
 #++++++++++++++++++++++++++++++++++++
 price.book <- function(symbol, bvps) {
   
 
   
   #Price data to finish calculation
-  a <- last(colnames(bvps))
-  
-  symbol_prices <- AlpacaforR::get_bars(symbol,from = as.Date(a)-5,to = as.Date(a)+5) %>% 
-                                              map_df(data.frame) %>% filter(time < a) %>% 
-                                              tail(1)
+  symbol_prices <- AlpacaforR::get_bars(symbol,from = "2019-09-06",to = "2019-09-06") %>% map_df(data.frame) 
   
   
   price_book <- Cl(symbol_prices) / last(bvps)
@@ -302,10 +303,10 @@ price.book("DBX",bk.val(qtr_dbx))
 ```
 
 
-Price-to-Book = 💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩
+Price-to-Book = 💩💩💩💩💩💩�
 
 
-This is no surprise though. It should be expected that as a software company, it will have a high PB ratio (Mr. Buffet wouldn't touch this type of name). According to [NYU Sterns P/B ratio by Sector](http://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/pbvdata.html), the average between Software (Internet) and Software (System & Application) is 11.03 which Dropbox has a higher ratio of 14.6857.
+This is no surprise though. It should be expected that as a software company, it will have a high PB ratio (Mr. Buffet wouldn't touch this type of name). According to [NYU Sterns P/B ratio by Sector](http://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/pbvdata.html), the average between Software (Internet) and Software (System & Application) is 11.03x which Dropbox comes in-line with a PB ratio of ~11.12x.
 
 
 Now, let's skip price to earnings because Dropbox isn't even turning a profit in Net Income yet. Therefore, Price-to-Earings is also 💩💩💩 but we don't buy into growth companies for valuations, do we? Well yes, we do, but just not using these metrics. Since management doesn't expect Dropbox to turn profits until 2021, let's put our attention on some revenue metrics since this is where Dropbox can shine (top-line growth).
@@ -367,11 +368,11 @@ Thats what I want to see!! A linear trend of top line growth, just as expected. 
 ```{r}
 
 # My AlpacaforR package is a beast (shameless advertising here)
-price <- AlpacaforR::get_bars(ticker,from = "2019-09-04",to = "2019-09-04") %>% map_df(data.frame)
+price <- AlpacaforR::get_bars(ticker,from = "2019-09-06",to = "2019-09-06") %>% map_df(data.frame)
 
 
 #shares <- shares_out(qtr_dbx)
-shares <- 411
+shares <- 413.4
 
 mrkt_val <- Cl(price) * last(shares)
 
@@ -437,7 +438,7 @@ print(estimates_relval)
 
 
 
-$26.46 at the Estimated Full-Year Revenue Guidance for 2019 and $24.46 at the current LTM Revenue which is both significantly above the most recent close price of $18.97. 
+~$26.31 at the Estimated Full-Year Revenue Guidance for 2019 and ~$24.32 at the current LTM Revenue which is both significantly above the most recent close price of $18.97. 
 
 Now, as much as I want to calculate Ebitda multiples and run the same analysis, I don't think it is necessary since Dropbox hasn't been very profitable and EBITDA is the "closest" resemblance of FCF which we will be calculated next. Dropbox is undervalued in terms of relative valuation but how about Intrinsic?
 
@@ -616,7 +617,7 @@ equity_pps
 
 Finally, the question we've all been asking. Is Dropbox Really a Buy? There are very few companies that can compete with the big four Google, Amazon, Apple, and Microsoft, let alone a company that IPO'd only within the last 12 months. NO ONE can accurately predict every time where a stock is going to head in a few weeks or where it will close tomorrow. I try tell whether a stock is a good and attractive buy that will appreciate in the long run, but I can't promise about tomorrow. Not trying to BS anyone. 
 
-To answer the question, I believe it is a **good time to buy** shares of Dropbox as wall street is missing the sticky and growing customer base through the lens of competition & risk worries which is leading to its undervaluation in both relative and intrinsic terms. Even under the "Quick N' Clean" intrinsic valuation where I used bare-bone assumptions, I am seeing an estimated price of **$23.85 as of 09/09/2019 which is 25.72% above the previous close of $18.97 (09/06/2019)**. 
+To answer the question, I believe it is a **good time to buy** shares of Dropbox as wall street is missing the sticky and growing customer base through the lens of competition & risk worries which is leading to its undervaluation in both relative and intrinsic terms. Even under the "Quick N' Clean" intrinsic valuation where I used bare-bone assumptions, I am seeing an estimated price of **$23.71 as of 09/09/2019 which is 24.99% above the previous close of $18.97 (09/06/2019)**. 
 
 
 # Whats Next

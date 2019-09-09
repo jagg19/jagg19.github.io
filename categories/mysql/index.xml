@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mysql on Running on R</title>
-    <link>/categories/mysql/</link>
+    <link>https://jagg19.github.io/categories/mysql/</link>
     <description>Recent content in Mysql on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jagg19.github.io/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Running R on AWS EC2 and Logging into RStudio from Anywhere</title>
-      <link>/2019/08/aws-r/</link>
+      <link>https://jagg19.github.io/2019/08/aws-r/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/08/aws-r/</guid>
+      <guid>https://jagg19.github.io/2019/08/aws-r/</guid>
       <description>Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database , I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.</description>
     </item>
     
     <item>
       <title>Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</title>
-      <link>/2019/07/aws-rds-mysql/</link>
+      <link>https://jagg19.github.io/2019/07/aws-rds-mysql/</link>
       <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/07/aws-rds-mysql/</guid>
+      <guid>https://jagg19.github.io/2019/07/aws-rds-mysql/</guid>
       <description>Amazon Web Services RDS with MySQL &amp;amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal + MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.</description>
     </item>
     
     <item>
       <title>Using MySQL with R</title>
-      <link>/2019/05/mysql-r/</link>
+      <link>https://jagg19.github.io/2019/05/mysql-r/</link>
       <pubDate>Tue, 14 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/05/mysql-r/</guid>
+      <guid>https://jagg19.github.io/2019/05/mysql-r/</guid>
       <description>Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading + writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB+. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.</description>
     </item>
     

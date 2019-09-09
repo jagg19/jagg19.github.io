@@ -2,354 +2,354 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Running on R</title>
-    <link>/tags/</link>
+    <link>https://jagg19.github.io/tags/</link>
     <description>Recent content in Tags on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 15 Apr 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jagg19.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Alpaca</title>
-      <link>/tags/alpaca/</link>
+      <link>https://jagg19.github.io/tags/alpaca/</link>
       <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/alpaca/</guid>
+      <guid>https://jagg19.github.io/tags/alpaca/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Aws</title>
-      <link>/tags/aws/</link>
+      <link>https://jagg19.github.io/tags/aws/</link>
       <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/aws/</guid>
+      <guid>https://jagg19.github.io/tags/aws/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Backtest</title>
-      <link>/tags/backtest/</link>
+      <link>https://jagg19.github.io/tags/backtest/</link>
       <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/backtest/</guid>
+      <guid>https://jagg19.github.io/tags/backtest/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Cloud</title>
-      <link>/tags/cloud/</link>
+      <link>https://jagg19.github.io/tags/cloud/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/cloud/</guid>
+      <guid>https://jagg19.github.io/tags/cloud/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Comparable Analysis</title>
-      <link>/tags/comparable-analysis/</link>
+      <link>https://jagg19.github.io/tags/comparable-analysis/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/comparable-analysis/</guid>
+      <guid>https://jagg19.github.io/tags/comparable-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Conference Call</title>
-      <link>/tags/conference-call/</link>
+      <link>https://jagg19.github.io/tags/conference-call/</link>
       <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/conference-call/</guid>
+      <guid>https://jagg19.github.io/tags/conference-call/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Crm</title>
-      <link>/tags/crm/</link>
+      <link>https://jagg19.github.io/tags/crm/</link>
       <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/crm/</guid>
+      <guid>https://jagg19.github.io/tags/crm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Data Analysis</title>
-      <link>/tags/data-analysis/</link>
+      <link>https://jagg19.github.io/tags/data-analysis/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/data-analysis/</guid>
+      <guid>https://jagg19.github.io/tags/data-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dbx</title>
-      <link>/tags/dbx/</link>
+      <link>https://jagg19.github.io/tags/dbx/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/dbx/</guid>
+      <guid>https://jagg19.github.io/tags/dbx/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dcf</title>
-      <link>/tags/dcf/</link>
+      <link>https://jagg19.github.io/tags/dcf/</link>
       <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/dcf/</guid>
+      <guid>https://jagg19.github.io/tags/dcf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Deploying Website / Apps</title>
-      <link>/tags/deploying-website-apps/</link>
+      <link>https://jagg19.github.io/tags/deploying-website-apps/</link>
       <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/deploying-website-apps/</guid>
+      <guid>https://jagg19.github.io/tags/deploying-website-apps/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Earnings</title>
-      <link>/tags/earnings/</link>
+      <link>https://jagg19.github.io/tags/earnings/</link>
       <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/earnings/</guid>
+      <guid>https://jagg19.github.io/tags/earnings/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ec2</title>
-      <link>/tags/ec2/</link>
+      <link>https://jagg19.github.io/tags/ec2/</link>
       <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/ec2/</guid>
+      <guid>https://jagg19.github.io/tags/ec2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Elastic Load Balancer</title>
-      <link>/tags/elastic-load-balancer/</link>
+      <link>https://jagg19.github.io/tags/elastic-load-balancer/</link>
       <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/elastic-load-balancer/</guid>
+      <guid>https://jagg19.github.io/tags/elastic-load-balancer/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Finance</title>
-      <link>/tags/finance/</link>
+      <link>https://jagg19.github.io/tags/finance/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/finance/</guid>
+      <guid>https://jagg19.github.io/tags/finance/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Forecasting</title>
-      <link>/tags/forecasting/</link>
+      <link>https://jagg19.github.io/tags/forecasting/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/forecasting/</guid>
+      <guid>https://jagg19.github.io/tags/forecasting/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Interest Rates</title>
-      <link>/tags/interest-rates/</link>
+      <link>https://jagg19.github.io/tags/interest-rates/</link>
       <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/interest-rates/</guid>
+      <guid>https://jagg19.github.io/tags/interest-rates/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ipo</title>
-      <link>/tags/ipo/</link>
+      <link>https://jagg19.github.io/tags/ipo/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/ipo/</guid>
+      <guid>https://jagg19.github.io/tags/ipo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Lyft</title>
-      <link>/tags/lyft/</link>
+      <link>https://jagg19.github.io/tags/lyft/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/lyft/</guid>
+      <guid>https://jagg19.github.io/tags/lyft/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Machine Learning</title>
-      <link>/tags/machine-learning/</link>
+      <link>https://jagg19.github.io/tags/machine-learning/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/machine-learning/</guid>
+      <guid>https://jagg19.github.io/tags/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mysql</title>
-      <link>/tags/mysql/</link>
+      <link>https://jagg19.github.io/tags/mysql/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/mysql/</guid>
+      <guid>https://jagg19.github.io/tags/mysql/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Nginx</title>
-      <link>/tags/nginx/</link>
+      <link>https://jagg19.github.io/tags/nginx/</link>
       <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/nginx/</guid>
+      <guid>https://jagg19.github.io/tags/nginx/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Predictions</title>
-      <link>/tags/predictions/</link>
+      <link>https://jagg19.github.io/tags/predictions/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/predictions/</guid>
+      <guid>https://jagg19.github.io/tags/predictions/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Programming</title>
-      <link>/tags/programming/</link>
+      <link>https://jagg19.github.io/tags/programming/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/programming/</guid>
+      <guid>https://jagg19.github.io/tags/programming/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Quarterly Results</title>
-      <link>/tags/quarterly-results/</link>
+      <link>https://jagg19.github.io/tags/quarterly-results/</link>
       <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/quarterly-results/</guid>
+      <guid>https://jagg19.github.io/tags/quarterly-results/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>/tags/r/</link>
+      <link>https://jagg19.github.io/tags/r/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/r/</guid>
+      <guid>https://jagg19.github.io/tags/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R Package</title>
-      <link>/tags/r-package/</link>
+      <link>https://jagg19.github.io/tags/r-package/</link>
       <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/r-package/</guid>
+      <guid>https://jagg19.github.io/tags/r-package/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rds</title>
-      <link>/tags/rds/</link>
+      <link>https://jagg19.github.io/tags/rds/</link>
       <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/rds/</guid>
+      <guid>https://jagg19.github.io/tags/rds/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Recommendations</title>
-      <link>/tags/recommendations/</link>
+      <link>https://jagg19.github.io/tags/recommendations/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/recommendations/</guid>
+      <guid>https://jagg19.github.io/tags/recommendations/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Relational Database</title>
-      <link>/tags/relational-database/</link>
+      <link>https://jagg19.github.io/tags/relational-database/</link>
       <pubDate>Tue, 14 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/relational-database/</guid>
+      <guid>https://jagg19.github.io/tags/relational-database/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Route 53</title>
-      <link>/tags/route-53/</link>
+      <link>https://jagg19.github.io/tags/route-53/</link>
       <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/route-53/</guid>
+      <guid>https://jagg19.github.io/tags/route-53/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rstudio</title>
-      <link>/tags/rstudio/</link>
+      <link>https://jagg19.github.io/tags/rstudio/</link>
       <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/rstudio/</guid>
+      <guid>https://jagg19.github.io/tags/rstudio/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sentiment Analysis</title>
-      <link>/tags/sentiment-analysis/</link>
+      <link>https://jagg19.github.io/tags/sentiment-analysis/</link>
       <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/sentiment-analysis/</guid>
+      <guid>https://jagg19.github.io/tags/sentiment-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Shiny</title>
-      <link>/tags/shiny/</link>
+      <link>https://jagg19.github.io/tags/shiny/</link>
       <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/shiny/</guid>
+      <guid>https://jagg19.github.io/tags/shiny/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Text Mining</title>
-      <link>/tags/text-mining/</link>
+      <link>https://jagg19.github.io/tags/text-mining/</link>
       <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/text-mining/</guid>
+      <guid>https://jagg19.github.io/tags/text-mining/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Trading</title>
-      <link>/tags/trading/</link>
+      <link>https://jagg19.github.io/tags/trading/</link>
       <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/trading/</guid>
+      <guid>https://jagg19.github.io/tags/trading/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Valuations</title>
-      <link>/tags/valuations/</link>
+      <link>https://jagg19.github.io/tags/valuations/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/valuations/</guid>
+      <guid>https://jagg19.github.io/tags/valuations/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Yield Curve</title>
-      <link>/tags/yield-curve/</link>
+      <link>https://jagg19.github.io/tags/yield-curve/</link>
       <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/yield-curve/</guid>
+      <guid>https://jagg19.github.io/tags/yield-curve/</guid>
       <description></description>
     </item>
     

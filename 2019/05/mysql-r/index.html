@@ -15,8 +15,8 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Using MySQL with R">
 <meta name="twitter:title" content="Using MySQL with R">
-<meta property="og:url" content="/2019/05/mysql-r/">
-<meta property="twitter:url" content="/2019/05/mysql-r/">
+<meta property="og:url" content="https://jagg19.github.io/2019/05/mysql-r/">
+<meta property="twitter:url" content="https://jagg19.github.io/2019/05/mysql-r/">
 <meta property="og:site_name" content="Running on R">
 <meta property="og:description" content="Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading &#43; writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB&#43;. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.">
 <meta name="twitter:description" content="Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading &#43; writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB&#43;. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.">
@@ -74,12 +74,12 @@
 
     <title>Using MySQL with R</title>
 
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="https://jagg19.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="/2019/05/mysql-r/">
+    <link rel="canonical" href="https://jagg19.github.io/2019/05/mysql-r/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -87,7 +87,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    <link rel="stylesheet" href="https://jagg19.github.io/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
     
     
 
@@ -115,12 +115,12 @@ if (!doNotTrack) {
       <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="/">Running on R</a>
+    <a class="header-title-link" href="https://jagg19.github.io/">Running on R</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="/#about">
+         href="https://jagg19.github.io/#about">
     
     
     
@@ -136,7 +136,7 @@ if (!doNotTrack) {
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="/#about">
+        <a href="https://jagg19.github.io/#about">
           <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
         </a>
         <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
@@ -149,7 +149,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -159,7 +159,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/#about">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -169,7 +169,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/categories">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -179,7 +179,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/tags">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -189,7 +189,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/archives">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -203,7 +203,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/jagg19">
+      <a class="sidebar-button-link " href="https://github.com/jagg19" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -213,7 +213,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -257,13 +257,13 @@ if (!doNotTrack) {
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/mysql">MySQL</a>, 
+      <a class="category-link" href="https://jagg19.github.io/categories/mysql">MySQL</a>, 
     
-      <a class="category-link" href="/categories/r">R</a>, 
+      <a class="category-link" href="https://jagg19.github.io/categories/r">R</a>, 
     
-      <a class="category-link" href="/categories/relational-database">Relational Database</a>, 
+      <a class="category-link" href="https://jagg19.github.io/categories/relational-database">Relational Database</a>, 
     
-      <a class="category-link" href="/categories/programming">Programming</a>
+      <a class="category-link" href="https://jagg19.github.io/categories/programming">Programming</a>
     
   
 
@@ -513,7 +513,7 @@ ggplot(db_results, aes(factor(month,levels = month.name),number)) +
   scale_fill_continuous(&quot;Year&quot;, breaks=c(2008:2018), labels = c(2008:2018), type = &quot;viridis&quot;) +
   theme_dark() + 
   theme(axis.text.x = element_text(angle=50, vjust=0.65)) </code></pre>
-<p><img src="/img/MySQL-R/tickets_month_year.png" /></p>
+<p><img src="https://jagg19.github.io/img/MySQL-R/tickets_month_year.png" /></p>
 </div>
 <div id="r-query-using-dplyr" class="section level1">
 <h1>R query using Dplyr</h1>
@@ -555,13 +555,13 @@ dbDisconnect(stuffDB)</code></pre>
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="/tags/mysql/">MySQL</a>
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/mysql/">MySQL</a>
 
-  <a class="tag tag--primary tag--small" href="/tags/r/">R</a>
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/r/">R</a>
 
-  <a class="tag tag--primary tag--small" href="/tags/relational-database/">Relational Database</a>
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/relational-database/">Relational Database</a>
 
-  <a class="tag tag--primary tag--small" href="/tags/programming/">Programming</a>
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/programming/">Programming</a>
 
                   </div>
                 
@@ -574,7 +574,7 @@ dbDisconnect(stuffDB)</code></pre>
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/aws-rds-mysql/" data-tooltip="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/07/aws-rds-mysql/" data-tooltip="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -582,7 +582,7 @@ dbDisconnect(stuffDB)</code></pre>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/sentiment-analysis-conf-call/" data-tooltip="Sentiment Analysis on Earnings Call">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/" data-tooltip="Sentiment Analysis on Earnings Call">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -600,19 +600,19 @@ dbDisconnect(stuffDB)</code></pre>
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/05/mysql-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/05/mysql-r/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/05/mysql-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/05/mysql-r/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/05/mysql-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/05/mysql-r/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -660,7 +660,7 @@ dbDisconnect(stuffDB)</code></pre>
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/aws-rds-mysql/" data-tooltip="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/07/aws-rds-mysql/" data-tooltip="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -668,7 +668,7 @@ dbDisconnect(stuffDB)</code></pre>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/sentiment-analysis-conf-call/" data-tooltip="Sentiment Analysis on Earnings Call">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/" data-tooltip="Sentiment Analysis on Earnings Call">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -686,19 +686,19 @@ dbDisconnect(stuffDB)</code></pre>
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/05/mysql-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/05/mysql-r/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/05/mysql-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/05/mysql-r/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/05/mysql-r/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/05/mysql-r/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -728,19 +728,19 @@ dbDisconnect(stuffDB)</code></pre>
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F05%2Fmysql-r%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F05%2Fmysql-r%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F05%2Fmysql-r%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fjagg19.github.io%2F2019%2F05%2Fmysql-r%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F05%2Fmysql-r%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F05%2Fmysql-r%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -801,7 +801,7 @@ dbDisconnect(stuffDB)</code></pre>
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/09/dbx-q3-quicknclean/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/09/dbx-q3-quicknclean/">
                 <h3 class="media-heading">Dropbox Valuation - Quick N&#39; Clean</h3>
               </a>
               <span class="media-meta">
@@ -819,7 +819,7 @@ dbDisconnect(stuffDB)</code></pre>
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/08/https-aws-r/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/08/https-aws-r/">
                 <h3 class="media-heading">HTTPS to Secure Your RStudio &#43; Shiny App Work Environment</h3>
               </a>
               <span class="media-meta">
@@ -837,7 +837,7 @@ dbDisconnect(stuffDB)</code></pre>
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/08/aws-r/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/08/aws-r/">
                 <h3 class="media-heading">Running R on AWS EC2 and Logging into RStudio from Anywhere</h3>
               </a>
               <span class="media-meta">
@@ -854,7 +854,7 @@ dbDisconnect(stuffDB)</code></pre>
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/07/aws-rds-mysql/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/07/aws-rds-mysql/">
                 <h3 class="media-heading">Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</h3>
               </a>
               <span class="media-meta">
@@ -871,7 +871,7 @@ dbDisconnect(stuffDB)</code></pre>
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/05/mysql-r/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/05/mysql-r/">
                 <h3 class="media-heading">Using MySQL with R</h3>
               </a>
               <span class="media-meta">
@@ -888,7 +888,7 @@ dbDisconnect(stuffDB)</code></pre>
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/04/sentiment-analysis-conf-call/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
                 <h3 class="media-heading">Sentiment Analysis on Earnings Call</h3>
               </a>
               <span class="media-meta">
@@ -905,7 +905,7 @@ dbDisconnect(stuffDB)</code></pre>
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/04/alpaca-for-r/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/alpaca-for-r/">
                 <h3 class="media-heading">AlpacaforR</h3>
               </a>
               <span class="media-meta">
@@ -924,7 +924,7 @@ After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Ex
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/backtest-simple-earnings/">
                 <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
               </a>
               <span class="media-meta">
@@ -943,7 +943,7 @@ You often hear two things when watching or reading financial news. One is earnin
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/">
                 <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
               </a>
               <span class="media-meta">
@@ -961,7 +961,7 @@ You often hear two things when watching or reading financial news. One is earnin
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/01/salesforce-q3-update/">
                 <h3 class="media-heading">Salesforce Q3 Update</h3>
               </a>
               <span class="media-meta">
@@ -992,7 +992,7 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
     
   
     
-    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
+    <div id="cover" style="background-image:url('https://jagg19.github.io/images/cover.jpg');"></div>
   
 
 
@@ -1004,7 +1004,7 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="https://jagg19.github.io/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
 
 
 <script lang="javascript">
@@ -1039,7 +1039,7 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = '\/2019\/05\/mysql-r\/';
+          this.page.url = 'https:\/\/jagg19.github.io\/2019\/05\/mysql-r\/';
           
             this.page.identifier = '\/2019\/05\/mysql-r\/'
           

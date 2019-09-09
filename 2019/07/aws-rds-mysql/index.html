@@ -15,8 +15,8 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
 <meta name="twitter:title" content="Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal">
-<meta property="og:url" content="/2019/07/aws-rds-mysql/">
-<meta property="twitter:url" content="/2019/07/aws-rds-mysql/">
+<meta property="og:url" content="https://jagg19.github.io/2019/07/aws-rds-mysql/">
+<meta property="twitter:url" content="https://jagg19.github.io/2019/07/aws-rds-mysql/">
 <meta property="og:site_name" content="Running on R">
 <meta property="og:description" content="Amazon Web Services RDS with MySQL &amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal &#43; MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.">
 <meta name="twitter:description" content="Amazon Web Services RDS with MySQL &amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal &#43; MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.">
@@ -82,12 +82,12 @@
 
     <title>Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</title>
 
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="https://jagg19.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="/2019/07/aws-rds-mysql/">
+    <link rel="canonical" href="https://jagg19.github.io/2019/07/aws-rds-mysql/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -95,7 +95,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    <link rel="stylesheet" href="https://jagg19.github.io/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
     
     
 
@@ -123,12 +123,12 @@ if (!doNotTrack) {
       <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="/">Running on R</a>
+    <a class="header-title-link" href="https://jagg19.github.io/">Running on R</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="/#about">
+         href="https://jagg19.github.io/#about">
     
     
     
@@ -144,7 +144,7 @@ if (!doNotTrack) {
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="/#about">
+        <a href="https://jagg19.github.io/#about">
           <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
         </a>
         <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
@@ -157,7 +157,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -167,7 +167,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/#about">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -177,7 +177,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/categories">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -187,7 +187,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/tags">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -197,7 +197,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/archives">
+      <a class="sidebar-button-link " href="https://jagg19.github.io/archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -211,7 +211,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/jagg19">
+      <a class="sidebar-button-link " href="https://github.com/jagg19" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -221,7 +221,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -265,17 +265,17 @@ if (!doNotTrack) {
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/rds">RDS</a>, 
+      <a class="category-link" href="https://jagg19.github.io/categories/rds">RDS</a>, 
     
-      <a class="category-link" href="/categories/cloud">Cloud</a>, 
+      <a class="category-link" href="https://jagg19.github.io/categories/cloud">Cloud</a>, 
     
-      <a class="category-link" href="/categories/aws">AWS</a>, 
+      <a class="category-link" href="https://jagg19.github.io/categories/aws">AWS</a>, 
     
-      <a class="category-link" href="/categories/r">R</a>, 
+      <a class="category-link" href="https://jagg19.github.io/categories/r">R</a>, 
     
-      <a class="category-link" href="/categories/mysql">MySQL</a>, 
+      <a class="category-link" href="https://jagg19.github.io/categories/mysql">MySQL</a>, 
     
-      <a class="category-link" href="/categories/programming">Programming</a>
+      <a class="category-link" href="https://jagg19.github.io/categories/programming">Programming</a>
     
   
 
@@ -312,9 +312,9 @@ if (!doNotTrack) {
 <p><br></p>
 <p>#Creating Security Group for RDS</p>
 <p>The first thing we will want to do is configure a security group so we can have access to our RDS database. Go to the services tab and select EC2 then navigate to “Security Groups” under Network &amp; Security on the left navigation bar.</p>
-<p><img src="/img/RDS-MYSQL/rds_security_pre.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_security_pre.png" /></p>
 <p>Click Create Security Group, and then enter a name for your security group, and select the appropiate VPC (it will suually be default if this is your first RDS instance). Select add rule, and choose “MYSQL/Aurora” under the Type drop-down. Change Source to “Anywhere” and click Create.</p>
-<p><img src="/img/RDS-MYSQL/rds_security_intab.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_security_intab.png" /></p>
 <p><br></p>
 </div>
 <div id="launching-a-aws-rds-instance-to-run-mysql" class="section level1">
@@ -323,32 +323,32 @@ if (!doNotTrack) {
 <div id="step-1" class="section level5">
 <h5>Step 1</h5>
 <p>Select the DB Engine. We will select MySQL and make sure to check the box that says “Only enable options eligible for RDS free Usage Tier.” Click Next.</p>
-<p><img src="/img/RDS-MYSQL/rds_step1.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_step1.png" /></p>
 <p><br></p>
 </div>
 <div id="step-2" class="section level5">
 <h5>Step 2</h5>
 <p>Select the DB engine version. I’m selecting MySQL 8.0.15 since I have the same engine on my local desktop. Since we selected the Free Tier, our only DB Instance Class option is the “db.t2.micro - 1vCPU, 1GiB RAM” and our Allocated storage will be set to 20GiB.</p>
-<p><img src="/img/RDS-MYSQL/rds_step2.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_step2.png" /></p>
 <p><br></p>
 <p>Scroll down the page to Settings and add your DB identifier, master username, and master password. Set and remember your password since you will be prompted for it multiple times. Click Next.</p>
-<p><img src="/img/RDS-MYSQL/rds_step2b.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_step2b.png" /></p>
 <p><br></p>
 </div>
 <div id="step-3" class="section level5">
 <h5>Step 3</h5>
 <p>Make sure your public accessibility is set to “Yes” or else our instance will not have a public IP address assigned. Also, please make sure “Choose exisiting VPC secuirty groups” is selected so we can choose the RDS secuirty group we initially created. If you are storing sensitive data then you will need to configure the security group settings or subnet groups which is beyond this scope. I am only looking for easy ways to access non-sensitive data seamlessly at any location.</p>
 <p>Under Database options, just enter a database called “testing” so we can ensure everything was loaded correctly once we connect to our DB Instance. Leave the rest of the settings to default unless you’d like to snoop a little more. For these purposes, we do not need to change any settings so click create database. It will take ~10 minutes to launch the database and back it up so be patient :)</p>
-<p><img src="/img/RDS-MYSQL/rds_step3.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_step3.png" /></p>
 <p><br></p>
 </div>
 <div id="step-4" class="section level5">
 <h5>Step 4</h5>
 <p>Wait for our RDS to finish launching. Under the Summary tab for our new RDS, you will see it turn to “Available” (Please keep note of where your endpoint is located as we will later need it).</p>
-<p><img src="/img/RDS-MYSQL/rds_endpoint_location.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_endpoint_location.png" /></p>
 <p><br></p>
 <p>Let’s quickly check if the secuirty group settings look correct. It should read “0.0.0.0/0” for both Inbound &amp; Outbound.</p>
-<p><img src="/img/RDS-MYSQL/rds_security_postchng.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_security_postchng.png" /></p>
 <p>Great, the security group setting is set to the one we initially created. Its now time to connect to your new MySQL RDS Instance!</p>
 <p><br></p>
 </div>
@@ -372,7 +372,7 @@ if (!doNotTrack) {
 <p>Copy and paste your Endpoint which you will find under “Connectivity and security”. To connect through your local terminal, enter the below command with your appropriate values.</p>
 <p><code>mysql -h &lt;Endpoint&gt; -u &lt;Master Username&gt; -p</code></p>
 <p>Then it will prompt you for a password which is the master password you created with your username. Once you entered everything correctly, you will be logged into your MySQL DB that is hosted on Amazon RDS. Let’s see if the “testing” database was loading correctly during the initial set up.</p>
-<p><img src="/img/RDS-MYSQL/rds_term_login.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_term_login.png" /></p>
 <p>We can see our testing database so we’ve configured Mysql correctly! Now we are up and running through the local terminal. Let’s see how we can do this through MySQL Workbench.</p>
 <p><br></p>
 <p><a id="workbench"></a></p>
@@ -382,21 +382,21 @@ if (!doNotTrack) {
 <h4>MySQL Workbench</h4>
 <p>Launch MySQL Workbench and click <code>+</code> next to MySQL Connections. You will then be prompted to enter some details about the host, user, password, port, etc.</p>
 <p>Give your connection a name. I named mine RDS MySQL. Enter your RDS Instance Endpoint as the Hostname. Add “3306” to the port, and your master username and master password under Username and Password. Store your password so you do not need to enter it each time. Click OK once you’re done and then click your new connection.</p>
-<p><img src="/img/RDS-MYSQL/rds_create_cnt_wrkbnc.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_create_cnt_wrkbnc.png" /></p>
 <p><br></p>
 <p>If successful, you will be logged in and should see our “testing” database.</p>
-<p><img src="/img/RDS-MYSQL/rds_create_cntpst.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_create_cntpst.png" /></p>
 <p>Everything looks great! Now let’s add some data. If you want to put your current local database onto the new RDS, it is very using the MySQL Workbench interface.</p>
 <p><br></p>
 <p>#Importing Local MySQL to your new Remote MySQL</p>
 <p>Log into your local root user MySQL DB and navigate to the Administration tab and click Data Export. Select the database you want to export and select “Export to Self-contained File” then click Start Export.</p>
-<p><img src="/img/RDS-MYSQL/rds_start_export.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_start_export.png" /></p>
 <p><br></p>
 <p>Log into your remote AWS RDS Instance and navigate to the Administration tab and click Data Import/Restore. Check “Import from Self-Contained file” and navigate to the file to add the path. Then, we will select the database we want to import it to which in our example will be the testing database. Now we can hit Start Import and after a minute or two we can see all of the data was imported successfully.</p>
-<p><img src="/img/RDS-MYSQL/rds_start_import.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_start_import.png" /></p>
 <p><br></p>
 <p>Let’s run a simple sql command to see the last 10 rows of one of the tables that were imported.</p>
-<p><img src="/img/RDS-MYSQL/rds_check_import.png" /></p>
+<p><img src="https://jagg19.github.io/img/RDS-MYSQL/rds_check_import.png" /></p>
 <p>After importing the data, we can see 9 new tables in our testing database. Now we can access the data using the endpoint as the host on any device. This also means I can easily integrate this database to my public applications such as any Shiny Apps.</p>
 <p><br></p>
 <p>#Conclusion</p>
@@ -416,17 +416,17 @@ if (!doNotTrack) {
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="/tags/rds/">RDS</a>
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/rds/">RDS</a>
 
-  <a class="tag tag--primary tag--small" href="/tags/cloud/">Cloud</a>
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/cloud/">Cloud</a>
 
-  <a class="tag tag--primary tag--small" href="/tags/aws/">AWS</a>
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/aws/">AWS</a>
 
-  <a class="tag tag--primary tag--small" href="/tags/r/">R</a>
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/r/">R</a>
 
-  <a class="tag tag--primary tag--small" href="/tags/mysql/">MySQL</a>
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/mysql/">MySQL</a>
 
-  <a class="tag tag--primary tag--small" href="/tags/programming/">Programming</a>
+  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/programming/">Programming</a>
 
                   </div>
                 
@@ -439,7 +439,7 @@ if (!doNotTrack) {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/08/aws-r/" data-tooltip="Running R on AWS EC2 and Logging into RStudio from Anywhere">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/08/aws-r/" data-tooltip="Running R on AWS EC2 and Logging into RStudio from Anywhere">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -447,7 +447,7 @@ if (!doNotTrack) {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/mysql-r/" data-tooltip="Using MySQL with R">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/05/mysql-r/" data-tooltip="Using MySQL with R">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -465,19 +465,19 @@ if (!doNotTrack) {
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/07/aws-rds-mysql/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/07/aws-rds-mysql/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/07/aws-rds-mysql/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/07/aws-rds-mysql/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/07/aws-rds-mysql/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/07/aws-rds-mysql/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -525,7 +525,7 @@ if (!doNotTrack) {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/08/aws-r/" data-tooltip="Running R on AWS EC2 and Logging into RStudio from Anywhere">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/08/aws-r/" data-tooltip="Running R on AWS EC2 and Logging into RStudio from Anywhere">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -533,7 +533,7 @@ if (!doNotTrack) {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/mysql-r/" data-tooltip="Using MySQL with R">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/05/mysql-r/" data-tooltip="Using MySQL with R">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -551,19 +551,19 @@ if (!doNotTrack) {
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/07/aws-rds-mysql/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/07/aws-rds-mysql/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/07/aws-rds-mysql/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/07/aws-rds-mysql/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/07/aws-rds-mysql/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/07/aws-rds-mysql/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -593,19 +593,19 @@ if (!doNotTrack) {
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F07%2Faws-rds-mysql%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F07%2Faws-rds-mysql%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F07%2Faws-rds-mysql%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fjagg19.github.io%2F2019%2F07%2Faws-rds-mysql%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F07%2Faws-rds-mysql%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F07%2Faws-rds-mysql%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -666,7 +666,7 @@ if (!doNotTrack) {
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/09/dbx-q3-quicknclean/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/09/dbx-q3-quicknclean/">
                 <h3 class="media-heading">Dropbox Valuation - Quick N&#39; Clean</h3>
               </a>
               <span class="media-meta">
@@ -684,7 +684,7 @@ if (!doNotTrack) {
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/08/https-aws-r/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/08/https-aws-r/">
                 <h3 class="media-heading">HTTPS to Secure Your RStudio &#43; Shiny App Work Environment</h3>
               </a>
               <span class="media-meta">
@@ -702,7 +702,7 @@ if (!doNotTrack) {
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/08/aws-r/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/08/aws-r/">
                 <h3 class="media-heading">Running R on AWS EC2 and Logging into RStudio from Anywhere</h3>
               </a>
               <span class="media-meta">
@@ -719,7 +719,7 @@ if (!doNotTrack) {
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/07/aws-rds-mysql/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/07/aws-rds-mysql/">
                 <h3 class="media-heading">Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</h3>
               </a>
               <span class="media-meta">
@@ -736,7 +736,7 @@ if (!doNotTrack) {
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/05/mysql-r/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/05/mysql-r/">
                 <h3 class="media-heading">Using MySQL with R</h3>
               </a>
               <span class="media-meta">
@@ -753,7 +753,7 @@ if (!doNotTrack) {
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/04/sentiment-analysis-conf-call/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
                 <h3 class="media-heading">Sentiment Analysis on Earnings Call</h3>
               </a>
               <span class="media-meta">
@@ -770,7 +770,7 @@ if (!doNotTrack) {
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/04/alpaca-for-r/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/alpaca-for-r/">
                 <h3 class="media-heading">AlpacaforR</h3>
               </a>
               <span class="media-meta">
@@ -789,7 +789,7 @@ After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Ex
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/backtest-simple-earnings/">
                 <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
               </a>
               <span class="media-meta">
@@ -808,7 +808,7 @@ You often hear two things when watching or reading financial news. One is earnin
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/">
                 <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
               </a>
               <span class="media-meta">
@@ -826,7 +826,7 @@ You often hear two things when watching or reading financial news. One is earnin
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
+              <a class="link-unstyled" href="https://jagg19.github.io/2019/01/salesforce-q3-update/">
                 <h3 class="media-heading">Salesforce Q3 Update</h3>
               </a>
               <span class="media-meta">
@@ -857,7 +857,7 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
     
   
     
-    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
+    <div id="cover" style="background-image:url('https://jagg19.github.io/images/cover.jpg');"></div>
   
 
 
@@ -869,7 +869,7 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="https://jagg19.github.io/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
 
 
 <script lang="javascript">
@@ -904,7 +904,7 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = '\/2019\/07\/aws-rds-mysql\/';
+          this.page.url = 'https:\/\/jagg19.github.io\/2019\/07\/aws-rds-mysql\/';
           
             this.page.identifier = '\/2019\/07\/aws-rds-mysql\/'
           

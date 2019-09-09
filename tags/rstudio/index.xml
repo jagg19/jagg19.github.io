@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rstudio on Running on R</title>
-    <link>/tags/rstudio/</link>
+    <link>https://jagg19.github.io/tags/rstudio/</link>
     <description>Recent content in Rstudio on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 13 Aug 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/rstudio/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jagg19.github.io/tags/rstudio/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HTTPS to Secure Your RStudio &#43; Shiny App Work Environment</title>
-      <link>/2019/08/https-aws-r/</link>
+      <link>https://jagg19.github.io/2019/08/https-aws-r/</link>
       <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/08/https-aws-r/</guid>
+      <guid>https://jagg19.github.io/2019/08/https-aws-r/</guid>
       <description>HTTPS to Secure Your RStudio + Shiny App Work Environment Click any link in list below to jump to topic
  Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp;amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.</description>
     </item>
     
     <item>
       <title>Running R on AWS EC2 and Logging into RStudio from Anywhere</title>
-      <link>/2019/08/aws-r/</link>
+      <link>https://jagg19.github.io/2019/08/aws-r/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/08/aws-r/</guid>
+      <guid>https://jagg19.github.io/2019/08/aws-r/</guid>
       <description>Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database , I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.</description>
     </item>
     
