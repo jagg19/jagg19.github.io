@@ -7,16 +7,23 @@ coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1546623541/salesf
 coverSize: partial
 thumbnailImagePosition: left
 categories:
-  - Equity Valuation
+  - CRM
+  - DCF
+  - Recommendations
   - Earnings
   - Forecasting
   - Valuations
+  - Cloud
+  - Quarterly Results
 tags:
   - Cloud
   - Quarterly Results
   - CRM
   - DCF
   - Recommendations
+  - Earnings
+  - Forecasting
+  - Valuations
 output: 
   html_document:
    df_print: paged

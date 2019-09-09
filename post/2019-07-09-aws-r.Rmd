@@ -7,15 +7,21 @@ coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1563205259/ec2-rs
 slug: aws-r
 summary: "In my previous post Databases in the Cloud, I went over some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon. Simply speaking, EC2 is basiacally a virtual server that offers a variety of operating systems and computational power. EC2 allows users to build apps, automate scaling according to changing needs and peak periods, deploy computational intensive models, streamline development processes, and create virtual servers to manage storage, lessening the need to invest in infrastructure."
 tags:
-- EC2
 - Cloud
 - RStudio
+- R
+- Programming
+- AWS
+- MySQL
+- Deploying Website / Apps
 thumbnailImagePosition: left
 categories:
-- AWS
+- Cloud
+- RStudio
 - R
-- MySQL
 - Programming
+- AWS
+- MySQL
 - Deploying Website / Apps
 ---
 

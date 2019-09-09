@@ -6,8 +6,8 @@ slug: ml-airbnb-prices
 coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1542650457/Untitled-design-18.png
 coverSize: partial
 thumbnailImagePosition: left
-categories: ["Data Analysis", "Predictions", "Programming"]
-tags: ["Project","Machine Learning", "Airbnb","Price Predictions", "Programming"]
+categories: ["Machine Learning", "Programming", "Data Analysis", "Predictions"]
+tags: ["Machine Learning", "Programming", "Data Analysis", "Predictions"]
 summary: "While most of us have used or considered booking an Airbnb, there are a lot less of us who have considered posting our own property on Airbnb. Being that New York City rent is extremely high, I’ve considered listing my Brooklyn apartment to see what kind of profits I could turn. During this time, I was learning about multiple linear regression in my Quantitative Analysis & Forecasting class and was assigned a project to create a linear model to predict some form of dependent variable. I figured why not use this opportunity to dig a little deeper on estimating a listing price for my apartment."
 ---
 

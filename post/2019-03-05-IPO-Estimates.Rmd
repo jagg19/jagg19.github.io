@@ -7,14 +7,17 @@ coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1551759832/busine
 coverSize: partial
 thumbnailImagePosition: left
 categories:
+  - Cloud
+  - LYFT
+  - DBX
   - IPO
-  - Review
   - Forecasting
-  - Opinion
 tags:
   - Cloud
   - LYFT
   - DBX
+  - IPO
+  - Forecasting
 output: 
   html_document:
    df_print: paged

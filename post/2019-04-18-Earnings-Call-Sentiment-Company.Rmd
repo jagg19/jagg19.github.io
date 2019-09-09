@@ -6,8 +6,8 @@ slug: sentiment-analysis-conf-call
 coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/c_scale,w_325/v1546624528/Slider-Sentiment-468x340.png
 coverSize: partial
 thumbnailImagePosition: left
-categories: ["R", "R Markdown", "Investment", "Text Mining", "Earnings"]
-tags: ["CRM", "Cloud", "Sentiment Analysis", "Conference Call"]
+categories: ["CRM", "R","Cloud", "Sentiment Analysis","Text Mining","Earnings", "Conference Call"]
+tags: ["CRM", "R","Cloud", "Sentiment Analysis","Text Mining","Earnings", "Conference Call"]
 output: 
   html_document:
     df_print: paged

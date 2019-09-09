@@ -7,16 +7,19 @@ coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1552093638/1_SfUn
 coverSize: partial
 thumbnailImagePosition: left
 categories:
+  - Quarterly Results
   - Earnings
   - Backtest
   - Programming
   - Data Analysis
   - Trading
 tags:
-  - Algo
-  - NASDAQ
-  - Beautiful Plots
   - Quarterly Results
+  - Earnings
+  - Backtest
+  - Programming
+  - Data Analysis
+  - Trading
 output: 
   html_document:
    df_print: paged

@@ -6,8 +6,8 @@ slug: yield-curve-fun
 coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1544586991/A1MAIN-crazybull-042718-.jpg
 coverSize: partial
 thumbnailImagePosition: left
-categories: ["Data Analysis", "Market", "Yield Curve"]
-tags: ["Interest Rates", "Inverted Yield Curve", "Banks"]
+categories: ["Interest Rates","Data Analysis","Yield Curve"]
+tags: ["Interest Rates","Data Analysis","Yield Curve"]
 summary: "I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations. These two interest rates are part of the larger yield curve that generally trends higher along the x-axis of a graph, while an “inverted” curve trends lower along the x-axis. Let's take a look at the yield curve over five different time frames since the start of 2018 and which of these yields recently inverted."
 ---
 

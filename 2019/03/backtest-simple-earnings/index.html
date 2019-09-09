@@ -19,8 +19,8 @@ You often hear two things when watching or reading financial news. One is earnin
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scaling a Simple Earnings Strategy to the NASDAQ Exchange">
 <meta name="twitter:title" content="Scaling a Simple Earnings Strategy to the NASDAQ Exchange">
-<meta property="og:url" content="https://jagg19.github.io/2019/03/backtest-simple-earnings/">
-<meta property="twitter:url" content="https://jagg19.github.io/2019/03/backtest-simple-earnings/">
+<meta property="og:url" content="/2019/03/backtest-simple-earnings/">
+<meta property="twitter:url" content="/2019/03/backtest-simple-earnings/">
 <meta property="og:site_name" content="Running on R">
 <meta property="og:description" content="#Pure Earnings Play
  Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
@@ -39,6 +39,8 @@ You often hear two things when watching or reading financial news. One is earnin
   
   
     
+      <meta property="article:section" content="Quarterly Results">
+    
       <meta property="article:section" content="Earnings">
     
       <meta property="article:section" content="Backtest">
@@ -52,13 +54,17 @@ You often hear two things when watching or reading financial news. One is earnin
   
   
     
-      <meta property="article:tag" content="Algo">
-    
-      <meta property="article:tag" content="NASDAQ">
-    
-      <meta property="article:tag" content="Beautiful Plots">
-    
       <meta property="article:tag" content="Quarterly Results">
+    
+      <meta property="article:tag" content="Earnings">
+    
+      <meta property="article:tag" content="Backtest">
+    
+      <meta property="article:tag" content="Programming">
+    
+      <meta property="article:tag" content="Data Analysis">
+    
+      <meta property="article:tag" content="Trading">
     
   
 
@@ -84,12 +90,12 @@ You often hear two things when watching or reading financial news. One is earnin
 
     <title>Scaling a Simple Earnings Strategy to the NASDAQ Exchange</title>
 
-    <link rel="icon" href="https://jagg19.github.io/favicon.png">
+    <link rel="icon" href="/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://jagg19.github.io/2019/03/backtest-simple-earnings/">
+    <link rel="canonical" href="/2019/03/backtest-simple-earnings/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -97,7 +103,7 @@ You often hear two things when watching or reading financial news. One is earnin
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="https://jagg19.github.io/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
     
     
 
@@ -125,12 +131,12 @@ if (!doNotTrack) {
       <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="https://jagg19.github.io/">Running on R</a>
+    <a class="header-title-link" href="/">Running on R</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="https://jagg19.github.io/#about">
+         href="/#about">
     
     
     
@@ -146,7 +152,7 @@ if (!doNotTrack) {
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="https://jagg19.github.io/#about">
+        <a href="/#about">
           <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
         </a>
         <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
@@ -159,7 +165,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/">
+      <a class="sidebar-button-link " href="/">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -169,7 +175,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/#about">
+      <a class="sidebar-button-link " href="/#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -179,7 +185,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/categories">
+      <a class="sidebar-button-link " href="/categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -189,7 +195,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/tags">
+      <a class="sidebar-button-link " href="/tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -199,7 +205,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://jagg19.github.io/archives">
+      <a class="sidebar-button-link " href="/archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -213,7 +219,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/jagg19" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://github.com/jagg19">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -223,7 +229,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -267,15 +273,17 @@ if (!doNotTrack) {
   
     <span>in</span>
     
-      <a class="category-link" href="https://jagg19.github.io/categories/earnings">Earnings</a>, 
+      <a class="category-link" href="/categories/quarterly-results">Quarterly Results</a>, 
     
-      <a class="category-link" href="https://jagg19.github.io/categories/backtest">Backtest</a>, 
+      <a class="category-link" href="/categories/earnings">Earnings</a>, 
     
-      <a class="category-link" href="https://jagg19.github.io/categories/programming">Programming</a>, 
+      <a class="category-link" href="/categories/backtest">Backtest</a>, 
     
-      <a class="category-link" href="https://jagg19.github.io/categories/data-analysis">Data Analysis</a>, 
+      <a class="category-link" href="/categories/programming">Programming</a>, 
     
-      <a class="category-link" href="https://jagg19.github.io/categories/trading">Trading</a>
+      <a class="category-link" href="/categories/data-analysis">Data Analysis</a>, 
+    
+      <a class="category-link" href="/categories/trading">Trading</a>
     
   
 
@@ -310,14 +318,14 @@ if (!doNotTrack) {
 <p>You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions. I’m going to integrate the two to talk about the performance of a simple earnings trade strategy across the NASDAQ and how it compares against a basket of popular stocks. I wanted to compare it to a group of popular names from the NASDAQ to simulate the “go-to” names for the average mom-and-pop investor. These popular names will include Facebook, Apple, Amazon, Netflix, Google, and many more to see if these Wall Street darlings are also the best ones to trade during earnings. After all, if these companies are doing so well then their earning results should reflect that.</p>
 <p>###The Process
 The trading strategy is kept simple to illustrate the common approach to trade earnings. The strategy will buy the stock at the market open one day prior to the earnings release date, and if the company reports BEFORE the market open, then we will sell at the market open. If the company reports AFTER market close, then we will sell it the following day at the market open. See below to see how the trades are triggered.</p>
-<p><img src="https://jagg19.github.io/img/Strategy.png" /></p>
+<p><img src="/img/Strategy.png" /></p>
 <p><br>
 We are going to use this strategy and scale it out to each stock in the NASDAQ with a market cap over $5Billion. This is when the computers take over because we want to run this across thousands of different stocks and then run additional scripts on the results. A great trader usually focuses on a core set of stocks, whereas a computer can keep track of tens of thousands at a fraction of the time.</p>
 <p>###The Data
 All of our stock data (with exception of earnings dates) comes from an R package called “tidyquant” that uses yahoo, quandl, alphavantage, bloomberg, etc. for pricing data. First, we gather the NASDAQ exchange data and drop all stocks that do not have a Billion $ market cap, then filter out all companies that are under a $5 Billion market cap. After, we will map a pricing function to all stocks that passed our market cap screening to obtain the historic pricing data since the start of 2016. Finally, I will drop any rows that may contain NA values. After filtering through the NASDAQ, there are 282 stocks remaining that meet our criteria. I’ll also need to get all of the quarterly earnings dates for each stock during our specified time period. I will web scrape the data from a reputable source online in order for me to get accurate historic earnings data for each stock. I am saving $$$ by getting the data this way. Let’s look at the results through a variety of different visualizations, starting with a Lollipop chart to illustrate the top performing sectors by overall total returns.</p>
 <p>###Top Sectors</p>
 <p><br>
-<img src="https://jagg19.github.io/img/TotalSectorRtrns_NDQ.png" /></p>
+<img src="/img/TotalSectorRtrns_NDQ.png" /></p>
 <p>Being that we are backtesting the NASDAQ, I was quite surprised to see only one sector at a loss and the Energy coming out on top. After looking a little deeper, I found that only two stocks were responsible for the Energy Sector coming out on top. If additional energy companies would have made it through our initial Market Cap screening, then most likely Technology would have taken the #1 spot. Since this was such a simple strategy, I was very surprised to see only one sector at a loss. To see if only a few companies were responsible for the overall loss or if the losses were evenly spread out through the sector, we view the distribution on a histogram. After taking a quick look, it is clear to see that the returns are pretty normally distributed. Below is a table that lists each Sector by total overall returns and the number of companies in each sector.</p>
 <pre><code>## # A tibble: 12 x 3
 ##    SECTOR                OVERALL.RTRN Companies
@@ -335,11 +343,11 @@ All of our stock data (with exception of earnings dates) comes from an R package
 ## 11 Transportation                0.04         8
 ## 12 Health Care                  -0.41        44</code></pre>
 <p>###Histogram: Returns for each company in the Health sector.</p>
-<p><img src="https://jagg19.github.io/img/Healthcare_rtrns.png" /></p>
+<p><img src="/img/Healthcare_rtrns.png" /></p>
 <p><br></p>
 <p>###Top Stocks</p>
 <p>Now, let’s take a look at the Top 40 performing stocks by total return using the same Lollipop chart. Do you notice any of the big names, like Amazon or Apple? I’ll also print a table showing the top 100 stocks by overall total return, number of trades, and the sector it is in.</p>
-<p><img src="https://jagg19.github.io/img/TOP40STCKSRTRN_LOLIPOP_NDQ1.png" /></p>
+<p><img src="/img/TOP40STCKSRTRN_LOLIPOP_NDQ1.png" /></p>
 <pre><code>## # A tibble: 282 x 4
 ##     Symbol OVERALL.RTRN `# of Trades` SECTOR               
 ##     &lt;chr&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;                
@@ -447,28 +455,28 @@ All of our stock data (with exception of earnings dates) comes from an R package
 <p><br></p>
 <p>###Average Gains / Losses for Each Stock Traded</p>
 <p>We have over 280+ stocks with each earnings trade since 2016. It would not be a good-looking chart if we threw all of those on one axis, or even over a layer of different grids. I think a diverging bar graph would suit this nicely. We can put 100 stocks on a graph and easily see the average gains and losses for each stock. We will start from the last ranked stocks by return and work our way down, so the first chart shows the top 183-282 stocks by return, and their respective gains and losses.</p>
-<p><img src="https://jagg19.github.io/img/Avgrtrn183282_NDQ.png" />
-<img src="https://jagg19.github.io/img/STCKAVGRTRN_83-181_NDQ.png" /></p>
-<p><img src="https://jagg19.github.io/img/STCKAVGRTRN_1-82_NDQ.png" /></p>
+<p><img src="/img/Avgrtrn183282_NDQ.png" />
+<img src="/img/STCKAVGRTRN_83-181_NDQ.png" /></p>
+<p><img src="/img/STCKAVGRTRN_1-82_NDQ.png" /></p>
 <p><br></p>
 <p>###Cumulative Changes in Each Stock Traded</p>
 <p>Now, we can create a few grids to illustrate the cumulative change for the total capital over the backtesting period if we were to allocate $1000 DOLLARS into each stock. If the bullet is GREEN, then that means we are at a profit and above our initial capital of $1000 DOLLARS, and if it’s RED then it means we are at a loss. Let us look at the top 126 stocks by return over three different grids.</p>
-<p><img src="https://jagg19.github.io/img/Top42_Cumchart_NDQ.png" />
+<p><img src="/img/Top42_Cumchart_NDQ.png" />
 <br>
-<img src="https://jagg19.github.io/img/Top4384_Cumchart_NDQ.png" />
+<img src="/img/Top4384_Cumchart_NDQ.png" />
 <br>
-<img src="https://jagg19.github.io/img/Top85126_Cumchart_NDQ.png" /></p>
+<img src="/img/Top85126_Cumchart_NDQ.png" /></p>
 <p><br></p>
 <p>###Surprise, Surprise</p>
 <p>Were you expecting any of the above results? Did it surprise you to see the Energy sector come out on top or the lack of popular household stocks in the Top 10? I was pretty surprised to see ETSY come out on top as #1 for total returns at 85%, while EBAY (similar business model) came in at #192/282 for a total return of -3.53%. What about the overall return for the rest of the portfolio?</p>
 <p><br></p>
 <p>###Overall Returns</p>
 <p>Let’s view the return distribution for EACH trade made on the Full Portfolio and compare that to random samples. Also, we will compare these returns against a basket of the 20 most popular stocks in the NASDAQ as well as 20 random stocks from the top100 ranked by total return. I classified the “20 most popular” names by researching the most widely held stocks in the NASDAQ, most active by dollar trading volume in NASDAQ, and NASDAQ stocks in Robinhood’s top 100 most popular list.</p>
-<p><img src="https://jagg19.github.io/img/Fullport_Hist.png" /></p>
+<p><img src="/img/Fullport_Hist.png" /></p>
 <p>The returns for each trade made seem to be normally distributed, with exception of a few outliers. I removed those to get a cleaner view of the distributions, which we can see the average return for a trade is 46 basis points (or 0.46 percentage points). This is great considering there are over 3500 total trades. What about the overall return or the comparison to popular household names?</p>
 <p>###Our Portfolio vs Sample Portfolios vs Most Popular
 First, I would like to compare the distribution of the trade returns to the distributions of the randomly selected samples from the Full Portfolio. I’m doing this to gauge how this simple strategy would perform if we were to just randomly select a group of stocks or a group of popular stocks. After, we can compare the overall returns from each portfolio to see how effective this trade is compared to just trading the Top 20 Most Popular household names.</p>
-<p><img src="https://jagg19.github.io/img/Dist_portvssample_ndq.png" /></p>
+<p><img src="/img/Dist_portvssample_ndq.png" /></p>
 <p><br></p>
 <table>
 <thead>
@@ -495,7 +503,7 @@ First, I would like to compare the distribution of the trade returns to the dist
 </tbody>
 </table>
 <p><br></p>
-<p><img src="https://jagg19.github.io/img/Dist_sample1_2_ndq.png" /></p>
+<p><img src="/img/Dist_sample1_2_ndq.png" /></p>
 <p><br></p>
 <table>
 <thead>
@@ -522,7 +530,7 @@ First, I would like to compare the distribution of the trade returns to the dist
 </tbody>
 </table>
 <p><br>
-<img src="https://jagg19.github.io/img/Dist_sample2_3_ndq.png" /></p>
+<img src="/img/Dist_sample2_3_ndq.png" /></p>
 <p><br></p>
 <table>
 <thead>
@@ -549,7 +557,7 @@ First, I would like to compare the distribution of the trade returns to the dist
 </tbody>
 </table>
 <p><br>
-<img src="https://jagg19.github.io/img/Dist_sample3_4_ndq.png" /></p>
+<img src="/img/Dist_sample3_4_ndq.png" /></p>
 <p><br></p>
 <table>
 <thead>
@@ -576,7 +584,7 @@ First, I would like to compare the distribution of the trade returns to the dist
 </tbody>
 </table>
 <p><br>
-<img src="https://jagg19.github.io/img/Popular_rand_ndq.png" /></p>
+<img src="/img/Popular_rand_ndq.png" /></p>
 <p><br></p>
 <table>
 <thead>
@@ -619,8 +627,8 @@ Table for the overall gain / loss for each portfolio/sample above</p>
 <p><br></p>
 <p>###Quick Look - Correlation Among Returns</p>
 <p>Something interesting I thought I could look at was the correlation between the average earning returns for each stock. I’d like to see if any strong correlations above +/- 0.8 exist. If so then that can be something to help us decide which stocks to choose when initiating this simple earnings strategy. We will also do the same for the top 35 stocks.</p>
-<p><img src="https://jagg19.github.io/img/CorrelogramAll_NDQ1.png" />
-<img src="https://jagg19.github.io/img/TOP35_CORRELOGRAM_NDQ1.png" /></p>
+<p><img src="/img/CorrelogramAll_NDQ1.png" />
+<img src="/img/TOP35_CORRELOGRAM_NDQ1.png" /></p>
 <p>###What’s Next
 Overall, I’d like to fine-tune this simple strategy by maybe testing different buy/sell triggers, adding a couple of momentum indicators, getting intraday data, or even adding in a sentiment score going into earnings. I also want to check out what those high correlations are all about and backtest a pair trade strategy. I may create a continuation post to this and test out earnings pair trading strategies.</p>
 
@@ -635,13 +643,17 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/algo/">Algo</a>
+  <a class="tag tag--primary tag--small" href="/tags/quarterly-results/">Quarterly Results</a>
 
-  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/nasdaq/">NASDAQ</a>
+  <a class="tag tag--primary tag--small" href="/tags/earnings/">Earnings</a>
 
-  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/beautiful-plots/">Beautiful Plots</a>
+  <a class="tag tag--primary tag--small" href="/tags/backtest/">Backtest</a>
 
-  <a class="tag tag--primary tag--small" href="https://jagg19.github.io/tags/quarterly-results/">Quarterly Results</a>
+  <a class="tag tag--primary tag--small" href="/tags/programming/">Programming</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/data-analysis/">Data Analysis</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/trading/">Trading</a>
 
                   </div>
                 
@@ -654,7 +666,7 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/04/alpaca-for-r/" data-tooltip="AlpacaforR">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/alpaca-for-r/" data-tooltip="AlpacaforR">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -662,7 +674,7 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/" data-tooltip="Lyft IPO &#43; Dropbox Review">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/03/ipo-estimates-lyftdbx/" data-tooltip="Lyft IPO &#43; Dropbox Review">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -680,19 +692,19 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/03/backtest-simple-earnings/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/03/backtest-simple-earnings/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/03/backtest-simple-earnings/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/03/backtest-simple-earnings/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/03/backtest-simple-earnings/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/03/backtest-simple-earnings/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -740,7 +752,7 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/04/alpaca-for-r/" data-tooltip="AlpacaforR">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/alpaca-for-r/" data-tooltip="AlpacaforR">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -748,7 +760,7 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/" data-tooltip="Lyft IPO &#43; Dropbox Review">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/03/ipo-estimates-lyftdbx/" data-tooltip="Lyft IPO &#43; Dropbox Review">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -766,19 +778,19 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https://jagg19.github.io/2019/03/backtest-simple-earnings/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/03/backtest-simple-earnings/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://jagg19.github.io/2019/03/backtest-simple-earnings/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/03/backtest-simple-earnings/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://jagg19.github.io/2019/03/backtest-simple-earnings/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/03/backtest-simple-earnings/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -808,19 +820,19 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F03%2Fbacktest-simple-earnings%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F03%2Fbacktest-simple-earnings%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fjagg19.github.io%2F2019%2F03%2Fbacktest-simple-earnings%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F03%2Fbacktest-simple-earnings%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fjagg19.github.io%2F2019%2F03%2Fbacktest-simple-earnings%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F03%2Fbacktest-simple-earnings%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -881,7 +893,25 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/08/https-aws-r/">
+              <a class="link-unstyled" href="/2019/09/dbx-q3-quicknclean/">
+                <h3 class="media-heading">Dropbox Valuation - Quick N&#39; Clean</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Dropbox Valuation - Quick N’ Clean Click any link in the list below to jump to topic
+ What is Dropbox What Sets Dropbox Apart Digging into the financials Relative &amp; Intrinsic Valuations Is Dropbox Really a Buy  Dropbox’s shares have fallen -29.8% from its July high of $26.20, which was under the recent February high of $26.49 as of 09/04/2019. It’s also -57.75% under the ATH of $43.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/08/https-aws-r/">
                 <h3 class="media-heading">HTTPS to Secure Your RStudio &#43; Shiny App Work Environment</h3>
               </a>
               <span class="media-meta">
@@ -899,7 +929,7 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/08/aws-r/">
+              <a class="link-unstyled" href="/2019/08/aws-r/">
                 <h3 class="media-heading">Running R on AWS EC2 and Logging into RStudio from Anywhere</h3>
               </a>
               <span class="media-meta">
@@ -916,7 +946,7 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/07/aws-rds-mysql/">
+              <a class="link-unstyled" href="/2019/07/aws-rds-mysql/">
                 <h3 class="media-heading">Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</h3>
               </a>
               <span class="media-meta">
@@ -933,7 +963,7 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/05/mysql-r/">
+              <a class="link-unstyled" href="/2019/05/mysql-r/">
                 <h3 class="media-heading">Using MySQL with R</h3>
               </a>
               <span class="media-meta">
@@ -950,7 +980,7 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/">
+              <a class="link-unstyled" href="/2019/04/sentiment-analysis-conf-call/">
                 <h3 class="media-heading">Sentiment Analysis on Earnings Call</h3>
               </a>
               <span class="media-meta">
@@ -967,7 +997,7 @@ Overall, I’d like to fine-tune this simple strategy by maybe testing different
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/04/alpaca-for-r/">
+              <a class="link-unstyled" href="/2019/04/alpaca-for-r/">
                 <h3 class="media-heading">AlpacaforR</h3>
               </a>
               <span class="media-meta">
@@ -986,7 +1016,7 @@ After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Ex
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/backtest-simple-earnings/">
+              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
                 <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
               </a>
               <span class="media-meta">
@@ -1005,7 +1035,7 @@ You often hear two things when watching or reading financial news. One is earnin
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/03/ipo-estimates-lyftdbx/">
+              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
                 <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
               </a>
               <span class="media-meta">
@@ -1023,7 +1053,7 @@ You often hear two things when watching or reading financial news. One is earnin
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2019/01/salesforce-q3-update/">
+              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
                 <h3 class="media-heading">Salesforce Q3 Update</h3>
               </a>
               <span class="media-meta">
@@ -1039,24 +1069,6 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://jagg19.github.io/2018/12/yield-curve-fun/">
-                <h3 class="media-heading">Yield Curve Inversion - Marks End to Bull Market?</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Dec 12, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">#Going, Going, Inverted! - Yield Curve inversions are typically a leading indicator for a recession - Historic analysis on inversions for specific yields since 1990 - Yield Curve over 5 different time frames since the start of 2018 - Takeaway from recent inversions
-#Yield Curve Inversion I’ve always followed bank stocks ever since I first began investing almost six years ago. Once I learned the 10-year and 2-year treasury spread was a profit driver for the big banks, I started to track the daily fluctuations.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1064,7 +1076,7 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         12 posts found
+         13 posts found
       </p>
     </div>
   </div>
@@ -1072,7 +1084,7 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
     
   
     
-    <div id="cover" style="background-image:url('https://jagg19.github.io/images/cover.jpg');"></div>
+    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
   
 
 
@@ -1084,7 +1096,7 @@ Salesforce (CRM) carried on with its tradition of beating expectations and raisi
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://jagg19.github.io/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
 
 
 <script lang="javascript">
@@ -1119,7 +1131,7 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/jagg19.github.io\/2019\/03\/backtest-simple-earnings\/';
+          this.page.url = '\/2019\/03\/backtest-simple-earnings\/';
           
             this.page.identifier = '\/2019\/03\/backtest-simple-earnings\/'
           

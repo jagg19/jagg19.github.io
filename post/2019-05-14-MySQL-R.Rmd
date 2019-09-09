@@ -6,8 +6,8 @@ slug: mysql-r
 coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1557824027/hqdefault.jpg
 coverSize: partial
 thumbnailImagePosition: left
-categories: [R, Relational Database, Large Datasets]
-tags: [MySQL, programming, beautiful-plots, database]
+categories: [MySQL, R, Relational Database, Programming]
+tags: [MySQL, R, Relational Database, Programming]
 summary: "If you're an R programmer then you've probably crashed your R session a few times when trying to read datasets of a over 2GB+. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets and your session crashes with a window stating 'R SESSION ABORTED'. Since R executes code in-memory, which is the computers available RAM, you will encounter failures when reading datasets larger than the available memory. Also, once you have enough dataframes stored then your R session can become extremely slow and affect your work severely. One of my classes at Pace University showed me the value in storing your larger datasets in a MySQL database and I decided to learn how to stream these datasets in R so we do not have to store the larger datasets in-memory."
 ---
 

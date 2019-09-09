@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.51 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Jagger Villalobos">
+<meta name="keywords" content="">
+<meta name="description" content="Dropbox Valuation - Quick N’ Clean Click any link in the list below to jump to topic
+ What is Dropbox What Sets Dropbox Apart Digging into the financials Relative &amp; Intrinsic Valuations Is Dropbox Really a Buy  Dropbox’s shares have fallen -29.8% from its July high of $26.20, which was under the recent February high of $26.49 as of 09/04/2019. It’s also -57.75% under the ATH of $43.">
+
+
+<meta property="og:description" content="Dropbox Valuation - Quick N’ Clean Click any link in the list below to jump to topic
+ What is Dropbox What Sets Dropbox Apart Digging into the financials Relative &amp; Intrinsic Valuations Is Dropbox Really a Buy  Dropbox’s shares have fallen -29.8% from its July high of $26.20, which was under the recent February high of $26.49 as of 09/04/2019. It’s also -57.75% under the ATH of $43.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dropbox Valuation - Quick N&#39; Clean">
+<meta name="twitter:title" content="Dropbox Valuation - Quick N&#39; Clean">
+<meta property="og:url" content="/2019/08/dbx-q3-quicknclean/">
+<meta property="twitter:url" content="/2019/08/dbx-q3-quicknclean/">
+<meta property="og:site_name" content="Running on R">
+<meta property="og:description" content="Dropbox Valuation - Quick N’ Clean Click any link in the list below to jump to topic
+ What is Dropbox What Sets Dropbox Apart Digging into the financials Relative &amp; Intrinsic Valuations Is Dropbox Really a Buy  Dropbox’s shares have fallen -29.8% from its July high of $26.20, which was under the recent February high of $26.49 as of 09/04/2019. It’s also -57.75% under the ATH of $43.">
+<meta name="twitter:description" content="Dropbox Valuation - Quick N’ Clean Click any link in the list below to jump to topic
+ What is Dropbox What Sets Dropbox Apart Digging into the financials Relative &amp; Intrinsic Valuations Is Dropbox Really a Buy  Dropbox’s shares have fallen -29.8% from its July high of $26.20, which was under the recent February high of $26.49 as of 09/04/2019. It’s also -57.75% under the ATH of $43.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-08-16T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-08-16T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="DBX">
+    
+      <meta property="article:section" content="Programming">
+    
+      <meta property="article:section" content="Finance">
+    
+      <meta property="article:section" content="Cloud">
+    
+      <meta property="article:section" content="R">
+    
+      <meta property="article:section" content="Comparable Analysis">
+    
+      <meta property="article:section" content="Valuations">
+    
+      <meta property="article:section" content="Recommendations">
+    
+  
+  
+    
+      <meta property="article:tag" content="DBX">
+    
+      <meta property="article:tag" content="Programming">
+    
+      <meta property="article:tag" content="Finance">
+    
+      <meta property="article:tag" content="Cloud">
+    
+      <meta property="article:tag" content="R">
+    
+      <meta property="article:tag" content="Comparable Analysis">
+    
+      <meta property="article:tag" content="Valuations">
+    
+      <meta property="article:tag" content="Recommendations">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1568050734/image.jpg">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1568050734/image.jpg">
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+  <meta property="twitter:image" content="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png">
+
+
+    <title>Dropbox Valuation - Quick N&#39; Clean</title>
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="/2019/08/dbx-q3-quicknclean/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-134862415-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Running on R</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jagger Villalobos</h4>
+        
+          <h5 class="sidebar-profile-bio">Bottom-Up Analysis | Equity Research</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/jagg19">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/jaggervillalobos">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              post-header-cover--partial"
+       style="background-image:url('https://res.cloudinary.com/dyackvnwm/image/upload/v1568050734/image.jpg')"
+       data-behavior="4">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Dropbox Valuation - Quick N&#39; Clean
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-08-16T00:00:00Z">
+        
+  August 16, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/dbx">DBX</a>, 
+    
+      <a class="category-link" href="/categories/programming">Programming</a>, 
+    
+      <a class="category-link" href="/categories/finance">Finance</a>, 
+    
+      <a class="category-link" href="/categories/cloud">Cloud</a>, 
+    
+      <a class="category-link" href="/categories/r">R</a>, 
+    
+      <a class="category-link" href="/categories/comparable-analysis">Comparable Analysis</a>, 
+    
+      <a class="category-link" href="/categories/valuations">Valuations</a>, 
+    
+      <a class="category-link" href="/categories/recommendations">Recommendations</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="4"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+
+<div id="dropbox-valuation---quick-n-clean" class="section level1">
+<h1>Dropbox Valuation - Quick N’ Clean</h1>
+<p>Click any link in the list below to jump to topic</p>
+<ul>
+<li><a href="#dropbox">What is Dropbox</a></li>
+<li><a href="#apart">What Sets Dropbox Apart</a></li>
+<li><a href="#financials">Digging into the financials</a></li>
+<li><a href="#valuations">Relative &amp; Intrinsic Valuations</a></li>
+<li><a href="#conclusion">Is Dropbox Really a Buy</a></li>
+</ul>
+<p>Dropbox’s shares have fallen -29.8% from its July high of $26.20, which was under the recent February high of $26.49 as of 09/04/2019. It’s also -57.75% under the ATH of $43.50, so I saw this as a perfect opportunity to leverage R and run a “Quick N’ Clean” valuation to answer a couple questions like “What sets Dropbox Apart” and more.</p>
+<p>I’ve followed the software space for a while now, and I find it interesting that the leader in the collaboration tools industry has seen selling pressure from investors. Dropbox has proved itself as the leader in this space with double-digit YoY revenue growth and increasing the amount of Paid Users. Dropbox is one of the few companies to recently go public that is successfully competing with the largest players in this space (Google, Microsoft, Apple, Amazon). Let’s quickly review Dropbox as a company and then the financial prospects to arrive at a “Quick N’ Clean” Valuation.</p>
+<p><br></p>
+<p><a id="dropbox"></a></p>
+</div>
+<div id="dropbox" class="section level1">
+<h1>Dropbox</h1>
+<p>Dropbox is one of the smaller players in a dominated cloud sector, but a leader in the more niche collaboration tools industry. As more companies begin to transition into a data-oriented business, data storage and sharing will become vital for companies to grow. More employees will need to access and share files from anywhere, and consumers will prefer the apps that have a great and easy-to-use UI. File sharing will be seen as a major feature in collaboration tools services and this is where Dropbox provides a beautiful UI that’s extremely easy-to-use.</p>
+<p><br></p>
+</div>
+<div id="is-it-really-a-buy" class="section level1">
+<h1>Is it Really a BUY</h1>
+<p>According to NASDAQ’s website, Dropbox has 11 Analysts ratings with 8 as Strong Buys, 1 as Buy, 2 as Hold, and 0 as Sell. Looking at Seeking Alpha, they have 16 Analysts with 8 as a Buy, 3 as Outperform, 3 as Hold, 3 as Underperform and 0 as Sell. I like to venture where the crowd doesn’t go, so I wanted to seek out reasons why Dropbox could possibly be a sell. I wanted to find answers to the questions “what sets dropbox apart from competitor services” and also “is the stock undervalued on a relative scale”.</p>
+<p>After extensive research and comparisons between dropbox and its peers, I found the answers to the first question as to why dropbox and what sets them apart. Other than the obvious risks from the big cloud competitors, it was hard to find reasons to sell Dropbox. I conducted a survey that targeted consumer and enterprise Dropbox users that shedded a positive light on Dropbox. Now I hope to find an answer to whether Dropbox really is a “Buy” and to see some real support for an “undervalued” stock after running relative and intrinsic valuations.</p>
+<p><br></p>
+<p><a id="apart"></a></p>
+</div>
+<div id="question-1-whats-sets-dropbox-apart" class="section level1">
+<h1>Question 1: Whats Sets Dropbox Apart?</h1>
+<p>Dropbox’s popularity and network effect among consumers is nothing short of dominant. I created a two-question survey in various social threads where consumers / companies use Dropbox and its competitors to ask these questions;</p>
+<ol style="list-style-type: decimal">
+<li><p>Do you use Dropbox over its competitors such as Box, Google Drive, AWS S3, or Microsoft Onedrive? If yes, what moat or differentiator does Dropbox have compared to the others?</p></li>
+<li><p>Why so many enterprises and smaller companies like to use Dropbox than others.</p></li>
+</ol>
+<p>The general answers made it a little clearer to me why Dropbox continues to be the leader in this space. In general, respondents seemed to favor Dropboxes upload speed and the light CPU usage compared to competitors like google drive, as well as the very easy to use GUI vs others (google drive came in second). I noticed some people did say Dropbox was a little pricier vs its competitors (it raised its most popular subscription price in June by 20%) but none said it would push them to cancel the subscription and look elsewhere.</p>
+<p>With that said, I think Paying Subscribers are the biggest catalyst to Dropboxes growth. This can be through its consumer or enterprise customers. Enterprise is leading in terms of additional subscribers but I think growth has been shy of what management visioned. There could be a possibility that the enterprise users are picking up the slack from the paying consumer business. This small slowdown is not because of lack of quality or innovation, but because many services are offering free tiers that consumers are using.</p>
+<div id="doesnt-come-without-risks" class="section level2">
+<h2>Doesnt Come Without Risks</h2>
+<p>I noticed one trend in general from my small survey. There were not many respondents who used only one service (either Dropbox, Box, Google Drive, Amazon S3, Microsoft OneDrive). They all gave feedback on all of the services mentioned mostly because they sign up to multiple free-tier services to use each one for different purposes. The risk here is two-fold. Dropbox could lose paying subscribers to one of the competitor services that the user already has a free tier on (could be because of cheaper prices, additional features, etc.), or Dropbox could have existing paying subscribers spend less because they move a portion of their spending to another competitor.</p>
+<p>Google drive is the clear runner up in Dropboxes segment, so if Google wanted to do a complete revamp that created a fresh new GUI and incorporates all of its features from its arsenal of services then that could be a big threat to Dropbox. Also, I noticed AWS S3 is not well-known. If Amazon decided they wanted to add a consumer-friendly GUI to S3 (they currently do not really have one, it’s all dashboard/programming related), then this could also be a big threat due to Amazons resources and the fact that you pay as you go vs subscription and it’s virtually unlimited storage (with different tiers priced differently as well). Dropbox continues to integrate deeply through partnerships such as Slack, Zoom, and Atlassian but these two large companies already have a large network of amazing services of their own. Despite this, Dropbox continues to be the first that comes to mind and use when we think of consumer/enterprise cloud sharing storage.</p>
+</div>
+</div>
+<div id="question-2-are-dropbox-shares-currently-undervalued" class="section level1">
+<h1>Question 2: Are Dropbox Shares Currently Undervalued?</h1>
+<p>Now that I’ve found the reasons to what sets Dropbox apart, I want to find the answer to “Are Dropbox shares currently undervalued?” by running relative valuations from revenue multiples and intrinsic valuation on a discounted cash flow model.</p>
+<p><a id="financials"></a></p>
+<div id="getting-financial-data" class="section level2">
+<h2>Getting Financial Data</h2>
+<p>All of the financial data is coming from S&amp;P Capital IQ, which they get directly from the SEC filings. I downloaded them into two separate Excel Workbooks which can be done easily on Capital IQ. One workbook for annual statements and the other for quarterly, and each was loaded into R using the <code>xlsx</code> package.</p>
+<p>The end result in R was two lists, one for annual and one for quarterly. Each list contained 3 data frames for the income statement, balance sheet, and cash flow statement. See below for the code and the lists.</p>
+<pre class="r"><code># Ticker
+ticker &lt;- &quot;DBX&quot;
+
+
+# ANNUAL STATEMENTS
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# Create a list and statement names
+annual_dbx &lt;- list()
+statement_names &lt;- c(&quot;income_statement&quot;,&quot;balance_sheet&quot;,&quot;cashflow&quot;)
+
+
+# Read each excel sheet from the workbook into a dataframe...
+for(i in 1:length(statement_names)){
+  annual_dbx[[i]] &lt;- xlsx::read.xlsx(&quot;/Users/jagvill/DBX.xlsx&quot;,sheetIndex = i,startRow = 1,colClasses = c(&quot;character&quot;,rep(&quot;numeric&quot;,6)),stringsAsFactors=FALSE) %&gt;% na.omit()
+}
+
+names(annual_dbx) &lt;- statement_names
+
+
+
+
+# QUARTERLY STATEMENTS
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# Create a list and statement names
+qtr_dbx &lt;- list()
+
+# Read each excel sheet from the workbook into a dataframe...
+for(i in 1:length(statement_names)){
+  qtr_dbx[[i]] &lt;- xlsx::read.xlsx(&quot;/Users/jagvill/DBX_qtr.xlsx&quot;,sheetIndex = i,startRow = 1,colClasses = c(&quot;character&quot;,rep(&quot;numeric&quot;,6)),stringsAsFactors=FALSE) %&gt;% na.omit()
+}
+
+names(qtr_dbx) &lt;- statement_names
+
+
+
+# Clean up the white spacing on each of the statements line items from each list
+
+for(i in 1:2){     # First item in the list are the annual statements, and the second is quarterly
+  if(i == 1){    
+    for(i in 1:3){ # Annual
+      annual_dbx[[i]][,1] &lt;- stringr::str_trim(annual_dbx[[i]][,1]) 
+    }
+  } else{
+    for(i in 1:3){ # Quarterly
+      qtr_dbx[[i]][,1] &lt;- stringr::str_trim(qtr_dbx[[i]][,1]) 
+    }
+  }
+}
+
+
+
+head(qtr_dbx)</code></pre>
+<pre><code>## $income_statement
+##        For.the.Fiscal.Period.Ending. Mar.31.2018 Jun.30.2018 Sep.30.2018
+## 1                           Revenues      316.30      339.20      360.30
+## 2                   Cost of Revenues     -120.60      -89.50      -90.20
+## 3                Sales and Marketing     -157.00      -87.40      -95.00
+## 4         General and Administrative     -126.10      -49.80      -50.80
+## 5           Research and Development     -378.50     -119.70     -133.20
+## 7           Other Income/expense-net        3.40        2.20        0.50
+## 9              Earnings before Taxes     -463.70       -3.00       -6.00
+## 10          Provision for Income Tax       -1.80       -1.10        0.20
+## 11                 Net Income (Loss)     -465.50       -4.10       -5.80
+## 13                 Gross Profit/loss      195.70      249.70      270.10
+## 14           Operating Income (Loss)     -465.90       -7.20       -8.90
+## 15 Basic EPS - Continuing Operations       -2.13       -0.01       -0.01
+##    Dec.31.2018 Mar.31.2019 Jun.30.2019
+## 1       375.90      385.60      401.50
+## 2       -94.40      -98.40     -102.90
+## 3      -100.20     -101.50     -107.30
+## 4       -56.50      -57.00      -62.90
+## 5      -136.80     -150.00     -162.40
+## 7         0.70        4.20       10.00
+## 9        -7.40      -13.40      -20.80
+## 10       -2.10        5.70       -0.60
+## 11       -9.50       -7.70      -21.40
+## 13      281.50      287.20      298.60
+## 14      -12.00      -21.30      -34.00
+## 15       -0.02       -0.02       -0.05
+## 
+## $balance_sheet
+##                            Balance.Sheet.as.of..  X43190  X43281  X43373
+## 1                      Cash and Cash Equivalents   665.3   504.1   536.2
+## 2                         Short-term Investments   180.7   477.7   502.9
+## 3                Trade and Other Receivables Net    26.2    31.2    28.6
+## 4      Prepaid Expenses and Other Current Assets    57.7    86.8    96.0
+## 5                           Total Current Assets   929.9  1099.8  1163.7
+## 6                    Property and Equipment, net   345.6   330.8   295.9
+## 7                                       Goodwill    99.0    97.8    98.0
+## 8                         Intangible Assets, Net    17.9    16.3    15.2
+## 9                                   Other Assets    46.3    57.7    50.3
+## 11                                  Total Assets  1438.7  1602.4  1623.1
+## 12                              Accounts Payable    29.4    24.0    27.9
+## 13             Accrued Compensation and Benefits    36.2    45.1    64.2
+## 14         Accrued and Other Current Liabilities   143.1   172.3   163.2
+## 16                              Deferred Revenue   444.6   464.8   479.3
+## 19                     Total Current Liabilities   746.1   793.3   815.1
+## 21                 Other Non-current Liabilities    36.3    31.5     8.8
+## 25                    Additional Paid in Capital  2104.9  2248.4  2285.0
+## 26                           Accumulated Deficit -1600.4 -1619.4 -1643.5
+## 27 Accumulated Other Comprehensive Income (Loss)     5.7     1.9     1.9
+## 28                     Total Shareholders Equity   510.2   630.9   643.4
+## 29       Total Liabilities &amp; Shareholders Equity  1438.7  1602.4  1623.1
+##     X43465  X43555  X43646
+## 1    519.3   359.2   343.6
+## 2    570.0   556.0   629.2
+## 3     28.6    34.1    37.6
+## 4     92.3    58.3    57.3
+## 5   1210.2  1007.6  1067.7
+## 6    310.6   340.9   369.3
+## 7     96.5   230.4   230.9
+## 8     14.7    57.4    53.7
+## 9     62.1    61.9    67.6
+## 11  1694.1  2128.6  2364.9
+## 12    33.3    27.4    31.8
+## 13    80.9    36.4    57.4
+## 14   164.5   148.8   149.4
+## 16   485.0   508.4   517.3
+## 19   837.5   865.8   903.1
+## 21     8.9     9.7    10.6
+## 25  2337.5  2377.8  2428.4
+## 26 -1659.5 -1674.7 -1700.1
+## 27    -1.2     1.8     1.9
+## 28   676.8   704.9   730.2
+## 29  1694.1  2128.6  2364.9
+## 
+## $cashflow
+##                                             For.the.Fiscal.Period.Ending.
+## 1                                                              Net Income
+## 2                                           Depreciation and Amortization
+## 3                                    Amortization of Deferred Commissions
+## 4                                                Stock based Compensation
+## 5                                                                  Others
+## 6                                                            Other Assets
+## 8                                        Trade and Other Receivables, Net
+## 9                                                        Accounts Payable
+## 10                                                       Deferred Revenue
+## 11                              Prepaid Expenses and Other Current Assets
+## 12                                      Accrued Compensation and Benefits
+## 13                                  Accrued and Other Current Liabilities
+## 17                                    Cash Flow from Operating Activities
+## 19                                                   Capital Expenditures
+## 23                                     Purchases of Short-term Investment
+## 27                                    Cash Flow from Investing Activities
+## 28                                                                 Others
+## 32             Proceeds from Issuance of Common Stock, Net of Repurchases
+## 34 Shares Repurchased for Tax Withholdings on Release of Restricted Stock
+## 37                                    Cash Flow from Financing Activities
+## 38              Foreign Exchange Rate Effect on Cash and Cash Equivalents
+## 39                                          Cash Flow Net Changes in Cash
+##    X3.months.Mar.31.2018 X6.months.Jun.30.2018 X9.months.Sep.30.2018
+## 1                 -465.5                -469.6                -475.4
+## 2                   35.9                  75.9                 121.6
+## 3                    2.4                   5.3                   8.5
+## 4                  486.5                 541.6                 596.6
+## 5                   -0.6                  -1.1                  -0.9
+## 6                   -5.7                 -17.5                 -10.4
+## 8                    3.6                  -1.9                   0.4
+## 9                   -2.8                  -8.5                  -3.9
+## 10                  26.7                  46.4                  60.8
+## 11                  -1.5                 -33.9                 -47.3
+## 12                 -26.2                 -10.9                   7.2
+## 13                   8.8                  44.5                  40.6
+## 17                  61.8                 173.7                 301.7
+## 19                  -9.9                 -19.6                 -27.6
+## 23                -180.8                -495.9                -664.3
+## 27                -193.1                -497.6                -529.0
+## 28                  -2.1                  -4.1                  -6.1
+## 32                   0.8                   1.0                   9.8
+## 34                -241.2                -282.4                -326.7
+## 37                 365.0                 399.4                 335.0
+## 38                   1.6                  -1.4                  -1.5
+## 39                 235.3                  74.1                 106.2
+##    X12.months.Dec.31.2018 X3.months.Mar.31.2019 X6.months.Jun.30.2019
+## 1                  -484.9                  -7.7                 -29.1
+## 2                   166.8                  45.8                  91.9
+## 3                    12.1                   3.9                   8.1
+## 4                   650.1                  55.6                 123.7
+## 5                    -1.9                  -4.4                  -7.6
+## 6                   -11.2                  11.2                  26.2
+## 8                     0.1                  -5.1                  -8.5
+## 9                    -1.7                  -5.2                  -1.8
+## 10                   66.4                  18.6                  28.0
+## 11                  -47.9                 -14.2                 -18.5
+## 12                   25.0                 -45.9                 -24.8
+## 13                   40.3                  10.0                  10.5
+## 17                  425.4                  63.2                 192.0
+## 19                  -63.0                 -29.7                 -63.4
+## 23                 -850.4                -153.0                -389.7
+## 27                 -633.8                -173.3                -270.5
+## 28                   -2.6                  -0.2                  -0.7
+## 32                   26.2                   0.9                   2.0
+## 34                 -351.9                 -25.5                 -48.1
+## 37                  300.8                 -51.0                 -97.4
+## 38                   -3.1                   1.0                   0.2
+## 39                   89.3                -160.1                -175.7</code></pre>
+<div id="more-data-cleansing" class="section level3">
+<h3>More Data Cleansing</h3>
+<p>Great, we got our statements loaded in pretty quickly, but it’s not 100% clean (look at the dates in the column name). Let’s do a little cleaning before we move forward.</p>
+<blockquote>
+<p>The time origin for Excels date format is 1899-12-30</p>
+</blockquote>
+<pre class="r"><code># Get quarterly dates and format correctly
+dates_qtrly &lt;- colnames(qtr_dbx[[&quot;income_statement&quot;]])[-1]
+dates_qtrly &lt;- as.Date(dates_qtrly, &quot;%b.%d.%Y&quot;)
+
+# Clean the dates for each statement
+for(i in 1:3){
+  colnames(qtr_dbx[[i]])[-1] &lt;- as.character(dates_qtrly)  
+}
+
+
+
+# Get Annual dates and format correctly
+dates_annual &lt;- colnames(annual_dbx[[&quot;balance_sheet&quot;]])[-1]
+dates_annual &lt;- gsub(pattern = &quot;X&quot;, replacement = &quot;&quot;, x = dates_annual)
+
+
+# Time origin for Excel date format
+dates_annual &lt;- as.Date(as.numeric(dates_annual), origin = &quot;1899-12-30&quot;)
+
+# Clean the dates for each statement
+for(i in 1:3){
+  colnames(annual_dbx[[i]])[-1] &lt;- as.character(dates_annual)
+}
+
+head(qtr_dbx)</code></pre>
+<pre><code>## $income_statement
+##        For.the.Fiscal.Period.Ending. 2018-03-31 2018-06-30 2018-09-30
+## 1                           Revenues     316.30     339.20     360.30
+## 2                   Cost of Revenues    -120.60     -89.50     -90.20
+## 3                Sales and Marketing    -157.00     -87.40     -95.00
+## 4         General and Administrative    -126.10     -49.80     -50.80
+## 5           Research and Development    -378.50    -119.70    -133.20
+## 7           Other Income/expense-net       3.40       2.20       0.50
+## 9              Earnings before Taxes    -463.70      -3.00      -6.00
+## 10          Provision for Income Tax      -1.80      -1.10       0.20
+## 11                 Net Income (Loss)    -465.50      -4.10      -5.80
+## 13                 Gross Profit/loss     195.70     249.70     270.10
+## 14           Operating Income (Loss)    -465.90      -7.20      -8.90
+## 15 Basic EPS - Continuing Operations      -2.13      -0.01      -0.01
+##    2018-12-31 2019-03-31 2019-06-30
+## 1      375.90     385.60     401.50
+## 2      -94.40     -98.40    -102.90
+## 3     -100.20    -101.50    -107.30
+## 4      -56.50     -57.00     -62.90
+## 5     -136.80    -150.00    -162.40
+## 7        0.70       4.20      10.00
+## 9       -7.40     -13.40     -20.80
+## 10      -2.10       5.70      -0.60
+## 11      -9.50      -7.70     -21.40
+## 13     281.50     287.20     298.60
+## 14     -12.00     -21.30     -34.00
+## 15      -0.02      -0.02      -0.05
+## 
+## $balance_sheet
+##                            Balance.Sheet.as.of.. 2018-03-31 2018-06-30
+## 1                      Cash and Cash Equivalents      665.3      504.1
+## 2                         Short-term Investments      180.7      477.7
+## 3                Trade and Other Receivables Net       26.2       31.2
+## 4      Prepaid Expenses and Other Current Assets       57.7       86.8
+## 5                           Total Current Assets      929.9     1099.8
+## 6                    Property and Equipment, net      345.6      330.8
+## 7                                       Goodwill       99.0       97.8
+## 8                         Intangible Assets, Net       17.9       16.3
+## 9                                   Other Assets       46.3       57.7
+## 11                                  Total Assets     1438.7     1602.4
+## 12                              Accounts Payable       29.4       24.0
+## 13             Accrued Compensation and Benefits       36.2       45.1
+## 14         Accrued and Other Current Liabilities      143.1      172.3
+## 16                              Deferred Revenue      444.6      464.8
+## 19                     Total Current Liabilities      746.1      793.3
+## 21                 Other Non-current Liabilities       36.3       31.5
+## 25                    Additional Paid in Capital     2104.9     2248.4
+## 26                           Accumulated Deficit    -1600.4    -1619.4
+## 27 Accumulated Other Comprehensive Income (Loss)        5.7        1.9
+## 28                     Total Shareholders Equity      510.2      630.9
+## 29       Total Liabilities &amp; Shareholders Equity     1438.7     1602.4
+##    2018-09-30 2018-12-31 2019-03-31 2019-06-30
+## 1       536.2      519.3      359.2      343.6
+## 2       502.9      570.0      556.0      629.2
+## 3        28.6       28.6       34.1       37.6
+## 4        96.0       92.3       58.3       57.3
+## 5      1163.7     1210.2     1007.6     1067.7
+## 6       295.9      310.6      340.9      369.3
+## 7        98.0       96.5      230.4      230.9
+## 8        15.2       14.7       57.4       53.7
+## 9        50.3       62.1       61.9       67.6
+## 11     1623.1     1694.1     2128.6     2364.9
+## 12       27.9       33.3       27.4       31.8
+## 13       64.2       80.9       36.4       57.4
+## 14      163.2      164.5      148.8      149.4
+## 16      479.3      485.0      508.4      517.3
+## 19      815.1      837.5      865.8      903.1
+## 21        8.8        8.9        9.7       10.6
+## 25     2285.0     2337.5     2377.8     2428.4
+## 26    -1643.5    -1659.5    -1674.7    -1700.1
+## 27        1.9       -1.2        1.8        1.9
+## 28      643.4      676.8      704.9      730.2
+## 29     1623.1     1694.1     2128.6     2364.9
+## 
+## $cashflow
+##                                             For.the.Fiscal.Period.Ending.
+## 1                                                              Net Income
+## 2                                           Depreciation and Amortization
+## 3                                    Amortization of Deferred Commissions
+## 4                                                Stock based Compensation
+## 5                                                                  Others
+## 6                                                            Other Assets
+## 8                                        Trade and Other Receivables, Net
+## 9                                                        Accounts Payable
+## 10                                                       Deferred Revenue
+## 11                              Prepaid Expenses and Other Current Assets
+## 12                                      Accrued Compensation and Benefits
+## 13                                  Accrued and Other Current Liabilities
+## 17                                    Cash Flow from Operating Activities
+## 19                                                   Capital Expenditures
+## 23                                     Purchases of Short-term Investment
+## 27                                    Cash Flow from Investing Activities
+## 28                                                                 Others
+## 32             Proceeds from Issuance of Common Stock, Net of Repurchases
+## 34 Shares Repurchased for Tax Withholdings on Release of Restricted Stock
+## 37                                    Cash Flow from Financing Activities
+## 38              Foreign Exchange Rate Effect on Cash and Cash Equivalents
+## 39                                          Cash Flow Net Changes in Cash
+##    2018-03-31 2018-06-30 2018-09-30 2018-12-31 2019-03-31 2019-06-30
+## 1      -465.5     -469.6     -475.4     -484.9       -7.7      -29.1
+## 2        35.9       75.9      121.6      166.8       45.8       91.9
+## 3         2.4        5.3        8.5       12.1        3.9        8.1
+## 4       486.5      541.6      596.6      650.1       55.6      123.7
+## 5        -0.6       -1.1       -0.9       -1.9       -4.4       -7.6
+## 6        -5.7      -17.5      -10.4      -11.2       11.2       26.2
+## 8         3.6       -1.9        0.4        0.1       -5.1       -8.5
+## 9        -2.8       -8.5       -3.9       -1.7       -5.2       -1.8
+## 10       26.7       46.4       60.8       66.4       18.6       28.0
+## 11       -1.5      -33.9      -47.3      -47.9      -14.2      -18.5
+## 12      -26.2      -10.9        7.2       25.0      -45.9      -24.8
+## 13        8.8       44.5       40.6       40.3       10.0       10.5
+## 17       61.8      173.7      301.7      425.4       63.2      192.0
+## 19       -9.9      -19.6      -27.6      -63.0      -29.7      -63.4
+## 23     -180.8     -495.9     -664.3     -850.4     -153.0     -389.7
+## 27     -193.1     -497.6     -529.0     -633.8     -173.3     -270.5
+## 28       -2.1       -4.1       -6.1       -2.6       -0.2       -0.7
+## 32        0.8        1.0        9.8       26.2        0.9        2.0
+## 34     -241.2     -282.4     -326.7     -351.9      -25.5      -48.1
+## 37      365.0      399.4      335.0      300.8      -51.0      -97.4
+## 38        1.6       -1.4       -1.5       -3.1        1.0        0.2
+## 39      235.3       74.1      106.2       89.3     -160.1     -175.7</code></pre>
+<p>I’ve cleaned the extra white spacing, and fix the column date formats. At this point, I can start the relative valuation and a bare bone intrinsic valuation. I’ll create functions on the fly to help calculate and replicate financial metrics / ratios.</p>
+<p><br></p>
+</div>
+</div>
+<div id="calculating-baller-ratios" class="section level2">
+<h2>Calculating BALLER ratios</h2>
+<p>Let’s check out the names of the statement lines so we can use the correct names when executing calculations (costs of good sold vs cost of revenues). I’ll start with calculating price-to-book, price-to-earnings, revenue multiples, and EBITDA multiples <strong>if applicable</strong>.</p>
+<div id="price-to-book" class="section level3">
+<h3>Price-to-Book</h3>
+<pre class="r"><code># Check unique labels for the lines of each statement
+#unique(qtr_dbx[[&quot;income_statement&quot;]][[1]])
+
+
+
+# Function to calculate shares outstanding
+#++++++++++++++++++++++++++++++++++++
+shares_out &lt;- function(statements){
+ni &lt;- filter(statements[[&quot;income_statement&quot;]], For.the.Fiscal.Period.Ending. == &quot;Net Income (Loss)&quot;)[,-1]  
+  
+eps &lt;- filter(statements[[&quot;income_statement&quot;]], For.the.Fiscal.Period.Ending. == &quot;Basic EPS - Continuing Operations&quot;)[,-1]
+  
+shares &lt;- ni / eps
+rownames(shares) &lt;- &quot;Shares Outstanding&quot;
+return(shares)
+}
+
+
+
+# Function to calculate book value per share
+#++++++++++++++++++++++++++++++++++++
+bk.val &lt;- function(statements) {
+  
+  
+  shares &lt;- shares_out(statements)
+  
+  
+  # Get Total Shareholder Equity and Calculate BVPS
+  shares_equity &lt;- filter(statements[[&quot;balance_sheet&quot;]], Balance.Sheet.as.of.. == &quot;Total Shareholders Equity&quot;)[,-1]
+  
+  bvps &lt;- shares_equity / shares
+  rownames(bvps) &lt;- &quot;Book Val. Per Share&quot;
+  return(bvps)
+}
+
+
+
+# Calculate Book Value
+bk.val(qtr_dbx)</code></pre>
+<pre><code>##                     2018-03-31 2018-06-30 2018-09-30 2018-12-31 2019-03-31
+## Book Val. Per Share   2.334535    1.53878    1.10931   1.424842   1.830909
+##                     2019-06-30
+## Book Val. Per Share   1.706075</code></pre>
+<pre class="r"><code># Function to calculate price to book ratio
+#++++++++++++++++++++++++++++++++++++
+price.book &lt;- function(symbol, bvps) {
+  
+
+  
+  #Price data to finish calculation
+  a &lt;- last(colnames(bvps))
+  
+  symbol_prices &lt;- AlpacaforR::get_bars(symbol,from = as.Date(a)-5,to = as.Date(a)+5) %&gt;% 
+                                              map_df(data.frame) %&gt;% filter(time &lt; a) %&gt;% 
+                                              tail(1)
+  
+  
+  price_book &lt;- Cl(symbol_prices) / last(bvps)
+  names(price_book) &lt;- &quot;Price-to-Book Ratio&quot;
+  return(price_book)
+}
+
+
+
+# Calculate Price to Book
+price.book(&quot;DBX&quot;,bk.val(qtr_dbx))</code></pre>
+<pre><code>## Price-to-Book Ratio 
+##            14.68576</code></pre>
+<p>Price-to-Book = 💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩</p>
+<p>This is no surprise though. It should be expected that as a software company, it will have a high PB ratio (Mr. Buffet wouldn’t touch this type of name). According to <a href="http://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/pbvdata.html">NYU Sterns P/B ratio by Sector</a>, the average between Software (Internet) and Software (System &amp; Application) is 11.03 which Dropbox has a higher ratio of 14.6857.</p>
+<p>Now, let’s skip price to earnings because Dropbox isn’t even turning a profit in Net Income yet. Therefore, Price-to-Earings is also 💩💩💩 but we don’t buy into growth companies for valuations, do we? Well yes, we do, but just not using these metrics. Since management doesn’t expect Dropbox to turn profits until 2021, let’s put our attention on some revenue metrics since this is where Dropbox can shine (top-line growth).</p>
+<p><br></p>
+</div>
+<div id="revenue-multiples" class="section level3">
+<h3>Revenue Multiples</h3>
+<p>Before I can calculate revenue multiples, I’ll need to first project revenue going out five or ten years. Since this is the quick version, I will use five years. I am using Paying Subscribers and Average Revenue Per User (ARPU) as our key drivers for projecting revenue. Since these directly affect the top-line, I think using this will give us an accurate picture of future revenue growth.</p>
+<p>As of their most recent quarter (2Q 19’), Dropbox had 13.6 million paying subscribers which were up 1.7 million from 2Q 18’, a 14.3% YoY increase. Management forecasts FY 19’ Revenue to be between $1.646-1.648 Billion, which represents 18% YoY growth which is what I used for Year 1. I assume this comes from a modest 2.5% increase in ARPU and a small bump to 13.7 Million Paying Subscribers (only 100k more from where we are now).</p>
+<p>In Years 2-5, I assume the growth in Paying subscribers begins to decelerate more, and growth in ARPU remains extremely modest (inline with AVG GDP growth). All in all, this has revenue growing at a decelerated rate in years 2-5 @ 15.8% 13.5% 9.6% and 6.8%. See below for the rest of projected revenue.</p>
+<pre class="r"><code># Setting &amp; plot historical + projected revenues
+unique(qtr_dbx[[&quot;income_statement&quot;]][[1]])</code></pre>
+<pre><code>##  [1] &quot;Revenues&quot;                         
+##  [2] &quot;Cost of Revenues&quot;                 
+##  [3] &quot;Sales and Marketing&quot;              
+##  [4] &quot;General and Administrative&quot;       
+##  [5] &quot;Research and Development&quot;         
+##  [6] &quot;Other Income/expense-net&quot;         
+##  [7] &quot;Earnings before Taxes&quot;            
+##  [8] &quot;Provision for Income Tax&quot;         
+##  [9] &quot;Net Income (Loss)&quot;                
+## [10] &quot;Gross Profit/loss&quot;                
+## [11] &quot;Operating Income (Loss)&quot;          
+## [12] &quot;Basic EPS - Continuing Operations&quot;</code></pre>
+<pre class="r"><code>rev_hist &lt;- filter(annual_dbx[[&quot;income_statement&quot;]], For.the.Fiscal.Period.Ending. == &quot;Revenues&quot;)[,-1]
+rownames(rev_hist) &lt;- &quot;Revenues&quot;
+
+
+# REVENUE PROJECTIONS
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+rev_g &lt;- c(.184,.158,.135,.096,.068)
+n &lt;- 1:5
+rev_proj &lt;- rev_hist
+for(i in n){
+  rev_proj &lt;- cbind(rev_proj, (last(rev_proj)*(1+rev_g[i])))
+}
+
+
+# Add Projected dates
+dates_proj &lt;- c(&quot;Dec-31-2015&quot;,&quot;Dec-31-2016&quot;,&quot;Dec-31-2017&quot;,&quot;Dec-31-2018&quot;,&quot;Dec-31-2019&quot;,&quot;Dec-31-2020&quot;,&quot;Dec-31-2021&quot;,&quot;Dec-31-2022&quot;,&quot;Dec-31-2023&quot;)
+
+colnames(rev_proj) &lt;- dates_proj</code></pre>
+</div>
+<div id="plot-revenues" class="section level3">
+<h3>Plot Revenues</h3>
+<pre class="r"><code># Convert to a tidy format for easier plotting
+rev_proj_tidy &lt;- tidyr::gather(rev_proj, dates, Amount) %&gt;% mutate(type = c(rep(&quot;Historic&quot;,4),rep(&quot;Projected&quot;,5)))
+
+# Plot away
+ggplot2::ggplot(rev_proj_tidy, aes(dates,Amount,fill=type)) + geom_bar(stat = &quot;identity&quot;) + theme(axis.text.x = element_text(angle = 90)) + geom_text(aes(label=round(Amount,1)), vjust=1.6, color=&quot;white&quot;, size=3)</code></pre>
+<p><img src="/post/DBX-QUICKNDIRTY_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Thats what I want to see!! A linear trend of top line growth, just as expected. For this type of revenue growth, we should see a premium on its revenue multiple compared to its peers. If not, then maybe the market is discounting Dropbox shares a little too much?</p>
+<pre class="r"><code># My AlpacaforR package is a beast (shameless advertising here)
+price &lt;- AlpacaforR::get_bars(ticker,from = &quot;2019-09-04&quot;,to = &quot;2019-09-04&quot;) %&gt;% map_df(data.frame)
+
+
+#shares &lt;- shares_out(qtr_dbx)
+shares &lt;- 411
+
+mrkt_val &lt;- Cl(price) * last(shares)
+
+
+
+# Cash and Cash Equivalents
+cash &lt;- last(filter(qtr_dbx[[&quot;balance_sheet&quot;]], Balance.Sheet.as.of.. == &quot;Cash and Cash Equivalents&quot;)) + last(filter(qtr_dbx[[&quot;balance_sheet&quot;]], Balance.Sheet.as.of.. == &quot;Short-term Investments&quot;))
+
+
+# Total Debt
+debt &lt;- 787.20
+
+# Enterprise Value
+ent.val &lt;- mrkt_val - cash + debt
+
+
+# Projected revenue for this year
+rev_19 &lt;- rev_proj[,5]
+
+
+# Current LTM revenue
+ltm_rev &lt;- qtr_dbx[[&quot;income_statement&quot;]][1,] %&gt;% select(-1) %&gt;% 
+            gather(key = Date,value = Revenue) %&gt;% 
+            mutate(LTM = rollapply(Revenue,4,sum,fill = 0, align=&quot;right&quot;)) %&gt;% 
+            select(LTM) %&gt;% pull() %&gt;% last()
+
+
+# Calculate Multiple for Projected revenue
+rev_mult19 &lt;- ent.val / rev_19
+
+# Calculate Multiple for LTM revenue
+rev_multltm &lt;- ent.val / ltm_rev
+
+# Create Dataframe
+ent_rev_mult &lt;- data.frame(&quot;Multiples&quot;=c(rev_mult19,rev_multltm))
+rownames(ent_rev_mult) &lt;- c(&#39;Est. 19\&#39; Revenue&#39;,&#39;LTM Revenue&#39;)
+
+# Show Projected and LTM Rev. Multiples
+print(ent_rev_mult)</code></pre>
+<pre><code>##                  Multiples
+## Est. 19&#39; Revenue  4.474337
+## LTM Revenue       4.839946</code></pre>
+<p><br></p>
+<p><a id="valuations"></a></p>
+</div>
+<div id="relative-valuation-revenue-trading-multiple" class="section level3">
+<h3>Relative Valuation: Revenue Trading Multiple</h3>
+<p>According to Capital IQ, the average TEV / Total Revenue ratio for the Application Software Industry is 6.6x so we can see that Dropbox is coming in under that ratio. It looks like the market isn’t appreciating the revenue growth that Dropbox has shown therefore there is no premium compared to its peers. Being that Dropbox is a leader in this space for its size, the market is not appropriately pricing Dropbox on a revenue trading multiple front. If Dropbox was to be valued in line with its peers, we could see its stock price jump to…….</p>
+<pre class="r"><code># If Dropbox had the same revenue multiple as its peers...
+estimates_relval &lt;- data.frame(Ent.Value=c(6.6 * rev_19,6.6 * ltm_rev))
+
+estimates_relval &lt;- estimates_relval %&gt;% mutate(Share.Price = Ent.Value/shares)
+
+rownames(estimates_relval) &lt;- c(&quot;Fwd Estimate&quot;,&quot;LTM Estimate&quot;)
+
+# Show Relative Share Price estimate
+print(estimates_relval)</code></pre>
+<pre><code>##              Ent.Value Share.Price
+## Fwd Estimate  10875.30    26.46059
+## LTM Estimate  10053.78    24.46175</code></pre>
+<p>$26.46 at the Estimated Full-Year Revenue Guidance for 2019 and $24.46 at the current LTM Revenue which is both significantly above the most recent close price of $18.97.</p>
+<p>Now, as much as I want to calculate Ebitda multiples and run the same analysis, I don’t think it is necessary since Dropbox hasn’t been very profitable and EBITDA is the “closest” resemblance of FCF which we will be calculated next. Dropbox is undervalued in terms of relative valuation but how about Intrinsic?</p>
+<p><br></p>
+</div>
+<div id="intrinsic-valuation-quick-n-clean-dcf" class="section level3">
+<h3>Intrinsic Valuation: Quick N’ Clean DCF</h3>
+<p>There are multiple ways to calculate a companies Free Cash Flow. I usually like to be thorough when making any non-cash adjustments but since this is the “Quick N’ Clean” approach, I’ll check to see how Dropbox is calculating their FCF (a lot of these companies are in their own world so they’ll use ‘community adjusted’ free cash flows) to spare time.</p>
+<p>From the Cash Flow Statement, Dropbox is subtracting Capital Expenditures from their Cash flow from Operating Activites to arrive at their FCF. Let’s do that and then project FCF going forward 10 years. How did I choose growth rates? I started with the guidance the management gave for the full year 2019 (see below).</p>
+<blockquote>
+<p>We continue to expect free cash flow to be in the range of $375 million to $385 million this range includes one-time spend related to the build out of our new corporate headquarters, excluding this spend free cash flow would be $445 million to $465 million.</p>
+</blockquote>
+<p>Notice how FCF would have been in the range of $445-465 Million if the ONE-TIME expense for new headquarters were excluded. I want to keep this in mind when projecting FCF for years 2-5. I used the industries average 3-year CAGR for free cash flow of 18.7% as a base reference when projecting future FCF growth. Once again, this historical data is coming from S&amp;P Capital IQ.</p>
+<pre class="r"><code>#unique(annual_dbx[[&quot;cashflow&quot;]][[1]])
+
+# Create function to calculate free cash flow
+#++++++++++++++++++++++++++++++++++++
+fcf.value &lt;- function(statements){
+annual_cash_recent &lt;- statements[[&quot;cashflow&quot;]] #%&gt;% select(1,ncol(annual_dbx[[&quot;cashflow&quot;]]))
+
+
+op_cshflw_ann &lt;- filter(annual_cash_recent, For.the.Fiscal.Period.Ending. == &quot;Cash Flow from Operating Activities&quot;)
+
+capex_ann &lt;- filter(annual_cash_recent, For.the.Fiscal.Period.Ending. == &quot;Capital Expenditures&quot;)
+
+fcf_current_ann &lt;- op_cshflw_ann[,-1] + capex_ann[,-1]
+rownames(fcf_current_ann) &lt;- &quot;Free Cash Flow&quot;
+return(fcf_current_ann)
+}
+
+
+
+# Calculate Annual Free Cash Flows
+fcf_ann &lt;- fcf.value(annual_dbx)
+
+# Calculate Quarterly Free Cash Flows
+fcf_qtr &lt;- fcf.value(qtr_dbx)
+
+
+# Show Annual FCF
+print(fcf_ann)</code></pre>
+<pre><code>##                2015-12-31 2016-12-31 2017-12-31 2018-12-31
+## Free Cash Flow      -63.9      137.4        305      362.4</code></pre>
+<p><br></p>
+</div>
+<div id="discount-rate-capital-asset-pricing-model" class="section level3">
+<h3>Discount Rate: Capital Asset Pricing Model</h3>
+<p>Next, I’ll create a function to calculate CAPM for the discount rate. I’ll use the 10-yr yield as the risk-free rate which at the time of this writing is at a low of 1.5%. I’ll use an RF rate of 2% to adjust for the recent volatility in yields and 8.5% as the Market Premium. I expect this to be above 10% due to the risk involved with growing tech companies.</p>
+<pre class="r"><code># Create function to calculate discount rate using CAPM
+#++++++++++++++++++++++++++++++++++++
+capm &lt;- function(symbol, rm = .085, rf = .02){
+  
+  #Calculate equity risk premium
+  erp &lt;- rm - rf
+  
+  #Set dates
+  d &lt;- as.POSIXlt(Sys.Date())
+  d$year &lt;- d$year-5
+  from &lt;- as.Date(d)
+  to &lt;- Sys.Date()
+  
+  #Get price data for SPY then your symbol
+  spy.price &lt;- getSymbols(&quot;SPY&quot;, from = from, to = to, auto.assign = FALSE)
+  spy.price &lt;- to.monthly(spy.price[,4], OHLC=FALSE)
+  rets &lt;- Return.calculate(spy.price)
+  
+  #Your stock and combine with spy
+  symbol.price &lt;- getSymbols(symbol, from = from, to = to, auto.assign = FALSE)
+  symbol.price &lt;- to.monthly(symbol.price[,4], OHLC=FALSE)
+  rets$symbol &lt;- Return.calculate(symbol.price)
+  
+  #Rename first variable
+  names(rets)[1] &lt;- &quot;spy_ret&quot;
+  
+  #Remove NA from first obv
+  rets &lt;- rets[-1,]
+  
+  #Run regression to find the beta
+  reg &lt;- lm(symbol ~ spy_ret, data = rets)
+  
+  beta &lt;- summary(reg)$coeff[2]
+  
+  ca.pm &lt;- rf + (beta * erp)
+  return(ca.pm)
+}
+
+
+
+# Calculate and show discount rate
+
+disc &lt;- capm(ticker)
+disc</code></pre>
+<pre><code>## [1] 0.1197025</code></pre>
+</div>
+<div id="equity-value" class="section level3">
+<h3>Equity Value</h3>
+<p>Last, I will create a function to calculate the Equity Value of a company. In this function, we will forecast FCF, create a discount factor using the discount rate we calculated above, add the present value of those free cash flows, calculate the terminal value using a terminal value growth rate, and finally add the two together to derive the equity value of Dropbox. Finally, we will divide this value by the shares outstanding to get to our estimated share price which will hopefully be above the current price.</p>
+<blockquote>
+<p>Not all companies are created equal and just because the peers have grown at 18.7% 3-Year CAGR doesn’t mean Dropbox will do the same. Since Dropbox is a leader and is just beginning to see some real growth in FCF, we will grow FCF a little faster than the industries historical average at 25% in year 2, peaking at 30% in year 3, 20% in year 4 and 18% in year 5. After, Dropbox sees a slowdown of 3% per year in FCF growth for years 6-8 and then shows modest growth of 5% and 3% in years 9 &amp; 10.</p>
+</blockquote>
+<pre class="r"><code># Create function to calculate Equity Value
+#++++++++++++++++++++++++++++++++++++
+equity.value &lt;- function(fcf, disc, g, n = 10, tvg = .02,tv_disc_diff=.02){ 
+              #default forecast period of 5 years
+              #create dataframe &amp; calculate fv of FCF and pv of the 
+              #forecasted 5 years fv fcf and sum it all up
+              cf &lt;- rep(fcf, n)
+              cf &lt;- data.frame(cf)
+              cf$period &lt;- seq(1,n,1)
+              
+      
+              
+              fcf_vec &lt;- last(fcf_ann)
+              for(i in g){
+                val &lt;- tail(fcf_vec,1) * (1+i)
+                fcf_vec &lt;- c(fcf_vec,val)
+              }
+              fcf_vec &lt;- fcf_vec[-1]
+              
+              
+              cf$fv &lt;- fcf_vec
+              
+              
+              
+              cf$pv_factor &lt;- 1 / (1 + disc)^cf$period  
+              cf$pv &lt;- cf$fv * cf$pv_factor
+              pv_cf &lt;- sum(cf$pv)
+              
+              #terminal period - default value at 2%
+              #calculate Terminal value and discount it to PV
+              tv &lt;- cf$fv[n] * (1+tvg) / (disc - tvg)
+              pv_tv &lt;- tv / (1+(disc-tv_disc_diff))^n
+              
+              #add PV of forecasted values and PV of terminal value to
+              #get PV equity value
+              equity_value &lt;- pv_cf + pv_tv
+              return(equity_value)
+}
+
+
+
+
+# FCF Growth in years 1-10
+growth &lt;- c(.05,.25,.30,.20,.18,.15,.12,.09,.05,.03)
+
+# Calculate Equity Value
+equity_value_fcf &lt;- equity.value(fcf = last(fcf_ann), disc = disc, g = growth)
+
+
+#Price per share
+equity_pps &lt;- equity_value_fcf / shares
+equity_pps</code></pre>
+<pre><code>## [1] 23.84999</code></pre>
+<p><a id="conclusion"></a></p>
+</div>
+</div>
+</div>
+<div id="is-dropbox-really-a-buy" class="section level1">
+<h1>Is Dropbox Really a Buy?</h1>
+<p>Finally, the question we’ve all been asking. Is Dropbox Really a Buy? There are very few companies that can compete with the big four Google, Amazon, Apple, and Microsoft, let alone a company that IPO’d only within the last 12 months. NO ONE can accurately predict every time where a stock is going to head in a few weeks or where it will close tomorrow. I try tell whether a stock is a good and attractive buy that will appreciate in the long run, but I can’t promise about tomorrow. Not trying to BS anyone.</p>
+<p>To answer the question, I believe it is a <strong>good time to buy</strong> shares of Dropbox as wall street is missing the sticky and growing customer base through the lens of competition &amp; risk worries which is leading to its undervaluation in both relative and intrinsic terms. Even under the “Quick N’ Clean” intrinsic valuation where I used bare-bone assumptions, I am seeing an estimated price of <strong>$23.85 as of 9/9/2019 which is 25.72% above the previous close of $18.97</strong>.</p>
+</div>
+<div id="whats-next" class="section level1">
+<h1>Whats Next</h1>
+<p>I plan on taking this “Quick N’ Clean” valuation and create a more complex DCF Model in excel. I will also do more extensive research into its direct comparables as well as more fundamental research to have better assumptions for three different scenarios if these were not appropriate enough. If this “Quick N’ Clean” valuation showed that it was Overvalued, then I would not want to put the time and effort into a more extensive model! Time is $$$ so I look for ways to save it.</p>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/dbx/">DBX</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/programming/">Programming</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/finance/">Finance</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/cloud/">Cloud</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/r/">R</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/comparable-analysis/">Comparable Analysis</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/valuations/">Valuations</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/recommendations/">Recommendations</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/08/https-aws-r/" data-tooltip="HTTPS to Secure Your RStudio &#43; Shiny App Work Environment">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/08/dbx-q3-quicknclean/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/08/dbx-q3-quicknclean/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/08/dbx-q3-quicknclean/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Jagger Villalobos. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/08/https-aws-r/" data-tooltip="HTTPS to Secure Your RStudio &#43; Shiny App Work Environment">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?url=/2019/08/dbx-q3-quicknclean/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/08/dbx-q3-quicknclean/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/08/dbx-q3-quicknclean/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?url=%2F2019%2F08%2Fdbx-q3-quicknclean%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F08%2Fdbx-q3-quicknclean%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F08%2Fdbx-q3-quicknclean%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://res.cloudinary.com/dyackvnwm/image/upload/v1542411893/profilepic.png" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jagger Villalobos</h4>
+    
+      <div id="about-card-bio">Bottom-Up Analysis | Equity Research</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Seeking Analyst Position
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        New York, New York
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/08/dbx-q3-quicknclean/">
+                <h3 class="media-heading">Dropbox Valuation - Quick N&#39; Clean</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Dropbox Valuation - Quick N’ Clean Click any link in the list below to jump to topic
+ What is Dropbox What Sets Dropbox Apart Digging into the financials Relative &amp; Intrinsic Valuations Is Dropbox Really a Buy  Dropbox’s shares have fallen -29.8% from its July high of $26.20, which was under the recent February high of $26.49 as of 09/04/2019. It’s also -57.75% under the ATH of $43.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/08/https-aws-r/">
+                <h3 class="media-heading">HTTPS to Secure Your RStudio &#43; Shiny App Work Environment</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">HTTPS to Secure Your RStudio + Shiny App Work Environment Click any link in list below to jump to topic
+ Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/08/aws-r/">
+                <h3 class="media-heading">Running R on AWS EC2 and Logging into RStudio from Anywhere</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database , I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/07/aws-rds-mysql/">
+                <h3 class="media-heading">Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Amazon Web Services RDS with MySQL &amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal + MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/05/mysql-r/">
+                <h3 class="media-heading">Using MySQL with R</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading + writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB+. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/sentiment-analysis-conf-call/">
+                <h3 class="media-heading">Sentiment Analysis on Earnings Call</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/alpaca-for-r/">
+                <h3 class="media-heading">AlpacaforR</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">#AlpacaforR
+ What is Alpaca and AlpacaforR Some Example Functions Implementing the Earnings Strategy Some Bonus Example Functions - Live Account Users Learn more about Alpaca and AlpacaforR Github  
+After writing my recent post Scaling a Simple Earnings Strategy to the NASDAQ Exchange, I started to research how I could implement that earnings strategy into a live brokerage account directly from R. Most of us have heard of Quantopian or other backtesting services, but things can get complicated quickly once you search for a way to implement a live strategy using R.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/backtest-simple-earnings/">
+                <h3 class="media-heading">Scaling a Simple Earnings Strategy to the NASDAQ Exchange</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">#Pure Earnings Play
+ Getting the data and writing the function Top sectors and stocks from results Beautiful plots to visualize the results Quick review How to improve the simple strategy  
+You often hear two things when watching or reading financial news. One is earnings season, and another is quantitative trading. Most people prefer to manage their own money and pick the companies their most familiar with when making trading decisions.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/03/ipo-estimates-lyftdbx/">
+                <h3 class="media-heading">Lyft IPO &#43; Dropbox Review</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">IPO Estimate &amp; Review  Taking a look at LYFT financials for the first time Review of Dropbox IPO and stock performance  
+ Can the slow IPO market get a lift from LYFT? Every year, the stock market generates millionaire/billionaires daily through initial public offering or IPO. $46.8 Billion flooded the IPO markets last year, with 191 companies having their market debuts in 2018 beating 2017 by 31.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/01/salesforce-q3-update/">
+                <h3 class="media-heading">Salesforce Q3 Update</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">#Salesforce Q3 Update - Updated model from previous post, click here to read previous Salesforce post - Management raised top and bottom line forecasts for FY19 guidance - Management gave more details on FY20 &amp; FY22 goals and confirmed forecasts - Near bulletproof business model during economic slowdown - Key risks to management goals - Recommendation and price targets
+
+Salesforce (CRM) carried on with its tradition of beating expectations and raising future forecasts in its most recent quarterly results.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         13 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2019\/08\/dbx-q3-quicknclean\/';
+          
+            this.page.identifier = '\/2019\/08\/dbx-q3-quicknclean\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

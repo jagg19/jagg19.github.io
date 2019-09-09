@@ -6,8 +6,8 @@ slug: salesforce-enough-to-buy
 coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1543362880/1088Salesforce.Einstein.jpg
 coverSize: partial
 thumbnailImagePosition: left
-categories: ["Equity Valuation","Forecasting", "Valuations"]
-tags: ["CRM", "Cloud", "DCF", "WACC", "Comparable Analysis", "Recommendations"]
+categories: ["CRM", "Cloud", "DCF", "Comparable Analysis","Valuations", "Recommendations"]
+tags: ["CRM", "Cloud", "DCF", "Comparable Analysis","Valuations", "Recommendations"]
 summary: "Whenever Customer Relationship Management is the topic of discussion, it’s almost impossible not to see Salesforce mentioned as the pioneer and leader. Salesforce currently has the largest market share of the CRM segment and is expected to continue gaining market share. Before we dig into Salesforce specifically, let’s explore what exactly CRM is and the growth prospects. I want to cover some important factors that can affect Salesforce future cash flows instead of specific steps and calculations."
 ---
 

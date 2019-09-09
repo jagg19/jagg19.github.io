@@ -10,16 +10,27 @@ tags:
 - EC2
 - Cloud
 - RStudio
+- R
+- Programming
 - Shiny
 - Nginx
 - Route 53
+- Deploying Website / Apps
+- AWS
 - Elastic Load Balancer
 thumbnailImagePosition: left
 categories:
-- AWS
+- EC2
+- Cloud
+- RStudio
 - R
 - Programming
+- Shiny
+- Nginx
+- Route 53
 - Deploying Website / Apps
+- AWS
+- Elastic Load Balancer
 ---
 
 # HTTPS to Secure Your RStudio + Shiny App Work Environment

@@ -1,0 +1,626 @@
+---
+title: "Dropbox Valuation - Quick N' Clean"
+author: "Jagger Villalobos"
+date: '2019-09-09'
+coverSize: partial
+coverImage: https://res.cloudinary.com/dyackvnwm/image/upload/v1568050734/image.jpg
+slug: dbx-q3-quicknclean
+tags: ["DBX","Programming","Finance","Cloud","R","Comparable Analysis","Valuations", "Recommendations"]
+thumbnailImagePosition: left
+categories: ["DBX","Programming","Finance","Cloud","R","Comparable Analysis","Valuations", "Recommendations"]
+summary: "Dropbox's shares have fallen -29.8% from its July high of $26.20, which was under the recent February high of $26.49 as of 09/04/2019. It's also -57.75% under the ATH of $43.50, so I saw this as a perfect opportunity to leverage R and run a 'Quick N' Clean' valuation to answer a couple questions like 'What sets Dropbox Apart' and more. "
+---
+
+# Dropbox Valuation - Quick N' Clean
+
+Click any link in the list below to jump to topic
+
+- [What is Dropbox](#dropbox)
+- [What Sets Dropbox Apart](#apart)
+- [Digging into the financials](#financials)
+- [Relative & Intrinsic Valuations](#valuations)
+- [Is Dropbox Really a Buy](#conclusion)
+
+
+
+Dropbox's shares have fallen -29.8% from its July high of $26.20, which was under the recent February high of $26.49 as of 09/04/2019. It's also -57.75% under the ATH of $43.50, so I saw this as a perfect opportunity to leverage R and run a "Quick N' Clean" valuation to answer a couple questions like "What sets Dropbox Apart" and more. 
+
+I've followed the software space for a while now, and I find it interesting that the leader in the collaboration tools industry has seen selling pressure from investors. Dropbox has proved itself as the leader in this space with double-digit YoY revenue growth and increasing the amount of Paid Users. Dropbox is one of the few companies to recently go public that is successfully competing with the largest players in this space (Google, Microsoft, Apple, Amazon). Let's quickly review Dropbox as a company and then the financial prospects to arrive at a "Quick N' Clean" Valuation. 
+
+
+<br>
+
+<a id="dropbox"></a>
+
+# Dropbox
+
+Dropbox is one of the smaller players in a dominated cloud sector, but a leader in the more niche collaboration tools industry. As more companies begin to transition into a data-oriented business, data storage and sharing will become vital for companies to grow. More employees will need to access and share files from anywhere, and consumers will prefer the apps that have a great and easy-to-use UI. File sharing will be seen as a major feature in collaboration tools services and this is where Dropbox provides a beautiful UI that's extremely easy-to-use. 
+
+
+<br>
+
+# Is it Really a BUY
+
+According to NASDAQ's website, Dropbox has 11 Analysts ratings with 8 as Strong Buys, 1 as Buy, 2 as Hold, and 0 as Sell. Looking at Seeking Alpha, they have 16 Analysts with 8 as a Buy, 3 as Outperform, 3 as Hold, 3 as Underperform and 0 as Sell. I like to venture where the crowd doesn't go, so I wanted to seek out reasons why Dropbox could possibly be a sell. I wanted to find answers to the questions "what sets dropbox apart from competitor services" and also "is the stock undervalued on a relative scale". 
+
+After extensive research and comparisons between dropbox and its peers, I found the answers to the first question as to why dropbox and what sets them apart. Other than the obvious risks from the big cloud competitors, it was hard to find reasons to sell Dropbox. I conducted a survey that targeted consumer and enterprise Dropbox users that shedded a positive light on Dropbox. Now I hope to find an answer to whether Dropbox really is a "Buy" and to see some real support for an "undervalued" stock after running relative and intrinsic valuations. 
+
+
+
+
+```{r include=FALSE}
+#Load packages
+#++++++++++++++++++++++++++++++++++++
+if("quantmod" %in% rownames(installed.packages()) == FALSE){
+  install.packages("quantmod")
+}  else{ require(quantmod)}
+
+
+if("PerformanceAnalytics" %in% rownames(installed.packages()) == FALSE){
+  install.packages("PerformanceAnalytics")
+}  else{ require(PerformanceAnalytics)}
+
+
+if("zoo" %in% rownames(installed.packages()) == FALSE){
+  install.packages("zoo")
+}  else{ require(zoo)}
+
+
+if("dplyr" %in% rownames(installed.packages()) == FALSE){
+  install.packages("dplyr")
+}  else{ require(dplyr)}
+
+if("tidyverse" %in% rownames(installed.packages()) == FALSE){
+  install.packages("tidyverse")
+}  else{ require(tidyverse)}
+
+
+```
+
+<br>
+
+<a id="apart"></a>
+
+# Question 1: Whats Sets Dropbox Apart?
+
+Dropbox's popularity and network effect among consumers is nothing short of dominant. I created a two-question survey in various social threads where consumers / companies use Dropbox and its competitors to ask these questions;
+
+
+
+1. Do you use Dropbox over its competitors such as Box, Google Drive, AWS S3, or Microsoft Onedrive? If yes, what moat or differentiator does Dropbox have compared to the others?
+
+
+
+2. Why so many enterprises and smaller companies like to use Dropbox than others.
+
+
+The general answers made it a little clearer to me why Dropbox continues to be the leader in this space. In general, respondents seemed to favor Dropboxes upload speed and the light CPU usage compared to competitors like google drive, as well as the very easy to use GUI vs others (google drive came in second). I noticed some people did say Dropbox was a little pricier vs its competitors (it raised its most popular subscription price in June by 20%) but none said it would push them to cancel the subscription and look elsewhere.  
+
+
+With that said, I think Paying Subscribers are the biggest catalyst to Dropboxes growth. This can be through its consumer or enterprise customers. Enterprise is leading in terms of additional subscribers but I think growth has been shy of what management visioned. There could be a possibility that the enterprise users are picking up the slack from the  paying consumer business. This small slowdown is not because of lack of quality or innovation, but because many services are offering free tiers that consumers are using. 
+
+
+## Doesnt Come Without Risks
+
+I noticed one trend in general from my small survey. There were not many respondents who used only one service (either Dropbox, Box, Google Drive, Amazon S3, Microsoft OneDrive). They all gave feedback on all of the services mentioned mostly because they sign up to multiple free-tier services to use each one for different purposes. The risk here is two-fold. Dropbox could lose paying subscribers to one of the competitor services that the user already has a free tier on (could be because of cheaper prices, additional features, etc.), or Dropbox could have existing paying subscribers spend less because they move a portion of their spending to another competitor.
+
+
+
+Google drive is the clear runner up in Dropboxes segment, so if Google wanted to do a complete revamp that created a fresh new GUI and incorporates all of its features from its arsenal of services then that could be a big threat to Dropbox. Also, I noticed AWS S3 is not well-known. If Amazon decided they wanted to add a consumer-friendly GUI to S3 (they currently do not really have one, it's all dashboard/programming related), then this could also be a big threat due to Amazons resources and the fact that you pay as you go vs subscription and it's virtually unlimited storage (with different tiers priced differently as well). Dropbox continues to integrate deeply through partnerships such as Slack, Zoom, and Atlassian but these two large companies already have a large network of amazing services of their own. Despite this, Dropbox continues to be the first that comes to mind and use when we think of consumer/enterprise cloud sharing storage.
+
+
+
+
+
+# Question 2: Are Dropbox Shares Currently Undervalued?
+
+Now that I've found the reasons to what sets Dropbox apart, I want to find the answer to "Are Dropbox shares currently undervalued?" by running relative valuations from revenue multiples and intrinsic valuation on a discounted cash flow model.
+
+
+<a id="financials"></a>
+
+## Getting Financial Data
+
+All of the financial data is coming from S&P Capital IQ, which they get directly from the SEC filings. I downloaded them into two separate Excel Workbooks which can be done easily on Capital IQ. One workbook for annual statements and the other for quarterly, and each was loaded into R using the `xlsx` package. 
+
+The end result in R was two lists, one for annual and one for quarterly. Each list contained 3 data frames for the income statement, balance sheet, and cash flow statement. See below for the code and the lists.
+
+```{r}
+
+
+# Ticker
+ticker <- "DBX"
+
+
+# ANNUAL STATEMENTS
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# Create a list and statement names
+annual_dbx <- list()
+statement_names <- c("income_statement","balance_sheet","cashflow")
+
+
+# Read each excel sheet from the workbook into a dataframe...
+for(i in 1:length(statement_names)){
+  annual_dbx[[i]] <- xlsx::read.xlsx("/Users/jagvill/DBX.xlsx",sheetIndex = i,startRow = 1,colClasses = c("character",rep("numeric",6)),stringsAsFactors=FALSE) %>% na.omit()
+}
+
+names(annual_dbx) <- statement_names
+
+
+
+
+# QUARTERLY STATEMENTS
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# Create a list and statement names
+qtr_dbx <- list()
+
+# Read each excel sheet from the workbook into a dataframe...
+for(i in 1:length(statement_names)){
+  qtr_dbx[[i]] <- xlsx::read.xlsx("/Users/jagvill/DBX_qtr.xlsx",sheetIndex = i,startRow = 1,colClasses = c("character",rep("numeric",6)),stringsAsFactors=FALSE) %>% na.omit()
+}
+
+names(qtr_dbx) <- statement_names
+
+
+
+# Clean up the white spacing on each of the statements line items from each list
+
+for(i in 1:2){     # First item in the list are the annual statements, and the second is quarterly
+  if(i == 1){    
+    for(i in 1:3){ # Annual
+      annual_dbx[[i]][,1] <- stringr::str_trim(annual_dbx[[i]][,1]) 
+    }
+  } else{
+    for(i in 1:3){ # Quarterly
+      qtr_dbx[[i]][,1] <- stringr::str_trim(qtr_dbx[[i]][,1]) 
+    }
+  }
+}
+
+
+
+head(qtr_dbx)
+```
+
+
+### More Data Cleansing
+
+Great, we got our statements loaded in pretty quickly, but it's not 100% clean (look at the dates in the column name). Let's do a little cleaning before we move forward. 
+
+> The time origin for Excels date format is 1899-12-30
+
+```{r}
+# Get quarterly dates and format correctly
+dates_qtrly <- colnames(qtr_dbx[["income_statement"]])[-1]
+dates_qtrly <- as.Date(dates_qtrly, "%b.%d.%Y")
+
+# Clean the dates for each statement
+for(i in 1:3){
+  colnames(qtr_dbx[[i]])[-1] <- as.character(dates_qtrly)  
+}
+
+
+
+# Get Annual dates and format correctly
+dates_annual <- colnames(annual_dbx[["balance_sheet"]])[-1]
+dates_annual <- gsub(pattern = "X", replacement = "", x = dates_annual)
+
+
+# Time origin for Excel date format
+dates_annual <- as.Date(as.numeric(dates_annual), origin = "1899-12-30")
+
+# Clean the dates for each statement
+for(i in 1:3){
+  colnames(annual_dbx[[i]])[-1] <- as.character(dates_annual)
+}
+
+head(qtr_dbx)
+
+```
+
+
+I've cleaned the extra white spacing, and fix the column date formats. At this point, I can start the relative valuation and a bare bone intrinsic valuation. I'll create functions on the fly to help calculate and replicate financial metrics / ratios.
+
+
+<br>
+
+## Calculating BALLER ratios
+
+Let's check out the names of the statement lines so we can use the correct names when executing calculations (costs of good sold vs cost of revenues). I'll start with calculating price-to-book, price-to-earnings, revenue multiples, and EBITDA multiples **if applicable**.
+
+### Price-to-Book
+
+```{r warning=FALSE}
+# Check unique labels for the lines of each statement
+#unique(qtr_dbx[["income_statement"]][[1]])
+
+
+
+# Function to calculate shares outstanding
+#++++++++++++++++++++++++++++++++++++
+shares_out <- function(statements){
+ni <- filter(statements[["income_statement"]], For.the.Fiscal.Period.Ending. == "Net Income (Loss)")[,-1]  
+  
+eps <- filter(statements[["income_statement"]], For.the.Fiscal.Period.Ending. == "Basic EPS - Continuing Operations")[,-1]
+  
+shares <- ni / eps
+rownames(shares) <- "Shares Outstanding"
+return(shares)
+}
+
+
+
+# Function to calculate book value per share
+#++++++++++++++++++++++++++++++++++++
+bk.val <- function(statements) {
+  
+  
+  shares <- shares_out(statements)
+  
+  
+  # Get Total Shareholder Equity and Calculate BVPS
+  shares_equity <- filter(statements[["balance_sheet"]], Balance.Sheet.as.of.. == "Total Shareholders Equity")[,-1]
+  
+  bvps <- shares_equity / shares
+  rownames(bvps) <- "Book Val. Per Share"
+  return(bvps)
+}
+
+
+
+# Calculate Book Value
+bk.val(qtr_dbx)
+
+
+
+# Function to calculate price to book ratio
+#++++++++++++++++++++++++++++++++++++
+price.book <- function(symbol, bvps) {
+  
+
+  
+  #Price data to finish calculation
+  a <- last(colnames(bvps))
+  
+  symbol_prices <- AlpacaforR::get_bars(symbol,from = as.Date(a)-5,to = as.Date(a)+5) %>% 
+                                              map_df(data.frame) %>% filter(time < a) %>% 
+                                              tail(1)
+  
+  
+  price_book <- Cl(symbol_prices) / last(bvps)
+  names(price_book) <- "Price-to-Book Ratio"
+  return(price_book)
+}
+
+
+
+# Calculate Price to Book
+price.book("DBX",bk.val(qtr_dbx))
+
+```
+
+
+Price-to-Book = 💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩💩
+
+
+This is no surprise though. It should be expected that as a software company, it will have a high PB ratio (Mr. Buffet wouldn't touch this type of name). According to [NYU Sterns P/B ratio by Sector](http://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/pbvdata.html), the average between Software (Internet) and Software (System & Application) is 11.03 which Dropbox has a higher ratio of 14.6857.
+
+
+Now, let's skip price to earnings because Dropbox isn't even turning a profit in Net Income yet. Therefore, Price-to-Earings is also 💩💩💩 but we don't buy into growth companies for valuations, do we? Well yes, we do, but just not using these metrics. Since management doesn't expect Dropbox to turn profits until 2021, let's put our attention on some revenue metrics since this is where Dropbox can shine (top-line growth).
+ 
+
+<br>
+
+### Revenue Multiples
+
+Before I can calculate revenue multiples, I'll need to first project revenue going out five or ten years. Since this is the quick version, I will use five years. I am using Paying Subscribers and Average Revenue Per User (ARPU) as our key drivers for projecting revenue. Since these directly affect the top-line, I think using this will give us an accurate picture of future revenue growth. 
+
+As of their most recent quarter (2Q 19'), Dropbox had 13.6 million paying subscribers which were up 1.7 million from 2Q 18', a 14.3% YoY increase. Management forecasts FY 19' Revenue to be between $1.646-1.648 Billion, which represents 18% YoY growth which is what I used for Year 1. I assume this comes from a modest 2.5% increase in ARPU and a small bump to 13.7 Million Paying Subscribers (only 100k more from where we are now). 
+
+In Years 2-5, I assume the growth in Paying subscribers begins to decelerate more, and growth in ARPU remains extremely modest (inline with AVG GDP growth). All in all, this has revenue growing at a decelerated rate in years 2-5 @ 15.8% 13.5% 9.6% and 6.8%. See below for the rest of projected revenue.
+
+```{r}
+
+# Setting & plot historical + projected revenues
+unique(qtr_dbx[["income_statement"]][[1]])
+
+rev_hist <- filter(annual_dbx[["income_statement"]], For.the.Fiscal.Period.Ending. == "Revenues")[,-1]
+rownames(rev_hist) <- "Revenues"
+
+
+# REVENUE PROJECTIONS
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+rev_g <- c(.184,.158,.135,.096,.068)
+n <- 1:5
+rev_proj <- rev_hist
+for(i in n){
+  rev_proj <- cbind(rev_proj, (last(rev_proj)*(1+rev_g[i])))
+}
+
+
+# Add Projected dates
+dates_proj <- c("Dec-31-2015","Dec-31-2016","Dec-31-2017","Dec-31-2018","Dec-31-2019","Dec-31-2020","Dec-31-2021","Dec-31-2022","Dec-31-2023")
+
+colnames(rev_proj) <- dates_proj
+
+```
+
+
+### Plot Revenues
+
+```{r}
+
+# Convert to a tidy format for easier plotting
+rev_proj_tidy <- tidyr::gather(rev_proj, dates, Amount) %>% mutate(type = c(rep("Historic",4),rep("Projected",5)))
+
+# Plot away
+ggplot2::ggplot(rev_proj_tidy, aes(dates,Amount,fill=type)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90)) + geom_text(aes(label=round(Amount,1)), vjust=1.6, color="white", size=3)
+
+```
+
+Thats what I want to see!! A linear trend of top line growth, just as expected. For this type of revenue growth, we should see a premium on its revenue multiple compared to its peers. If not, then maybe the market is discounting Dropbox shares a little too much?
+
+
+```{r}
+
+# My AlpacaforR package is a beast (shameless advertising here)
+price <- AlpacaforR::get_bars(ticker,from = "2019-09-04",to = "2019-09-04") %>% map_df(data.frame)
+
+
+#shares <- shares_out(qtr_dbx)
+shares <- 411
+
+mrkt_val <- Cl(price) * last(shares)
+
+
+
+# Cash and Cash Equivalents
+cash <- last(filter(qtr_dbx[["balance_sheet"]], Balance.Sheet.as.of.. == "Cash and Cash Equivalents")) + last(filter(qtr_dbx[["balance_sheet"]], Balance.Sheet.as.of.. == "Short-term Investments"))
+
+
+# Total Debt
+debt <- 787.20
+
+# Enterprise Value
+ent.val <- mrkt_val - cash + debt
+
+
+# Projected revenue for this year
+rev_19 <- rev_proj[,5]
+
+
+# Current LTM revenue
+ltm_rev <- qtr_dbx[["income_statement"]][1,] %>% select(-1) %>% 
+            gather(key = Date,value = Revenue) %>% 
+            mutate(LTM = rollapply(Revenue,4,sum,fill = 0, align="right")) %>% 
+            select(LTM) %>% pull() %>% last()
+
+
+# Calculate Multiple for Projected revenue
+rev_mult19 <- ent.val / rev_19
+
+# Calculate Multiple for LTM revenue
+rev_multltm <- ent.val / ltm_rev
+
+# Create Dataframe
+ent_rev_mult <- data.frame("Multiples"=c(rev_mult19,rev_multltm))
+rownames(ent_rev_mult) <- c('Est. 19\' Revenue','LTM Revenue')
+
+# Show Projected and LTM Rev. Multiples
+print(ent_rev_mult)
+```
+
+<br>
+
+<a id="valuations"></a>
+
+### Relative Valuation: Revenue Trading Multiple
+
+According to Capital IQ, the average TEV / Total Revenue ratio for the Application Software Industry is 6.6x so we can see that Dropbox is coming in under that ratio. It looks like the market isn't appreciating the revenue growth that Dropbox has shown therefore there is no premium compared to its peers. Being that Dropbox is a leader in this space for its size, the market is not appropriately pricing Dropbox on a revenue trading multiple front. If Dropbox was to be valued in line with its peers, we could see its stock price jump to.......
+
+
+```{r}
+
+# If Dropbox had the same revenue multiple as its peers...
+estimates_relval <- data.frame(Ent.Value=c(6.6 * rev_19,6.6 * ltm_rev))
+
+estimates_relval <- estimates_relval %>% mutate(Share.Price = Ent.Value/shares)
+
+rownames(estimates_relval) <- c("Fwd Estimate","LTM Estimate")
+
+# Show Relative Share Price estimate
+print(estimates_relval)
+```
+
+
+
+$26.46 at the Estimated Full-Year Revenue Guidance for 2019 and $24.46 at the current LTM Revenue which is both significantly above the most recent close price of $18.97. 
+
+Now, as much as I want to calculate Ebitda multiples and run the same analysis, I don't think it is necessary since Dropbox hasn't been very profitable and EBITDA is the "closest" resemblance of FCF which we will be calculated next. Dropbox is undervalued in terms of relative valuation but how about Intrinsic?
+
+
+<br>
+
+
+
+### Intrinsic Valuation: Quick N' Clean DCF
+
+There are multiple ways to calculate a companies Free Cash Flow. I usually like to be thorough when making any non-cash adjustments but since this is the "Quick N' Clean" approach, I'll check to see how Dropbox is calculating their FCF (a lot of these companies are in their own world so they'll use 'community adjusted' free cash flows) to spare time. 
+
+From the Cash Flow Statement, Dropbox is subtracting Capital Expenditures from their Cash flow from Operating Activites to arrive at their FCF. Let's do that and then project FCF going forward 10 years. How did I choose growth rates? I started with the guidance the management gave for the full year 2019 (see below). 
+
+>We continue to expect free cash flow to be in the range of $375 million to $385 million this range includes one-time spend related to the build out of our new corporate headquarters, excluding this spend free cash flow would be $445 million to $465 million.
+
+Notice how FCF would have been in the range of $445-465 Million if the ONE-TIME expense for new headquarters were excluded. I want to keep this in mind when projecting FCF for years 2-5. I used the industries average 3-year CAGR for free cash flow of 18.7% as a base reference when projecting future FCF growth. Once again, this historical data is coming from S&P Capital IQ.
+
+
+
+```{r}
+
+#unique(annual_dbx[["cashflow"]][[1]])
+
+# Create function to calculate free cash flow
+#++++++++++++++++++++++++++++++++++++
+fcf.value <- function(statements){
+annual_cash_recent <- statements[["cashflow"]] #%>% select(1,ncol(annual_dbx[["cashflow"]]))
+
+
+op_cshflw_ann <- filter(annual_cash_recent, For.the.Fiscal.Period.Ending. == "Cash Flow from Operating Activities")
+
+capex_ann <- filter(annual_cash_recent, For.the.Fiscal.Period.Ending. == "Capital Expenditures")
+
+fcf_current_ann <- op_cshflw_ann[,-1] + capex_ann[,-1]
+rownames(fcf_current_ann) <- "Free Cash Flow"
+return(fcf_current_ann)
+}
+
+
+
+# Calculate Annual Free Cash Flows
+fcf_ann <- fcf.value(annual_dbx)
+
+# Calculate Quarterly Free Cash Flows
+fcf_qtr <- fcf.value(qtr_dbx)
+
+
+# Show Annual FCF
+print(fcf_ann)
+```
+
+<br>
+
+### Discount Rate: Capital Asset Pricing Model
+
+Next, I'll create a function to calculate CAPM for the discount rate. I'll use the 10-yr yield as the risk-free rate which at the time of this writing is at a low of 1.5%. I'll use an RF rate of 2% to adjust for the recent volatility in yields and 8.5% as the Market Premium. I expect this to be above 10% due to the risk involved with growing tech companies.
+
+```{r warning=FALSE, message=FALSE}
+
+# Create function to calculate discount rate using CAPM
+#++++++++++++++++++++++++++++++++++++
+capm <- function(symbol, rm = .085, rf = .02){
+  
+  #Calculate equity risk premium
+  erp <- rm - rf
+  
+  #Set dates
+  d <- as.POSIXlt(Sys.Date())
+  d$year <- d$year-5
+  from <- as.Date(d)
+  to <- Sys.Date()
+  
+  #Get price data for SPY then your symbol
+  spy.price <- getSymbols("SPY", from = from, to = to, auto.assign = FALSE)
+  spy.price <- to.monthly(spy.price[,4], OHLC=FALSE)
+  rets <- Return.calculate(spy.price)
+  
+  #Your stock and combine with spy
+  symbol.price <- getSymbols(symbol, from = from, to = to, auto.assign = FALSE)
+  symbol.price <- to.monthly(symbol.price[,4], OHLC=FALSE)
+  rets$symbol <- Return.calculate(symbol.price)
+  
+  #Rename first variable
+  names(rets)[1] <- "spy_ret"
+  
+  #Remove NA from first obv
+  rets <- rets[-1,]
+  
+  #Run regression to find the beta
+  reg <- lm(symbol ~ spy_ret, data = rets)
+  
+  beta <- summary(reg)$coeff[2]
+  
+  ca.pm <- rf + (beta * erp)
+  return(ca.pm)
+}
+
+
+
+# Calculate and show discount rate
+
+disc <- capm(ticker)
+disc
+```
+
+
+### Equity Value
+
+Last, I will create a function to calculate the Equity Value of a company. In this function, we will forecast FCF, create a discount factor using the discount rate we calculated above, add the present value of those free cash flows, calculate the terminal value using a terminal value growth rate, and finally add the two together to derive the equity value of Dropbox. Finally, we will divide this value by the shares outstanding to get to our estimated share price which will hopefully be above the current price. 
+
+>Not all companies are created equal and just because the peers have grown at 18.7% 3-Year CAGR doesn't mean Dropbox will do the same. Since Dropbox is a leader and is just beginning to see some real growth in FCF, we will grow FCF a little faster than the industries historical average at 25% in year 2, peaking at 30% in year 3, 20% in year 4 and 18% in year 5. After, Dropbox sees a slowdown of 3% per year in FCF growth for years 6-8 and then shows modest growth of 5% and 3% in years 9 & 10. 
+
+```{r}
+
+
+# Create function to calculate Equity Value
+#++++++++++++++++++++++++++++++++++++
+equity.value <- function(fcf, disc, g, n = 10, tvg = .02,tv_disc_diff=.02){ 
+              #default forecast period of 5 years
+              #create dataframe & calculate fv of FCF and pv of the 
+              #forecasted 5 years fv fcf and sum it all up
+              cf <- rep(fcf, n)
+              cf <- data.frame(cf)
+              cf$period <- seq(1,n,1)
+              
+      
+              
+              fcf_vec <- last(fcf_ann)
+              for(i in g){
+                val <- tail(fcf_vec,1) * (1+i)
+                fcf_vec <- c(fcf_vec,val)
+              }
+              fcf_vec <- fcf_vec[-1]
+              
+              
+              cf$fv <- fcf_vec
+              
+              
+              
+              cf$pv_factor <- 1 / (1 + disc)^cf$period  
+              cf$pv <- cf$fv * cf$pv_factor
+              pv_cf <- sum(cf$pv)
+              
+              #terminal period - default value at 2%
+              #calculate Terminal value and discount it to PV
+              tv <- cf$fv[n] * (1+tvg) / (disc - tvg)
+              pv_tv <- tv / (1+(disc-tv_disc_diff))^n
+              
+              #add PV of forecasted values and PV of terminal value to
+              #get PV equity value
+              equity_value <- pv_cf + pv_tv
+              return(equity_value)
+}
+
+
+
+
+# FCF Growth in years 1-10
+growth <- c(.05,.25,.30,.20,.18,.15,.12,.09,.05,.03)
+
+# Calculate Equity Value
+equity_value_fcf <- equity.value(fcf = last(fcf_ann), disc = disc, g = growth)
+
+
+#Price per share
+equity_pps <- equity_value_fcf / shares
+equity_pps
+```
+
+
+
+<a id="conclusion"></a>
+
+# Is Dropbox Really a Buy?
+
+Finally, the question we've all been asking. Is Dropbox Really a Buy? There are very few companies that can compete with the big four Google, Amazon, Apple, and Microsoft, let alone a company that IPO'd only within the last 12 months. NO ONE can accurately predict every time where a stock is going to head in a few weeks or where it will close tomorrow. I try tell whether a stock is a good and attractive buy that will appreciate in the long run, but I can't promise about tomorrow. Not trying to BS anyone. 
+
+To answer the question, I believe it is a **good time to buy** shares of Dropbox as wall street is missing the sticky and growing customer base through the lens of competition & risk worries which is leading to its undervaluation in both relative and intrinsic terms. Even under the "Quick N' Clean" intrinsic valuation where I used bare-bone assumptions, I am seeing an estimated price of **$23.85 as of 9/9/2019 which is 25.72% above the previous close of $18.97**. 
+
+
+# Whats Next
+
+I plan on taking this "Quick N' Clean" valuation and create a more complex DCF Model in excel. I will also do more extensive research into its direct comparables as well as more fundamental research to have better assumptions for three different scenarios if these were not appropriate enough. If this "Quick N' Clean" valuation showed that it was Overvalued, then I would not want to put the time and effort into a more extensive model! Time is $$$ so I look for ways to save it. 
+
+

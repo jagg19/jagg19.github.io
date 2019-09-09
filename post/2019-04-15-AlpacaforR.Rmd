@@ -8,15 +8,17 @@ coverSize: partial
 thumbnailImagePosition: left
 categories:
   - R Package
-  - Earnings
   - Backtest
-  - Programming
+  - Earnings
   - Trading
-tags:
-  - Algo
   - Alpaca
-  - NASDAQ
-  - NYSE
+  - Quarterly Results
+tags:
+  - R Package
+  - Backtest
+  - Earnings
+  - Trading
+  - Alpaca
   - Quarterly Results
 output: 
   html_document:

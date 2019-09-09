@@ -2,58 +2,68 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on Running on R</title>
-    <link>https://jagg19.github.io/categories/r/</link>
+    <link>/categories/r/</link>
     <description>Recent content in R on Running on R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Sep 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jagg19.github.io/categories/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Dropbox Valuation - Quick N&#39; Clean</title>
+      <link>/2019/09/dbx-q3-quicknclean/</link>
+      <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/09/dbx-q3-quicknclean/</guid>
+      <description>Dropbox Valuation - Quick N’ Clean Click any link in the list below to jump to topic
+ What is Dropbox What Sets Dropbox Apart Digging into the financials Relative &amp;amp; Intrinsic Valuations Is Dropbox Really a Buy  Dropbox’s shares have fallen -29.8% from its July high of $26.20, which was under the recent February high of $26.49 as of 09/04/2019. It’s also -57.75% under the ATH of $43.</description>
+    </item>
+    
+    <item>
       <title>HTTPS to Secure Your RStudio &#43; Shiny App Work Environment</title>
-      <link>https://jagg19.github.io/2019/08/https-aws-r/</link>
+      <link>/2019/08/https-aws-r/</link>
       <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/08/https-aws-r/</guid>
+      <guid>/2019/08/https-aws-r/</guid>
       <description>HTTPS to Secure Your RStudio + Shiny App Work Environment Click any link in list below to jump to topic
  Creating a Friendly URL Route 53 to Host Domain and Create Subdomains AWS Certificate Manager for SSL keys AWS Elastic Load Balancers: HTTPS Redirection Installing Nginx &amp;amp; Creating Configuration Files  I wanted to create this post as an addition to my previous post Running R on AWS EC2 and Logging into RStudio from Anywhere to show how to secure your AWS environment.</description>
     </item>
     
     <item>
       <title>Running R on AWS EC2 and Logging into RStudio from Anywhere</title>
-      <link>https://jagg19.github.io/2019/08/aws-r/</link>
+      <link>/2019/08/aws-r/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/08/aws-r/</guid>
+      <guid>/2019/08/aws-r/</guid>
       <description>Advantages of using Amazon’s EC2 service with R Short and Easy Installation Detailed, longer yet more flexible installation Logging in to your RStudio from anywhere Using RStudio’s system terminal to install MySQL Wrapping it all up  In my previous post Databases in the Cloud: Amazon Relational Database , I reviewed some of the benefits Amazon Web Services has to offer. Amazon EC2 is just another great service offered by Amazon.</description>
     </item>
     
     <item>
       <title>Databases in the Cloud: Amazon Relational Database Service and Connecting From MySQL Workbench / Terminal</title>
-      <link>https://jagg19.github.io/2019/07/aws-rds-mysql/</link>
+      <link>/2019/07/aws-rds-mysql/</link>
       <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/07/aws-rds-mysql/</guid>
+      <guid>/2019/07/aws-rds-mysql/</guid>
       <description>Amazon Web Services RDS with MySQL &amp;amp; MySQL Workbench  What is Amazon RDS How to create a MySQL RDS Connecting to your RDS: Terminal + MySQL Workbench Importing local database into new RDS  If you had a chance to read my post Using MySQL with R, you’ll see that I like to use MySQL to store larger datasets for open-source projects. I found myself with access issues when trying to use MySQL as the database for a shiny app that I was looking to deploy.</description>
     </item>
     
     <item>
       <title>Using MySQL with R</title>
-      <link>https://jagg19.github.io/2019/05/mysql-r/</link>
+      <link>/2019/05/mysql-r/</link>
       <pubDate>Tue, 14 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/05/mysql-r/</guid>
+      <guid>/2019/05/mysql-r/</guid>
       <description>Using MySQL with R  Benefits of a Relational Database Connecting to MySQL and reading + writing data from R Simple analysis using the tables from MySQL  If you’re an R programmer, then you’ve probably crashed your R session a few times when trying to read datasets of over 2GB+. It can get a little frustrating when all you want to do is harness the true power behind R through building statistical models on these large datasets, and your session crashes with a window stating “R SESSION ABORTED”.</description>
     </item>
     
     <item>
       <title>Sentiment Analysis on Earnings Call</title>
-      <link>https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/</link>
+      <link>/2019/04/sentiment-analysis-conf-call/</link>
       <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jagg19.github.io/2019/04/sentiment-analysis-conf-call/</guid>
+      <guid>/2019/04/sentiment-analysis-conf-call/</guid>
       <description>Conference Call Text Mining and Sentiment Analysis  Executives are very careful with the language they use during a conference call Using sentiment scores to validate future / long-term goals Checking for negation words that can affect score Key takeaways from this analysis  Do you ever notice when our president sends out a tweet and the markets spike/drop almost instantly, or within seconds of news going public, millions of shares are being traded based off what was said or done?</description>
     </item>
     

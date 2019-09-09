@@ -9,8 +9,14 @@ summary: "Amazon RDS is another amazing service provided by AWS (Amazon Web Serv
 tags:
 - RDS
 - Cloud
+- AWS
+- R
+- MySQL
+- Programming
 thumbnailImagePosition: left
 categories:
+- RDS
+- Cloud
 - AWS
 - R
 - MySQL
