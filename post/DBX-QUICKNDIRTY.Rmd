@@ -303,8 +303,7 @@ price.book("DBX",bk.val(qtr_dbx))
 ```
 
 
-Price-to-Book = 💩💩💩💩💩💩�
-
+Price-to-Book = 💩💩💩💩💩💩
 
 This is no surprise though. It should be expected that as a software company, it will have a high PB ratio (Mr. Buffet wouldn't touch this type of name). According to [NYU Sterns P/B ratio by Sector](http://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/pbvdata.html), the average between Software (Internet) and Software (System & Application) is 11.03x which Dropbox comes in-line with a PB ratio of ~11.12x.
 

@@ -791,7 +791,7 @@ price.book &lt;- function(symbol, bvps) {
 price.book(&quot;DBX&quot;,bk.val(qtr_dbx))</code></pre>
 <pre><code>## Price-to-Book Ratio 
 ##            11.11909</code></pre>
-<p>Price-to-Book = 💩💩💩💩💩💩�</p>
+<p>Price-to-Book = 💩💩💩💩💩💩</p>
 <p>This is no surprise though. It should be expected that as a software company, it will have a high PB ratio (Mr. Buffet wouldn’t touch this type of name). According to <a href="http://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/pbvdata.html">NYU Sterns P/B ratio by Sector</a>, the average between Software (Internet) and Software (System &amp; Application) is 11.03x which Dropbox comes in-line with a PB ratio of ~11.12x.</p>
 <p>Now, let’s skip price to earnings because Dropbox isn’t even turning a profit in Net Income yet. Therefore, Price-to-Earings is also 💩💩💩 but we don’t buy into growth companies for valuations, do we? Well yes, we do, but just not using these metrics. Since management doesn’t expect Dropbox to turn profits until 2021, let’s put our attention on some revenue metrics since this is where Dropbox can shine (top-line growth).</p>
 <p><br></p>
@@ -1001,7 +1001,7 @@ capm &lt;- function(symbol, rm = .085, rf = .02){
 
 disc &lt;- capm(ticker)
 disc</code></pre>
-<pre><code>## [1] 0.1197025</code></pre>
+<pre><code>## [1] 0.1203834</code></pre>
 </div>
 <div id="equity-value" class="section level3">
 <h3>Equity Value</h3>
@@ -1061,7 +1061,7 @@ equity_value_fcf &lt;- equity.value(fcf = last(fcf_ann), disc = disc, g = growth
 #Price per share
 equity_pps &lt;- equity_value_fcf / shares
 equity_pps</code></pre>
-<pre><code>## [1] 23.71153</code></pre>
+<pre><code>## [1] 23.5093</code></pre>
 <p><a id="conclusion"></a></p>
 </div>
 </div>
